@@ -12,9 +12,11 @@ import javafx.stage.Stage;
 public class Game extends Application {
 
 
-    private static Stage primaryStage;
+    private static Stage primaryStage; //the stage everything is shown on
 
-    private static Scene mainMenu;
+    private static Scene mainMenu; //the main menu
+
+    private static Scene levelMenu; //the levels menu
 
     /**
      * open the main menu
@@ -25,18 +27,38 @@ public class Game extends Application {
         Game.primaryStage = primaryStage;
 
 
-
+        loadLevelMenu();
         loadMainMenu();
+
         openMainMenu();
         primaryStage.show();
     }
 
-    public void loadMainMenu () {
+
+    /**
+     * loads the menu fxml file into the mainmenu scene.
+     */
+    private void loadMainMenu () {
         BorderPane menuPane;
 
         try {
             menuPane = FXMLLoader.load(getClass().getResource("mainMenu.fxml"));
             mainMenu = new Scene(menuPane,1350,900);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    /**
+     * loads the level fxml file into the levelMenu scene.
+     */
+    private void loadLevelMenu () {
+        BorderPane levelPane;
+
+        try {
+            levelPane = FXMLLoader.load(getClass().getResource("levelMenu.fxml"));
+            levelMenu = new Scene(levelPane,1350,900);
         } catch(Exception e) {
             e.printStackTrace();
         }
@@ -51,7 +73,13 @@ public class Game extends Application {
 
     }
 
+    /**
+     *changes the menu to the level Menu
+     */
+    public static void openLevelMenu() {
+        primaryStage.setScene(levelMenu);
 
+    }
 
 
 
