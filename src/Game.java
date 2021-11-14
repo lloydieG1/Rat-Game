@@ -12,26 +12,44 @@ import javafx.stage.Stage;
 public class Game extends Application {
 
 
+    private static Stage primaryStage;
+
+    private static Scene mainMenu;
+
     /**
      * open the main menu
      * @param primaryStage stage javafx shows things on
      */
     public void start(Stage primaryStage) {
 
+        Game.primaryStage = primaryStage;
+
+
+
+        loadMainMenu();
+        openMainMenu();
+        primaryStage.show();
+    }
+
+    public void loadMainMenu () {
         BorderPane menuPane;
-        Scene menu = null;
+
         try {
             menuPane = FXMLLoader.load(getClass().getResource("mainMenu.fxml"));
-            menu = new Scene(menuPane,1350,900);
-            primaryStage.setScene(menu);
-            primaryStage.show();
+            mainMenu = new Scene(menuPane,1350,900);
         } catch(Exception e) {
             e.printStackTrace();
         }
 
-        primaryStage.setScene(menu);
     }
 
+    /**
+     *changes the menu to the main Menu
+     */
+    public static void openMainMenu() {
+        primaryStage.setScene(mainMenu);
+
+    }
 
 
 
