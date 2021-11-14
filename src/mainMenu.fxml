@@ -3,15 +3,19 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1350.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-   <left>
-      <Button mnemonicParsing="false" text="Levels" BorderPane.alignment="CENTER" />
-   </left>
    <center>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="25.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" text="Button" />
+            <Button mnemonicParsing="false" text="Levels">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" text="Help" />
+            <Button mnemonicParsing="false" text="quit" />
          </children>
       </VBox>
    </center>

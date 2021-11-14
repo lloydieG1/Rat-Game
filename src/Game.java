@@ -18,7 +18,7 @@ public class Game extends Application {
      */
     public void start(Stage primaryStage) {
 
-        BorderPane menuPane = null;
+        BorderPane menuPane;
         Scene menu = null;
         try {
             menuPane = FXMLLoader.load(getClass().getResource("mainMenu.fxml"));
