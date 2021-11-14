@@ -12,7 +12,10 @@ import javafx.stage.Stage;
 public class Game extends Application {
 
 
-
+    /**
+     * open the main menu
+     * @param primaryStage stage javafx shows things on
+     */
     public void start(Stage primaryStage) {
 
         BorderPane menuPane = null;
