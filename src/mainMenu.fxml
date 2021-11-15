@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -28,10 +29,13 @@
       </VBox>
    </center>
    <top>
-      <Text fx:id="motd" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" BorderPane.alignment="CENTER">
+      <Text fx:id="motd" fill="#c9c659" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="1000.0" BorderPane.alignment="CENTER">
          <font>
-            <Font size="52.0" />
+            <Font name="Lucida Handwriting Italic" size="36.0" />
          </font>
+         <effect>
+            <Glow level="0.58" />
+         </effect>
       </Text>
    </top>
 </BorderPane>
