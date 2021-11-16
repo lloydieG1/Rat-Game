@@ -68,7 +68,7 @@ public class Game extends Application {
      * runs the logic of the game
      */
     private static void loop() {
-        System.out.println("lol");
+
         gameGraphics.fillRect(0,0,50,50);
     }
 
@@ -106,7 +106,7 @@ public class Game extends Application {
 
     /**
      * loads the canvas to be drawn to in levels
-     * @param canvas
+     * @param graphics game graphics
      */
     public static void loadCanvas(GraphicsContext graphics) {
         gameGraphics = graphics;

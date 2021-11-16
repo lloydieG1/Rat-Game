@@ -20,7 +20,7 @@
                <font>
                   <Font size="33.0" />
                </font></Button>
-            <Button mnemonicParsing="false" text="quit">
+            <Button mnemonicParsing="false" text="Quit">
                <font>
                   <Font size="35.0" />
                </font>
