@@ -1,8 +1,14 @@
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 /**
  * launching application which runs the game
@@ -11,14 +17,21 @@ import javafx.stage.Stage;
  */
 public class Game extends Application {
 
-    private static int WIDTH = 1350; //width of the window
-    private static int HEIGHT = 900; //height of the window
+    private static final int WIDTH = 1350; //width of the window
+    private static final int HEIGHT = 900; //height of the window
 
     private static Stage primaryStage; //the stage everything is shown on
 
     private static Scene mainMenu; //the main menu
     private static Scene levelMenu; //the levels menu
     private static Scene ingameScene; //the levels menu
+
+    private static Canvas gameCanvas; //canvas to show the graphics on
+
+    private static Timeline gameLoop; //the loop in which the game runs
+
+
+    private static final int fps = 24;
 
     /**
      * open the main menu and loads the other menus
@@ -33,8 +46,22 @@ public class Game extends Application {
         levelMenu = loadScene("levelMenu.fxml");
         ingameScene = loadScene("ingameScene.fxml");
 
+
+
+
         openMainMenu();
         primaryStage.show();
+
+        int fpstime = 1000/fps;
+
+        //game loop:
+        gameLoop = new Timeline(new KeyFrame(Duration.millis(fpstime), (ActionEvent event) -> {
+           System.out.println("lol");
+        }));
+
+
+        gameLoop.setCycleCount(Timeline.INDEFINITE);
+
     }
 
 
@@ -59,6 +86,16 @@ public class Game extends Application {
      */
     public static void openGameScene(int level) {
         primaryStage.setScene(ingameScene);
+        gameLoop.play();
+
+    }
+
+    public static void pauseGame() {
+        gameLoop.pause();
+    }
+
+    public static void loadCanvas(Canvas canvas) {
+        gameCanvas = canvas;
 
     }
 

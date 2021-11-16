@@ -21,6 +21,7 @@ public class InGameController implements Initializable {
     @FXML
     private void backClick() {
         Game.openLevelMenu();
+        Game.pauseGame();
 
     }
 
@@ -33,7 +34,7 @@ public class InGameController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        Game.loadCanvas(gameCanvas);
     }
 }
 

@@ -75,14 +75,13 @@ public class DailyMessage {
      */
 	public static String getMessage(String args[]) throws IOException {
 		String url = "http://cswebcat.swansea.ac.uk/message?solution=".concat(translateURLstring(args));
-        System.out.println(translateURLstring(args));
 		URL test = new URL (url);
 		BufferedReader in = new BufferedReader(
 		new InputStreamReader(test.openStream()));
 		String inputLine;
 		if ((inputLine = in.readLine()) != null) {
             return inputLine;
-        }		else {
+        } else {
             return "something ain't right";
         }
 	}
