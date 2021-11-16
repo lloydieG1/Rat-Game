@@ -18,7 +18,7 @@
          </children></VBox>
    </top>
    <center>
-      <Canvas height="700.0" width="700.0" BorderPane.alignment="CENTER" />
+      <Canvas fx:id="gameCanvas" height="700.0" width="700.0" BorderPane.alignment="CENTER" />
    </center>
    <right>
       <VBox prefHeight="981.0" prefWidth="242.0" BorderPane.alignment="CENTER" />

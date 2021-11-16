@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -26,12 +27,12 @@ public class Game extends Application {
     private static Scene levelMenu; //the levels menu
     private static Scene ingameScene; //the levels menu
 
-    private static Canvas gameCanvas; //canvas to show the graphics on
+    private static GraphicsContext gameGraphics; //canvas to show the graphics on
 
     private static Timeline gameLoop; //the loop in which the game runs
 
 
-    private static final int fps = 24;
+    private static final int fps = 24; //the fps of the game
 
     /**
      * open the main menu and loads the other menus
@@ -47,8 +48,6 @@ public class Game extends Application {
         ingameScene = loadScene("ingameScene.fxml");
 
 
-
-
         openMainMenu();
         primaryStage.show();
 
@@ -56,7 +55,7 @@ public class Game extends Application {
 
         //game loop:
         gameLoop = new Timeline(new KeyFrame(Duration.millis(fpstime), (ActionEvent event) -> {
-           System.out.println("lol");
+           loop();
         }));
 
 
@@ -64,6 +63,14 @@ public class Game extends Application {
 
     }
 
+
+    /**
+     * runs the logic of the game
+     */
+    private static void loop() {
+        System.out.println("lol");
+        gameGraphics.fillRect(0,0,50,50);
+    }
 
     /**
      *changes the menu to the main Menu
@@ -90,12 +97,19 @@ public class Game extends Application {
 
     }
 
+    /**
+     * pauses the gameLoop
+     */
     public static void pauseGame() {
         gameLoop.pause();
     }
 
-    public static void loadCanvas(Canvas canvas) {
-        gameCanvas = canvas;
+    /**
+     * loads the canvas to be drawn to in levels
+     * @param canvas
+     */
+    public static void loadCanvas(GraphicsContext graphics) {
+        gameGraphics = graphics;
 
     }
 

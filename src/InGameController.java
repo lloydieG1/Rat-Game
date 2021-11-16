@@ -34,7 +34,7 @@ public class InGameController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Game.loadCanvas(gameCanvas);
+        Game.loadCanvas(gameCanvas.getGraphicsContext2D());
     }
 }
 
