@@ -1,3 +1,6 @@
+import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -26,15 +29,6 @@ public class LevelsMenuController implements Initializable {
 
     }
 
-    /**
-     * switches to level 1
-     */
-    @FXML
-    private void level1() {
-        Game.openGameScene(1);
-
-    }
-
 
     /**
      * code ran on initalization, allows graphics context to be referenced.
@@ -47,9 +41,17 @@ public class LevelsMenuController implements Initializable {
         File[] levels = directory.listFiles();
         int fileCount= directory.list().length;
         for (int i = 0; i < fileCount; i++) {
-            Button levelButton = new Button(levels[i].getName().replace(".txt", ""));
+            String buttonText = levels[i].getName().replace(".txt", "");
+            Button levelButton = new Button(buttonText);
             levelButton.setFont(new Font(25));
+            levelButton.setOnAction(new EventHandler() {
 
+                @Override
+                public void handle(Event event) {
+                    Game.openGameScene(buttonText);
+                }
+
+            });
             levelPane.getChildren().add(levelButton);
         }
 

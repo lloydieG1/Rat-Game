@@ -91,7 +91,7 @@ public class Game extends Application {
     /**
      *changes the menu to the level Menu
      */
-    public static void openGameScene(int level) {
+    public static void openGameScene(String levelName) {
         primaryStage.setScene(ingameScene);
         gameLoop.play();
 
