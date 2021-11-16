@@ -4,7 +4,7 @@ import java.io.*;
 
 /**
  * this class fetches the message of the day
- * @author Jack
+ * @author Jack, William Randle
  */
 public class DailyMessage {
 
@@ -82,8 +82,7 @@ public class DailyMessage {
 		String inputLine;
 		if ((inputLine = in.readLine()) != null) {
             return inputLine;
-        }
-		else {
+        }		else {
             return "something ain't right";
         }
 	}

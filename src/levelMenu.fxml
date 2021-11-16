@@ -9,7 +9,7 @@
    <center>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" text="Level 1">
+            <Button mnemonicParsing="false" onAction="#level1" text="Level 1">
                <font>
                   <Font size="44.0" />
                </font>

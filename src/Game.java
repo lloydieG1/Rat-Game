@@ -11,15 +11,17 @@ import javafx.stage.Stage;
  */
 public class Game extends Application {
 
+    private static int WIDTH = 1350; //width of the window
+    private static int HEIGHT = 900; //height of the window
 
     private static Stage primaryStage; //the stage everything is shown on
 
     private static Scene mainMenu; //the main menu
-
     private static Scene levelMenu; //the levels menu
+    private static Scene ingameScene; //the levels menu
 
     /**
-     * open the main menu
+     * open the main menu and loads the other menus
      * @param primaryStage stage javafx shows things on
      */
     public void start(Stage primaryStage) {
@@ -27,43 +29,14 @@ public class Game extends Application {
         Game.primaryStage = primaryStage;
 
 
-        loadLevelMenu();
-        loadMainMenu();
+        mainMenu = loadScene("mainMenu.fxml");
+        levelMenu = loadScene("levelMenu.fxml");
+        ingameScene = loadScene("ingameScene.fxml");
 
         openMainMenu();
         primaryStage.show();
     }
 
-
-    /**
-     * loads the menu fxml file into the mainmenu scene.
-     */
-    private void loadMainMenu () {
-        BorderPane menuPane;
-
-        try {
-            menuPane = FXMLLoader.load(getClass().getResource("mainMenu.fxml"));
-            mainMenu = new Scene(menuPane,1350,900);
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    /**
-     * loads the level fxml file into the levelMenu scene.
-     */
-    private void loadLevelMenu () {
-        BorderPane levelPane;
-
-        try {
-            levelPane = FXMLLoader.load(getClass().getResource("levelMenu.fxml"));
-            levelMenu = new Scene(levelPane,1350,900);
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-
-    }
 
     /**
      *changes the menu to the main Menu
@@ -81,10 +54,30 @@ public class Game extends Application {
 
     }
 
+    /**
+     *changes the menu to the level Menu
+     */
+    public static void openGameScene(int level) {
+        primaryStage.setScene(ingameScene);
+
+    }
 
 
+    /**
+     * loads an fxml file from parsed filename string
+     * @param fxmlFile string the name of the file to be loaded
+     * @return a complete scene which can be shown
+     */
+    private Scene loadScene (String fxmlFile) {
+        try {
+            BorderPane pane = FXMLLoader.load(getClass().getResource(fxmlFile));
+            return new Scene(pane,WIDTH,HEIGHT);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
 
-
+        return null;
+    }
 
 
     public static void main(String[] args) {

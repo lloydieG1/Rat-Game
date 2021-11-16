@@ -16,6 +16,15 @@ public class LevelsMenuController {
 
     }
 
+    /**
+     * switches to level 1
+     */
+    @FXML
+    private void level1() {
+        Game.openGameScene(1);
+
+    }
+
 }
 
 
