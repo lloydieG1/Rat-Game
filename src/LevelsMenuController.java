@@ -31,29 +31,39 @@ public class LevelsMenuController implements Initializable {
 
 
     /**
-     * code ran on initalization, allows graphics context to be referenced.
-     * @param url
-     * @param resourceBundle
+     * adds the buttons to the tilepane
      */
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    private void addLevelButtons() {
         File directory=new File("res\\maps");
         File[] levels = directory.listFiles();
         int fileCount= directory.list().length;
+
         for (int i = 0; i < fileCount; i++) {
             String buttonText = levels[i].getName().replace(".txt", "");
             Button levelButton = new Button(buttonText);
             levelButton.setFont(new Font(25));
+
             levelButton.setOnAction(new EventHandler() {
 
                 @Override
                 public void handle(Event event) {
                     Game.openGameScene(buttonText);
                 }
-
             });
+
             levelPane.getChildren().add(levelButton);
         }
+    }
+
+
+    /**
+     * code ran on initalization, adds level buttons to the tilepane
+     * @param url
+     * @param resourceBundle
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+       addLevelButtons();
 
     }
 
