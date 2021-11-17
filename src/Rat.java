@@ -10,7 +10,7 @@ public class Rat {
 	private int x;
 	private int y;
 	private boolean isMale;
-	private String initialDirection;
+	private String direction;
 	static ArrayList <Rat> rats = new ArrayList <Rat>();
 	
 	/**
@@ -24,7 +24,7 @@ public class Rat {
 		this.x = x;
 		this.y = y;
 		this.isMale = isMale;
-		this.initialDirection = initialDirection;
+		this.direction = initialDirection;
 	}
 	
 	public int getX () {
@@ -39,8 +39,8 @@ public class Rat {
 		return isMale;
 	}
 	
-	public String getInitialDirection () {
-		return initialDirection;
+	public String getDirection () {
+		return direction;
 	}
 	
 	/**
