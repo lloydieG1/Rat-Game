@@ -1,0 +1,17 @@
+15,7
+/
+GGGGGGGGGGGGGGG
+GPPPTTPPGTTPPPG
+GPGPGGGPGGGPGPG
+GPGGGGGPGGGPPPG
+GPGPGGGPGGGGGPG
+GPPPTTPPPTTPPPG
+GGGGGGGGGGGGGGG
+/
+5
+/
+3,2,True,north 13,4,False,east 7,6,True,south
+/
+180
+/
+Bomb,5 Gas,10 Sterilisation,6 MaleSexChange,12 FemaleSexChange,12 NoEntrySign,10 DeathRat,20
