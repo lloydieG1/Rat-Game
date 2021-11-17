@@ -1,2 +1,2 @@
-public class Tile {
+public class Tile extends Element {
 }

@@ -6,7 +6,7 @@ import java.util.ArrayList;
  *
  */
 
-public class Rat {
+public class Rat extends Element {
 	private int x;
 	private int y;
 	private boolean isMale;
