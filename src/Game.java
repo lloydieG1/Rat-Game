@@ -55,7 +55,7 @@ public class Game extends Application {
 
         //game loop:
         gameLoop = new Timeline(new KeyFrame(Duration.millis(fpstime), (ActionEvent event) -> {
-           loop();
+            loop();
         }));
 
 
@@ -91,7 +91,7 @@ public class Game extends Application {
     /**
      *changes the menu to the level Menu
      */
-    public static void openGameScene(int level) {
+    public static void openGameScene(String levelName) {
         primaryStage.setScene(ingameScene);
         gameLoop.play();
 
