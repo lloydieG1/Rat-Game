@@ -6,7 +6,7 @@ import java.util.Scanner;
 /**
  * This class is responsible for storing and manipulating
  * the parts that make up a level.
- * @author Lloyd, Mosaed, Tafon, Yazan
+ * @author Lloyd
  */
 public class Level {
 	//data that makes up a level
@@ -28,22 +28,15 @@ public class Level {
      * @param fileName name of level file
      */
 	public void parseLevelFile(String fileName) {
-		Scanner levelFile = openLevelFile(fileName);
+		 String levelFile = readLevelFile(fileName);
 		
 		//splits up the main data spaces in the file e.g. playsize, tiles, rats, etc...
-		String[] levelData = fileName.split(MAIN_DATA_DELIMITER);
-		
+		String[] levelData = levelFile.split(MAIN_DATA_DELIMITER);
+
 		this.maxRats = Integer.parseInt(levelData[2]);
 		this.gridSize = parseGridSize(levelData[0]);
-		//add rats to elements
 		this.elements.addAll(parseRats(levelData[3]));  
 		this.elements.addAll(parseTiles(levelData[1]));
-		
-	
-		
-		levelFile.close();
-		
-		//return outputArray;
 	}
 	
 	private Scanner openLevelFile(String fileName) {
@@ -62,6 +55,19 @@ public class Level {
 		return in;
 	}
 	
+	private String readLevelFile(String fileName) {
+		Scanner in = openLevelFile(fileName);
+		
+		String fileText = "";
+		while(in.hasNext()) {
+			fileText = fileText + in.nextLine();
+		}
+		
+		in.close();
+		
+		return fileText;
+	}
+	
 	private int[] parseGridSize(String sizeData){
 		String[] data = sizeData.split(INTERNAL_DATA_DELIMITER);
 		int[] outputArr = new int[2];
@@ -78,6 +84,19 @@ public class Level {
 	private ArrayList<Tile> parseTiles(String tileData){
 		ArrayList<Tile> tiles = new ArrayList<Tile>();
 		
+		//TODO quite a scuffed nested for loop, want to change
+		String[] tileRows = tileData.split(NEWLINE);
+		for (int i = 0; i < tileRows.length; i++) {
+			for (int j = 0; j < tileRows[i].length(); j++) {
+				char tileLetter = tileRows[i].charAt(j);
+				
+				//TODO this will be Tile(j, gridSize[0] - i, tileLetter) once Tile is implemented
+				Tile tile = new Tile();
+				tiles.add(tile);
+				
+			}
+		}
+		
 		return tiles;
 	}
 	
@@ -88,10 +107,12 @@ public class Level {
 		String[] seperateRats = ratData.split(" ");
 		for (int i = 0; i < seperateRats.length; i++) {
 			String[] individualRat = seperateRats[i].split(INTERNAL_DATA_DELIMITER);
+			
 			int xPos = Integer.parseInt(individualRat[0]);
 			int yPos = Integer.parseInt(individualRat[1]);
 			boolean isMale = Boolean.parseBoolean(individualRat[2]);
 			String initialDirection = individualRat[3];
+			
 			Rat rat = new Rat(xPos, yPos, isMale, initialDirection);
 			rats.add(rat);
 		}
@@ -105,13 +126,11 @@ public class Level {
 //		
 //		return tiles;
 //	}
-//	
-	public static void main(String[] args) {		
-		Level currentLevel = new Level();
-		currentLevel.parseLevelFile("./src/TestLevel.txt");
-		
-	}
-	
 
 	
+//	public static void main(String[] args) {		
+//		Level currentLevel = new Level();
+//		currentLevel.parseLevelFile("./src/TestLevel.txt");
+//		
+//	}	
 }
