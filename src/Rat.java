@@ -11,6 +11,7 @@ public class Rat {
 	private int y;
 	private boolean isMale;
 	private String initialDirection;
+	static ArrayList <Rat> rats = new ArrayList <Rat>();
 	
 	/**
 	 * Construct a rat with necessary properties
@@ -41,8 +42,30 @@ public class Rat {
 	public String getInitialDirection () {
 		return initialDirection;
 	}
+	
 	/**
-	 * Check if 2 rats are the opposite sex
+	 * Create a rat
+	 * @param x X coordinate to spawn a rat
+	 * @param y Y coordinate to spawn a rat
+	 * @param isMale Sex of rat
+	 * @param initialDirection Where the rat first direction is
+	 * @return A rat object
+	 */
+	public static Rat createRat (int x, int y, boolean isMale, String initialDirection) {
+		 Rat rat = new Rat(x, y, isMale, initialDirection);
+		 return rat;
+	}
+	
+	/**
+	 * Add a rat to rats array list
+	 * @param The rat to add to rats array list
+	 */
+	public static void addRat (Rat rat) {
+		rats.add(rat);
+	}
+	
+	/**
+	 * Check if 2 rats are of the opposite sex
 	 * @param rat1 first rat to check sex
 	 * @param rat2 second rat to check sex
 	 * @return Whether two rats do not have the same sex
@@ -51,8 +74,16 @@ public class Rat {
 		return rat1.isMale && !rat2.isMale;
 	}
 	
-//	public static void main(String[] args) {
-//		ArrayList <Rat> rats = new ArrayList <Rat>();
-//		rats.add(new Rat (1, 2, true, "South"));
-//	  }
+	
+	
+	// For testing
+//	public static void main (String args[]) {
+//		addRat(createRat(1, 3, true, "South"));
+//		addRat(createRat(2, 3, false, "Nouth"));
+//		
+//		for (int i=0; i < rats.size(); i++) {
+//			System.out.println(rats.get(i).getX());
+//		}
+//	}
+	
 }
