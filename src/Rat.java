@@ -58,7 +58,7 @@ public class Rat {
 	
 	/**
 	 * Add a rat to rats array list
-	 * @param The rat to add to rats array list
+	 * @param rat The rat to add to rats array list
 	 */
 	public static void addRat (Rat rat) {
 		rats.add(rat);
