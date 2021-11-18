@@ -1,4 +1,4 @@
-public class Tile extends Element {
+public class Tile {
 	private int xPos;
 	private int yPos;
 	private char tileType;
