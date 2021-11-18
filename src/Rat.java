@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 /**
  * Holds every necessary rat behaviour
  * @author Mosaed
@@ -7,32 +5,31 @@ import java.util.ArrayList;
  */
 
 public class Rat extends Element {
-	private int x;
-	private int y;
+	private int xPos;
+	private int yPos;
 	private boolean isMale;
-	private String direction;
-	static ArrayList <Rat> rats = new ArrayList <Rat>();
+	private String initialDirection;
 	
 	/**
 	 * Construct a rat with necessary properties
-	 * @param x X coordinate to spawn a rat
-	 * @param y Y coordinate to spawn a rat
+	 * @param xPos X coordinate to spawn a rat
+	 * @param yPos Y coordinate to spawn a rat
 	 * @param isMale Sex of rat
 	 * @param initialDirection Where the rat first direction is
 	 */
-	public Rat (int x, int y, boolean isMale, String initialDirection) {
-		this.x = x;
-		this.y = y;
+	public Rat (int xPos, int yPos, boolean isMale, String initialDirection) {
+		this.xPos = xPos;
+		this.yPos = yPos;
 		this.isMale = isMale;
-		this.direction = initialDirection;
+		this.initialDirection = initialDirection;
 	}
 	
-	public int getX () {
-		return x;
+	public int getXPos () {
+		return xPos;
 	}
 	
-	public int getY () {
-		return y;
+	public int getYPos () {
+		return yPos;
 	}
 	
 	public boolean getIsMale () {
@@ -40,30 +37,9 @@ public class Rat extends Element {
 	}
 	
 	public String getDirection () {
-		return direction;
+		return initialDirection;
 	}
-	
-	/**
-	 * Create a rat
-	 * @param x X coordinate to spawn a rat
-	 * @param y Y coordinate to spawn a rat
-	 * @param isMale Sex of rat
-	 * @param initialDirection Where the rat first direction is
-	 * @return A rat object
-	 */
-	public static Rat createRat (int x, int y, boolean isMale, String initialDirection) {
-		 Rat rat = new Rat(x, y, isMale, initialDirection);
-		 return rat;
-	}
-	
-	/**
-	 * Add a rat to rats array list
-	 * @param rat The rat to add to rats array list
-	 */
-	public static void addRat (Rat rat) {
-		rats.add(rat);
-	}
-	
+		
 	/**
 	 * Check if 2 rats are of the opposite sex
 	 * @param rat1 first rat to check sex
