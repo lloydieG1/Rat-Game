@@ -1,9 +1,9 @@
 public class Tile extends Element {
 	private int width;
 	private int height;
-	private String tileType;
+	private char tileType;
 	
-	public Tile (int width, int height, String tileType) {
+	public Tile (int width, int height, char tileType) {
 		this.width = width;
 		this.height = height;
 		this.tileType = tileType;
@@ -17,7 +17,7 @@ public class Tile extends Element {
 		return height;
 	}
 	
-	public String getTileType() {
+	public char getTileType() {
 		return tileType;
 	}
 }
