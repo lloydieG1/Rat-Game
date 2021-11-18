@@ -34,6 +34,8 @@ public class Game extends Application {
 
     public static final int fps = 24; //the fps of the game
 
+    private static Level currentLevel;
+
     /**
      * open the main menu and loads the other menus
      * @param primaryStage stage javafx shows things on
@@ -55,7 +57,7 @@ public class Game extends Application {
 
         //game loop:
         gameLoop = new Timeline(new KeyFrame(Duration.millis(fpstime), (ActionEvent event) -> {
-            loop();
+            tick();
         }));
 
 
@@ -67,8 +69,9 @@ public class Game extends Application {
     /**
      * runs the logic of the game
      */
-    private static void loop() {
-
+    private static void tick() {
+       // currentLevel.tick();
+       // currentLevel.render();
         gameGraphics.fillRect(0,0,50,50);
     }
 
@@ -92,6 +95,8 @@ public class Game extends Application {
      *changes the menu to the level Menu
      */
     public static void openGameScene(String levelName) {
+        LevelLoader levelLoader = new LevelLoader();
+        currentLevel = levelLoader.levelLoader(levelName);
         primaryStage.setScene(ingameScene);
         gameLoop.play();
 
