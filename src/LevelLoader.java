@@ -93,7 +93,7 @@ public class LevelLoader {
 				
 				//TODO this will be Tile(j, gridSize[0] - i, tileLetter) once Tile is implemented
 				//Tile tile = new Tile();
-				tileGrid[j][i] = new Tile(j, i, tileLetter);
+				//tileGrid[j][i] = new Tile(j, i, tileLetter);
 				
 			}
 		}

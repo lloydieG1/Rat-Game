@@ -37,5 +37,7 @@ public class Level {
 		this.expectedTime = expectedTime;
 		this.levelItemData = levelItemData;
 	}
+	
+	
 }
 
