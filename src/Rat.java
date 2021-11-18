@@ -17,21 +17,13 @@ public class Rat extends Element {
 	 * @param isMale Sex of rat
 	 * @param initialDirection Where the rat first direction is
 	 */
-	public Rat (int xPos, int yPos, boolean isMale, String initialDirection) {
-		this.xPos = xPos;
-		this.yPos = yPos;
+	public Rat (ElementType type, Level level, int xPos, int yPos, boolean isMale, String initialDirection) {
+        super(type, level, xPos, yPos);
+
 		this.isMale = isMale;
 		this.initialDirection = initialDirection;
 	}
-	
-	public int getXPos () {
-		return xPos;
-	}
-	
-	public int getYPos () {
-		return yPos;
-	}
-	
+
 	public boolean getIsMale () {
 		return isMale;
 	}
