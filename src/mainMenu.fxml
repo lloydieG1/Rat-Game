@@ -31,7 +31,7 @@
    <top>
       <Text fx:id="motd" fill="#c9c659" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="1000.0" BorderPane.alignment="CENTER">
          <font>
-            <Font name="Lucida Handwriting Italic" size="36.0" />
+            <Font name="Lucida Handwriting Italic" size="28.0" />
          </font>
          <effect>
             <Glow level="0.58" />
