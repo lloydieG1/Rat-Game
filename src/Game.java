@@ -32,7 +32,7 @@ public class Game extends Application {
     private static Timeline gameLoop; //the loop in which the game runs
 
 
-    private static final int fps = 24; //the fps of the game
+    public static final int fps = 24; //the fps of the game
 
     /**
      * open the main menu and loads the other menus
