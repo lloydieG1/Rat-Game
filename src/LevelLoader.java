@@ -16,6 +16,11 @@ public class LevelLoader {
 
     private static String[] levelData;
 
+    private static final String OPEN_FILE_ERROR = "Could not find ";
+    private static final String MAIN_DATA_DELIMITER = "/";
+    private static final String INTERNAL_DATA_DELIMITER = ",";
+    private static final String NEWLINE = "\n";
+
 
     public static Level getLevel(String levelName) {
         levelName = levelName+".txt";
