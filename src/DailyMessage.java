@@ -15,8 +15,9 @@ public class DailyMessage {
      * @throws IOException
      */
 	private static String getURLstring(String args[]) throws IOException {
-		
+
 		URL test = new URL ("http://cswebcat.swansea.ac.uk/puzzle");
+
 		BufferedReader in = new BufferedReader(
 		new InputStreamReader(test.openStream()));
 		
@@ -74,15 +75,26 @@ public class DailyMessage {
      * @throws IOException
      */
 	public static String getMessage(String args[]) throws IOException {
-		String url = "http://cswebcat.swansea.ac.uk/message?solution=".concat(translateURLstring(args));
-		URL test = new URL (url);
-		BufferedReader in = new BufferedReader(
-		new InputStreamReader(test.openStream()));
-		String inputLine;
-		if ((inputLine = in.readLine()) != null) {
-            return inputLine;
+        URL testConnection = new URL ("http://cswebcat.swansea.ac.uk/puzzle");
+
+        if (testConnection.getQuery() == null) {
+            return "no internet or website unavailable";
         } else {
-            return "something ain't right";
+
+            String url = "http://cswebcat.swansea.ac.uk/message?solution=".concat(translateURLstring(args));
+
+            URL test = new URL(url);
+
+            BufferedReader in = new BufferedReader(
+
+                    new InputStreamReader(test.openStream()));
+
+            String inputLine;
+            if ((inputLine = in.readLine()) != null) {
+                return inputLine;
+            } else {
+                return "something ain't right";
+            }
         }
 	}
 

@@ -1,23 +1,59 @@
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
+
+import java.util.ArrayList;
+
+/**
+ * a tile will store the elements insde it.
+ * @author william randle
+ */
 public class Tile {
-	private int xPos;
-	private int yPos;
-	private char tileType;
-	
-	public Tile (int xPos, int yPos, char tileType) {
-		this.xPos = xPos;
-		this.yPos = yPos;
-		this.tileType = tileType;
-	}
-	
-	public int getXPos() {
-		return xPos;
-	}
-	
-	public int getYPos() {
-		return yPos;
-	}
-	
-	public char getTileType() {
-		return tileType;
-	}
+
+    private final int x;
+    private final int y;
+
+    private final TileType type;
+
+
+    public Tile(TileType type, int x, int y) {
+        this.type = type;
+        this.x = x;
+        this.y = y;
+
+    }
+
+
+
+
+
+    public TileType getType() {
+
+
+        return type;
+    }
+
+
+
+    public void render(GraphicsContext g) {
+        double factor = Game.factor;
+        double x = this.x*factor;
+        double y = this.y*factor;
+        int size = Game.gameSize;
+            g.setFill(Color.RED);
+        if (type.equals(TileType.Grass)) {
+            g.setFill(Color.color(0.3,0.6,0));
+            g.fillRect(x, y, size, size);
+        } else if (type.equals(TileType.Path)) {
+            g.setFill(Color.color(0.4,0.3,0));
+            g.fillRect(x, y, size, size);
+        }else if (type.equals(TileType.Tunnel)) {
+            g.setFill(Color.color(0.4,0,0));
+            g.fillRect(x, y, size, size);
+        }
+
+
+    }
+
+
+
 }

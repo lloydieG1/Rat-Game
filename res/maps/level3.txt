@@ -1,0 +1,8 @@
+5
+p p p g g
+p g p g g
+p p p g g
+g g g g g
+g g g g g
+/
+rat 2 2 m

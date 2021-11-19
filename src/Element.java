@@ -12,8 +12,13 @@ public abstract class Element {
     protected int currentTick =0; //the current tick in the cycle (eg 3/(maxfps))
     protected Level level; //the level the element is in so it can use getElements
     protected int age =0; //age of the element in ticks
+    protected Direction dir;
 
     protected boolean flagRemoval = false; //determines if level should remove this element at the end of the tick
+
+    protected double size = Game.gameSize;
+
+    protected double factor = Game.factor;
 
     /**
      * constructs an element with x,y, level it is in and type.
