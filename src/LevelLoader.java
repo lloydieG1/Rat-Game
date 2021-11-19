@@ -3,6 +3,7 @@ import javafx.scene.paint.Stop;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -13,13 +14,32 @@ import java.util.Scanner;
 public class LevelLoader {
     private static String resources = "res\\maps";
 
+    private static String[] levelData;
+
+
     public static Level getLevel(String levelName) {
         levelName = levelName+".txt";
 
+
+
+
+        int[] gridSize = parseGridSize(levelData[0]);
+        Tile[][] tileGrid = createTileGrid(levelData[0]);
+        int maxRats = Integer.parseInt(levelData[2]);
+        ArrayList<Element> elements = parseRats(levelData[3]);
+        int expectedTime = Integer.parseInt(levelData[4]);
         Level level = getEmptyMap(levelName);
 
         level = populateMap(levelName, level);
+
         return level;
+
+    }
+
+
+    private static loadFile() {
+        File levelFile = new File(resources + "\\" + levelName);
+        levelData = levelFile.split(MAIN_DATA_DELIMITER);
 
     }
 
