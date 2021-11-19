@@ -1,3 +1,5 @@
+import javafx.scene.canvas.GraphicsContext;
+
 /**
  * Holds every necessary rat behaviour
  * @author Mosaed
@@ -5,8 +7,6 @@
  */
 
 public class Rat extends Element {
-	private int xPos;
-	private int yPos;
 	private boolean isMale;
 	private String initialDirection;
 	
@@ -19,7 +19,6 @@ public class Rat extends Element {
 	 */
 	public Rat (ElementType type, Level level, int xPos, int yPos, boolean isMale, String initialDirection) {
         super(type, level, xPos, yPos);
-
 		this.isMale = isMale;
 		this.initialDirection = initialDirection;
 	}
@@ -40,6 +39,18 @@ public class Rat extends Element {
 	 */
 	public boolean canMate (Rat rat1, Rat rat2) {
 		return rat1.isMale && !rat2.isMale;
+	}
+
+	@Override
+	protected void tick() {
+		// TODO 
+		
+	}
+
+	@Override
+	protected void render(GraphicsContext g) {
+		// TODO 
+		
 	}
 	
 	
