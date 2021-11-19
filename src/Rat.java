@@ -10,11 +10,11 @@ public class Rat extends Element {
 
     private boolean isMale;
 
-    public Rat(ElementType type, Level level, int x, int y, boolean isMale) {
-        super(type, level, x, y);
+    public Rat(ElementType type, Level level, int x, int y, boolean isMale, Direction dir) {
+        super(type, level, x, y, dir);
 
         this.isMale = isMale;
-        this.dir = Direction.North;
+
 
     }
 

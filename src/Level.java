@@ -53,6 +53,12 @@ public class Level {
         tiles = new Tile[x][y];
         elements = new ArrayList<>();
 
+        for (int i = 0; i < x; i++) {
+            for (int j = 0; j < y; j++) {
+                addTile(i, j ,new Tile(TileType.Grass,i,j));
+            }
+        }
+
 
 
 

@@ -17,35 +17,31 @@ public class LevelLoader {
     private static String[] levelData;
 
     private static final String OPEN_FILE_ERROR = "Could not find ";
-    private static final String MAIN_DATA_DELIMITER = "+";
+    private static final String MAIN_DATA_DELIMITER = "/";
     private static final String INTERNAL_DATA_DELIMITER = ",";
-    private static final String NEWLINE = "\n";
+    private static final String NEWLINE = ";";
 
     private static String fileName;
 
+    private static Level level;
+
 
     public static Level getLevel(String levelName) {
-        levelName = levelName+".txt";
 
-
-        fileName = levelName;
+        fileName = levelName+".txt";
         loadFile();
 
         int[] gridSize = parseGridSize(levelData[0]);
-        Tile[][] tileGrid = createTileGrid(levelData[0]);
-        int maxRats = Integer.parseInt(levelData[2]);
-        ArrayList<Element> elements = parseRats(levelData[3]);
-        int expectedTime = Integer.parseInt(levelData[4]);
-        Level level = getEmptyMap(levelName);
-
-        level = populateMap(levelName, level);
+        level = new Level(gridSize[0],gridSize[1]);
+        parseTiles(levelData[1]);
+        parseRats(levelData[3]);
 
         return level;
 
     }
 
     private static Scanner openLevelFile(String fileName) {
-        File inputFile = new File(fileName);
+        File inputFile = new File("res\\maps\\" + fileName);
         Scanner in = null;
 
         //attempts to open file and returns exception if it is not found
@@ -67,29 +63,7 @@ public class LevelLoader {
 
     }
 
-    private static Level getEmptyMap(String levelName) {
-        Level level = null;
-        File levelFile = new File(resources + "\\" + levelName);
-        try {
-
-            Scanner map = new Scanner(levelFile);
-            int size = map.nextInt();
-            level = new Level(size, size);
-
-            for (int j =0; j < size; j++) {
-                for (int i =0; i < size; i++) {
-
-                    level.addTile(i, j, new Tile(getTile(map.next()), i, j));
-                }
-            }
-            map.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        return level;
-    }
-
-    private static String readLevelFile(String fileName) {
+      private static String readLevelFile(String fileName) {
         Scanner in = openLevelFile(fileName);
 
         String fileText = "";
@@ -102,44 +76,104 @@ public class LevelLoader {
         return fileText;
     }
 
-    private static Level populateMap(String levelName, Level level) {
-
-        File levelFile = new File(resources + "\\" + levelName);
-        try {
-
-            Scanner map = new Scanner(levelFile);
-            while (!(map.nextLine().contains("/"))) {
-                //
-            }
-            while (map.hasNextLine()) {
-                String elementType = map.next();
-                if (elementType.equals("rat")) {
-                    int x = map.nextInt();
-                    int y = map.nextInt();
-                    String gender = map.next();
-                    boolean isMale = gender.equals("m");
-                    Rat rat = new Rat(ElementType.Rat, level, x, y, isMale);
-                    level.addElement(rat);
-                }
-            }
-
-
-            map.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        return level;
-    }
-
-
-    private static TileType getTile(String tileS) {
-        if (tileS.equals("p")) {
+        private static TileType getTile(char tileS) {
+        if (tileS == 'p') {
             return TileType.Path;
-        } else if( tileS.equals("t")) {
+        } else if( tileS == 't') {
             return TileType.Tunnel;
         } else {
             return TileType.Grass;
         }
     }
 
-}
+
+
+        private static int[] parseGridSize(String sizeData){
+            String[] data = sizeData.split(INTERNAL_DATA_DELIMITER);
+            int[] outputArr = new int[2];
+
+            int width = Integer.parseInt(data[0]);
+            int height = Integer.parseInt(data[1]);
+
+            outputArr[0] = width;
+            outputArr[1] = height;
+
+            return outputArr;
+        }
+
+
+
+        private static void parseTiles(String tileData){
+            ArrayList<Tile> tiles = new ArrayList<Tile>();
+
+            String[] tileRows = tileData.split(NEWLINE);
+            int rowSize=tileRows[0].length();
+            int columnSize=tileRows.length;
+            //TODO quite a scuffed nested for loop, want to change
+
+
+            for (int i = 0; i < rowSize; i++) {
+
+                for (int j = 0; j < columnSize; j++) {
+                    char tileLetter = tileRows[j].charAt(i);
+                    Tile tile = new Tile(getTile(tileLetter), j, i);
+
+                    level.addTile(i, j, tile);
+
+                }
+            }
+
+
+        }
+
+
+        private static void parseRats(String ratData){
+            String[] seperateRats = ratData.split(" ");
+            for (int i = 0; i < seperateRats.length; i++) {
+                String[] individualRat = seperateRats[i].split(INTERNAL_DATA_DELIMITER);
+
+                int xPos = Integer.parseInt(individualRat[0]);
+                int yPos = Integer.parseInt(individualRat[1]);
+                boolean isMale = Boolean.parseBoolean(individualRat[2]);
+                Direction initialDirection = getDirection(individualRat[3]);
+
+                Rat rat = new Rat(ElementType.Rat, level, xPos, yPos, isMale, initialDirection);
+                level.addElement(rat);
+            }
+
+
+        }
+
+        private static Direction getDirection(String sDir) {
+            if (sDir.equals("north")) {
+                return Direction.North;
+            } else if (sDir.equals("east")) {
+                return Direction.East;
+            } else if (sDir.equals("south")) {
+                return Direction.South;
+            } else if (sDir.equals("west")){
+                return Direction.West;
+            } else {
+                System.out.println("wrong input direction");
+                return Direction.North;
+
+            }
+        }
+
+        //TODO figure out how data for items in menu work
+//	private ArrayList<Element> parseItem(String itemData){
+//		ArrayList<Element> tiles = new ArrayList<>();
+//
+//		return tiles;
+//	}
+
+
+//	public static void main(String[] args) {
+//		Level currentLevel = new Level();
+//		currentLevel.parseLevelFile("./src/TestLevel.txt");
+//
+//	}
+    }
+
+
+

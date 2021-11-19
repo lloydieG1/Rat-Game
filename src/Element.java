@@ -27,11 +27,12 @@ public abstract class Element {
      * @param x
      * @param y
      */
-    public Element(ElementType type, Level level, int x, int y) {
+    public Element(ElementType type, Level level, int x, int y, Direction dir) {
         this.y = y;
         this.x = x;
         this.type = type;
         this.level = level;
+        this.dir = dir;
     }
 
     /**
