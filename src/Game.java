@@ -26,6 +26,7 @@ public class Game extends Application {
     private static Scene mainMenu; //the main menu
     private static Scene levelMenu; //the levels menu
     private static Scene ingameScene; //the levels menu
+    private static Scene levelLayout; //the layout of the levels 
 
     private static GraphicsContext gameGraphics; //canvas to show the graphics on
 
@@ -48,6 +49,7 @@ public class Game extends Application {
         mainMenu = loadScene("mainMenu.fxml");
         levelMenu = loadScene("levelMenu.fxml");
         ingameScene = loadScene("ingameScene.fxml");
+        levelLayout = loadScene("levelLayout.fxml");
 
 
         openMainMenu();
@@ -97,7 +99,7 @@ public class Game extends Application {
     public static void openGameScene(String levelName) {
         LevelLoader levelLoader = new LevelLoader();
         currentLevel = levelLoader.levelLoader(levelName);
-        primaryStage.setScene(ingameScene);
+        primaryStage.setScene(levelLayout);
         gameLoop.play();
 
     }
