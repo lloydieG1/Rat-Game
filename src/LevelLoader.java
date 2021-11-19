@@ -17,16 +17,19 @@ public class LevelLoader {
     private static String[] levelData;
 
     private static final String OPEN_FILE_ERROR = "Could not find ";
-    private static final String MAIN_DATA_DELIMITER = "/";
+    private static final String MAIN_DATA_DELIMITER = "+";
     private static final String INTERNAL_DATA_DELIMITER = ",";
     private static final String NEWLINE = "\n";
+
+    private static String fileName;
 
 
     public static Level getLevel(String levelName) {
         levelName = levelName+".txt";
 
 
-
+        fileName = levelName;
+        loadFile();
 
         int[] gridSize = parseGridSize(levelData[0]);
         Tile[][] tileGrid = createTileGrid(levelData[0]);
@@ -41,9 +44,25 @@ public class LevelLoader {
 
     }
 
+    private static Scanner openLevelFile(String fileName) {
+        File inputFile = new File(fileName);
+        Scanner in = null;
 
-    private static loadFile() {
-        File levelFile = new File(resources + "\\" + levelName);
+        //attempts to open file and returns exception if it is not found
+        try {
+            in = new Scanner (inputFile);
+        }
+        catch (FileNotFoundException e) {
+            System.out.println (OPEN_FILE_ERROR + fileName);
+            System.exit (0);
+        }
+
+        return in;
+    }
+
+
+    private static void loadFile() {
+        String levelFile = readLevelFile(fileName);
         levelData = levelFile.split(MAIN_DATA_DELIMITER);
 
     }
@@ -68,6 +87,19 @@ public class LevelLoader {
             e.printStackTrace();
         }
         return level;
+    }
+
+    private static String readLevelFile(String fileName) {
+        Scanner in = openLevelFile(fileName);
+
+        String fileText = "";
+        while(in.hasNext()) {
+            fileText = fileText + in.nextLine();
+        }
+
+        in.close();
+
+        return fileText;
     }
 
     private static Level populateMap(String levelName, Level level) {
