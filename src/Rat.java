@@ -9,6 +9,9 @@ import javafx.scene.canvas.GraphicsContext;
 public class Rat extends Element {
 	private boolean isMale;
 	private String initialDirection;
+	private int age;
+	private boolean isPregnant;
+	private boolean isSterile;
 	
 	/**
 	 * Construct a rat with necessary properties
@@ -21,6 +24,8 @@ public class Rat extends Element {
         super(type, level, xPos, yPos);
 		this.isMale = isMale;
 		this.initialDirection = initialDirection;
+		isPregnant = false;
+		isSterile = false;
 	}
 
 	public boolean getIsMale () {
@@ -30,39 +35,61 @@ public class Rat extends Element {
 	public String getDirection () {
 		return initialDirection;
 	}
+	
+	public int getAge() {
+		return age;
+	}
+	
+	protected void tick() {
+        currentTick++;
+        if(currentTick > tickSpeed) {
+            currentTick = 0;
+            logic();
+            }
+    }
+
+	
+	private void logic() {
+        age++;
+    }
 		
 	/**
-	 * Check if 2 rats are of the opposite sex
+	 * Make sure all mating conditions between 2 rats are met
+	 * Check 2 rats are adults, not sterile of the opposite sex and the female rat is not pregnant
 	 * @param rat1 first rat to check sex
 	 * @param rat2 second rat to check sex
 	 * @return Whether two rats do not have the same sex
 	 */
 	public boolean canMate (Rat rat1, Rat rat2) {
-		return rat1.isMale && !rat2.isMale;
-	}
-
-	@Override
-	protected void tick() {
-		// TODO 
 		
+		if (rat1.age > 2 && rat2.age > 2) {
+			if (!rat1.isSterile && !rat2.isSterile) {
+				if(rat1.isMale && !rat2.isMale && !rat2.isPregnant) {
+					rat2.isPregnant = true;
+					giveBirth(rat2);
+					return true;
+				} else if (!rat1.isMale && rat2.isMale && !rat1.isPregnant) {
+					rat1.isPregnant = true;
+					giveBirth(rat1);
+					return true;
+				} else {
+					return false;
+				}
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}	
 	}
-
-	@Override
+	
+	public void giveBirth(Rat rat) {
+		//TODO After 5 sec change rat isPregnant to false and make baby rats
+		rat.isPregnant = false;
+	}
+		
 	protected void render(GraphicsContext g) {
-		// TODO 
-		
-	}
-	
-	
-	
-	// For testing
-//	public static void main (String args[]) {
-//		addRat(createRat(1, 3, true, "South"));
-//		addRat(createRat(2, 3, false, "Nouth"));
-//		
-//		for (int i=0; i < rats.size(); i++) {
-//			System.out.println(rats.get(i).getX());
-//		}
-//	}
+        //TODO
+    }
 	
 }
