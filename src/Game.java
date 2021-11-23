@@ -11,6 +11,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.util.Random;
+
 /**
  * launching application which runs the game
  * @author William Randle, Jack Lennard
@@ -36,9 +38,14 @@ public class Game extends Application {
     public static final int fps = 24; //the fps of the game
 
 
-    public static final int gameSize = 50;
-
     private static Level currentLevel;
+
+    public static Random random = new Random();
+
+    public static int gameSize = 50;
+
+    public static double factor = 50;
+
 
     /**
      * open the main menu and loads the other menus
@@ -75,9 +82,8 @@ public class Game extends Application {
      * runs the logic of the game
      */
     private static void tick() {
-       // currentLevel.tick();
-       // currentLevel.render();
-        gameGraphics.fillRect(0,0,50,50);
+        currentLevel.tick();
+        currentLevel.render(gameGraphics);
     }
 
     /**
@@ -100,8 +106,8 @@ public class Game extends Application {
      *changes the menu to the level Menu
      */
     public static void openGameScene(String levelName) {
-        LevelLoader levelLoader = new LevelLoader();
-        currentLevel = levelLoader.levelLoader(levelName);
+
+        currentLevel = LevelLoader.getLevel(levelName);
         primaryStage.setScene(levelLayout);
         gameLoop.play();
 
