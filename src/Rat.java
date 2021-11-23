@@ -3,10 +3,9 @@ import javafx.scene.paint.Color;
 
 /**
  * Holds every necessary rat behaviour
- * @author Mosaed, Tefon
+ * @author Mosaed
  *
  */
-// Tafon: "just checking if my push works"
 public class Rat extends Element {
 	private boolean isMale;
 	private String initialDirection;
