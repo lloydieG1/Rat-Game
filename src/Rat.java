@@ -3,7 +3,7 @@ import javafx.scene.paint.Color;
 
 /**
  * Holds every necessary rat behaviour
- * @author Mosaed
+ * @author Mosaed, Tefon
  *
  */
 
@@ -97,8 +97,6 @@ public class Rat extends Element {
         int size = Game.gameSize/2;
         g.setFill(Color.RED);
         g.fillRect(x, y, size, size);
-
-
     }
 	
 }
