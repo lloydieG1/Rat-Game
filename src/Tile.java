@@ -15,7 +15,7 @@ public class Tile {
     private final TileType type;
 
 
-    public Tile(TileType type, int x, int y) {
+    public Tile(TileType type, int y, int x) {
         this.type = type;
         this.x = x;
         this.y = y;

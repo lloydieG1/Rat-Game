@@ -57,8 +57,9 @@ public class Level {
             for (int j = 0; j < y; j++) {
                 addTile(i, j ,new Tile(TileType.Grass,i,j));
             }
-        }
 
+        }
+        System.out.println(x + " " + y);
 
 
 

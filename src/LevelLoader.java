@@ -77,10 +77,15 @@ public class LevelLoader {
     }
 
         private static TileType getTile(char tileS) {
-        if (tileS == 'p') {
+        if (tileS == 'P') {
+
             return TileType.Path;
-        } else if( tileS == 't') {
+
+        } else if( tileS == 'T') {
             return TileType.Tunnel;
+        } else if( tileS == 'G') {
+
+            return TileType.Grass;
         } else {
             return TileType.Grass;
         }
@@ -104,7 +109,7 @@ public class LevelLoader {
 
 
         private static void parseTiles(String tileData){
-            ArrayList<Tile> tiles = new ArrayList<Tile>();
+
 
             String[] tileRows = tileData.split(NEWLINE);
             int rowSize=tileRows[0].length();
@@ -112,13 +117,14 @@ public class LevelLoader {
             //TODO quite a scuffed nested for loop, want to change
 
 
-            for (int i = 0; i < rowSize; i++) {
+            for (int i = 1; i < rowSize; i++) {
 
                 for (int j = 0; j < columnSize; j++) {
                     char tileLetter = tileRows[j].charAt(i);
                     Tile tile = new Tile(getTile(tileLetter), j, i);
 
-                    level.addTile(i, j, tile);
+                    level.addTile(rowSize-i, j, tile);
+                    System.out.println(tileLetter);
 
                 }
             }

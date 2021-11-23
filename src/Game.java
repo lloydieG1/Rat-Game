@@ -8,6 +8,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -81,6 +82,8 @@ public class Game extends Application {
        // currentLevel.tick();
        // currentLevel.render();
         currentLevel.tick();
+        gameGraphics.setFill(Color.GREEN);
+        gameGraphics.fillRect(0, 0, 700, 700);
         currentLevel.render(gameGraphics);
     }
 
