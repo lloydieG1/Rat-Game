@@ -35,6 +35,9 @@ public class Game extends Application {
 
     public static final int fps = 24; //the fps of the game
 
+
+    public static final int gameSize = 50;
+
     private static Level currentLevel;
 
     /**

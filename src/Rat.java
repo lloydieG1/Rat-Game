@@ -1,4 +1,5 @@
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 /**
  * Holds every necessary rat behaviour
@@ -87,9 +88,17 @@ public class Rat extends Element {
 		//TODO After 5 sec change rat isPregnant to false and make baby rats
 		rat.isPregnant = false;
 	}
-		
-	protected void render(GraphicsContext g) {
-        //TODO
+
+
+    protected void render(GraphicsContext g) {
+        double factor = 12;
+        double x = this.x*factor;
+        double y = this.y*factor;
+        int size = Game.gameSize/2;
+        g.setFill(Color.RED);
+        g.fillRect(x, y, size, size);
+
+
     }
 	
 }
