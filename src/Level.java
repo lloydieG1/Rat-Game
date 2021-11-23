@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 /**
  * scene manager contains and manages all of the tiles and elements in a level
- * @author william randle
+ * @author william randle, lloyd, adrian, yazan
  */
 public class Level {
     //   private int[] gridSize;
@@ -44,7 +44,7 @@ public class Level {
 
 
     /**
-     * constructs a SceneManager
+     * constructs a Level
      *
      * @param x width of map
      * @param y height of map
@@ -60,9 +60,6 @@ public class Level {
 
         }
         System.out.println(x + " " + y);
-
-
-
     }
 
     /**
@@ -137,19 +134,13 @@ public class Level {
 
 
     public void tick() {
-
         for (Element element : elements) {
-
             element.tick();
-
-
-
         }
 
 
         for(Element element : nextElements) {
             elements.add(element);
-
         }
         nextElements = new ArrayList<>();
     }
@@ -160,23 +151,13 @@ public class Level {
         for (Element element : elements) {
             element.render(g);
         }
-
     }
 
     public void renderTiles(GraphicsContext g) {
         for (int i = 0; i < tiles.length; i++) {
             for (int j = 0; j < tiles[i].length; j++) {
-
                 tiles[i][j].render(g);
-
             }
         }
-
-
     }
-
-
-
-
-
 }

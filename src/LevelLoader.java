@@ -9,25 +9,21 @@ import java.util.Scanner;
 /**
  * level loeader takes in text input and constructs a scenemanager with info
  * from said text file
- * @author
+ * @author william randle, lloyd, adrian, yazan
  */
 public class LevelLoader {
-    private static String resources = "res\\maps";
-
     private static String[] levelData;
+    private static String fileName;
+    private static Level level;
 
     private static final String OPEN_FILE_ERROR = "Could not find ";
     private static final String MAIN_DATA_DELIMITER = "/";
     private static final String INTERNAL_DATA_DELIMITER = ",";
-    private static final String NEWLINE = ";";
-
-    private static String fileName;
-
-    private static Level level;
-
+    private static final String TILE_GRID_DELIMITER = ";";
+    private static final String SPACE = " ";
+    private static final String LEVELS_PATH = "res\\maps\\";
 
     public static Level getLevel(String levelName) {
-
         fileName = levelName+".txt";
         loadFile();
 
@@ -37,11 +33,10 @@ public class LevelLoader {
         parseRats(levelData[3]);
 
         return level;
-
     }
 
     private static Scanner openLevelFile(String fileName) {
-        File inputFile = new File("res\\maps\\" + fileName);
+        File inputFile = new File(LEVELS_PATH + fileName);
         Scanner in = null;
 
         //attempts to open file and returns exception if it is not found
@@ -55,7 +50,6 @@ public class LevelLoader {
 
         return in;
     }
-
 
     private static void loadFile() {
         String levelFile = readLevelFile(fileName);
@@ -76,22 +70,20 @@ public class LevelLoader {
         return fileText;
     }
 
-    private static TileType getTile(char tileS) {
-        if (tileS == 'P') {
-
-            return TileType.Path;
-
-        } else if( tileS == 'T') {
-            return TileType.Tunnel;
-        } else if( tileS == 'G') {
-
-            return TileType.Grass;
-        } else {
-            return TileType.Grass;
-        }
+    private static TileType getTile(char tileChar) {
+    	//grass tiles are checked first for optimisation as they are the most common
+    	switch(tileChar) {
+			case 'G':
+				return TileType.Grass;
+			case 'P':
+				return TileType.Path;
+			case 'T':
+				return TileType.Tunnel;
+			default:
+				System.out.println("Invalid tile type " + tileChar);
+				return TileType.Grass;
+		}
     }
-
-
 
     private static int[] parseGridSize(String sizeData){
         String[] data = sizeData.split(INTERNAL_DATA_DELIMITER);
@@ -106,16 +98,11 @@ public class LevelLoader {
         return outputArr;
     }
 
-
-
     private static void parseTiles(String tileData){
-
-
-        String[] tileRows = tileData.split(NEWLINE);
+        String[] tileRows = tileData.split(TILE_GRID_DELIMITER);
         int rowSize=tileRows[0].length();
         int columnSize=tileRows.length;
         //TODO quite a scuffed nested for loop, want to change
-
 
         for (int i = 0; i < rowSize; i++) {
 
@@ -128,13 +115,10 @@ public class LevelLoader {
 
             }
         }
-
-
     }
 
-
     private static void parseRats(String ratData){
-        String[] seperateRats = ratData.split(" ");
+        String[] seperateRats = ratData.split(SPACE);
         for (int i = 0; i < seperateRats.length; i++) {
             String[] individualRat = seperateRats[i].split(INTERNAL_DATA_DELIMITER);
 
@@ -146,24 +130,22 @@ public class LevelLoader {
             Rat rat = new Rat(ElementType.Rat, level, xPos, yPos, isMale, initialDirection);
             level.addElement(rat);
         }
-
-
     }
 
     private static Direction getDirection(String sDir) {
-        if (sDir.equals("north")) {
-            return Direction.North;
-        } else if (sDir.equals("east")) {
-            return Direction.East;
-        } else if (sDir.equals("south")) {
-            return Direction.South;
-        } else if (sDir.equals("west")){
-            return Direction.West;
-        } else {
-            System.out.println("wrong input direction");
-            return Direction.North;
-
-        }
+    	switch(sDir) {
+    		case "north":
+    			return Direction.North;
+    		case "east":
+    			return Direction.East;
+    		case "south":
+    			return Direction.South;
+    		case "west":
+    			return Direction.West;
+    		default:
+    			System.out.println("Invalid direction " + sDir);
+    			return Direction.North;
+    	}
     }
 
     //TODO figure out how data for items in menu work
@@ -171,13 +153,6 @@ public class LevelLoader {
 //		ArrayList<Element> tiles = new ArrayList<>();
 //
 //		return tiles;
-//	}
-
-
-//	public static void main(String[] args) {
-//		Level currentLevel = new Level();
-//		currentLevel.parseLevelFile("./src/TestLevel.txt");
-//
 //	}
 }
 
