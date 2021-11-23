@@ -194,7 +194,7 @@ public class Rat extends Element {
      * @param g graphics context
      */
     protected void render(GraphicsContext g) {
-        double x = this.x*factor;
+        double x = (this.x-1)*factor;
         double y = this.y*factor;
         //calculating the position the rat should be in this frame
 

@@ -117,7 +117,7 @@ public class LevelLoader {
             //TODO quite a scuffed nested for loop, want to change
 
 
-            for (int i = 1; i < rowSize; i++) {
+            for (int i = 0; i < rowSize; i++) {
 
                 for (int j = 0; j < columnSize; j++) {
                     char tileLetter = tileRows[j].charAt(i);
