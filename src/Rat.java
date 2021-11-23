@@ -6,7 +6,7 @@ import javafx.scene.paint.Color;
  * @author Mosaed, Tefon
  *
  */
-
+// Tafon: "just checking if my push works"
 public class Rat extends Element {
 	private boolean isMale;
 	private String initialDirection;
