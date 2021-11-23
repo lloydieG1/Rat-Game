@@ -16,13 +16,13 @@ import java.util.Random;
 /**
  * launching application which runs the game
  * @author William Randle, Jack Lennard
- *
  */
 public class Game extends Application {
 
     private static final int WIDTH = 1350; //width of the window
     private static final int HEIGHT = 900; //height of the window
-
+    public static final int FPS = 24; //the fps of the game
+    
     private static Stage primaryStage; //the stage everything is shown on
 
     private static Scene mainMenu; //the main menu
@@ -33,9 +33,6 @@ public class Game extends Application {
     private static GraphicsContext gameGraphics; //canvas to show the graphics on
 
     private static Timeline gameLoop; //the loop in which the game runs
-
-
-    public static final int fps = 24; //the fps of the game
 
 
     private static Level currentLevel;
@@ -65,7 +62,7 @@ public class Game extends Application {
         openMainMenu();
         primaryStage.show();
 
-        int fpstime = 1000/fps;
+        int fpstime = 1000/FPS;
 
         //game loop:
         gameLoop = new Timeline(new KeyFrame(Duration.millis(fpstime), (ActionEvent event) -> {

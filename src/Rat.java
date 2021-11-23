@@ -3,8 +3,8 @@ import javafx.scene.paint.Color;
 
 
 /**
- *a rat will move to tiles, etc
- * @author william randle, mo,
+ * Class used for construction and behaviours of Rat elements
+ * @author William Randle, Mosaed,
  */
 public class Rat extends Element {
 
@@ -14,8 +14,17 @@ public class Rat extends Element {
 
     private boolean isSterile;
 
-
-
+    
+    /**
+     * Rat constructor
+     * 
+     * @param type
+     * @param level
+     * @param x
+     * @param y
+     * @param isMale
+     * @param dir
+     */
     public Rat(ElementType type, Level level, int x, int y, boolean isMale, Direction dir) {
         super(type, level, x, y, dir);
 
@@ -24,6 +33,10 @@ public class Rat extends Element {
 
     }
 
+    /**
+     * Runs Tick() behaviours, allowing them to run logics automatically 
+     * in time with other elements
+     */
     protected void tick() {
         currentTick++;
         if(currentTick > tickSpeed) {
@@ -38,7 +51,7 @@ public class Rat extends Element {
     }
 
     /**
-     * the logic of the rat, only ran at the rats slower speed
+     * the logic of the rat, only run at the rat's slower speed
      */
     private void logic() {
         age++;
@@ -87,6 +100,11 @@ public class Rat extends Element {
         }
     }
 
+    /**
+     * @param rat
+     * 
+     * method to create more Rats after Breed() method is called
+     */
     public void giveBirth(Rat rat) {
         //TODO After 5 sec change rat isPregnant to false and make baby rats
         rat.isPregnant = false;

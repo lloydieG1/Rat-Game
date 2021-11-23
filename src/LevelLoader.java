@@ -7,15 +7,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * level loeader takes in text input and constructs a scenemanager with info
+ * level loader takes in text input and constructs a scenemanager with info
  * from said text file
  * @author william randle, lloyd, adrian, yazan
+ * @version 1
  */
 public class LevelLoader {
-    private static String[] levelData;
-    private static String fileName;
-    private static Level level;
-
     private static final String OPEN_FILE_ERROR = "Could not find ";
     private static final String MAIN_DATA_DELIMITER = "/";
     private static final String INTERNAL_DATA_DELIMITER = ",";
@@ -23,6 +20,14 @@ public class LevelLoader {
     private static final String SPACE = " ";
     private static final String LEVELS_PATH = "res\\maps\\";
 
+    private static String[] levelData;
+    private static String fileName;
+    private static Level level;
+    
+    /**
+     * @param levelName the name of the level, used to find the level file
+     * @return a populated map of tiles and rats to then be played
+     */
     public static Level getLevel(String levelName) {
         fileName = levelName+".txt";
         loadFile();
@@ -35,6 +40,11 @@ public class LevelLoader {
         return level;
     }
 
+    /**
+     * @param fileName
+     * @return a long sequence of text that is interpreted by
+     * the parseX() methods
+     */
     private static Scanner openLevelFile(String fileName) {
         File inputFile = new File(LEVELS_PATH + fileName);
         Scanner in = null;
@@ -51,12 +61,19 @@ public class LevelLoader {
         return in;
     }
 
+    /**
+     * splits the data from the level file into interpretable pieces.
+     */
     private static void loadFile() {
         String levelFile = readLevelFile(fileName);
         levelData = levelFile.split(MAIN_DATA_DELIMITER);
 
     }
 
+    /**
+     * @param fileName
+     * @return parsed level data to be passed to the parseX() methods
+     */
     private static String readLevelFile(String fileName) {
         Scanner in = openLevelFile(fileName);
 
@@ -70,6 +87,10 @@ public class LevelLoader {
         return fileText;
     }
 
+    /**
+     * @param tileS a char that relates to a type of Tile
+     * @return the type of the tile to be taken from TileType.emnum
+     */
     private static TileType getTile(char tileChar) {
     	//grass tiles are checked first for optimisation as they are the most common
     	switch(tileChar) {
@@ -85,6 +106,11 @@ public class LevelLoader {
 		}
     }
 
+    /**
+     * @param sizeData specifies the size of the game map
+     * @return a 2d array representing the x,y coordinates of the
+     * game map
+     */
     private static int[] parseGridSize(String sizeData){
         String[] data = sizeData.split(INTERNAL_DATA_DELIMITER);
         int[] outputArr = new int[2];
@@ -98,6 +124,14 @@ public class LevelLoader {
         return outputArr;
     }
 
+    /**
+     * @param tileData The full set of tiles comprising this level's
+     * game map
+     * 
+     * this method parses the list of tiles passed through the level
+     * data and then constructs the map sequentially by getting the type
+     * and coordinates needed, then placing the tile.
+     */
     private static void parseTiles(String tileData){
         String[] tileRows = tileData.split(TILE_GRID_DELIMITER);
         int rowSize=tileRows[0].length();
@@ -117,6 +151,13 @@ public class LevelLoader {
         }
     }
 
+    /**
+     * @param ratData The full list of rats and their coordinates for this level
+     * 
+     * this method parses the list of rats passed through the level
+     * data and then adds them to the map sequentially by getting the type
+     * and coordinates needed, then placing the rats.
+     */
     private static void parseRats(String ratData){
         String[] seperateRats = ratData.split(SPACE);
         for (int i = 0; i < seperateRats.length; i++) {
@@ -132,6 +173,10 @@ public class LevelLoader {
         }
     }
 
+    /**
+     * @param sDir a direction for the element to move upon initialisation.
+     * @return a direction that the rats can use to begin pathing.
+     */
     private static Direction getDirection(String sDir) {
     	switch(sDir) {
     		case "north":

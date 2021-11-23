@@ -14,6 +14,7 @@ import java.util.ResourceBundle;
 /**
  * this class handles interactions with the level menu
  * @author William Randle
+ * @version 2
  */
 public class LevelsMenuController implements Initializable {
 

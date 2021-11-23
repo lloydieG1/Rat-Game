@@ -4,8 +4,10 @@ import javafx.scene.paint.Color;
 import java.util.ArrayList;
 
 /**
- * a tile will store the elements insde it.
+ * a tile occupies an x,y position on the map and, depending on tile type,
+ * can be occupied by a number of Elements.
  * @author william randle
+ * @version 1
  */
 public class Tile {
 
@@ -14,16 +16,31 @@ public class Tile {
 
     private final TileType type;
 
+    /**
+     * @param type
+     * @param y
+     * @param x
+     * 
+     * Tile Constructor
+     */
     public Tile(TileType type, int y, int x) {
         this.type = type;
         this.x = x;
         this.y = y;
     }
 
+    /**
+     * @return the Type of the specified tile 
+     */
     public TileType getType() {
         return type;
     }
 
+    /**
+     * @param g Graphics Context
+     * 
+     * draws a Tile on the Map
+     */
     public void render(GraphicsContext g) {
         double factor = Game.factor;
         double x = this.x*factor;

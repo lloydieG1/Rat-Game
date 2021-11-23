@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 /**
  * this class handles interactions with the level menu
  * @author William Randle
+ * @version 1
  */
 public class InGameController implements Initializable {
 
@@ -28,7 +29,9 @@ public class InGameController implements Initializable {
 
 
     /**
-     * code ran on initalization, allows graphics context to be referenced.
+     * code run on initalization of level, 
+     * allows graphics context to be referenced.
+     * 
      * @param url
      * @param resourceBundle
      */

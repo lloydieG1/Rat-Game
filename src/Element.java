@@ -1,20 +1,25 @@
 import javafx.scene.canvas.GraphicsContext;
 
 /**
- * elements are things in the map which can move, like rat
- * @author william randle
+ * @author William Randle
+ * @version 3
+ */
+
+/**
+ * elements are objects on the map which can be changed, such as rats or items.
  */
 public abstract class Element {
     protected int x; //x position in the map
     protected int y; //y position in the map
     protected ElementType type; //the type of element
-    protected int tickSpeed = Game.fps/2; //means logic only happens once this many ticks have passed
-    protected int currentTick =0; //the current tick in the cycle (eg 3/(maxfps))
+    protected int tickSpeed = Game.FPS/2; //means logic only happens once this many ticks have passed
+    protected int currentTick = 0; //the current tick in the cycle (eg 3/(maxfps))
     protected Level level; //the level the element is in so it can use getElements
-    protected int age =0; //age of the element in ticks
+    protected int age = 0; //age of the element in ticks
     protected Direction dir;
 
-    protected boolean flagRemoval = false; //determines if level should remove this element at the end of the tick
+    protected boolean flagRemoval = false; 
+    //determines if level should remove this element at the end of the tick
 
     protected double size = Game.gameSize;
 
@@ -36,7 +41,7 @@ public abstract class Element {
     }
 
     /**
-     * returns the type of element
+     * returns the type of an element
      * @return
      */
     public ElementType getType() {
@@ -62,7 +67,7 @@ public abstract class Element {
     }
 
     /**
-     * executes elements logic
+     * executes element logics to allow time-based interactions.
      */
     protected abstract void tick();
 
@@ -73,7 +78,6 @@ public abstract class Element {
     protected abstract void render(GraphicsContext g);
 
     /**
-     *
      * @return if the element needs to be removed from the level at the end of the tick.
      */
     public boolean isFlagRemoval() {

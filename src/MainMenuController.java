@@ -8,7 +8,7 @@ import java.util.ResourceBundle;
 
 /**
  * this class handles interactions with the main menu
- * @author William Randle, Jack
+ * @author William Randle, Jack Lennard
  */
 public class MainMenuController implements Initializable {
 
@@ -26,7 +26,7 @@ public class MainMenuController implements Initializable {
 
 
     /**
-     * code ran on initalization, displays updated message of the day
+     * code run on initalization, displays updated message of the day
      * @param url
      * @param resourceBundle
      */

@@ -9,6 +9,11 @@ import java.util.ArrayList;
 /**
  * scene manager contains and manages all of the tiles and elements in a level
  * @author william randle, lloyd, adrian, yazan
+ * @version 1
+ */
+/**
+ * @author A B
+ *
  */
 public class Level {
     //   private int[] gridSize;
@@ -64,23 +69,38 @@ public class Level {
 
     /**
      *
-     * @param x east/west in map
-     * @param y north/south in map
+     * @param x horizontal map coordinate
+     * @param y Vertical map coordinate
      * @return tile at parsed position
      */
     public Tile getTile(int x, int y) {
         return tiles[x][y];
     }
 
+    /**
+     * @param x 
+     * @param y 
+     * @param tile 
+     * adds a tile of the selected Type to the map at
+     * coordinates x,y
+     */
     public void addTile(int x, int y, Tile tile) {
         tiles[x][y] = tile;
     }
-
+    
+    /**
+     * @return the total amount of tiles on the map
+     */
     public int getLength() {
         return tiles.length;
     }
 
-
+    /**
+     * @param x 
+     * @param
+     * @return an arraylist of elements that are contained in the tile
+     * that has coordinates x,y
+     */
     public ArrayList<Element> getElements(int x, int y) {
         ArrayList<Element> stack = new ArrayList<>(); //returning elements at x,y
         for (Element element : elements) {
@@ -92,16 +112,25 @@ public class Level {
 
     }
 
+    /**
+     * @param element An object that interacts with others on the map
+     */
     public void addElementLive(Element element) {
         nextElements.add(element);
 
     }
 
+    /**
+     * @param element
+     */
     public void addElement(Element element) {
         elements.add(element);
 
     }
 
+    /**
+     * @param element
+     */
     public void removeElement(Element element) {
         element.flagRemoval = true;
         removeFlagged();
@@ -124,7 +153,7 @@ public class Level {
     }
 
     /**
-     * removes all elements
+     * removes all elements from the map
      */
     public void removeAll() {
 
@@ -132,7 +161,10 @@ public class Level {
 
     }
 
-
+    /**
+     * has elements run their tick() behaviours, and adds
+     * buffered elements to the map
+     */
     public void tick() {
         for (Element element : elements) {
             element.tick();
@@ -145,6 +177,10 @@ public class Level {
         nextElements = new ArrayList<>();
     }
 
+    /**
+     * calls to draw elements and tiles on the map.
+     * @param g Graphics Context
+     */
     public void render(GraphicsContext g) {
         renderTiles(g);
 
@@ -153,6 +189,10 @@ public class Level {
         }
     }
 
+    /**
+     * draws tiles on the map.
+     * @param g
+     */
     public void renderTiles(GraphicsContext g) {
         for (int i = 0; i < tiles.length; i++) {
             for (int j = 0; j < tiles[i].length; j++) {
