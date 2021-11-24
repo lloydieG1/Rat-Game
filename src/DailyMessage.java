@@ -47,7 +47,8 @@ public class DailyMessage {
      * @return String solved cipher to get MOTD
      * @throws IOException
      */
-	private static String translateURLstring(String args[]) throws IOException {        char[] cipher = getURLstring(null).toCharArray();
+	private static String translateURLstring(String args[]) throws IOException {        
+		char[] cipher = getURLstring(null).toCharArray();
 		String convertedCipher = "";
         for (int i = 1; i <= cipher.length; i++) {
             int selectedChar = cipher[i-1];
