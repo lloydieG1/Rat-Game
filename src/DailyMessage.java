@@ -21,18 +21,22 @@ public class DailyMessage {
      * @return String of unsolved cipher
      * @throws IOException
      */
-	private static String getURLstring(String args[]) throws IOException {
+	private static String getURLstring(String args[]) throws IOException, UnknownHostException {
 		
 		URL puzzle = new URL ("http://cswebcat.swansea.ac.uk/puzzle");		
-		BufferedReader in = new BufferedReader(
-		new InputStreamReader(puzzle.openStream()));
-		
-		String htmlResponse;
-		if ((htmlResponse = in.readLine()) != null) {
-            return htmlResponse;
-        } else {
-            return "something ain't right";
-        }
+		try {
+			BufferedReader in = new BufferedReader(
+			new InputStreamReader(puzzle.openStream()));
+			
+			String htmlResponse;
+			if ((htmlResponse = in.readLine()) != null) {
+	            return htmlResponse;
+	        } else {
+	            return "something ain't right";
+	        }
+		} catch (UnknownHostException e) {
+			return "No Internet - Daily Message Unavailable";
+		}
 	}
 
 
@@ -76,17 +80,21 @@ public class DailyMessage {
      * @return String message of the day
      * @throws IOException
      */
-	public static String getMessage(String args[]) throws IOException {
+	public static String getMessage(String args[]) throws IOException, UnknownHostException {
 		String message = "http://cswebcat.swansea.ac.uk/message?solution=".concat(translateURLstring(args));
 		URL messageURL = new URL (message);
-		BufferedReader in = new BufferedReader(
-		new InputStreamReader(messageURL.openStream()));
-		String motd;
-		if ((motd = in.readLine()) != null) {
-            return motd;
-        } else {
-            return "something ain't right";
-        }
+		try {
+			BufferedReader in = new BufferedReader(
+			new InputStreamReader(messageURL.openStream()));
+			String motd;
+			if ((motd = in.readLine()) != null) {
+	            return motd;
+	        } else {
+	            return "something ain't right";
+	        }
+		} catch (UnknownHostException e) {
+			return "No Internet - Daily Message Unavailable";
+		}
 	}
 
 }
