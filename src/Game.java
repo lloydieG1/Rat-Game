@@ -144,6 +144,14 @@ public class Game extends Application {
     }
 
 
+    /**
+     * closes the javafx window.
+     */
+    public static void quit() {
+        primaryStage.close();
+    }
+
+
     public static void main(String[] args) {
         launch(args);
     }

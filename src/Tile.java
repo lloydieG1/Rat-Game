@@ -11,15 +11,15 @@ import java.util.ArrayList;
  */
 public class Tile {
 
-    private final int x;
-    private final int y;
+    private final int x; //x position of the tile
+    private final int y; //y position of the tile
 
     private final TileType type;
 
     /**
-     * @param type
-     * @param y
-     * @param x
+     * @param type the variant of tile
+     * @param y the y position of the tile
+     * @param x the x position of the tile
      * 
      * Tile Constructor
      */
