@@ -208,15 +208,6 @@ public class Rat extends Element {
         }else if (checkX == x-1) {
             dir = Direction.West;
         }
-        
-        for (Element element : level.getElements(x, y)) {
-            if (element.getType().equals(ElementType.StopSign)) {
-            	StopSign stopsign = (StopSign) element;
-                stopsign.blocksUp();
-                this.dir = rightDir(dir);
-            	this.dir = rightDir(dir);
-            }
-        }
 
         this.x = checkX;
         this.y = checkY;
@@ -255,6 +246,15 @@ public class Rat extends Element {
 
         if (level.getTile(x, y).getType().equals(TileType.Grass)) {
             return false;
+        }
+        
+        	
+    	for (Element element : level.getElements(x, y)) {
+            if (element.getType().equals(ElementType.StopSign)) {
+            	StopSign stopsign = (StopSign) element;
+                stopsign.blocksUp();
+                return false;
+            }
         }
 
 
