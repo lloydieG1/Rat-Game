@@ -6,12 +6,12 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
-public class deathRat extends Element {
+public class DeathRat extends Element {
 	
 	private int ratsKilled;
 	private Image image;
 
-	public deathRat(ElementType type, Level level, int x, int y) {
+	public DeathRat(ElementType type, Level level, int x, int y) {
 		super(type, level, x, y, Direction.North);
 		// TODO Auto-generated constructor stub
 		ratsKilled = 0;

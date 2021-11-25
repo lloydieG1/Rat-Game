@@ -4,10 +4,9 @@
  */
 
 public enum ElementType {
-
     Rat(),
     StopSign(),
     Bomb(),
-    DeathRat;
-
+    DeathRat(),
+    Gas();
 }
