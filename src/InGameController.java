@@ -24,6 +24,11 @@ public class InGameController implements Initializable {
 
     @FXML
     ImageView bomb;
+    @FXML
+    ImageView deathRat;
+    
+    
+    ElementType lastItem;
     /**
      * switches back to the menu
      */
@@ -47,6 +52,17 @@ public class InGameController implements Initializable {
         Image image = new Image(inputstream);
         bomb.setImage(image);
         bomb.setCache(true);
+        
+        
+        inputstream = null;
+        try {
+            inputstream = new FileInputStream(filePath + "deathRat.png");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        image = new Image(inputstream);
+        deathRat.setImage(image);
+        deathRat.setCache(true);
 
     }
 
@@ -62,7 +78,7 @@ public class InGameController implements Initializable {
 
 
 
-        placeItem((int)x, (int)y, ElementType.Bomb);
+        placeItem((int)x, (int)y, lastItem);
     }
 
     /**
@@ -73,6 +89,8 @@ public class InGameController implements Initializable {
     public static void placeItem(int x, int y, ElementType type) {
         if (type.equals(ElementType.Bomb)) {
          Game.currentLevel.addElement(new Bomb(ElementType.Bomb,  Game.currentLevel, x/Game.gameSize, y/Game.gameSize));
+        } else if (type.equals(ElementType.DeathRat)) {
+         Game.currentLevel.addElement(new deathRat(ElementType.DeathRat, Game.currentLevel, x/Game.gameSize, y/Game.gameSize));
         } else {
             System.out.println("invalid item type");
         }
@@ -110,6 +128,29 @@ public class InGameController implements Initializable {
                 // Consume the event. This means we mark it as dealt with.
                 event.consume();
             }
+            
+            
+        });
+        
+        deathRat.setOnDragDetected(new EventHandler<MouseEvent>() {
+            public void handle(MouseEvent event) {
+                // Mark the drag as started.
+                // We do not use the transfer mode (this can be used to indicate different forms
+                // of drags operations, for example, moving files or copying files).
+                Dragboard db = deathRat.startDragAndDrop(TransferMode.ANY);
+                // db.setDragView(bomb.getImage());
+
+                // We have to put some content in the clipboard of the drag event.
+                // We do not use this, but we could use it to store extra data if we wished.
+                ClipboardContent content = new ClipboardContent();
+                content.putString("deathRat");
+                db.setContent(content);
+
+                // Consume the event. This means we mark it as dealt with.
+                event.consume();
+            }
+            
+            
         });
 
 
@@ -119,6 +160,13 @@ public class InGameController implements Initializable {
                 // Mark the drag as acceptable if the source was the draggable image.
                 // (for example, we don't want to allow the user to drag things or files into our application)
                 if (event.getGestureSource() == bomb) {
+                	lastItem = ElementType.Bomb;
+                    // Mark the drag event as acceptable by the canvas.
+                    event.acceptTransferModes(TransferMode.ANY);
+                    // Consume the event. This means we mark it as dealt with.
+                    event.consume();
+                } else if (event.getGestureSource() == deathRat) {
+                	lastItem = ElementType.DeathRat;
                     // Mark the drag event as acceptable by the canvas.
                     event.acceptTransferModes(TransferMode.ANY);
                     // Consume the event. This means we mark it as dealt with.
