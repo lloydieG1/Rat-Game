@@ -4,7 +4,7 @@ import javafx.scene.paint.Color;
 
 /**
  * Class used for construction and behaviours of Rat elements
- * @author William Randle, Mosaed,
+ * @author William Randle, Mosaed, Jack Lennard
  */
 public class Rat extends Element {
 
@@ -207,6 +207,15 @@ public class Rat extends Element {
             dir = Direction.East;
         }else if (checkX == x-1) {
             dir = Direction.West;
+        }
+        
+        for (Element element : level.getElements(x, y)) {
+            if (element.getType().equals(ElementType.StopSign)) {
+            	StopSign stopsign = (StopSign) element;
+                stopsign.blocksUp();
+                this.dir = rightDir(dir);
+            	this.dir = rightDir(dir);
+            }
         }
 
         this.x = checkX;
