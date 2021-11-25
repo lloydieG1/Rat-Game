@@ -5,10 +5,7 @@
 
 public enum ElementType {
     Rat(),
-<<<<<<< Updated upstream
     StopSign(),
-    Bomb();
-=======
     Bomb(),
     Gas(),
     Sterilise(),
@@ -16,6 +13,5 @@ public enum ElementType {
     GenderChange(),
     NoEntry(),
     DeathRat();
->>>>>>> Stashed changes
 
 }
