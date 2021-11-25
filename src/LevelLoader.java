@@ -138,13 +138,13 @@ public class LevelLoader {
         int columnSize=tileRows.length;
         //TODO quite a scuffed nested for loop, want to change
 
-        for (int i = 0; i < rowSize; i++) {
+        for (int i = rowSize-1; i >= 0; i--) {
 
             for (int j = 0; j < columnSize; j++) {
                 char tileLetter = tileRows[j].charAt(i);
                 Tile tile = new Tile(getTile(tileLetter), j, i);
 
-                level.addTile(rowSize-i, j, tile);
+                level.addTile(i, j, tile);
                 System.out.println(tileLetter);
 
             }
