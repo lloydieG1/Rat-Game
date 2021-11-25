@@ -35,7 +35,7 @@ public class Game extends Application {
     private static Timeline gameLoop; //the loop in which the game runs
 
 
-    private static Level currentLevel;
+    public static Level currentLevel;
 
     public static Random random = new Random();
 
@@ -72,6 +72,9 @@ public class Game extends Application {
         gameLoop.setCycleCount(Timeline.INDEFINITE);
 
     }
+
+
+
 
 
     /**
