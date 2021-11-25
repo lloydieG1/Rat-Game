@@ -5,8 +5,12 @@
 
 public enum ElementType {
     Rat(),
-    StopSign(),
+    NoEntry(),
     Bomb(),
     DeathRat(),
-    Gas();
+    Gas(),
+    Sterilise(),
+    Poison(),
+    GenderChange();
+    
 }
