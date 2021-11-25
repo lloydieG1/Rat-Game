@@ -86,7 +86,7 @@ public abstract class Element {
     }
 
     protected double renderX() {
-        return ((this.x-1)*factor)*-1.0 + 700;
+        return this.x*factor;
     }
 
     protected double renderY() {
