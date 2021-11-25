@@ -70,7 +70,7 @@ public class DeathRat extends Element {
     /**
      * handles the movement of the rat
      */
-    private void movement() {
+	private void movement() {
         //update to the position decided last tick.
 
         int checkX = 0;
@@ -78,7 +78,7 @@ public class DeathRat extends Element {
 
         int randomNum = Game.random.nextInt(4);
 
-        // changes direction until no longer stuck
+        // changes direction until nolonger stuck
         while (isStuck()) {
             dir = rightDir(dir);
         }
@@ -135,7 +135,7 @@ public class DeathRat extends Element {
 
 
     /**
-     *  checks if the tile at parsed position is a eligible tile to go onto
+     *  checks if the tile at parsed position is a eligable tile to go onto
      *
      * @return boolean if tile is safe
      */
@@ -179,7 +179,7 @@ public class DeathRat extends Element {
     private boolean isStuck() {
         int checkX= x;
         int checkY = y;
-        int totalPaths = 0; //if paths accessible is < 2 then stuck
+        int totalPaths = 0; //if paths accesable is < 2 then stuck
 
         if(isTile(checkX, checkY+1)) {
             totalPaths++;
@@ -222,7 +222,7 @@ public class DeathRat extends Element {
 	protected void render(GraphicsContext g) {
 		double size = Game.gameSize;
         double halfSize = size/2;
-        double x = renderX();
+        double x = ((this.x-1)*factor)*-1.0 + 700;
         double y = renderY();
         //calculating the position the rat should be in this frame
 
