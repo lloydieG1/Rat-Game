@@ -12,7 +12,11 @@ public class Rat extends Element {
 
     private boolean isPregnant;
 
+    private static int ADULTHOOD = 5;
+
     private boolean isSterile;
+
+    private boolean isChild;
 
     
     /**
@@ -30,6 +34,7 @@ public class Rat extends Element {
 
         this.isMale = isMale;
 
+        isChild = true;
 
     }
 
@@ -50,12 +55,27 @@ public class Rat extends Element {
 
     }
 
+
     /**
-     * the logic of the rat, only run at the rat's slower speed
+     * the logic of the rat, only ran at the rats slower speed
      */
     private void logic() {
         age++;
+        if (age == ADULTHOOD) {
+            grow();
+        }
+        if(! isChild) {
+            if (isMale == false) {
+                breed();
+            }
+        }
+
         movement();
+    }
+
+
+    private void grow() {
+        isChild = false;
     }
 
     public boolean getIsMale () {
@@ -108,6 +128,10 @@ public class Rat extends Element {
     public void giveBirth(Rat rat) {
         //TODO After 5 sec change rat isPregnant to false and make baby rats
         rat.isPregnant = false;
+    }
+
+    private void breed () {
+        
     }
 
 
