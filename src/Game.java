@@ -55,7 +55,6 @@ public class Game extends Application {
 
         mainMenu = loadScene("mainMenu.fxml");
         levelMenu = loadScene("levelMenu.fxml");
-        ingameScene = loadScene("ingameScene.fxml");
         levelLayout = loadScene("levelLayout.fxml");
 
 

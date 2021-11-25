@@ -64,7 +64,7 @@ public class Level {
             }
 
         }
-        System.out.println(x + " " + y);
+         addElement(new Bomb(ElementType.Bomb, this, 4, 4));
     }
 
     /**
