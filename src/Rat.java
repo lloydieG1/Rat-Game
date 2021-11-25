@@ -12,7 +12,15 @@ public class Rat extends Element {
 
     private boolean isPregnant;
 
+    private static int ADULTHOOD = 5;
+
     private boolean isSterile;
+
+    private boolean isChild;
+
+    private final int breedingtime = 5;
+
+    private boolean breeding;
 
     
     /**
@@ -30,6 +38,9 @@ public class Rat extends Element {
 
         this.isMale = isMale;
 
+        isChild = true;
+
+        breeding = false;
 
     }
 
@@ -50,12 +61,29 @@ public class Rat extends Element {
 
     }
 
+
     /**
-     * the logic of the rat, only run at the rat's slower speed
+     * the logic of the rat, only ran at the rats slower speed
      */
     private void logic() {
         age++;
-        movement();
+        if (age == ADULTHOOD) {
+            grow();
+        }
+        if(! isChild) {
+            if (isMale == false) {
+                breed();
+            }
+        }
+
+        if (! breeding) {
+            movement();
+        }
+    }
+
+
+    private void grow() {
+        isChild = false;
     }
 
     public boolean getIsMale () {
@@ -108,6 +136,18 @@ public class Rat extends Element {
     public void giveBirth(Rat rat) {
         //TODO After 5 sec change rat isPregnant to false and make baby rats
         rat.isPregnant = false;
+    }
+
+    private void breed() {
+        for (Element element : level.getElements(x, y)) {
+            if (element.getType().equals(ElementType.Rat)) {
+                Rat rat = (Rat) element;
+                if (rat.isMale == true) {
+                 //   level.addElementLive(new Rat(ElementType.Rat, level, x, y, Game.random.nextBoolean(), Direction.North));
+                    breeding = true;
+                }
+            }
+        }
     }
 
 
@@ -267,10 +307,16 @@ public class Rat extends Element {
      */
     protected void render(GraphicsContext g) {
         double x = ((this.x-1)*factor)*-1.0 + 700;
-        double y = this.y*factor;
+        double y = renderY();
         //calculating the position the rat should be in this frame
+        g.setFill(Color.color(0.6,0.1,0.3));
+        if (isMale) {
+            g.setFill(Color.color(0.2,0.2,0.3));
+        }
 
-        g.setFill(Color.color(0.2,0.2,0.3));
+        if(isChild) {
+            g.setFill(Color.color(0.5,0.5,0.3));
+        }
         g.fillRect(x, y, size/2, size/2);
 
 

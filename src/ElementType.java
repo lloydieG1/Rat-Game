@@ -6,6 +6,7 @@
 public enum ElementType {
 
     Rat(),
-    StopSign();
+    StopSign(),
+    Bomb();
 
 }

@@ -35,7 +35,7 @@ public class Game extends Application {
     private static Timeline gameLoop; //the loop in which the game runs
 
 
-    private static Level currentLevel;
+    public static Level currentLevel;
 
     public static Random random = new Random();
 
@@ -55,7 +55,6 @@ public class Game extends Application {
 
         mainMenu = loadScene("mainMenu.fxml");
         levelMenu = loadScene("levelMenu.fxml");
-        ingameScene = loadScene("ingameScene.fxml");
         levelLayout = loadScene("levelLayout.fxml");
 
 
@@ -73,6 +72,9 @@ public class Game extends Application {
         gameLoop.setCycleCount(Timeline.INDEFINITE);
 
     }
+
+
+
 
 
     /**
@@ -141,6 +143,14 @@ public class Game extends Application {
         }
 
         return null;
+    }
+
+
+    /**
+     * closes the javafx window.
+     */
+    public static void quit() {
+        primaryStage.close();
     }
 
 

@@ -85,4 +85,12 @@ public abstract class Element {
         return isFlagRemoval();
     }
 
+    protected double renderX() {
+        return this.x*factor;
+    }
+
+    protected double renderY() {
+        return this.y*factor;
+    }
+
 }

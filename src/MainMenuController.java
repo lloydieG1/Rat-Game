@@ -24,6 +24,15 @@ public class MainMenuController implements Initializable {
         }
 
 
+    /**
+     * quits the game
+     */
+    @FXML
+        private void quit() {
+            Game.quit();
+        }
+
+
 
     /**
      * code run on initalization, displays updated message of the day
