@@ -18,6 +18,11 @@ public class Rat extends Element {
 
     private boolean isChild;
 
+    private int breeding = 0;
+    private final int BREEDING_TIME = 3;
+
+
+
     
     /**
      * Rat constructor
@@ -46,12 +51,20 @@ public class Rat extends Element {
         currentTick++;
         if(currentTick > tickSpeed) {
             currentTick = 0;
-            logic();
+
+            if (breeding == 0) {
+                logic();
+            } else {
+
+
+                breeding--;
+            }
+
+            if (breeding < 0) {
+                breeding = 0;
+            }
+
         }
-
-
-
-
 
     }
 
@@ -131,8 +144,16 @@ public class Rat extends Element {
         rat.isPregnant = false;
     }
 
-    private void breed () {
-        
+    private void breed() {
+        for (Element element : level.getElements(x, y)) {
+            if (element.getType().equals(ElementType.Rat)) {
+                Rat rat = (Rat) element;
+                if (rat.isMale == true) {
+                    level.addElementLive(new Rat(ElementType.Rat, level, x, y, Game.random.nextBoolean(), Direction.North));
+                    breeding = BREEDING_TIME;
+                }
+            }
+        }
     }
 
 
@@ -294,8 +315,16 @@ public class Rat extends Element {
         double x = renderX();
         double y = renderY();
         //calculating the position the rat should be in this frame
+        g.setFill(Color.color(0.8,0.4,0.5));
+        if (isChild) {
+            g.setFill(Color.color(0.5,.5,0.8));
+        }
 
-        g.setFill(Color.color(0.2,0.2,0.3));
+        if (isMale) {
+            g.setFill(Color.color(0.2,0.2,0.6));
+        }
+
+
         g.fillRect(x, y, size/2, size/2);
 
 

@@ -77,6 +77,9 @@ public class Game extends Application {
 
 
 
+
+
+
     /**
      * runs the logic of the game
      */
@@ -143,6 +146,13 @@ public class Game extends Application {
         }
 
         return null;
+    }
+
+
+
+    public static void endGame() {
+        pauseGame();
+        openLevelMenu();
     }
 
 

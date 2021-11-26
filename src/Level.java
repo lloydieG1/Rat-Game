@@ -22,13 +22,15 @@ public class Level {
     private ArrayList<Element> nextElements = new ArrayList<>();
     private ArrayList<MenuItem> menuItems = new ArrayList<>();
 
+    private int maxRats;
+
     /**
      * constructs a Level
      *
      * @param x width of map
      * @param y height of map
      */
-    public Level(int x, int y) {
+    public Level(int x, int y, int maxRats) {
         tiles = new Tile[x][y];
         elements = new ArrayList<>();
 
@@ -39,6 +41,9 @@ public class Level {
 
         }
          addElement(new Bomb(ElementType.Bomb, this, 4, 4));
+
+        this.maxRats = maxRats;
+        System.out.println(maxRats);
     }
 
     /**
@@ -83,6 +88,19 @@ public class Level {
             }
         }
         return stack;
+
+    }
+
+
+
+    public boolean tooManyRats() {
+        int rats = 0;
+        for (Element element : elements) {
+            if (element.getType().equals(ElementType.Rat)) {
+                rats++;
+            }
+        }
+        return rats>maxRats;
 
     }
 
@@ -157,6 +175,11 @@ public class Level {
             elements.add(element);
         }
         nextElements = new ArrayList<>();
+
+        if (tooManyRats()) {
+            Game.endGame();
+            System.out.println("you lost: too many rats");
+        }
     }
 
     /**
