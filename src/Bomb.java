@@ -14,6 +14,7 @@ public class Bomb extends Element  {
     private final int RADIUS = 1;
 
 
+
     public Bomb(ElementType type, Level level, int x, int y) {
         super(type, level, x, y, Direction.North);
         health = 6;

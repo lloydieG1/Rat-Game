@@ -25,6 +25,9 @@ public abstract class Element {
 
     protected double factor = Game.factor;
 
+    protected int nextX;
+    protected int nextY;
+
     /**
      * constructs an element with x,y, level it is in and type.
      * @param type
@@ -38,6 +41,9 @@ public abstract class Element {
         this.type = type;
         this.level = level;
         this.dir = dir;
+
+        this.nextX = x;
+        this.nextY = y;
     }
 
     /**
@@ -85,12 +91,31 @@ public abstract class Element {
         return isFlagRemoval();
     }
 
-    protected double renderX() {
-        return this.x*factor;
+    /**
+     * smoothly interpolates number frames
+     * @param x1
+     * @param x2
+     * @return
+     */
+    protected double interpolate(double x1, double x2) {
+
+        return x1+((x2-x1)/tickSpeed)*currentTick;
     }
 
-    protected double renderY() {
-        return this.y*factor;
+    protected double renderX() {
+        double x = this.x*factor;
+        double nextX = this.nextX*factor;
+
+        return interpolate(x, nextX);
     }
+
+
+    protected double renderY() {
+        double y = this.y*factor;
+        double nextY = this.nextY*factor;
+
+        return interpolate(y, nextY);
+    }
+
 
 }

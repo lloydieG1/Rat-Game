@@ -56,7 +56,6 @@ public class Rat extends Element {
                 logic();
             } else {
 
-
                 breeding--;
             }
 
@@ -73,16 +72,12 @@ public class Rat extends Element {
      * the logic of the rat, only ran at the rats slower speed
      */
     private void logic() {
+        x = nextX;
+        y = nextY;
         age++;
         if (age == ADULTHOOD) {
             grow();
         }
-        if(! isChild) {
-            if (isMale == false) {
-                breed();
-            }
-        }
-
         movement();
         if(! isChild) {
             if (isMale == false) {
@@ -90,7 +85,6 @@ public class Rat extends Element {
             }
         }
 
-        System.out.println(x + " " + y);
     }
 
 
@@ -157,6 +151,8 @@ public class Rat extends Element {
                 if (rat.isMale == true) {
                     level.addElementLive(new Rat(ElementType.Rat, level, x, y, Game.random.nextBoolean(), Direction.North));
                     breeding = BREEDING_TIME;
+                    nextY = y;
+                    nextX = x;
                 }
             }
         }
@@ -221,8 +217,8 @@ public class Rat extends Element {
             dir = Direction.West;
         }
 
-        this.x = checkX;
-        this.y = checkY;
+        this.nextX = checkX;
+        this.nextY = checkY;
 
 
     }
