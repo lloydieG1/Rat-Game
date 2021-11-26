@@ -21,7 +21,6 @@ public class LevelLoader {
     private static final String LEVELS_PATH = "res\\maps\\";
 
     private static String[] levelData;
-    private static String fileName;
     private static Level level;
     
     /**
@@ -29,13 +28,14 @@ public class LevelLoader {
      * @return a populated map of tiles and rats to then be played
      */
     public static Level getLevel(String levelName) {
-        fileName = levelName+".txt";
-        loadFile();
+        String fileName = levelName+".txt";
+        loadFile(fileName);
 
         int[] gridSize = parseGridSize(levelData[0]);
         level = new Level(gridSize[0],gridSize[1]);
         parseTiles(levelData[1]);
         parseRats(levelData[3]);
+        parseItemData(levelData[5]);
 
         return level;
     }
@@ -64,7 +64,7 @@ public class LevelLoader {
     /**
      * splits the data from the level file into interpretable pieces.
      */
-    private static void loadFile() {
+    private static void loadFile(String fileName) {
         String levelFile = readLevelFile(fileName);
         levelData = levelFile.split(MAIN_DATA_DELIMITER);
 
@@ -193,12 +193,26 @@ public class LevelLoader {
     	}
     }
 
-    //TODO figure out how data for items in menu work
-//	private ArrayList<Element> parseItem(String itemData){
-//		ArrayList<Element> tiles = new ArrayList<>();
-//
-//		return tiles;
-//	}
+    private static ArrayList<MenuItem> parseItemData(String itemData){
+		ArrayList<MenuItem> menuItems = new ArrayList<MenuItem>();
+		String[] Items = itemData.split(SPACE);
+		for (int i = 0; i < Items.length; i++) {
+			System.out.println(Items[i]);
+		}
+
+
+		for (int i = 0; i < Items.length; i++) {
+            String[] individualItem = Items[i].split(INTERNAL_DATA_DELIMITER);
+            String itemType = individualItem[0];
+            int replenishTimer = Integer.parseInt(individualItem[1]);
+
+            MenuItem menuItem = new MenuItem(itemType, replenishTimer); 
+            
+            level.addMenuItem(menuItem);
+        }
+
+		return menuItems;
+	}
 }
 
 
