@@ -58,11 +58,11 @@
                         <ImageView id="bombImageDrag" fx:id="bomb" fitHeight="58.0" fitWidth="383.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </TilePane>
-                  <ImageView id="gasImageDrag" fitHeight="58.0" fitWidth="383.0" pickOnBounds="true" preserveRatio="true">
-                     <VBox.margin>
-                        <Insets />
-                     </VBox.margin>
-                  </ImageView>
+                  <TilePane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <ImageView id="gasImageDrag" fx:id="deathRat" fitHeight="58.0" fitWidth="383.0" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </TilePane>
                   <ImageView id="radiationImageDrag" fitHeight="58.0" fitWidth="383.0" layoutX="10.0" layoutY="74.0" pickOnBounds="true" preserveRatio="true">
                      <VBox.margin>
                         <Insets />
