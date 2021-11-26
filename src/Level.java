@@ -93,14 +93,28 @@ public class Level {
 
 
 
-    public boolean tooManyRats() {
+    public int ratCount() {
         int rats = 0;
         for (Element element : elements) {
             if (element.getType().equals(ElementType.Rat)) {
                 rats++;
             }
         }
-        return rats>maxRats;
+        return rats;
+
+    }
+
+
+    private void checkGameCondition() {
+        int rats = ratCount();
+        if (rats > maxRats) {
+            Game.endGame();
+            System.out.println("you lost: too many rats");
+        } else if (rats == 0) {
+            Game.endGame();
+            System.out.println("you won: no more rats");
+        }
+
 
     }
 
@@ -176,10 +190,7 @@ public class Level {
         }
         nextElements = new ArrayList<>();
 
-        if (tooManyRats()) {
-            Game.endGame();
-            System.out.println("you lost: too many rats");
-        }
+        checkGameCondition();
     }
 
     /**

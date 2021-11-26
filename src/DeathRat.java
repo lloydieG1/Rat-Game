@@ -67,7 +67,7 @@ public class DeathRat extends Element {
         return dir;
     }
 
-  
+
 	
 	@Override
 	protected void render(GraphicsContext g) {
