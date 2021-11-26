@@ -16,36 +16,11 @@ import java.util.ArrayList;
  *
  */
 public class Level {
-    //   private int[] gridSize;
-    //  private Tile[][] tileGrid = null;
-    //  private ArrayList<Element> elements = new ArrayList<Element>();
-    //   private int maxRats;
-    //   private int expectedTime;
-    //   private ArrayList<Element> levelItemData = new ArrayList<Element>();
-
-
-    //  /**
-    //  * @param gridSize
-    //   * @param tileGrid
-    //    * @param elements
-    //    * @param maxRats
-    //    * @param expectedTime
-    //   * @param levelItemData
-    //    */
-    //  public Level(int[] gridSize, Tile[][] tileGrid, ArrayList<Element> elements, int maxRats, int expectedTime,
-    //               ArrayList<Element> levelItemData) {
-    //       super();
-    //      this.gridSize = gridSize;
-    //      this.tileGrid = tileGrid;
-    //      this.elements = elements;
-    //      this.maxRats = maxRats;
-    //      this.expectedTime = expectedTime;
-    //      this.levelItemData = levelItemData;
-    //  }
     private Tile[][] tiles; // 2d array of all the tiles and what they contain
 
     private ArrayList<Element> elements;
     private ArrayList<Element> nextElements = new ArrayList<>();
+    private ArrayList<MenuItem> menuItems;
 
 
     /**
@@ -125,6 +100,14 @@ public class Level {
      */
     public void addElement(Element element) {
         elements.add(element);
+
+    }
+    
+    /**
+     * @param menuItem
+     */
+    public void addMenuItem(MenuItem menuItem) {
+        menuItems.add(menuItem);
 
     }
 

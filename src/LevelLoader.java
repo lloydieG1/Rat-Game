@@ -21,7 +21,6 @@ public class LevelLoader {
     private static final String LEVELS_PATH = "res\\maps\\";
 
     private static String[] levelData;
-    private static String fileName;
     private static Level level;
     
     /**
@@ -29,8 +28,8 @@ public class LevelLoader {
      * @return a populated map of tiles and rats to then be played
      */
     public static Level getLevel(String levelName) {
-        fileName = levelName+".txt";
-        loadFile();
+        String fileName = levelName+".txt";
+        loadFile(fileName);
 
         int[] gridSize = parseGridSize(levelData[0]);
         level = new Level(gridSize[0],gridSize[1]);
@@ -64,7 +63,7 @@ public class LevelLoader {
     /**
      * splits the data from the level file into interpretable pieces.
      */
-    private static void loadFile() {
+    private static void loadFile(String fileName) {
         String levelFile = readLevelFile(fileName);
         levelData = levelFile.split(MAIN_DATA_DELIMITER);
 
@@ -138,13 +137,13 @@ public class LevelLoader {
         int columnSize=tileRows.length;
         //TODO quite a scuffed nested for loop, want to change
 
-        for (int i = rowSize-1; i >= 0; i--) {
+        for (int i = 0; i < rowSize; i++) {
 
             for (int j = 0; j < columnSize; j++) {
                 char tileLetter = tileRows[j].charAt(i);
                 Tile tile = new Tile(getTile(tileLetter), j, i);
 
-                level.addTile(i, j, tile);
+                level.addTile(rowSize-i, j, tile);
                 System.out.println(tileLetter);
 
             }
@@ -194,11 +193,26 @@ public class LevelLoader {
     }
 
     //TODO figure out how data for items in menu work
-//	private ArrayList<Element> parseItem(String itemData){
-//		ArrayList<Element> tiles = new ArrayList<>();
-//
-//		return tiles;
-//	}
+	private  ArrayList<MenuItem> parseItemData(String itemData){
+		ArrayList<MenuItem> menuItems = new ArrayList<MenuItem>();
+		String[] Items = itemData.split(SPACE);
+		
+		for (int i = 0; i < Items.length; i++) {
+            String[] individualItem = Items[i].split(INTERNAL_DATA_DELIMITER);
+
+            String itemType = individualItem[0];
+            int replenishTimer = Integer.parseInt(individualItem[1]);
+            
+            MenuItem menuItem = new MenuItem(itemType, replenishTimer); 
+            level.addMenuItem(menuItem);
+        }
+		
+		return menuItems;
+	}
+	
+	public static void main(String[] args) {
+		
+	}
 }
 
 
