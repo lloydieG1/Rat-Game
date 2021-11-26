@@ -25,7 +25,7 @@ public class MenuItem {
 			case "Sterilise":
 				returnType = ElementType.Sterilise;
 				break;
-			case "Poision":
+			case "Poison":
 				returnType = ElementType.Poison;
 				break;
 			case "GenderChange":
