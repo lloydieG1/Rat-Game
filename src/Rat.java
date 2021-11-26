@@ -72,6 +72,10 @@ public class Rat extends Element {
      * the logic of the rat, only ran at the rats slower speed
      */
     private void logic() {
+        if (level.getTile(x, y).getType().equals(TileType.Grass)) {
+            level.removeElement(this);
+
+        }
 
         age++;
         if (age == ADULTHOOD) {

@@ -96,6 +96,9 @@ public abstract class Element {
      * handles the movement of the rat
      */
     protected void movement() {
+
+
+
         x = nextX;
         y = nextY;
         //update to the position decided last tick.
@@ -154,6 +157,7 @@ public abstract class Element {
 
         this.nextX = checkX;
         this.nextY = checkY;
+
 
 
     }
