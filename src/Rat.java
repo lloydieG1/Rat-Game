@@ -84,6 +84,12 @@ public class Rat extends Element {
         }
 
         movement();
+        if(! isChild) {
+            if (isMale == false) {
+                breed();
+            }
+        }
+
         System.out.println(x + " " + y);
     }
 
