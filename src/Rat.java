@@ -19,7 +19,7 @@ public class Rat extends Element {
     private boolean isChild;
 
     private int breeding = 0;
-    private final int BREEDING_TIME = 3;
+    private final int BREEDING_TIME = 5;
 
 
 
