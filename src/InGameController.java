@@ -1,3 +1,4 @@
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -44,6 +45,29 @@ public class InGameController implements Initializable {
     private void backClick() {
         Game.openLevelMenu();
         Game.pauseGame();
+
+    }
+
+    @FXML
+    private void mapClick(MouseEvent event) {
+        double x = event.getX();
+        double y = event.getY();
+
+        if (x < Game.gameSize) {
+            Game.gameX = Game.gameX+Game.gameSize;
+        }
+
+        if (y < Game.gameSize) {
+            Game.gameY = Game.gameY+Game.gameSize;
+        }
+
+        if (x > Game.MAP_WIDTH-Game.gameSize) {
+            Game.gameX = Game.gameX-Game.gameSize;
+        }
+
+        if (y > Game.MAP_HEIGHT-Game.gameSize) {
+            Game.gameY = Game.gameY-Game.gameSize;
+        }
 
     }
 

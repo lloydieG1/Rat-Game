@@ -46,9 +46,12 @@ public class Game extends Application {
 
     public static InGameController levelController;
 
+    public static final int MAP_WIDTH = 961;
+    public static final int MAP_HEIGHT = 861;
     public static int gameX =0;
     public static int gameY = 0;
     public static int score;
+
 
     /**
      * open the main menu and loads the other menus
@@ -84,6 +87,7 @@ public class Game extends Application {
         levelLayout.addEventFilter(KeyEvent.KEY_PRESSED, event -> processKeyEvent(event));
 
     }
+
 
 
     /**
@@ -142,6 +146,17 @@ public class Game extends Application {
         gameGraphics.fillRect(0,0,gameGraphics.getCanvas().getWidth(), gameGraphics.getCanvas().getHeight());
         currentLevel.render(gameGraphics);
         updateScore();
+        drawButtons(gameGraphics);
+    }
+
+    private static void drawButtons(GraphicsContext g) {
+        g.setFill(Color.color(0.2,0.2,0.2,0.5));
+        g.fillRect(0, 0, MAP_WIDTH, gameSize);
+        g.fillRect(0, 0, gameSize, MAP_HEIGHT);
+
+        g.fillRect(MAP_WIDTH-gameSize, 0, MAP_WIDTH, MAP_HEIGHT);
+        g.fillRect(0, MAP_HEIGHT-gameSize, MAP_WIDTH, MAP_HEIGHT);
+
     }
 
     /**
