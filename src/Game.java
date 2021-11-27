@@ -104,7 +104,6 @@ public class Game extends Application {
             case RIGHT:
                 // Right key was pressed. So move the player right by one cell.
                 Game.gameX-=scroll;
-              //  clampMap();
                 break;
             case LEFT:
                 // Right key was pressed. So move the player right by one cell.
@@ -126,6 +125,13 @@ public class Game extends Application {
                 break;
         }
 
+        int visibleTiles = 14;
+
+        int mapWidth = currentLevel.getMapBounds()[0];
+        int mapHeight = currentLevel.getMapBounds()[1];
+        System.out.println(mapHeight);
+        gameY = minMax(gameY, -gameSize* (mapHeight-visibleTiles), gameSize);
+        gameX = minMax(gameX, -gameSize*(mapWidth-visibleTiles), gameSize);
 
         // Consume the event. This means we mark it as dealt with. This stops other GUI nodes (buttons etc) responding to it.
         event.consume();
@@ -228,6 +234,23 @@ public class Game extends Application {
         }
 
         return null;
+    }
+
+    /**
+     * prevents a value being above or below parsed ints
+     * @param var
+     * @param min
+     * @param max
+     * @return
+     */
+    public static int minMax(int var, int min, int max) {
+        if(var >= max)
+            return max;
+        else if (var <=min)
+            return min;
+        else
+            return var;
+
     }
 
 

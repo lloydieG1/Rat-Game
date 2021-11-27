@@ -21,6 +21,9 @@ public class Level {
 
     private int maxRats;
 
+    private int xSize;
+    private int ySize;
+
     /**
      * constructs a Level
      *
@@ -30,6 +33,8 @@ public class Level {
     public Level(int x, int y, int maxRats) {
         tiles = new Tile[x][y];
         elements = new ArrayList<>();
+        this.xSize = x;
+        this.ySize = y;
 
         for (int i = 0; i < x; i++) {
             for (int j = 0; j < y; j++) {
@@ -86,6 +91,17 @@ public class Level {
         }
         return stack;
 
+    }
+
+    /**
+     * gives the bounds of the map
+     * @return
+     */
+    public int[] getMapBounds() {
+        int[] bounds = new int[2];
+        bounds[0]= xSize;
+        bounds[1] = ySize;
+        return bounds;
     }
 
 
