@@ -150,7 +150,13 @@ public class Rat extends Element {
         double x = renderX();
         double y = renderY();
         //calculating the position the rat should be in this frame
-        g.drawImage(image, x - size / 4, y - size / 4);
+
+        g.save();
+        g.translate(x+Game.gameSize/2.0, y+Game.gameSize/2.0);
+        g.rotate(interpolateDir(dirAsNum(lastDir),dirAsNum(dir)));
+        g.drawImage(image,-(size/2), -(size/2), size, size);
+        g.restore();
+
     }
 
 }

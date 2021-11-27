@@ -27,6 +27,7 @@ public abstract class Element {
 
     protected int nextX;
     protected int nextY;
+    protected Direction lastDir;
 
     /**
      * constructs an element with x,y, level it is in and type.
@@ -44,6 +45,7 @@ public abstract class Element {
 
         this.nextX = x;
         this.nextY = y;
+
     }
 
     /**
@@ -96,6 +98,7 @@ public abstract class Element {
      * handles the movement of the rat
      */
     protected void movement() {
+        lastDir = dir;
 
 
 
@@ -261,6 +264,66 @@ public abstract class Element {
         double nextX = this.nextX*factor+ Game.gameX;
 
         return interpolate(x, nextX);
+    }
+
+    /**
+     * smoothly interpolates rotations
+     * @param x1
+     * @param x2
+     * @return
+     */
+    protected double interpolateDir(double x1, double x2) {
+        //makes sure the rat never rotates more than 180 for a turn:
+        if (x2-x1 > 180) {
+            x2 = x2-360;
+        } else if (x2-x1 < -180){
+            x2 = x2+360;
+        }
+
+        double currentTick = minMax(this.currentTick, 0, tickSpeed/2);
+        double tickSpeed = this.tickSpeed/2.0;
+        return cosineInterpolation(x1, x2, currentTick, tickSpeed);
+    }
+
+    protected double cosineInterpolation(double x1, double x2, double min, double max) {
+
+        double m2 = (1-Math.cos(min*3.14159265/max))/2;
+        return x1+(x2-x1)*m2;
+    }
+
+    /**
+     * prevents a value being above or below parsed ints
+     * @param var
+     * @param min
+     * @param max
+     * @return
+     */
+    public int minMax(int var, int min, int max) {
+        if(var >= max)
+            return max;
+        else if (var <=min)
+            return min;
+        else
+            return var;
+
+    }
+
+    /**
+     * gives a number instead of a Direction value
+     * @param dir
+     * @return
+     */
+    protected double dirAsNum(Direction dir) {
+        if (dir == Direction.North) {
+            return(180);
+        } else if (dir == Direction.East) {
+            return (90);
+        }else if (dir == Direction.South) {
+            return(0);
+        }else if (dir == Direction.West) {
+            return(270);
+        }
+        return 0;
     }
 
     /**
