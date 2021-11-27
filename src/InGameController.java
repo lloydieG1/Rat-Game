@@ -48,14 +48,7 @@ public class InGameController implements Initializable {
     }
 
     private Image  getImage(String fileName) {
-        String filePath = "res\\images\\";
-        FileInputStream inputstream = null;
-        try {
-            inputstream = new FileInputStream(filePath + fileName);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        Image image = new Image(inputstream);
+        Image image = ImageLoader.getImage(fileName, 64);
         return image;
     }
 
