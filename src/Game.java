@@ -28,7 +28,7 @@ public class Game extends Application {
 
     private static Scene mainMenu; //the main menu
     private static Scene levelMenu; //the levels menu
-    private static Scene ingameScene; //the levels menu
+    private static Scene endGame; //the levels menu
     private static Scene levelLayout; //the layout of the levels 
 
     private static GraphicsContext gameGraphics; //canvas to show the graphics on
@@ -62,7 +62,7 @@ public class Game extends Application {
         mainMenu = loadScene("mainMenu.fxml");
         levelMenu = loadScene("levelMenu.fxml");
         levelLayout = loadScene("levelLayout.fxml");
-
+        endGame = loadScene("EndGameScreen.fxml");
 
         openMainMenu();
         primaryStage.show();
@@ -160,6 +160,15 @@ public class Game extends Application {
 
     }
 
+
+    /**
+     *changes the menu to the end game scene
+     */
+    public static void openEndGame() {
+        primaryStage.setScene(endGame);
+
+    }
+
     /**
      *changes the menu to the level Menu
      */
@@ -208,7 +217,7 @@ public class Game extends Application {
 
     public static void endGame() {
         pauseGame();
-        openLevelMenu();
+        openEndGame();
     }
 
 

@@ -252,6 +252,10 @@ public abstract class Element {
         return x1+((x2-x1)/tickSpeed)*currentTick;
     }
 
+    /**
+     * gets the rendered version of x
+     * @return
+     */
     protected double renderX() {
         double x = this.x*factor + Game.gameX;
         double nextX = this.nextX*factor+ Game.gameX;
@@ -259,7 +263,10 @@ public abstract class Element {
         return interpolate(x, nextX);
     }
 
-
+    /**
+     * gets the rendered version of y
+     * @return
+     */
     protected double renderY() {
         double y = this.y*factor+ Game.gameY;
         double nextY = this.nextY*factor+ Game.gameY;
