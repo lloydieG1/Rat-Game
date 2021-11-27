@@ -5,6 +5,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
+import javafx.scene.layout.TilePane;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -26,7 +27,10 @@ public class InGameController implements Initializable {
     ImageView bomb;
     @FXML
     ImageView deathRat;
-    
+
+
+    @FXML
+    TilePane bombPane;
     
     ElementType lastItem;
     /**
@@ -37,6 +41,20 @@ public class InGameController implements Initializable {
         Game.openLevelMenu();
         Game.pauseGame();
 
+    }
+
+    /**
+     * adds a bomb to the tilepane
+     */
+    public void addBomb() {
+        bombPane.getChildren().add(bomb);
+    }
+
+    /**
+     * adds a bomb to the tilepane
+     */
+    public void removeBomb() {
+        bombPane.getChildren().remove(0);
     }
 
 
@@ -79,6 +97,9 @@ public class InGameController implements Initializable {
 
 
         placeItem((int)x, (int)y, lastItem);
+        if (lastItem.equals(ElementType.Bomb)) {
+            removeBomb();
+        }
     }
 
     /**
