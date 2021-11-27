@@ -53,11 +53,7 @@
             <Pane id="miniMap" prefHeight="328.0" prefWidth="374.0" />
             <VBox alignment="TOP_CENTER" layoutX="-4.0" layoutY="328.0" prefHeight="557.0" prefWidth="380.0">
                <children>
-                  <TilePane fx:id="bombPane" prefHeight="200.0" prefWidth="200.0">
-                     <children>
-                        <ImageView id="bombImageDrag" fx:id="bomb" fitHeight="58.0" fitWidth="383.0" pickOnBounds="true" preserveRatio="true" />
-                     </children>
-                  </TilePane>
+                  <TilePane fx:id="bombPane" prefHeight="200.0" prefWidth="200.0" />
                   <TilePane prefHeight="200.0" prefWidth="200.0">
                      <children>
                         <ImageView id="gasImageDrag" fx:id="deathRat" fitHeight="58.0" fitWidth="383.0" pickOnBounds="true" preserveRatio="true" />

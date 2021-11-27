@@ -43,6 +43,7 @@ public class Game extends Application {
 
     public static double factor = 50;
 
+    public static InGameController levelController;
 
     /**
      * open the main menu and loads the other menus
@@ -70,6 +71,9 @@ public class Game extends Application {
 
 
         gameLoop.setCycleCount(Timeline.INDEFINITE);
+
+        levelController.addBomb();
+
 
     }
 

@@ -24,15 +24,13 @@ public class InGameController implements Initializable {
     Canvas gameCanvas; //canvas the game is shown on
 
     @FXML
-    ImageView bomb;
-    @FXML
     ImageView deathRat;
 
 
     @FXML
-    TilePane bombPane;
+    private TilePane bombPane;
     
-    ElementType lastItem;
+    private static ElementType lastItem;
     /**
      * switches back to the menu
      */
@@ -47,6 +45,37 @@ public class InGameController implements Initializable {
      * adds a bomb to the tilepane
      */
     public void addBomb() {
+        ImageView bomb = new ImageView();
+        String filePath = "res\\images\\";
+        FileInputStream inputstream = null;
+        try {
+            inputstream = new FileInputStream(filePath + "bomb.png");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Image image = new Image(inputstream);
+        bomb.setImage(image);
+        bomb.setCache(true);
+        bomb.setOnDragDetected(new EventHandler<MouseEvent>() {
+            public void handle(MouseEvent event) {
+                // Mark the drag as started.
+                // We do not use the transfer mode (this can be used to indicate different forms
+                // of drags operations, for example, moving files or copying files).
+                Dragboard db = bomb.startDragAndDrop(TransferMode.ANY);
+                // db.setDragView(bomb.getImage());
+
+                // We have to put some content in the clipboard of the drag event.
+                // We do not use this, but we could use it to store extra data if we wished.
+                ClipboardContent content = new ClipboardContent();
+                content.putString("bomb");
+                db.setContent(content);
+
+                lastItem = ElementType.Bomb;
+                // Consume the event. This means we mark it as dealt with.
+                event.consume();
+            }
+        });
+
         bombPane.getChildren().add(bomb);
     }
 
@@ -62,16 +91,8 @@ public class InGameController implements Initializable {
 
         String filePath = "res\\images\\";
         FileInputStream inputstream = null;
-        try {
-            inputstream = new FileInputStream(filePath + "bomb.png");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        Image image = new Image(inputstream);
-        bomb.setImage(image);
-        bomb.setCache(true);
-        
-        
+
+        Image image;
         inputstream = null;
         try {
             inputstream = new FileInputStream(filePath + "deathRat.png");
@@ -128,31 +149,14 @@ public class InGameController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        Game.levelController = this;
+
         Game.loadCanvas(gameCanvas.getGraphicsContext2D());
         showImages();
 
+        addBomb();
+        addBomb();
 
-        bomb.setOnDragDetected(new EventHandler<MouseEvent>() {
-            public void handle(MouseEvent event) {
-                // Mark the drag as started.
-                // We do not use the transfer mode (this can be used to indicate different forms
-                // of drags operations, for example, moving files or copying files).
-                Dragboard db = bomb.startDragAndDrop(TransferMode.ANY);
-                // db.setDragView(bomb.getImage());
-
-                // We have to put some content in the clipboard of the drag event.
-                // We do not use this, but we could use it to store extra data if we wished.
-                ClipboardContent content = new ClipboardContent();
-                content.putString("bomb");
-                db.setContent(content);
-
-                // Consume the event. This means we mark it as dealt with.
-                event.consume();
-            }
-            
-            
-        });
-        
         deathRat.setOnDragDetected(new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
                 // Mark the drag as started.
@@ -180,19 +184,10 @@ public class InGameController implements Initializable {
             public void handle(DragEvent event) {
                 // Mark the drag as acceptable if the source was the draggable image.
                 // (for example, we don't want to allow the user to drag things or files into our application)
-                if (event.getGestureSource() == bomb) {
-                	lastItem = ElementType.Bomb;
                     // Mark the drag event as acceptable by the canvas.
                     event.acceptTransferModes(TransferMode.ANY);
                     // Consume the event. This means we mark it as dealt with.
                     event.consume();
-                } else if (event.getGestureSource() == deathRat) {
-                	lastItem = ElementType.DeathRat;
-                    // Mark the drag event as acceptable by the canvas.
-                    event.acceptTransferModes(TransferMode.ANY);
-                    // Consume the event. This means we mark it as dealt with.
-                    event.consume();
-                }
             }
         });
 
@@ -205,6 +200,8 @@ public class InGameController implements Initializable {
                 event.consume();
             }
         });
+
+
     }
 }
 
