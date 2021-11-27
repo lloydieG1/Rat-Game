@@ -1,4 +1,6 @@
-
+/**
+ * @author lloyd
+ */
 public class PlayerProfile {
 	private String username;
 	private int maxLevel;

@@ -1,4 +1,6 @@
-
+/**
+ * @author lloyd
+ */
 public class MenuItem {
 	private ElementType itemType;
 	private int replenishTimer;

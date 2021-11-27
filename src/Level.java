@@ -11,10 +11,7 @@ import java.util.ArrayList;
  * @author william randle, lloyd, adrian, yazan
  * @version 1
  */
-/**
- * @author A B
- *
- */
+
 public class Level {
     private Tile[][] tiles; // 2d array of all the tiles and what they contain
 
