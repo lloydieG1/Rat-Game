@@ -1,5 +1,9 @@
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
+        import javafx.scene.image.Image;
+        import javafx.scene.paint.Color;
+
+        import java.io.FileInputStream;
+        import java.io.FileNotFoundException;
 
 
 /**
@@ -10,19 +14,23 @@ public class Rat extends Element {
 
     private boolean isMale;
 
+    private boolean isPregnant;
+
     private static int ADULTHOOD = 5;
+
+    private boolean isSterile;
 
     private boolean isChild;
 
     private int breeding = 0;
-    
     private final int BREEDING_TIME = 5;
+    private Image image;
 
 
-    
+
     /**
      * Rat constructor
-     * 
+     *
      * @param type
      * @param level
      * @param x
@@ -32,12 +40,25 @@ public class Rat extends Element {
      */
     public Rat(ElementType type, Level level, int x, int y, boolean isMale, Direction dir) {
         super(type, level, x, y, dir);
+
         this.isMale = isMale;
+
         isChild = true;
+
+        FileInputStream inputstream = null;
+        try {
+
+            inputstream = new FileInputStream("res\\images\\ratChild.png");
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        image = new Image(inputstream, 64, 64, true, false);
+
     }
 
     /**
-     * Runs Tick() behaviours, allowing them to run logics automatically 
+     * Runs Tick() behaviours, allowing them to run logics automatically
      * in time with other elements
      */
     protected void tick() {
@@ -85,7 +106,22 @@ public class Rat extends Element {
 
 
     private void grow() {
+
         isChild = false;
+
+        FileInputStream inputstream = null;
+        try {
+
+            if (isMale) {
+                inputstream = new FileInputStream("res\\images\\ratMale.png");
+            } else {
+                inputstream = new FileInputStream("res\\images\\ratFemale.png");
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        image = new Image(inputstream, 64, 64, true, false);
     }
 
     public boolean getIsMale () {
@@ -101,17 +137,16 @@ public class Rat extends Element {
     }
 
 
+
     private void breed() {
         for (Element element : level.getElements(x, y)) {
             if (element.getType().equals(ElementType.Rat)) {
                 Rat rat = (Rat) element;
                 if (rat.isMale == true) {
-                	for(int i =0; i < 3; i++) {
-                		level.addElementLive(new Rat(ElementType.Rat, level, x, y, Game.random.nextBoolean(), Direction.North));
-                	}
-                	breeding = BREEDING_TIME;
+                    level.addElementLive(new Rat(ElementType.Rat, level, x, y, Game.random.nextBoolean(), Direction.North));
+                    breeding = BREEDING_TIME;
                     nextY = y;
-                    nextX = x;  
+                    nextX = x;
                 }
             }
         }
@@ -127,19 +162,7 @@ public class Rat extends Element {
         double x = renderX();
         double y = renderY();
         //calculating the position the rat should be in this frame
-        g.setFill(Color.color(0.8,0.4,0.5));
-        if (isChild) {
-            g.setFill(Color.color(0.5,.5,0.8));
-        }
-
-        if (isMale) {
-            g.setFill(Color.color(0.2,0.2,0.6));
-        }
-
-
-        g.fillRect(x, y, size/2, size/2);
-
-
+        g.drawImage(image, x - size / 4, y - size / 4);
     }
 
 }
