@@ -18,17 +18,9 @@ public class Poison extends Element {
 		super(type, level, x, y, dir);
 		health = 6;
         damage = false;
-		
-		
-		 FileInputStream inputstream = null;
-	        try {
 
-	            inputstream = new FileInputStream("res\\images\\Poison.png");
 
-	        } catch (FileNotFoundException e) {
-	            e.printStackTrace();
-	        }
-	        image = new Image(inputstream, 64, 64, true, false);
+        image = ImageLoader.getImage("Poison.png", 64);
 
 		}
 

@@ -26,7 +26,7 @@ public class Gas extends Element {
         super(type, level, x, y, dir);
         health = 6;
         damage = false;
-        
+        image = ImageLoader.getImage("gas.png", 64);
       
     }
 
@@ -73,8 +73,7 @@ public class Gas extends Element {
         double y = renderY();
         //calculating the position the rat should be in this frame
 
-        g.setFill(Color.color(0.2,0.2,0.3));
-        g.fillRect(x, y, size/2, size/2);
+        g.drawImage(image, x - size / 4, y - size / 4);
 
 
     }
