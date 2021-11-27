@@ -52,9 +52,9 @@
       <AnchorPane prefHeight="880.0" prefWidth="377.0" BorderPane.alignment="CENTER">
          <children>
             <Pane id="miniMap" prefHeight="328.0" prefWidth="374.0" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" AnchorPane.rightAnchor="356.86328125" />
             <VBox alignment="TOP_CENTER" layoutX="-4.0" layoutY="328.0" prefHeight="557.0" prefWidth="380.0">
                <children>
+                  <Text fx:id="score" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
                   <TilePane fx:id="bombPane" prefHeight="200.0" prefWidth="200.0" />
                   <TilePane fx:id="deathRatPane" prefHeight="200.0" prefWidth="200.0" />
                   <ImageView id="radiationImageDrag" fitHeight="58.0" fitWidth="383.0" layoutX="10.0" layoutY="74.0" pickOnBounds="true" preserveRatio="true">

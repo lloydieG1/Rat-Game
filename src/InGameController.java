@@ -6,6 +6,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.TilePane;
+import javafx.scene.text.Text;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -24,7 +25,7 @@ public class InGameController implements Initializable {
     Canvas gameCanvas; //canvas the game is shown on
 
     @FXML
-    ImageView deathRat;
+    Text score;
 
     @FXML
     private TilePane bombPane;
@@ -142,6 +143,7 @@ public class InGameController implements Initializable {
     public void removeDeathRat() {
         deathRatPane.getChildren().remove(0);
     }
+
 
 
     /**

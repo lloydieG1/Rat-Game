@@ -47,6 +47,7 @@ public class DeathRat extends Element {
 			if (element.getType().equals(ElementType.Rat)) {
 				level.removeElement(element);
 				ratsKilled++;
+                Game.score = Game.score+1;
             }
 		}
 	}

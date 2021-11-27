@@ -48,6 +48,7 @@ public class Game extends Application {
 
     public static int gameX =0;
     public static int gameY = 0;
+    public static int score;
 
     /**
      * open the main menu and loads the other menus
@@ -85,6 +86,10 @@ public class Game extends Application {
     }
 
 
+    /**
+     * scrolls the map with arrow keys
+     * @param event
+     */
     public void processKeyEvent(KeyEvent event) {
         // We change the behaviour depending on the actual key that was pressed.
 
@@ -120,6 +125,10 @@ public class Game extends Application {
         event.consume();
     }
 
+    public static void updateScore() {
+        levelController.score.setText(Integer.toString(score));
+    }
+
 
 
 
@@ -132,6 +141,7 @@ public class Game extends Application {
         gameGraphics.setFill(Color.color(0.3,0.6,0));
         gameGraphics.fillRect(0,0,gameGraphics.getCanvas().getWidth(), gameGraphics.getCanvas().getHeight());
         currentLevel.render(gameGraphics);
+        updateScore();
     }
 
     /**
