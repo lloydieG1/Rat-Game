@@ -203,6 +203,8 @@ public class Level {
         for (Element element : elements) {
             element.render(g);
         }
+
+        renderTunnels(g);
     }
 
     /**
@@ -213,6 +215,16 @@ public class Level {
         for (int i = 0; i < tiles.length; i++) {
             for (int j = 0; j < tiles[i].length; j++) {
                 tiles[i][j].render(g);
+            }
+        }
+    }
+
+    public void renderTunnels(GraphicsContext g) {
+        for (int i = 0; i < tiles.length; i++) {
+            for (int j = 0; j < tiles[i].length; j++) {
+                if( tiles[i][j].getType().equals(TileType.Tunnel)) {
+                    tiles[i][j].render(g);
+                }
             }
         }
     }
