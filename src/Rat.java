@@ -171,14 +171,16 @@ public class Rat extends Element {
         double x = renderX();
         double y = renderY();
         //calculating the position the rat should be in this frame
-        g.setFill(Color.color(0.8,0.4,0.5));
         if (isChild) {
             g.setFill(Color.color(0.5,.5,0.8));
+        } else {
+            if (isMale) {
+                g.setFill(Color.color(0.2,0.2,0.6));
+            } else {
+                g.setFill(Color.color(0.8,0.4,0.5));
+            }
         }
 
-        if (isMale) {
-            g.setFill(Color.color(0.2,0.2,0.6));
-        }
 
 
         g.fillRect(x, y, size/2, size/2);

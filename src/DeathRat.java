@@ -50,10 +50,15 @@ public class DeathRat extends Element {
                 Game.score = Game.score+1;
             }
 		}
+
+        for (Element element : level.getElements(nextX, nextY)) {
+            if (element.getType().equals(ElementType.Rat)) {
+                level.removeElement(element);
+                ratsKilled++;
+                Game.score = Game.score+1;
+            }
+        }
 	}
-	
-	
-	
 
 	@Override
 	protected void tick() {
