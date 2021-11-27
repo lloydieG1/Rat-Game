@@ -21,7 +21,7 @@ public class ImageLoader {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        image = new Image(inputstream, 64, 64, true, false);
+        image = new Image(inputstream, size, size, true, false);
 
         return image;
     }
