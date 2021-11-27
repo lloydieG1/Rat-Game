@@ -22,6 +22,9 @@
         <TilePane fx:id="levelPane" alignment="CENTER" hgap="25.0" prefHeight="200.0" prefWidth="200.0" vgap="25.0" BorderPane.alignment="CENTER" />
    </left>
    <center>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="you lost" BorderPane.alignment="CENTER" />
+      <Text fx:id="text" strokeType="OUTSIDE" strokeWidth="0.0" text="you lost" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="77.0" />
+         </font></Text>
    </center>
 </BorderPane>

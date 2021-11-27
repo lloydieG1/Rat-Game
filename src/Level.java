@@ -105,11 +105,9 @@ public class Level {
     private void checkGameCondition() {
         int rats = ratCount();
         if (rats > maxRats) {
-            Game.endGame();
-            System.out.println("you lost: too many rats");
+            Game.endGame("you lost with a score of " + Game.score);
         } else if (rats == 0) {
-            Game.endGame();
-            System.out.println("you won: no more rats");
+            Game.endGame("you won with a score of " + Game.score);
         }
 
 

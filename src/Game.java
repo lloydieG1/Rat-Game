@@ -46,6 +46,8 @@ public class Game extends Application {
 
     public static InGameController levelController;
 
+    public static EndGameController endGameController;
+
     public static final int MAP_WIDTH = 961;
     public static final int MAP_HEIGHT = 861;
     public static int gameX =0;
@@ -230,8 +232,9 @@ public class Game extends Application {
 
 
 
-    public static void endGame() {
+    public static void endGame(String message) {
         pauseGame();
+        endGameController.setText(message);
         openEndGame();
     }
 
