@@ -8,6 +8,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -39,11 +40,14 @@ public class Game extends Application {
 
     public static Random random = new Random();
 
-    public static int gameSize = 50;
+    public static int gameSize = 70;
 
-    public static double factor = 50;
+    public static double factor = 70;
 
     public static InGameController levelController;
+
+    public static int gameX =0;
+    public static int gameY = 0;
 
     /**
      * open the main menu and loads the other menus
@@ -76,10 +80,45 @@ public class Game extends Application {
         levelController.addBomb();
         levelController.addDeathRat();
 
+        levelLayout.addEventFilter(KeyEvent.KEY_PRESSED, event -> processKeyEvent(event));
+
     }
 
 
+    public void processKeyEvent(KeyEvent event) {
+        // We change the behaviour depending on the actual key that was pressed.
 
+        int scroll = 50;
+        switch (event.getCode()) {
+            case RIGHT:
+                // Right key was pressed. So move the player right by one cell.
+                Game.gameX-=scroll;
+              //  clampMap();
+                break;
+            case LEFT:
+                // Right key was pressed. So move the player right by one cell.
+                Game.gameX+=scroll;
+               // clampMap();
+                break;
+            case UP:
+                // Right key was pressed. So move the player right by one cell.
+                Game.gameY+=scroll;
+             //   clampMap();
+                break;
+            case DOWN:
+                // Right key was pressed. So move the player right by one cell.
+                Game.gameY-=scroll;
+              //  clampMap();
+                break;
+            default:
+                // Do nothing for all other keys.
+                break;
+        }
+
+
+        // Consume the event. This means we mark it as dealt with. This stops other GUI nodes (buttons etc) responding to it.
+        event.consume();
+    }
 
 
 
@@ -90,6 +129,8 @@ public class Game extends Application {
      */
     private static void tick() {
         currentLevel.tick();
+        gameGraphics.setFill(Color.color(0.3,0.6,0));
+        gameGraphics.fillRect(0,0,gameGraphics.getCanvas().getWidth(), gameGraphics.getCanvas().getHeight());
         currentLevel.render(gameGraphics);
     }
 

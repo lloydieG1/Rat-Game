@@ -253,16 +253,16 @@ public abstract class Element {
     }
 
     protected double renderX() {
-        double x = this.x*factor;
-        double nextX = this.nextX*factor;
+        double x = this.x*factor + Game.gameX;
+        double nextX = this.nextX*factor+ Game.gameX;
 
         return interpolate(x, nextX);
     }
 
 
     protected double renderY() {
-        double y = this.y*factor;
-        double nextY = this.nextY*factor;
+        double y = this.y*factor+ Game.gameY;
+        double nextY = this.nextY*factor+ Game.gameY;
 
         return interpolate(y, nextY);
     }

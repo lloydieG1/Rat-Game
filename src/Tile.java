@@ -43,8 +43,8 @@ public class Tile {
      */
     public void render(GraphicsContext g) {
         double factor = Game.factor;
-        double x = this.x*factor;
-        double y = this.y*factor;
+        double x = this.x*factor + Game.gameX;
+        double y = this.y*factor + Game.gameY;
         int size = Game.gameSize;
         g.setFill(Color.RED);
         
