@@ -109,19 +109,15 @@ public class Rat extends Element {
 
         isChild = false;
 
-        FileInputStream inputstream = null;
-        try {
 
             if (isMale) {
-                inputstream = new FileInputStream("res\\images\\ratMale.png");
+                image = ImageLoader.getImage("ratMale.png", 64);
+               
             } else {
-                inputstream = new FileInputStream("res\\images\\ratFemale.png");
+                image = ImageLoader.getImage("ratFemale.png", 64);
             }
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        image = new Image(inputstream, 64, 64, true, false);
+
     }
 
     public boolean getIsMale () {
