@@ -40,7 +40,7 @@ public class Level {
             }
 
         }
-         addElement(new Bomb(ElementType.Bomb, this, 4, 4));
+
 
         this.maxRats = maxRats;
         System.out.println(maxRats);

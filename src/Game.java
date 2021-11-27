@@ -73,7 +73,8 @@ public class Game extends Application {
         gameLoop.setCycleCount(Timeline.INDEFINITE);
 
         levelController.addBomb();
-
+        levelController.addBomb();
+        levelController.addDeathRat();
 
     }
 
