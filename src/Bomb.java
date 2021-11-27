@@ -20,15 +20,7 @@ public class Bomb extends Element  {
         health = 6;
         damage = false;
 
-        FileInputStream inputstream = null;
-        try {
-
-            inputstream = new FileInputStream("res\\images\\bomb.png");
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        image = new Image(inputstream, 64, 64, true, false);
+        image = ImageLoader.getImage("bomb.png", 64);
 
     }
 

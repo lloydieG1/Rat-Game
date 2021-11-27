@@ -15,16 +15,8 @@ public class DeathRat extends Element {
 		super(type, level, x, y, Direction.North);
 		// TODO Auto-generated constructor stub
 		ratsKilled = 0;
-		
-		FileInputStream inputstream = null;
-        try {
 
-            inputstream = new FileInputStream("res\\images\\deathRat.png");
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        image = new Image(inputstream, 64, 64, true, false);
+        image = ImageLoader.getImage("deathRat.png", 64);
 	}
 	
 	private void logic() {
