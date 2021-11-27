@@ -57,18 +57,7 @@ public class Rat extends Element {
         currentTick++;
         if(currentTick > tickSpeed) {
             currentTick = 0;
-
-            if (breeding == 0) {
-                logic();
-            } else {
-
-                breeding--;
-            }
-
-            if (breeding < 0) {
-                breeding = 0;
-            }
-
+            logic();
         }
 
     }
@@ -78,6 +67,7 @@ public class Rat extends Element {
      * the logic of the rat, only ran at the rats slower speed
      */
     private void logic() {
+        if (breeding == 0) {
         if (level.getTile(x, y).getType().equals(TileType.Grass)) {
             level.removeElement(this);
 
@@ -93,8 +83,15 @@ public class Rat extends Element {
                 breed();
             }
         }
+        } else {
+            breeding--;
+        }
 
+        if (breeding < 0) {
+            breeding = 0;
+        }
     }
+
 
 
     private void grow() {

@@ -287,7 +287,8 @@ public abstract class Element {
 
     protected double cosineInterpolation(double x1, double x2, double min, double max) {
 
-        double m2 = (1-Math.cos(min*3.14159265/max))/2;
+        double pi = 3.14159265;
+        double m2 = (1-Math.cos(min*pi/max))/2;
         return x1+(x2-x1)*m2;
     }
 
