@@ -172,6 +172,8 @@ public class InGameController implements Initializable {
      * @param y
      */
     public static void placeItem(int x, int y, ElementType type) {
+        x = x-Game.gameX;
+        y=y-Game.gameY;
         if (type.equals(ElementType.Bomb)) {
          Game.currentLevel.addElement(new Bomb(ElementType.Bomb,  Game.currentLevel, x/Game.gameSize, y/Game.gameSize));
         } else if (type.equals(ElementType.DeathRat)) {
