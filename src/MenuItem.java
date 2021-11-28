@@ -1,5 +1,6 @@
 /**
  * @author lloyd
+ * 
  */
 public class MenuItem {
 	private ElementType itemType;
@@ -41,6 +42,7 @@ public class MenuItem {
 				break;
 			case "DeathRat":
 				returnType = ElementType.DeathRat;
+                break;
 			default:
 				returnType = null;
 		}
