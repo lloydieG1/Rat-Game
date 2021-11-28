@@ -246,7 +246,7 @@ public class Level {
             for (int j = 0; j < tiles[i].length; j++) {
 
 
-                tiles[i][j].minirender(g, true, tiles[0].length);
+                tiles[i][j].minirender(g, tiles[0].length);
 
             }
         }

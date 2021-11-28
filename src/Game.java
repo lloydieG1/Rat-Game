@@ -56,6 +56,8 @@ public class Game extends Application {
     public static int gameY = 0;
     public static int score;
 
+    public static final int VISIBLE_TILES = 14;
+
 
     /**
      * open the main menu and loads the other menus
@@ -101,7 +103,7 @@ public class Game extends Application {
     public void processKeyEvent(KeyEvent event) {
         // We change the behaviour depending on the actual key that was pressed.
 
-        int scroll = 50;
+        int scroll = gameSize;
         switch (event.getCode()) {
             case RIGHT:
                 // Right key was pressed. So move the player right by one cell.
@@ -126,21 +128,20 @@ public class Game extends Application {
                 // Do nothing for all other keys.
                 break;
         }
-
-        int visibleTiles = 14;
-
-        int mapWidth = currentLevel.getMapBounds()[0];
-        int mapHeight = currentLevel.getMapBounds()[1];
-        System.out.println(mapHeight);
-        gameY = minMax(gameY, -gameSize* (mapHeight-visibleTiles), gameSize);
-        gameX = minMax(gameX, -gameSize*(mapWidth-visibleTiles), gameSize);
-
-        // Consume the event. This means we mark it as dealt with. This stops other GUI nodes (buttons etc) responding to it.
+                // Consume the event. This means we mark it as dealt with. This stops other GUI nodes (buttons etc) responding to it.
         event.consume();
     }
 
     public static void updateScore() {
         levelController.score.setText(Integer.toString(score));
+    }
+
+    private static void clampMap() {
+        int mapWidth = currentLevel.getMapBounds()[0];
+        int mapHeight = currentLevel.getMapBounds()[1];
+        System.out.println(mapHeight);
+        gameY = minMax(gameY, -gameSize* (mapHeight-VISIBLE_TILES), gameSize);
+        gameX = minMax(gameX, -gameSize*(mapWidth-VISIBLE_TILES), gameSize);
     }
 
 
@@ -160,6 +161,7 @@ public class Game extends Application {
         updateScore();
         drawButtons(gameGraphics);
         currentLevel.renderMiniMap(minimap);
+        clampMap();
     }
 
     private static void drawButtons(GraphicsContext g) {

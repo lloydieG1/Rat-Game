@@ -63,8 +63,21 @@ public class Tile {
     }
 
 
-    public void minirender(GraphicsContext g, boolean visible, int width) {
-
+    public void minirender(GraphicsContext g, int width) {
+        //check if this tile is visible for the 4 directions
+        boolean visible = true;
+        if (this.y-1 < -(Game.gameY/Game.gameSize)) {
+            visible = false;
+        }
+        if (this.x-1 < -(Game.gameX/Game.gameSize)) {
+            visible = false;
+        }
+        if (this.x-1 > -(Game.gameX/Game.gameSize) + 11) {
+            visible = false;
+        }
+        if (this.y-1 > -(Game.gameY/Game.gameSize) + 11) {
+            visible = false;
+        }
 
         double size = g.getCanvas().getHeight()/width;
         double x = this.x*size;
