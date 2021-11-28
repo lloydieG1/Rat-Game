@@ -4,8 +4,11 @@
 public class MenuItem {
 	private ElementType itemType;
 	private int replenishTimer;
-	
-	public MenuItem(String itemType, int replenishTimer) {
+    private int currentTick = 0;
+    private int age = 0;
+    private int tickSpeed = Game.FPS/2; //means logic only happens once this many ticks have passed
+
+    public MenuItem(String itemType, int replenishTimer) {
 		this.itemType = itemStringToItemType(itemType);
 		this.replenishTimer = replenishTimer;
 	}
@@ -43,7 +46,23 @@ public class MenuItem {
 		}
 		return returnType; 
 	}
-	
+
+
+    protected void tick() {
+        currentTick++;
+        if(currentTick > tickSpeed) {
+            currentTick = 0;
+            logic();
+        }
+
+    }
+    private void logic() {
+        age++;
+        if (getReplenishTimer() % age == 0) {
+            Game.addItem(getItemType());
+        }
+    }
+
 	public ElementType getItemType() {
 		return itemType;
 	}

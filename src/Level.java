@@ -23,6 +23,7 @@ public class Level {
 
     private int xSize;
     private int ySize;
+    private int currentTick = 0;
 
     /**
      * constructs a Level
@@ -45,7 +46,6 @@ public class Level {
 
 
         this.maxRats = maxRats;
-        System.out.println(maxRats);
     }
 
     /**
@@ -191,6 +191,7 @@ public class Level {
      * buffered elements to the map
      */
     public void tick() {
+        currentTick++;
         for (Element element : elements) {
             element.tick();
         }
@@ -201,8 +202,20 @@ public class Level {
         }
         nextElements = new ArrayList<>();
 
+        tickMenuItems();
+
+
         checkGameCondition();
     }
+
+
+    private void tickMenuItems() {
+        for(MenuItem menuItem : menuItems) {
+            menuItem.tick();
+
+        }
+    }
+
 
     /**
      * calls to draw elements and tiles on the map.

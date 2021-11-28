@@ -263,13 +263,17 @@ public class Game extends Application {
 
 
     public static void addItem(ElementType itemType) {
-        if (itemType.equals(ElementType.Bomb)) {
-            levelController.addBomb();
-        } else if (itemType.equals(ElementType.DeathRat)) {
-            levelController.addDeathRat();
+        if (itemType ==null) {
+            System.out.println("null item type");
         } else {
-            System.out.println("invalid item type");
+            if (itemType.equals(ElementType.Bomb)) {
+                levelController.addBomb();
+            } else if (itemType.equals(ElementType.DeathRat)) {
+                levelController.addDeathRat();
+            } else {
+                System.out.println("invalid item type");
 
+            }
         }
     }
 
