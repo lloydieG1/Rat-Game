@@ -3,6 +3,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
@@ -33,6 +34,9 @@ public class InGameController implements Initializable {
 
     @FXML
     private TilePane deathRatPane;
+
+    @FXML
+    private Canvas minimap;
 
 
 
@@ -212,6 +216,7 @@ public class InGameController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Game.levelController = this;
+        Game.setMiniMap(minimap.getGraphicsContext2D());
 
         Game.loadCanvas(gameCanvas.getGraphicsContext2D());
 

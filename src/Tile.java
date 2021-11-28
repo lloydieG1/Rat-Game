@@ -33,6 +33,8 @@ public class Tile {
      * @return the Type of the specified tile 
      */
     public TileType getType() {
+
+
         return type;
     }
 
@@ -58,5 +60,34 @@ public class Tile {
             g.setFill(Color.color(0.4,0,0));
             g.fillRect(x, y, size, size);
         }
+    }
+
+
+    public void minirender(GraphicsContext g, boolean visible, int width) {
+
+
+        double size = g.getCanvas().getHeight()/width;
+        double x = this.x*size;
+        double y = this.y*size;
+        g.setFill(Color.RED);
+        if (type.equals(TileType.Grass)) {
+
+
+            g.setFill(Color.color(0, 1, 0));
+            g.fillRect(x, y, size, size);
+        } else if (type.equals(TileType.Path)) {
+            g.setFill(Color.color(0.6,0.5,0.3));
+            g.fillRect(x, y, size, size);
+        }else if (type.equals(TileType.Tunnel)) {
+            g.setFill(Color.color(0.4,0.5,0));
+            g.fillRect(x, y, size, size);
+        }
+
+        if (!(visible)) {
+            g.setFill(Color.color(0, 0, 0, 0.3));
+            g.fillRect(x, y, size, size);
+        }
+
+
     }
 }

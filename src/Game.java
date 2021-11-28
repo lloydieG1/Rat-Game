@@ -33,6 +33,8 @@ public class Game extends Application {
 
     private static GraphicsContext gameGraphics; //canvas to show the graphics on
 
+    private static GraphicsContext minimap;
+
     private static Timeline gameLoop; //the loop in which the game runs
 
 
@@ -145,6 +147,8 @@ public class Game extends Application {
 
 
 
+
+
     /**
      * runs the logic of the game
      */
@@ -155,6 +159,7 @@ public class Game extends Application {
         currentLevel.render(gameGraphics);
         updateScore();
         drawButtons(gameGraphics);
+        currentLevel.renderMiniMap(minimap);
     }
 
     private static void drawButtons(GraphicsContext g) {
@@ -236,6 +241,7 @@ public class Game extends Application {
         return null;
     }
 
+
     /**
      * prevents a value being above or below parsed ints
      * @param var
@@ -263,6 +269,10 @@ public class Game extends Application {
             System.out.println("invalid item type");
 
         }
+    }
+
+    public static void setMiniMap(GraphicsContext g) {
+        minimap = g;
     }
 
 

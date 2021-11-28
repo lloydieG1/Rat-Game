@@ -6,7 +6,6 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -19,10 +18,8 @@
    <right>
       <AnchorPane prefHeight="880.0" prefWidth="377.0" BorderPane.alignment="CENTER">
          <children>
-            <Pane id="miniMap" prefHeight="328.0" prefWidth="374.0" />
             <VBox alignment="TOP_CENTER" layoutX="-4.0" layoutY="328.0" prefHeight="557.0" prefWidth="380.0">
                <children>
-                  <Text fx:id="score" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
                   <TilePane fx:id="bombPane" prefHeight="200.0" prefWidth="200.0" />
                   <TilePane fx:id="deathRatPane" prefHeight="200.0" prefWidth="200.0" />
                   <ImageView id="radiationImageDrag" fitHeight="58.0" fitWidth="383.0" layoutX="10.0" layoutY="74.0" pickOnBounds="true" preserveRatio="true">
@@ -61,6 +58,8 @@
                   </Button>
                </children>
             </VBox>
+            <Canvas fx:id="minimap" height="300.0" layoutX="23.0" width="300.0" />
+            <Text fx:id="score" layoutX="329.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
          </children>
       </AnchorPane>
    </right>
