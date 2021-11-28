@@ -69,14 +69,15 @@ public class DeathRat extends Element {
 	
 	@Override
 	protected void render(GraphicsContext g) {
-		double size = Game.gameSize;
-        double halfSize = size/2;
         double x = renderX();
         double y = renderY();
         //calculating the position the rat should be in this frame
 
-        g.setFill(Color.color(0.5,0.5,0.5));
-        g.drawImage(image, x, y, halfSize, halfSize);
+        g.save();
+        g.translate(x+Game.gameSize/2.0, y+Game.gameSize/2.0);
+        g.rotate(interpolateDir(dirAsNum(lastDir),dirAsNum(dir)));
+        g.drawImage(image,-(size/2), -(size/2), size, size);
+        g.restore();
 
 
     }

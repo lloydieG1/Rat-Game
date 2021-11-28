@@ -27,7 +27,7 @@ public abstract class Element {
 
     protected int nextX;
     protected int nextY;
-    protected Direction lastDir;
+    protected Direction lastDir = Direction.North;
 
     /**
      * constructs an element with x,y, level it is in and type.
