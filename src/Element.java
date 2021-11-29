@@ -202,6 +202,14 @@ public abstract class Element {
                 return false;
             }
         }
+        
+        for (Element element : level.getElements(x, y)) {
+            if (element.getType().equals(ElementType.StopSign) && (this.getType().equals(ElementType.Rat))) {
+            	Sterilise sterilise = (Sterilise) element;
+                sterilise.steriliseRat((Rat) this);
+                return false;
+            }
+        }
 
 
         return true;

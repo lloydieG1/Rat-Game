@@ -120,7 +120,10 @@ public class Rat extends Element {
     public int getAge() {
         return age;
     }
-
+    
+    public void makeSterile() {
+    	this.isSterile = true;
+    }
 
 
     private void breed() {

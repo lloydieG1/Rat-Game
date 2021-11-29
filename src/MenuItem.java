@@ -38,7 +38,7 @@ public class MenuItem {
 				returnType = ElementType.GenderChange;
 				break;
 			case "NoEntry":
-				returnType = ElementType.NoEntry;
+				returnType = ElementType.StopSign;
 				break;
 			case "DeathRat":
 				returnType = ElementType.DeathRat;
