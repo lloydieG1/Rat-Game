@@ -17,6 +17,8 @@ public class DeathRat extends Element {
 		ratsKilled = 0;
 
         image = ImageLoader.getImage("deathRat.png", 64);
+
+
 	}
 	
 	private void logic() {
@@ -47,6 +49,10 @@ public class DeathRat extends Element {
 
 	@Override
 	protected void tick() {
+        if (level.getTile(x,y).getType().equals(TileType.Grass)) {
+            level.removeElement(this);
+            System.out.println("deleting deathRat");
+        }
 		currentTick++;
         if(currentTick > tickSpeed) {
             currentTick = 0;

@@ -23,7 +23,7 @@ public class Game extends Application {
 
     private static final int WIDTH = 1350; //width of the window
     private static final int HEIGHT = 900; //height of the window
-    public static final int FPS = 120; //the fps of the game
+    public static final int FPS = 80; //the fps of the game
     
     private static Stage primaryStage; //the stage everything is shown on
 
