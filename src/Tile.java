@@ -66,7 +66,7 @@ public class Tile {
 
 
     public boolean isVisible() {
-        int visibleTiles = Game.VISIBLE_TILES+1;
+        int visibleTiles = Game.VISIBLE_TILES;
         boolean visible = true;
         if (this.y-1 < -(Game.gameY/Game.gameSize)) {
             visible = false;
