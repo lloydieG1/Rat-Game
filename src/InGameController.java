@@ -109,7 +109,7 @@ public class InGameController implements Initializable {
             return "deathRat";
         } else if (type.equals(ElementType.Gas)) {
             return "gas";
-        } else if (type.equals(ElementType.NoEntry)) {
+        } else if (type.equals(ElementType.StopSign)) {
             return "noEntry";
         }
         return "invalid type";
@@ -178,9 +178,9 @@ public class InGameController implements Initializable {
                 if(gasPane.getChildren().size() <maxItems) {
                     gasPane.getChildren().add(getItem(ElementType.Gas));
                 }
-            } else if (itemType.equals(ElementType.NoEntry)) {
+            } else if (itemType.equals(ElementType.StopSign)) {
                 if(stopSignPane.getChildren().size() <maxItems) {
-                    stopSignPane.getChildren().add(getItem(ElementType.NoEntry));
+                    stopSignPane.getChildren().add(getItem(ElementType.StopSign));
                 }
             } else {
                 System.out.println("invalid item type");
