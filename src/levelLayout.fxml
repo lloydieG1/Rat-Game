@@ -33,7 +33,7 @@
                   </Button>
                </children>
             </VBox>
-            <Canvas fx:id="minimap" height="300.0" layoutX="23.0" onMouseClicked="#minimapClick" width="300.0" />
+            <Canvas fx:id="minimap" height="300.0" layoutX="23.0" width="300.0" />
             <Text fx:id="score" fill="#1acd37" layoutX="329.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
                <font>
                   <Font name="System Bold" size="24.0" />
