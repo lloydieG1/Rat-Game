@@ -62,7 +62,7 @@ public class Game extends Application {
     public static int VISIBLE_TILES = 14;
 
     private static final int ZOOM_MIN = 65;
-    private static final int ZOOM_MAX = 90;
+    private static final int ZOOM_MAX = 130;
 
 
     /**
@@ -156,7 +156,7 @@ public class Game extends Application {
                 //make the scroll happen from the center instead of the top corner
                 if (minMax(gameSize, ZOOM_MIN, ZOOM_MAX) == gameSize) {
                     int scroll = (int)(event.getTextDeltaY()*scrollFactor)*gameSize;
-                    int factorResize = 8;
+                    int factorResize = 11;
                     gameX = gameX - scroll/factorResize;
                     gameY = gameY - scroll/factorResize;
                 }

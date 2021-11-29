@@ -156,17 +156,26 @@ public class InGameController implements Initializable {
 
 
     public void addItem(ElementType itemType) {
+        int maxItems = 5;
         if (itemType ==null) {
             System.out.println("null item type");
         } else {
             if (itemType.equals(ElementType.Bomb)) {
-                bombPane.getChildren().add(getItem(ElementType.Bomb));
+                if(bombPane.getChildren().size() <maxItems) {
+                    bombPane.getChildren().add(getItem(ElementType.Bomb));
+                }
             } else if (itemType.equals(ElementType.DeathRat)) {
-                deathRatPane.getChildren().add(getItem(ElementType.DeathRat));
+                if(deathRatPane.getChildren().size() <maxItems) {
+                    deathRatPane.getChildren().add(getItem(ElementType.DeathRat));
+                }
             } else if (itemType.equals(ElementType.Gas)) {
-                gasPane.getChildren().add(getItem(ElementType.Gas));
+                if(gasPane.getChildren().size() <maxItems) {
+                    gasPane.getChildren().add(getItem(ElementType.Gas));
+                }
             } else if (itemType.equals(ElementType.NoEntry)) {
-                stopSignPane.getChildren().add(getItem(ElementType.NoEntry));
+                if(stopSignPane.getChildren().size() <maxItems) {
+                    stopSignPane.getChildren().add(getItem(ElementType.NoEntry));
+                }
             } else {
                 System.out.println("invalid item type");
 
