@@ -53,23 +53,51 @@ public class Gas extends Element {
 
         age++;
         health--;
-        if(isTile(x-1,y)) {
+        if(isSpreadable(x-1,y)) {
             level.addElementLive(new Gas(ElementType.Gas, level, (x-1), y, health));
 
         }
 
-        if(isTile(x+1,y)) {
+        if(isSpreadable(x+1,y)) {
             level.addElementLive(new Gas(ElementType.Gas, level, (x+1), y, health));
 
         }
 
-        if(isTile(x,y-1)) {
+        if(isSpreadable(x,y-1)) {
             level.addElementLive(new Gas(ElementType.Gas, level, x, y-1, health));
-
+            System.out.println("test");
         }
-        System.out.println(health);
+        if(isSpreadable(x,y+1)) {
+            level.addElementLive(new Gas(ElementType.Gas, level, x, y+1, health));
+            System.out.println("test");
+        }
 
     }
+
+    /**
+     *  checks if the tile at parsed position is a eligable tile to go onto
+     *
+     * @return boolean if tile is safe
+     */
+    protected boolean isSpreadable(int x, int y) {
+        int boardSize = level.getLength();
+
+        if (x < 0 || y < 0) {
+            return false;
+        }
+
+        if (x > boardSize-1 || y > boardSize-1) {
+            return false;
+        }
+
+        if (level.getTile(x, y).getType().equals(TileType.Grass)) {
+            return false;
+        }
+
+
+        return true;
+    }
+
 
     public Direction getDirection () {
         return dir;
