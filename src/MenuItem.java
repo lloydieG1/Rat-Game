@@ -60,9 +60,11 @@ public class MenuItem {
     }
     private void logic() {
         age++;
-        if (getReplenishTimer() % age == 1) {
+        if (getReplenishTimer() == age) {
             Game.addItem(getItemType());
+            age = 0;
         }
+        System.out.println(getReplenishTimer() + " " + age);
     }
 
 	public ElementType getItemType() {

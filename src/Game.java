@@ -92,10 +92,6 @@ public class Game extends Application {
 
         gameLoop.setCycleCount(Timeline.INDEFINITE);
 
-        levelController.addBomb();
-        levelController.addBomb();
-        levelController.addDeathRat();
-
         levelLayout.addEventFilter(KeyEvent.KEY_PRESSED, event -> processKeyEvent(event));
         levelLayout.addEventFilter(ScrollEvent.SCROLL, event -> scrollKeyEvent(event));
 
