@@ -98,8 +98,8 @@ public class InGameController implements Initializable {
 
     @FXML
     private void minimapClick(MouseEvent event) {
-        Game.gameX = -(int)event.getX()*8;
-        Game.gameY = -(int)event.getY()*8;
+        Game.gameX = -(int)event.getX()*4;
+        Game.gameY = -(int)event.getY()*4;
     }
 
     private String typeToString(ElementType type) {
