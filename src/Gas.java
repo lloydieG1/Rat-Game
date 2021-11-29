@@ -121,7 +121,7 @@ public class Gas extends Element {
         double y = renderY();
         //calculating the position the rat should be in this frame
 
-        g.drawImage(image, x - size / 4, y - size / 4);
+        g.drawImage(image, x , y, size, size);
 
 
     }
