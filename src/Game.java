@@ -145,11 +145,22 @@ public class Game extends Application {
     public void scrollKeyEvent(ScrollEvent event) {
         // We change the behaviour depending on the actual key that was pressed.
 
-        int scroll = gameSize;
+
         switch(event.getTextDeltaYUnits()) {
             case LINES:
                 // scroll about event.getTextDeltaY() lines
-                gameSize = gameSize + (int)(event.getTextDeltaY()*1.5);
+                double scrollFactor = 1.5;
+
+
+                gameSize = gameSize + (int)(event.getTextDeltaY()*scrollFactor);
+
+                //make the scroll happen from the center instead of the top corner
+                if (minMax(gameSize, 65, 100) == gameSize) {
+                    int scroll = (int)(event.getTextDeltaY()*scrollFactor)*gameSize;
+                    gameX = gameX - scroll/8;
+                    gameY = gameY - scroll/8;
+                }
+
                 break;
             case PAGES:
                 // scroll about event.getTextDeltaY() pages
