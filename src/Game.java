@@ -217,17 +217,20 @@ public class Game extends Application {
     private static void drawButtons(GraphicsContext g) {
 
         int buttonsize = levelController.buttonSize;
-        if(levelController.mouseDown) {
+        drawButton(g, 0,  0,  MAP_WIDTH, buttonsize);
+        drawButton(g, 0,  0,  buttonsize, MAP_HEIGHT);
+        drawButton(g, MAP_WIDTH-buttonsize,  0,  MAP_WIDTH, MAP_HEIGHT);
+        drawButton(g, 0,  MAP_HEIGHT-buttonsize,  MAP_WIDTH, MAP_HEIGHT);
+
+    }
+
+    private static void drawButton(GraphicsContext g, int x, int y, int width, int height) {
+        if(intersect((int)levelController.mouseX, (int)levelController.mouseY, x, y, width, height)) {
             g.setFill(Color.color(0.2, 0.2, 0.2, 0.5));
         } else {
             g.setFill(Color.color(0.2, 0.2, 0.2));
         }
-        g.fillRect(0, 0, MAP_WIDTH, buttonsize);
-        g.fillRect(0, 0, buttonsize, MAP_HEIGHT);
-
-        g.fillRect(MAP_WIDTH-buttonsize, 0, MAP_WIDTH, MAP_HEIGHT);
-        g.fillRect(0, MAP_HEIGHT-buttonsize, MAP_WIDTH, MAP_HEIGHT);
-
+        g.fillRect(x, y, width, height);
     }
 
     /**
@@ -236,6 +239,15 @@ public class Game extends Application {
     public static void openMainMenu() {
         primaryStage.setScene(mainMenu);
 
+    }
+
+    private static boolean intersect(int i, int j, int x, int y, int x2, int y2) {
+        if (i > x && i < x2 ) {
+            if (j > y && j < y2) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
