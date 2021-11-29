@@ -41,6 +41,9 @@ public class InGameController implements Initializable {
     private TilePane gasPane;
 
     @FXML
+    private TilePane stopSignPane;
+
+    @FXML
     private Canvas minimap;
 
     public int buttonSize = 70;
@@ -100,6 +103,8 @@ public class InGameController implements Initializable {
             return "deathRat";
         } else if (type.equals(ElementType.Gas)) {
             return "gas";
+        } else if (type.equals(ElementType.NoEntry)) {
+            return "noEntry";
         }
         return "invalid type";
     }
@@ -134,46 +139,21 @@ public class InGameController implements Initializable {
     public void resetItems() {
 
         while(bombPane.getChildren().size() >0) {
-            removeBomb();
+            bombPane.getChildren().remove(0);
         }
         while(deathRatPane.getChildren().size() >0) {
-            removeDeathRat();
+            deathRatPane.getChildren().remove(0);
         }
 
         while(gasPane.getChildren().size() >0) {
-            removeGas();
+            gasPane.getChildren().remove(0);
+        }
+
+        while(stopSignPane.getChildren().size() >0) {
+            stopSignPane.getChildren().remove(0);
         }
     }
 
-
-
-
-
-    /**
-     * adds a bomb to the tilepane
-     */
-    public void removeBomb() {
-
-        bombPane.getChildren().remove(0);
-    }
-
-
-
-    /**
-     * adds a bomb to the tilepane
-     */
-    public void removeDeathRat() {
-
-        deathRatPane.getChildren().remove(0);
-    }
-
-    /**
-     * adds a bomb to the tilepane
-     */
-    public void removeGas() {
-
-        gasPane.getChildren().remove(0);
-    }
 
     public void addItem(ElementType itemType) {
         if (itemType ==null) {
@@ -185,6 +165,8 @@ public class InGameController implements Initializable {
                 deathRatPane.getChildren().add(getItem(ElementType.DeathRat));
             } else if (itemType.equals(ElementType.Gas)) {
                 gasPane.getChildren().add(getItem(ElementType.Gas));
+            } else if (itemType.equals(ElementType.NoEntry)) {
+                stopSignPane.getChildren().add(getItem(ElementType.NoEntry));
             } else {
                 System.out.println("invalid item type");
 
@@ -206,9 +188,9 @@ public class InGameController implements Initializable {
 
         placeItem((int)x, (int)y, lastItem);
         if (lastItem.equals(ElementType.Bomb)) {
-            removeBomb();
+            bombPane.getChildren().remove(0);
         } else if (lastItem.equals(ElementType.DeathRat)) {
-            removeDeathRat();
+            deathRatPane.getChildren().remove(0);
         }
     }
 
@@ -224,6 +206,8 @@ public class InGameController implements Initializable {
          Game.currentLevel.addElement(new Bomb(ElementType.Bomb,  Game.currentLevel, x/Game.gameSize, y/Game.gameSize));
         } else if (type.equals(ElementType.DeathRat)) {
          Game.currentLevel.addElement(new DeathRat(ElementType.DeathRat, Game.currentLevel, x/Game.gameSize, y/Game.gameSize));
+        } else if (type.equals(ElementType.Gas)) {
+            Game.currentLevel.addElement(new Gas(ElementType.Gas, Game.currentLevel, x/Game.gameSize, y/Game.gameSize));
         } else {
             System.out.println("invalid item type");
         }
