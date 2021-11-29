@@ -3,7 +3,7 @@ import javafx.scene.paint.Color;
 
 
 /**
- * Class used for construction and behaviours of Rat elements
+ * Class used for construction and behaviours of StopSign elements
  * @author William Randle, Jack Lennard,
  */
 public class StopSign extends Element {

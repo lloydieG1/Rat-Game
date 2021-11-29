@@ -194,6 +194,14 @@ public abstract class Element {
         if (level.getTile(x, y).getType().equals(TileType.Grass)) {
             return false;
         }
+        
+        for (Element element : level.getElements(x, y)) {
+            if (element.getType().equals(ElementType.StopSign)) {
+            	StopSign stopsign = (StopSign) element;
+                stopsign.blocksUp();
+                return false;
+            }
+        }
 
 
         return true;

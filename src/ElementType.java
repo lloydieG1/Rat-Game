@@ -7,7 +7,7 @@
 
 public enum ElementType {
     Rat(),
-    NoEntry(),
+    StopSign(),
     Bomb(),
     DeathRat(),
     Gas(),
