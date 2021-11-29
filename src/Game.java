@@ -184,8 +184,8 @@ public class Game extends Application {
     private static void clampMap() {
         gameSize = minMax(gameSize, ZOOM_MIN, ZOOM_MAX);
         VISIBLE_TILES = (int)gameGraphics.getCanvas().getWidth()/gameSize -3;
-        int mapWidth = currentLevel.getMapBounds()[0]-2;
-        int mapHeight = currentLevel.getMapBounds()[1]-1;
+        int mapWidth = currentLevel.getMapBounds()[0]-4;
+        int mapHeight = currentLevel.getMapBounds()[1]-3;
 
         gameY = minMax(gameY, -gameSize* (mapHeight-VISIBLE_TILES), 0);
         gameX = minMax(gameX, -gameSize*(mapWidth-VISIBLE_TILES), 0);

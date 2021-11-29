@@ -65,7 +65,7 @@ public class Tile {
 
     public void minirender(GraphicsContext g, int width) {
         //check if this tile is visible for the 4 directions
-        int visibleTiles = Game.VISIBLE_TILES;
+        int visibleTiles = Game.VISIBLE_TILES+2;
         boolean visible = true;
         if (this.y < -(Game.gameY/Game.gameSize)) {
             visible = false;
