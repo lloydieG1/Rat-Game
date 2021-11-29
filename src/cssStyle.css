@@ -2,6 +2,7 @@
     -fx-base: #666666;
 }
 
-.first-button {
--fx-shape: "M150 0 L75 200 L225 200 Z";
+.button {
+-fx-text-fill: white;
+-fx-background-color: #000000;
 }
