@@ -178,6 +178,7 @@ public class Game extends Application {
     }
 
     private static void clampMap() {
+        gameSize = minMax(gameSize, 65, 100);
         VISIBLE_TILES = (int)gameGraphics.getCanvas().getWidth()/gameSize -3;
         int mapWidth = currentLevel.getMapBounds()[0]-2;
         int mapHeight = currentLevel.getMapBounds()[1]-1;
@@ -185,7 +186,7 @@ public class Game extends Application {
         gameY = minMax(gameY, -gameSize* (mapHeight-VISIBLE_TILES), 0);
         gameX = minMax(gameX, -gameSize*(mapWidth-VISIBLE_TILES), 0);
 
-        gameSize = minMax(gameSize, 65, 100);
+
     }
 
 
@@ -206,7 +207,7 @@ public class Game extends Application {
         updateScore();
         drawButtons(gameGraphics);
         currentLevel.renderMiniMap(minimap);
-
+        clampMap();
     }
 
     private static void drawButtons(GraphicsContext g) {
