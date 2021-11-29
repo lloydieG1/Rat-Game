@@ -96,6 +96,12 @@ public class InGameController implements Initializable {
         return image;
     }
 
+    @FXML
+    private void minimapClick(MouseEvent event) {
+        Game.gameX = -(int)event.getX()*8;
+        Game.gameY = -(int)event.getY()*8;
+    }
+
     private String typeToString(ElementType type) {
         if (type.equals(ElementType.Bomb)) {
             return "bomb";
