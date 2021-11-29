@@ -1,6 +1,6 @@
 /**
  * @author lloyd
- * 
+ *
  */
 public class MenuItem {
 	private ElementType itemType;
@@ -14,7 +14,7 @@ public class MenuItem {
 		this.replenishTimer = replenishTimer;
 	}
 	
-	/*
+	/**
 	 * converts string description of item to corresponding itemType
 	 * 
 	 * @param itemString e.g. "bomb"
@@ -60,7 +60,7 @@ public class MenuItem {
     }
     private void logic() {
         age++;
-        if (getReplenishTimer() % age == 0) {
+        if (getReplenishTimer() % age == 1) {
             Game.addItem(getItemType());
         }
     }
