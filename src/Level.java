@@ -11,10 +11,7 @@ import java.util.ArrayList;
  * @author william randle, lloyd, adrian, yazan
  * @version 1
  */
-/**
- * @author A B
- *
- */
+
 public class Level {
     private Tile[][] tiles; // 2d array of all the tiles and what they contain
 
@@ -23,6 +20,10 @@ public class Level {
     private ArrayList<MenuItem> menuItems = new ArrayList<>();
 
     private int maxRats;
+
+    private int xSize;
+    private int ySize;
+    private int currentTick = 0;
 
     /**
      * constructs a Level
@@ -33,6 +34,8 @@ public class Level {
     public Level(int x, int y, int maxRats) {
         tiles = new Tile[x][y];
         elements = new ArrayList<>();
+        this.xSize = x;
+        this.ySize = y;
 
         for (int i = 0; i < x; i++) {
             for (int j = 0; j < y; j++) {
@@ -40,10 +43,9 @@ public class Level {
             }
 
         }
-         addElement(new Bomb(ElementType.Bomb, this, 4, 4));
+
 
         this.maxRats = maxRats;
-        System.out.println(maxRats);
     }
 
     /**
@@ -91,6 +93,17 @@ public class Level {
 
     }
 
+    /**
+     * gives the bounds of the map
+     * @return
+     */
+    public int[] getMapBounds() {
+        int[] bounds = new int[2];
+        bounds[0]= xSize;
+        bounds[1] = ySize;
+        return bounds;
+    }
+
 
 
     public int ratCount() {
@@ -108,11 +121,9 @@ public class Level {
     private void checkGameCondition() {
         int rats = ratCount();
         if (rats > maxRats) {
-            Game.endGame();
-            System.out.println("you lost: too many rats");
+            Game.endGame("you lost with a score of " + Game.score);
         } else if (rats == 0) {
-            Game.endGame();
-            System.out.println("you won: no more rats");
+            Game.endGame("you won with a score of " + Game.score);
         }
 
 
@@ -166,21 +177,16 @@ public class Level {
 
     }
 
-    /**
-     * removes all elements from the map
-     */
-    public void removeAll() {
-
-        elements = new ArrayList<>();
-
-    }
 
     /**
      * has elements run their tick() behaviours, and adds
      * buffered elements to the map
      */
     public void tick() {
+        currentTick++;
         for (Element element : elements) {
+            element.factor = Game.gameSize;
+            element.size = Game.gameSize;
             element.tick();
         }
 
@@ -190,8 +196,20 @@ public class Level {
         }
         nextElements = new ArrayList<>();
 
+        tickMenuItems();
+
+
         checkGameCondition();
     }
+
+
+    private void tickMenuItems() {
+        for(MenuItem menuItem : menuItems) {
+            menuItem.tick();
+
+        }
+    }
+
 
     /**
      * calls to draw elements and tiles on the map.
@@ -201,8 +219,12 @@ public class Level {
         renderTiles(g);
 
         for (Element element : elements) {
-            element.render(g);
+            if (element.isVisible(g)) {
+                element.render(g);
+            }
         }
+
+        renderTunnels(g);
     }
 
     /**
@@ -215,5 +237,29 @@ public class Level {
                 tiles[i][j].render(g);
             }
         }
+    }
+
+    public void renderTunnels(GraphicsContext g) {
+        for (int i = 0; i < tiles.length; i++) {
+            for (int j = 0; j < tiles[i].length; j++) {
+                if( tiles[i][j].getType().equals(TileType.Tunnel)) {
+                    tiles[i][j].render(g);
+                }
+            }
+        }
+    }
+
+
+    public void renderMiniMap(GraphicsContext g) {
+        for (int i = 0; i < tiles.length; i++) {
+            for (int j = 0; j < tiles[i].length; j++) {
+
+
+                tiles[i][j].minirender(g, tiles[0].length);
+
+            }
+        }
+
+
     }
 }

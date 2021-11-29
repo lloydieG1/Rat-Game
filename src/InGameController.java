@@ -1,10 +1,14 @@
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
+import javafx.scene.layout.TilePane;
+import javafx.scene.text.Text;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -18,17 +22,42 @@ import java.util.ResourceBundle;
  */
 public class InGameController implements Initializable {
 
+    public double mouseX;
+    public double mouseY;
 
     @FXML
     Canvas gameCanvas; //canvas the game is shown on
 
     @FXML
-    ImageView bomb;
+    Text score;
+
     @FXML
-    ImageView deathRat;
+    private TilePane bombPane;
+
+    @FXML
+    private TilePane deathRatPane;
+
+    @FXML
+    private TilePane gasPane;
+
+    @FXML
+    private TilePane stopSignPane;
+
+    @FXML
+    private Canvas minimap;
+
+    public int buttonSize = 70;
+
+
+    @FXML
+    private void buttonsVisible(MouseEvent event) {
+        mouseX = event.getX();
+        mouseY = event.getY();
+
+    }
+
     
-    
-    ElementType lastItem;
+    private static ElementType lastItem;
     /**
      * switches back to the menu
      */
@@ -39,31 +68,131 @@ public class InGameController implements Initializable {
 
     }
 
+    @FXML
+    private void mapClick(MouseEvent event) {
+        double x = event.getX();
+        double y = event.getY();
 
-    public void showImages() {
-
-        String filePath = "res\\images\\";
-        FileInputStream inputstream = null;
-        try {
-            inputstream = new FileInputStream(filePath + "bomb.png");
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (x < buttonSize) {
+            Game.gameX = Game.gameX+buttonSize;
         }
-        Image image = new Image(inputstream);
-        bomb.setImage(image);
-        bomb.setCache(true);
-        
-        
-        inputstream = null;
-        try {
-            inputstream = new FileInputStream(filePath + "deathRat.png");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        image = new Image(inputstream);
-        deathRat.setImage(image);
-        deathRat.setCache(true);
 
+        if (y < buttonSize) {
+            Game.gameY = Game.gameY+buttonSize;
+        }
+
+        if (x > Game.MAP_WIDTH-buttonSize) {
+            Game.gameX = Game.gameX-buttonSize;
+        }
+
+        if (y > Game.MAP_HEIGHT-buttonSize) {
+            Game.gameY = Game.gameY-buttonSize;
+        }
+
+    }
+
+    private Image  getImage(String fileName) {
+        Image image = ImageLoader.getImage(fileName, 64);
+        return image;
+    }
+
+    @FXML
+    private void minimapClick(MouseEvent event) {
+        double sizeFactor = (0.23)*Game.currentLevel.getMapBounds()[0];
+        Game.gameX = -(int)(event.getX()*sizeFactor);
+        Game.gameY = -(int)(event.getY()*sizeFactor);
+
+        //move to center
+
+        Game.gameX+=(Game.VISIBLE_TILES*Game.gameSize)/2;
+        Game.gameY+=(Game.VISIBLE_TILES*Game.gameSize)/2;
+    }
+
+    private String typeToString(ElementType type) {
+        if (type.equals(ElementType.Bomb)) {
+            return "bomb";
+        } else if (type.equals(ElementType.DeathRat)) {
+            return "deathRat";
+        } else if (type.equals(ElementType.Gas)) {
+            return "gas";
+        } else if (type.equals(ElementType.StopSign)) {
+            return "stopSign";
+        }
+        return "invalid type";
+    }
+
+    private ImageView getItem(ElementType type) {
+        ImageView item = new ImageView();
+        item.setImage(getImage(typeToString(type) + ".png"));
+        item.setCache(true);
+        item.setOnDragDetected(new EventHandler<MouseEvent>() {
+            public void handle(MouseEvent event) {
+                // Mark the drag as started.
+                // We do not use the transfer mode (this can be used to indicate different forms
+                // of drags operations, for example, moving files or copying files).
+                Dragboard db = item.startDragAndDrop(TransferMode.ANY);
+                // db.setDragView(bomb.getImage());
+
+                // We have to put some content in the clipboard of the drag event.
+                // We do not use this, but we could use it to store extra data if we wished.
+                ClipboardContent content = new ClipboardContent();
+                content.putString(typeToString(type) );
+                db.setContent(content);
+
+                lastItem = type;
+                // Consume the event. This means we mark it as dealt with.
+                event.consume();
+            }
+        });
+
+        return item;
+    }
+
+    public void resetItems() {
+
+        while(bombPane.getChildren().size() >0) {
+            bombPane.getChildren().remove(0);
+        }
+        while(deathRatPane.getChildren().size() >0) {
+            deathRatPane.getChildren().remove(0);
+        }
+
+        while(gasPane.getChildren().size() >0) {
+            gasPane.getChildren().remove(0);
+        }
+
+        while(stopSignPane.getChildren().size() >0) {
+            stopSignPane.getChildren().remove(0);
+        }
+    }
+
+
+    public void addItem(ElementType itemType) {
+        int maxItems = 5;
+        if (itemType ==null) {
+            System.out.println("null item type");
+        } else {
+            if (itemType.equals(ElementType.Bomb)) {
+                if(bombPane.getChildren().size() <maxItems) {
+                    bombPane.getChildren().add(getItem(ElementType.Bomb));
+                }
+            } else if (itemType.equals(ElementType.DeathRat)) {
+                if(deathRatPane.getChildren().size() <maxItems) {
+                    deathRatPane.getChildren().add(getItem(ElementType.DeathRat));
+                }
+            } else if (itemType.equals(ElementType.Gas)) {
+                if(gasPane.getChildren().size() <maxItems) {
+                    gasPane.getChildren().add(getItem(ElementType.Gas));
+                }
+            } else if (itemType.equals(ElementType.StopSign)) {
+                if(stopSignPane.getChildren().size() <maxItems) {
+                    stopSignPane.getChildren().add(getItem(ElementType.StopSign));
+                }
+            } else {
+                System.out.println("invalid item type");
+
+            }
+        }
     }
 
     /**
@@ -79,6 +208,11 @@ public class InGameController implements Initializable {
 
 
         placeItem((int)x, (int)y, lastItem);
+        if (lastItem.equals(ElementType.Bomb)) {
+            bombPane.getChildren().remove(0);
+        } else if (lastItem.equals(ElementType.DeathRat)) {
+            deathRatPane.getChildren().remove(0);
+        }
     }
 
     /**
@@ -87,10 +221,14 @@ public class InGameController implements Initializable {
      * @param y
      */
     public static void placeItem(int x, int y, ElementType type) {
+        x = x-Game.gameX;
+        y=y-Game.gameY;
         if (type.equals(ElementType.Bomb)) {
          Game.currentLevel.addElement(new Bomb(ElementType.Bomb,  Game.currentLevel, x/Game.gameSize, y/Game.gameSize));
         } else if (type.equals(ElementType.DeathRat)) {
          Game.currentLevel.addElement(new DeathRat(ElementType.DeathRat, Game.currentLevel, x/Game.gameSize, y/Game.gameSize));
+        } else if (type.equals(ElementType.Gas)) {
+            Game.currentLevel.addElement(new Gas(ElementType.Gas, Game.currentLevel, x/Game.gameSize, y/Game.gameSize, 3));
         } else {
             System.out.println("invalid item type");
         }
@@ -107,71 +245,20 @@ public class InGameController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        Game.levelController = this;
+        Game.setMiniMap(minimap.getGraphicsContext2D());
+
         Game.loadCanvas(gameCanvas.getGraphicsContext2D());
-        showImages();
-
-
-        bomb.setOnDragDetected(new EventHandler<MouseEvent>() {
-            public void handle(MouseEvent event) {
-                // Mark the drag as started.
-                // We do not use the transfer mode (this can be used to indicate different forms
-                // of drags operations, for example, moving files or copying files).
-                Dragboard db = bomb.startDragAndDrop(TransferMode.ANY);
-                // db.setDragView(bomb.getImage());
-
-                // We have to put some content in the clipboard of the drag event.
-                // We do not use this, but we could use it to store extra data if we wished.
-                ClipboardContent content = new ClipboardContent();
-                content.putString("bomb");
-                db.setContent(content);
-
-                // Consume the event. This means we mark it as dealt with.
-                event.consume();
-            }
-            
-            
-        });
-        
-        deathRat.setOnDragDetected(new EventHandler<MouseEvent>() {
-            public void handle(MouseEvent event) {
-                // Mark the drag as started.
-                // We do not use the transfer mode (this can be used to indicate different forms
-                // of drags operations, for example, moving files or copying files).
-                Dragboard db = deathRat.startDragAndDrop(TransferMode.ANY);
-                // db.setDragView(bomb.getImage());
-
-                // We have to put some content in the clipboard of the drag event.
-                // We do not use this, but we could use it to store extra data if we wished.
-                ClipboardContent content = new ClipboardContent();
-                content.putString("deathRat");
-                db.setContent(content);
-
-                // Consume the event. This means we mark it as dealt with.
-                event.consume();
-            }
-            
-            
-        });
-
 
         // This code allows the canvas to receive a dragged object within its bounds.
         gameCanvas.setOnDragOver(new EventHandler<DragEvent>() {
             public void handle(DragEvent event) {
                 // Mark the drag as acceptable if the source was the draggable image.
                 // (for example, we don't want to allow the user to drag things or files into our application)
-                if (event.getGestureSource() == bomb) {
-                	lastItem = ElementType.Bomb;
                     // Mark the drag event as acceptable by the canvas.
                     event.acceptTransferModes(TransferMode.ANY);
                     // Consume the event. This means we mark it as dealt with.
                     event.consume();
-                } else if (event.getGestureSource() == deathRat) {
-                	lastItem = ElementType.DeathRat;
-                    // Mark the drag event as acceptable by the canvas.
-                    event.acceptTransferModes(TransferMode.ANY);
-                    // Consume the event. This means we mark it as dealt with.
-                    event.consume();
-                }
             }
         });
 
@@ -184,6 +271,8 @@ public class InGameController implements Initializable {
                 event.consume();
             }
         });
+
+
     }
 }
 

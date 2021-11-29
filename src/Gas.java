@@ -13,6 +13,7 @@ public class Gas extends Element {
     private boolean damage;
     private Image image;
 
+
     /**
      * Gas constructor
      * 
@@ -20,13 +21,13 @@ public class Gas extends Element {
      * @param level
      * @param x
      * @param y
-     * @param dir
      */
-    public Gas(ElementType type, Level level, int x, int y, Direction dir) {
-        super(type, level, x, y, dir);
-        health = 6;
+    public Gas(ElementType type, Level level, int x, int y, int health) {
+        super(type, level, x, y, Direction.North);
+        this.health = health;
         damage = false;
-        
+        image = ImageLoader.getImage("gas.png", 64);
+        tickSpeed = (int)(Game.FPS/1.7);
       
     }
 
@@ -35,21 +36,75 @@ public class Gas extends Element {
      * in time with other elements
      */
     protected void tick() {
+
         currentTick++;
         if(currentTick > tickSpeed) {
             currentTick = 0;
             logic();
         }
-
+        if (health <= 0) {
+            level.removeElement(this);
+        }
     }
 
     /**
      * the logic of the rat, only run at the rat's slower speed
      */
     private void logic() {
+
         age++;
-        movement();
+        health--;
+        if(isSpreadable(x-1,y)) {
+            level.addElementLive(new Gas(ElementType.Gas, level, (x-1), y, health));
+
+        }
+
+        if(isSpreadable(x+1,y)) {
+            level.addElementLive(new Gas(ElementType.Gas, level, (x+1), y, health));
+
+        }
+
+        if(isSpreadable(x,y-1)) {
+            level.addElementLive(new Gas(ElementType.Gas, level, x, y-1, health));
+            System.out.println("test");
+        }
+        if(isSpreadable(x,y+1)) {
+            level.addElementLive(new Gas(ElementType.Gas, level, x, y+1, health));
+            System.out.println("test");
+        }
+
     }
+
+    /**
+     *  checks if the tile at parsed position is a eligable tile to go onto
+     *
+     * @return boolean if tile is safe
+     */
+    protected boolean isSpreadable(int x, int y) {
+        int boardSize = level.getLength();
+
+        if (x < 0 || y < 0) {
+            return false;
+        }
+
+        if (x > boardSize-1 || y > boardSize-1) {
+            return false;
+        }
+
+        if (level.getTile(x, y).getType().equals(TileType.Grass)) {
+            return false;
+        }
+
+        for (Element element : level.getElements(x,y)) {
+            if (element.getType().equals(ElementType.Gas)) {
+                return false;
+            }
+        }
+
+
+        return true;
+    }
+
 
     public Direction getDirection () {
         return dir;
@@ -73,8 +128,7 @@ public class Gas extends Element {
         double y = renderY();
         //calculating the position the rat should be in this frame
 
-        g.setFill(Color.color(0.2,0.2,0.3));
-        g.fillRect(x, y, size/2, size/2);
+        g.drawImage(image, x , y, size, size);
 
 
     }

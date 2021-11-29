@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * @author lloyd
+ */
 public class PlayerProfileManager {
     private static final String OPEN_FILE_ERROR = "Could not find ";
 	private static final String PROFILE_FILE_PATH = "res/profiles/";

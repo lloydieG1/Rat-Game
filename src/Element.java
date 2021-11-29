@@ -22,11 +22,11 @@ public abstract class Element {
     //determines if level should remove this element at the end of the tick
 
     protected double size = Game.gameSize;
-
-    protected double factor = Game.factor;
+    protected double factor = Game.gameSize;
 
     protected int nextX;
     protected int nextY;
+    protected Direction lastDir = Direction.North;
 
     /**
      * constructs an element with x,y, level it is in and type.
@@ -44,6 +44,7 @@ public abstract class Element {
 
         this.nextX = x;
         this.nextY = y;
+
     }
 
     /**
@@ -69,6 +70,7 @@ public abstract class Element {
      * @return int y position in the map
      */
     public int getY() {
+
         return y;
     }
 
@@ -91,11 +93,30 @@ public abstract class Element {
         return isFlagRemoval();
     }
 
+    public boolean isVisible(GraphicsContext g) {
+        int visibleTiles = Game.VISIBLE_TILES+1;
+        boolean visible = true;
+        if (renderY() < 0) {
+            visible = false;
+        }
+        if (renderX() < 0) {
+            visible = false;
+        }
+        if (renderX() > g.getCanvas().getWidth()) {
+            visible = false;
+        }
+        if (renderY() > g.getCanvas().getHeight()) {
+            visible = false;
+        }
+        return visible;
+    }
+
 
     /**
      * handles the movement of the rat
      */
     protected void movement() {
+        lastDir = dir;
 
 
 
@@ -191,6 +212,22 @@ public abstract class Element {
         if (level.getTile(x, y).getType().equals(TileType.Grass)) {
             return false;
         }
+        
+        for (Element element : level.getElements(x, y)) {
+            if (element.getType().equals(ElementType.StopSign)) {
+            	StopSign stopsign = (StopSign) element;
+                stopsign.blocksUp();
+                return false;
+            }
+        }
+        
+        for (Element element : level.getElements(x, y)) {
+            if (element.getType().equals(ElementType.StopSign) && (this.getType().equals(ElementType.Rat))) {
+            	Sterilise sterilise = (Sterilise) element;
+                sterilise.steriliseRat((Rat) this);
+                return false;
+            }
+        }
 
 
         return true;
@@ -252,17 +289,85 @@ public abstract class Element {
         return x1+((x2-x1)/tickSpeed)*currentTick;
     }
 
+    /**
+     * gets the rendered version of x
+     * @return
+     */
     protected double renderX() {
-        double x = this.x*factor;
-        double nextX = this.nextX*factor;
+        double x = this.x*factor + Game.gameX;
+        double nextX = this.nextX*factor+ Game.gameX;
 
         return interpolate(x, nextX);
     }
 
+    /**
+     * smoothly interpolates rotations
+     * @param x1
+     * @param x2
+     * @return
+     */
+    protected double interpolateDir(double x1, double x2) {
+        //makes sure the rat never rotates more than 180 for a turn:
+        if (x2-x1 > 180) {
+            x2 = x2-360;
+        } else if (x2-x1 < -180){
+            x2 = x2+360;
+        }
 
+        double currentTick = minMax(this.currentTick, 0, tickSpeed/2);
+        double tickSpeed = this.tickSpeed/2.0;
+        return cosineInterpolation(x1, x2, currentTick, tickSpeed);
+    }
+
+    protected double cosineInterpolation(double x1, double x2, double min, double max) {
+
+        double pi = 3.14159265;
+        double m2 = (1-Math.cos(min*pi/max))/2;
+        return x1+(x2-x1)*m2;
+    }
+
+    /**
+     * prevents a value being above or below parsed ints
+     * @param var
+     * @param min
+     * @param max
+     * @return
+     */
+    public int minMax(int var, int min, int max) {
+        if(var >= max)
+            return max;
+        else if (var <=min)
+            return min;
+        else
+            return var;
+
+    }
+
+    /**
+     * gives a number instead of a Direction value
+     * @param dir
+     * @return
+     */
+    protected double dirAsNum(Direction dir) {
+        if (dir == Direction.North) {
+            return(180);
+        } else if (dir == Direction.East) {
+            return (90);
+        }else if (dir == Direction.South) {
+            return(0);
+        }else if (dir == Direction.West) {
+            return(270);
+        }
+        return 0;
+    }
+
+    /**
+     * gets the rendered version of y
+     * @return
+     */
     protected double renderY() {
-        double y = this.y*factor;
-        double nextY = this.nextY*factor;
+        double y = this.y*factor+ Game.gameY;
+        double nextY = this.nextY*factor+ Game.gameY;
 
         return interpolate(y, nextY);
     }

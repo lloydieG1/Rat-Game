@@ -1,5 +1,9 @@
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
+        import javafx.scene.image.Image;
+        import javafx.scene.paint.Color;
+
+        import java.io.FileInputStream;
+        import java.io.FileNotFoundException;
 
 
 /**
@@ -19,14 +23,14 @@ public class Rat extends Element {
     private boolean isChild;
 
     private int breeding = 0;
-    private final int BREEDING_TIME = 3;
+    private final int BREEDING_TIME = 5;
+    private Image image;
 
 
 
-    
     /**
      * Rat constructor
-     * 
+     *
      * @param type
      * @param level
      * @param x
@@ -41,28 +45,19 @@ public class Rat extends Element {
 
         isChild = true;
 
+        image = ImageLoader.getImage("ratChild.png", 64);
+
     }
 
     /**
-     * Runs Tick() behaviours, allowing them to run logics automatically 
+     * Runs Tick() behaviours, allowing them to run logics automatically
      * in time with other elements
      */
     protected void tick() {
         currentTick++;
         if(currentTick > tickSpeed) {
             currentTick = 0;
-
-            if (breeding == 0) {
-                logic();
-            } else {
-
-                breeding--;
-            }
-
-            if (breeding < 0) {
-                breeding = 0;
-            }
-
+            logic();
         }
 
     }
@@ -72,6 +67,7 @@ public class Rat extends Element {
      * the logic of the rat, only ran at the rats slower speed
      */
     private void logic() {
+        if (breeding == 0) {
         if (level.getTile(x, y).getType().equals(TileType.Grass)) {
             level.removeElement(this);
 
@@ -87,12 +83,30 @@ public class Rat extends Element {
                 breed();
             }
         }
+        } else {
+            breeding--;
+        }
 
+        if (breeding < 0) {
+            breeding = 0;
+        }
     }
 
 
+
     private void grow() {
+
         isChild = false;
+
+
+            if (isMale) {
+                image = ImageLoader.getImage("ratMale.png", 64);
+
+            } else {
+                image = ImageLoader.getImage("ratFemale.png", 64);
+            }
+
+
     }
 
     public boolean getIsMale () {
@@ -106,46 +120,11 @@ public class Rat extends Element {
     public int getAge() {
         return age;
     }
-
-    /**
-     * Make sure all mating conditions between 2 rats are met
-     * Check 2 rats are adults, not sterile of the opposite sex and the female rat is not pregnant
-     * @param rat1 first rat to check sex
-     * @param rat2 second rat to check sex
-     * @return Whether two rats do not have the same sex
-     */
-    public boolean canMate (Rat rat1, Rat rat2) {
-
-        if (rat1.age > 2 && rat2.age > 2) {
-            if (!rat1.isSterile && !rat2.isSterile) {
-                if(rat1.isMale && !rat2.isMale && !rat2.isPregnant) {
-                    rat2.isPregnant = true;
-                    giveBirth(rat2);
-                    return true;
-                } else if (!rat1.isMale && rat2.isMale && !rat1.isPregnant) {
-                    rat1.isPregnant = true;
-                    giveBirth(rat1);
-                    return true;
-                } else {
-                    return false;
-                }
-            } else {
-                return false;
-            }
-        } else {
-            return false;
-        }
+    
+    public void makeSterile() {
+    	this.isSterile = true;
     }
 
-    /**
-     * @param rat
-     * 
-     * method to create more Rats after Breed() method is called
-     */
-    public void giveBirth(Rat rat) {
-        //TODO After 5 sec change rat isPregnant to false and make baby rats
-        rat.isPregnant = false;
-    }
 
     private void breed() {
         for (Element element : level.getElements(x, y)) {
@@ -171,18 +150,12 @@ public class Rat extends Element {
         double x = renderX();
         double y = renderY();
         //calculating the position the rat should be in this frame
-        g.setFill(Color.color(0.8,0.4,0.5));
-        if (isChild) {
-            g.setFill(Color.color(0.5,.5,0.8));
-        }
 
-        if (isMale) {
-            g.setFill(Color.color(0.2,0.2,0.6));
-        }
-
-
-        g.fillRect(x, y, size/2, size/2);
-
+        g.save();
+        g.translate(x+Game.gameSize/2.0, y+Game.gameSize/2.0);
+        g.rotate(interpolateDir(dirAsNum(lastDir),dirAsNum(dir)));
+        g.drawImage(image,-(size/2), -(size/2), size, size);
+        g.restore();
 
     }
 

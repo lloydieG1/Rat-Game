@@ -1,4 +1,6 @@
-
+/**
+ * @author lloyd
+ */
 public class PlayerProfile {
 	private static final String PROFILE_FILE_PATH = "res/profiles/";
 	

@@ -6,23 +6,24 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
-public class Bomb extends Element  {
+public class Explosion extends Element  {
 
     private int health;
     private boolean damage;
-    private Image image;
+
     private final int RADIUS = 1;
 
     private Image blast;
 
 
 
-    public Bomb(ElementType type, Level level, int x, int y) {
+    public Explosion(ElementType type, Level level, int x, int y) {
         super(type, level, x, y, Direction.North);
-        health = 5;
+        health = 1;
         damage = false;
 
-        image = ImageLoader.getImage("bomb.png", 64);
+
+        blast = ImageLoader.getImage("blast.png", 64);
     }
 
     protected void tick() {
@@ -39,28 +40,13 @@ public class Bomb extends Element  {
     private void logic() {
         health--;
         if (health <= 0) {
-            explode();
-            level.addElementLive(new Explosion(ElementType.Explosion,level, x, y));
             level.removeElement(this);
         }
 
         damage = false;
     }
 
-    private void explode() {
 
-        for (int x = this.x-RADIUS; x <= this.x +RADIUS; x++) {
-            for (int y = this.y-RADIUS; y <= this.y+RADIUS; y++) {
-                for (Element element : level.getElements(x, y)) {
-                    if (element.getType().equals(ElementType.Rat)) {
-                        level.removeElement(element);
-                        Game.score = Game.score+1;
-
-                    }
-                }
-            }
-        }
-    }
 
     protected void render(GraphicsContext g) {
 
@@ -74,10 +60,14 @@ public class Bomb extends Element  {
         double y = renderY();
         //calculating the position the rat should be in this frame
 
+        g.save();
+        g.translate(x+Game.gameSize/2.0, y+Game.gameSize/2.0);
+        g.rotate(interpolateDir(dirAsNum(lastDir),dirAsNum(dir)));
 
+        double blastOffset = size*((2+RADIUS))*(interpolate(health, health-1)+0.5); //takes into account bomb shrinking
+        g.drawImage(blast, - blastOffset/2.0,  -blastOffset/2.0, blastOffset, blastOffset);
 
-        g.drawImage(image,x, y, size, size);
-
+        g.restore();
 
 
 

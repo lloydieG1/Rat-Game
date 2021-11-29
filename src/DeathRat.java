@@ -15,16 +15,8 @@ public class DeathRat extends Element {
 		super(type, level, x, y, Direction.North);
 		// TODO Auto-generated constructor stub
 		ratsKilled = 0;
-		
-		FileInputStream inputstream = null;
-        try {
 
-            inputstream = new FileInputStream("res\\images\\deathRat.png");
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        image = new Image(inputstream, 64, 64, true, false);
+        image = ImageLoader.getImage("deathRat.png", 64);
 	}
 	
 	private void logic() {
@@ -35,7 +27,7 @@ public class DeathRat extends Element {
         	killRat();
         }
         
-        if(ratsKilled > 5) {
+        if(ratsKilled > 0) {
         	level.removeElement(this);
         }
         
@@ -47,12 +39,11 @@ public class DeathRat extends Element {
 			if (element.getType().equals(ElementType.Rat)) {
 				level.removeElement(element);
 				ratsKilled++;
+                Game.score = Game.score+1;
             }
 		}
+
 	}
-	
-	
-	
 
 	@Override
 	protected void tick() {
@@ -60,6 +51,9 @@ public class DeathRat extends Element {
         if(currentTick > tickSpeed) {
             currentTick = 0;
             logic();
+        }
+        if (age > 12) {
+            killRat();
         }
 	}
 	
@@ -71,14 +65,15 @@ public class DeathRat extends Element {
 	
 	@Override
 	protected void render(GraphicsContext g) {
-		double size = Game.gameSize;
-        double halfSize = size/2;
         double x = renderX();
         double y = renderY();
         //calculating the position the rat should be in this frame
 
-        g.setFill(Color.color(0.5,0.5,0.5));
-        g.drawImage(image, x, y, halfSize, halfSize);
+        g.save();
+        g.translate(x+Game.gameSize/2.0, y+Game.gameSize/2.0);
+        g.rotate(interpolateDir(dirAsNum(lastDir),dirAsNum(dir)));
+        g.drawImage(image,-(size/2), -(size/2), size, size);
+        g.restore();
 
 
     }
