@@ -22,6 +22,7 @@ import java.util.ResourceBundle;
  */
 public class InGameController implements Initializable {
 
+    public boolean mouseDown;
 
     @FXML
     Canvas gameCanvas; //canvas the game is shown on
@@ -41,7 +42,15 @@ public class InGameController implements Initializable {
     public int buttonSize = 70;
 
 
+    @FXML
+    private void mouseDown() {
+        mouseDown = true;
+    }
 
+    @FXML
+    private void mouseUp() {
+        mouseDown = false;
+    }
     
     private static ElementType lastItem;
     /**

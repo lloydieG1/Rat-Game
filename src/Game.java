@@ -217,7 +217,11 @@ public class Game extends Application {
     private static void drawButtons(GraphicsContext g) {
 
         int buttonsize = levelController.buttonSize;
-        g.setFill(Color.color(0.2,0.2,0.2,0.5));
+        if(levelController.mouseDown) {
+            g.setFill(Color.color(0.2, 0.2, 0.2, 0.5));
+        } else {
+            g.setFill(Color.color(0.2, 0.2, 0.2));
+        }
         g.fillRect(0, 0, MAP_WIDTH, buttonsize);
         g.fillRect(0, 0, buttonsize, MAP_HEIGHT);
 
