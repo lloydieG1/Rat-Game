@@ -44,7 +44,7 @@ public class Tile {
      * draws a Tile on the Map
      */
     public void render(GraphicsContext g) {
-        double factor = Game.factor;
+        double factor = Game.gameSize;
         double x = this.x*factor + Game.gameX;
         double y = this.y*factor + Game.gameY;
         int size = Game.gameSize;
@@ -65,6 +65,7 @@ public class Tile {
 
     public void minirender(GraphicsContext g, int width) {
         //check if this tile is visible for the 4 directions
+        int visibleTiles = Game.VISIBLE_TILES;
         boolean visible = true;
         if (this.y-1 < -(Game.gameY/Game.gameSize)) {
             visible = false;
@@ -72,10 +73,10 @@ public class Tile {
         if (this.x-1 < -(Game.gameX/Game.gameSize)) {
             visible = false;
         }
-        if (this.x-1 > -(Game.gameX/Game.gameSize) + 11) {
+        if (this.x-1 > -(Game.gameX/Game.gameSize) + visibleTiles) {
             visible = false;
         }
-        if (this.y-1 > -(Game.gameY/Game.gameSize) + 11) {
+        if (this.y-1 > -(Game.gameY/Game.gameSize) + visibleTiles) {
             visible = false;
         }
 

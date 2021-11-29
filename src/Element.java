@@ -22,8 +22,7 @@ public abstract class Element {
     //determines if level should remove this element at the end of the tick
 
     protected double size = Game.gameSize;
-
-    protected double factor = Game.factor;
+    protected double factor = Game.gameSize;
 
     protected int nextX;
     protected int nextY;

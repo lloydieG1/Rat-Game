@@ -193,6 +193,8 @@ public class Level {
     public void tick() {
         currentTick++;
         for (Element element : elements) {
+            element.factor = Game.gameSize;
+            element.size = Game.gameSize;
             element.tick();
         }
 

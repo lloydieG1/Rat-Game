@@ -38,6 +38,8 @@ public class InGameController implements Initializable {
     @FXML
     private Canvas minimap;
 
+    public int buttonSize = 70;
+
 
 
     
@@ -57,20 +59,20 @@ public class InGameController implements Initializable {
         double x = event.getX();
         double y = event.getY();
 
-        if (x < Game.gameSize) {
-            Game.gameX = Game.gameX+Game.gameSize;
+        if (x < buttonSize) {
+            Game.gameX = Game.gameX+buttonSize;
         }
 
-        if (y < Game.gameSize) {
-            Game.gameY = Game.gameY+Game.gameSize;
+        if (y < buttonSize) {
+            Game.gameY = Game.gameY+buttonSize;
         }
 
-        if (x > Game.MAP_WIDTH-Game.gameSize) {
-            Game.gameX = Game.gameX-Game.gameSize;
+        if (x > Game.MAP_WIDTH-buttonSize) {
+            Game.gameX = Game.gameX-buttonSize;
         }
 
-        if (y > Game.MAP_HEIGHT-Game.gameSize) {
-            Game.gameY = Game.gameY-Game.gameSize;
+        if (y > Game.MAP_HEIGHT-buttonSize) {
+            Game.gameY = Game.gameY-buttonSize;
         }
 
     }

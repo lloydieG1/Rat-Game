@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -44,8 +45,6 @@ public class Game extends Application {
 
     public static int gameSize = 70;
 
-    public static double factor = 70;
-
     public static InGameController levelController;
 
     public static EndGameController endGameController;
@@ -54,9 +53,13 @@ public class Game extends Application {
     public static final int MAP_HEIGHT = 861;
     public static int gameX =0;
     public static int gameY = 0;
+
+    public static double scrollX;
+
+
     public static int score;
 
-    public static final int VISIBLE_TILES = 14;
+    public static int VISIBLE_TILES = 14;
 
 
     /**
@@ -91,6 +94,7 @@ public class Game extends Application {
         levelController.addDeathRat();
 
         levelLayout.addEventFilter(KeyEvent.KEY_PRESSED, event -> processKeyEvent(event));
+        levelLayout.addEventFilter(ScrollEvent.SCROLL, event -> scrollKeyEvent(event));
 
     }
 
@@ -132,6 +136,33 @@ public class Game extends Application {
         event.consume();
     }
 
+
+
+    /**
+     * scrolls the size of the map on the screen
+     * @param event
+     */
+    public void scrollKeyEvent(ScrollEvent event) {
+        // We change the behaviour depending on the actual key that was pressed.
+
+        int scroll = gameSize;
+        switch(event.getTextDeltaYUnits()) {
+            case LINES:
+                // scroll about event.getTextDeltaY() lines
+                gameSize = gameSize + (int)(event.getTextDeltaY()*1.5);
+                break;
+            case PAGES:
+                // scroll about event.getTextDeltaY() pages
+                break;
+            case NONE:
+                // scroll about event.getDeltaY() pixels
+                break;
+        }
+
+        VISIBLE_TILES = (int)gameGraphics.getCanvas().getWidth()/gameSize -3;
+        // Consume the event. This means we mark it as dealt with. This stops other GUI nodes (buttons etc) responding to it.
+        event.consume();
+    }
     public static void updateScore() {
         levelController.score.setText(Integer.toString(score));
     }
@@ -141,6 +172,8 @@ public class Game extends Application {
         int mapHeight = currentLevel.getMapBounds()[1]+1;
         gameY = minMax(gameY, -gameSize* (mapHeight-VISIBLE_TILES), gameSize);
         gameX = minMax(gameX, -gameSize*(mapWidth-VISIBLE_TILES), gameSize);
+
+        gameSize = minMax(gameSize, 65, 100);
     }
 
 
@@ -153,6 +186,7 @@ public class Game extends Application {
      * runs the logic of the game
      */
     private static void tick() {
+        clampMap();
         currentLevel.tick();
         gameGraphics.setFill(Color.color(0.3,0.6,0));
         gameGraphics.fillRect(0,0,gameGraphics.getCanvas().getWidth(), gameGraphics.getCanvas().getHeight());
@@ -160,16 +194,18 @@ public class Game extends Application {
         updateScore();
         drawButtons(gameGraphics);
         currentLevel.renderMiniMap(minimap);
-        clampMap();
+
     }
 
     private static void drawButtons(GraphicsContext g) {
-        g.setFill(Color.color(0.2,0.2,0.2,0.5));
-        g.fillRect(0, 0, MAP_WIDTH, gameSize);
-        g.fillRect(0, 0, gameSize, MAP_HEIGHT);
 
-        g.fillRect(MAP_WIDTH-gameSize, 0, MAP_WIDTH, MAP_HEIGHT);
-        g.fillRect(0, MAP_HEIGHT-gameSize, MAP_WIDTH, MAP_HEIGHT);
+        int buttonsize = levelController.buttonSize;
+        g.setFill(Color.color(0.2,0.2,0.2,0.5));
+        g.fillRect(0, 0, MAP_WIDTH, buttonsize);
+        g.fillRect(0, 0, buttonsize, MAP_HEIGHT);
+
+        g.fillRect(MAP_WIDTH-buttonsize, 0, MAP_WIDTH, MAP_HEIGHT);
+        g.fillRect(0, MAP_HEIGHT-buttonsize, MAP_WIDTH, MAP_HEIGHT);
 
     }
 
