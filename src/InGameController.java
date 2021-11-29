@@ -98,8 +98,9 @@ public class InGameController implements Initializable {
 
     @FXML
     private void minimapClick(MouseEvent event) {
-        Game.gameX = -(int)event.getX()*4;
-        Game.gameY = -(int)event.getY()*4;
+        double sizeFactor = 50.0/Game.gameSize;
+        Game.gameX = -(int)(event.getX()*sizeFactor);
+        Game.gameY = -(int)(event.getY()*sizeFactor);
     }
 
     private String typeToString(ElementType type) {
@@ -110,7 +111,7 @@ public class InGameController implements Initializable {
         } else if (type.equals(ElementType.Gas)) {
             return "gas";
         } else if (type.equals(ElementType.StopSign)) {
-            return "noEntry";
+            return "stopSign";
         }
         return "invalid type";
     }
