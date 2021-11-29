@@ -14,6 +14,8 @@ import java.util.ResourceBundle;
  * @version 2
  */
 public class EndGameController implements Initializable {
+    @FXML
+    Text text;
 
     /**
      * switches back to the menu
@@ -23,8 +25,7 @@ public class EndGameController implements Initializable {
         Game.openMainMenu();
 
     }
-    @FXML
-    Text text;
+
 
 
     @FXML

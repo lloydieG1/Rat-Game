@@ -71,6 +71,7 @@ public abstract class Element {
      * @return int y position in the map
      */
     public int getY() {
+
         return y;
     }
 

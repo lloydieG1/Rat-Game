@@ -139,7 +139,6 @@ public class Game extends Application {
     private static void clampMap() {
         int mapWidth = currentLevel.getMapBounds()[0];
         int mapHeight = currentLevel.getMapBounds()[1]+1;
-        System.out.println(mapHeight);
         gameY = minMax(gameY, -gameSize* (mapHeight-VISIBLE_TILES), gameSize);
         gameX = minMax(gameX, -gameSize*(mapWidth-VISIBLE_TILES), gameSize);
     }
