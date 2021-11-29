@@ -7,3 +7,7 @@
 -fx-background-color: #000000;
 -fx-effect:dropshadow(three-pass-box,black,4,0,0,0);
 }
+
+.button:hover { 
+    -fx-background-color: #777777;
+}
