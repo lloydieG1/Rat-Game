@@ -33,6 +33,8 @@ public class Tile {
      * @return the Type of the specified tile 
      */
     public TileType getType() {
+
+
         return type;
     }
 
@@ -42,9 +44,9 @@ public class Tile {
      * draws a Tile on the Map
      */
     public void render(GraphicsContext g) {
-        double factor = Game.factor;
-        double x = this.x*factor;
-        double y = this.y*factor;
+        double factor = Game.gameSize;
+        double x = this.x*factor + Game.gameX;
+        double y = this.y*factor + Game.gameY;
         int size = Game.gameSize;
         g.setFill(Color.RED);
         
@@ -58,5 +60,48 @@ public class Tile {
             g.setFill(Color.color(0.4,0,0));
             g.fillRect(x, y, size, size);
         }
+    }
+
+
+    public void minirender(GraphicsContext g, int width) {
+        //check if this tile is visible for the 4 directions
+        int visibleTiles = Game.VISIBLE_TILES+1;
+        boolean visible = true;
+        if (this.y-1 < -(Game.gameY/Game.gameSize)) {
+            visible = false;
+        }
+        if (this.x-1 < -(Game.gameX/Game.gameSize)) {
+            visible = false;
+        }
+        if (this.x-1 > -(Game.gameX/Game.gameSize) + visibleTiles) {
+            visible = false;
+        }
+        if (this.y-1 > -(Game.gameY/Game.gameSize) + visibleTiles) {
+            visible = false;
+        }
+
+        double size = g.getCanvas().getHeight()/width;
+        double x = this.x*size;
+        double y = this.y*size;
+        g.setFill(Color.RED);
+        if (type.equals(TileType.Grass)) {
+
+
+            g.setFill(Color.color(0, 1, 0));
+            g.fillRect(x, y, size, size);
+        } else if (type.equals(TileType.Path)) {
+            g.setFill(Color.color(0.6,0.5,0.3));
+            g.fillRect(x, y, size, size);
+        }else if (type.equals(TileType.Tunnel)) {
+            g.setFill(Color.color(0.4,0.5,0));
+            g.fillRect(x, y, size, size);
+        }
+
+        if (!(visible)) {
+            g.setFill(Color.color(0, 0, 0, 0.3));
+            g.fillRect(x, y, size, size);
+        }
+
+
     }
 }

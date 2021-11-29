@@ -32,9 +32,10 @@ public class LevelLoader {
         loadFile(fileName);
 
         int[] gridSize = parseGridSize(levelData[0]);
-        level = new Level(gridSize[0],gridSize[1]);
+        level = new Level(gridSize[0],gridSize[1], Integer.parseInt(levelData[2]));
         parseTiles(levelData[1]);
         parseRats(levelData[3]);
+        parseItemData(levelData[5]);
 
         return level;
     }
@@ -137,13 +138,13 @@ public class LevelLoader {
         int columnSize=tileRows.length;
         //TODO quite a scuffed nested for loop, want to change
 
-        for (int i = 0; i < rowSize; i++) {
+        for (int i = rowSize-1; i >= 0; i--) {
 
             for (int j = 0; j < columnSize; j++) {
                 char tileLetter = tileRows[j].charAt(i);
                 Tile tile = new Tile(getTile(tileLetter), j, i);
 
-                level.addTile(rowSize-i, j, tile);
+                level.addTile(i, j, tile);
                 System.out.println(tileLetter);
 
             }
@@ -192,26 +193,25 @@ public class LevelLoader {
     	}
     }
 
-    //TODO figure out how data for items in menu work
-	private  ArrayList<MenuItem> parseItemData(String itemData){
+    private static ArrayList<MenuItem> parseItemData(String itemData){
 		ArrayList<MenuItem> menuItems = new ArrayList<MenuItem>();
 		String[] Items = itemData.split(SPACE);
-		
+		for (int i = 0; i < Items.length; i++) {
+			System.out.println(Items[i]);
+		}
+
+
 		for (int i = 0; i < Items.length; i++) {
             String[] individualItem = Items[i].split(INTERNAL_DATA_DELIMITER);
-
             String itemType = individualItem[0];
             int replenishTimer = Integer.parseInt(individualItem[1]);
-            
+
             MenuItem menuItem = new MenuItem(itemType, replenishTimer); 
+            
             level.addMenuItem(menuItem);
         }
-		
+
 		return menuItems;
-	}
-	
-	public static void main(String[] args) {
-		
 	}
 }
 

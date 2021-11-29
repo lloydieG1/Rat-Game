@@ -11,17 +11,19 @@ import java.util.ArrayList;
  * @author william randle, lloyd, adrian, yazan
  * @version 1
  */
-/**
- * @author A B
- *
- */
+
 public class Level {
     private Tile[][] tiles; // 2d array of all the tiles and what they contain
 
     private ArrayList<Element> elements;
     private ArrayList<Element> nextElements = new ArrayList<>();
-    private ArrayList<MenuItem> menuItems;
+    private ArrayList<MenuItem> menuItems = new ArrayList<>();
 
+    private int maxRats;
+
+    private int xSize;
+    private int ySize;
+    private int currentTick = 0;
 
     /**
      * constructs a Level
@@ -29,9 +31,11 @@ public class Level {
      * @param x width of map
      * @param y height of map
      */
-    public Level(int x, int y) {
+    public Level(int x, int y, int maxRats) {
         tiles = new Tile[x][y];
         elements = new ArrayList<>();
+        this.xSize = x;
+        this.ySize = y;
 
         for (int i = 0; i < x; i++) {
             for (int j = 0; j < y; j++) {
@@ -39,7 +43,9 @@ public class Level {
             }
 
         }
-         addElement(new Bomb(ElementType.Bomb, this, 4, 4));
+
+
+        this.maxRats = maxRats;
     }
 
     /**
@@ -88,6 +94,42 @@ public class Level {
     }
 
     /**
+     * gives the bounds of the map
+     * @return
+     */
+    public int[] getMapBounds() {
+        int[] bounds = new int[2];
+        bounds[0]= xSize;
+        bounds[1] = ySize;
+        return bounds;
+    }
+
+
+
+    public int ratCount() {
+        int rats = 0;
+        for (Element element : elements) {
+            if (element.getType().equals(ElementType.Rat)) {
+                rats++;
+            }
+        }
+        return rats;
+
+    }
+
+
+    private void checkGameCondition() {
+        int rats = ratCount();
+        if (rats > maxRats) {
+            Game.endGame("you lost with a score of " + Game.score);
+        } else if (rats == 0) {
+            Game.endGame("you won with a score of " + Game.score);
+        }
+
+
+    }
+
+    /**
      * @param element An object that interacts with others on the map
      */
     public void addElementLive(Element element) {
@@ -102,7 +144,7 @@ public class Level {
         elements.add(element);
 
     }
-    
+
     /**
      * @param menuItem
      */
@@ -110,7 +152,7 @@ public class Level {
         menuItems.add(menuItem);
 
     }
-
+    
     /**
      * @param element
      */
@@ -149,7 +191,10 @@ public class Level {
      * buffered elements to the map
      */
     public void tick() {
+        currentTick++;
         for (Element element : elements) {
+            element.factor = Game.gameSize;
+            element.size = Game.gameSize;
             element.tick();
         }
 
@@ -158,7 +203,21 @@ public class Level {
             elements.add(element);
         }
         nextElements = new ArrayList<>();
+
+        tickMenuItems();
+
+
+        checkGameCondition();
     }
+
+
+    private void tickMenuItems() {
+        for(MenuItem menuItem : menuItems) {
+            menuItem.tick();
+
+        }
+    }
+
 
     /**
      * calls to draw elements and tiles on the map.
@@ -170,6 +229,8 @@ public class Level {
         for (Element element : elements) {
             element.render(g);
         }
+
+        renderTunnels(g);
     }
 
     /**
@@ -182,5 +243,29 @@ public class Level {
                 tiles[i][j].render(g);
             }
         }
+    }
+
+    public void renderTunnels(GraphicsContext g) {
+        for (int i = 0; i < tiles.length; i++) {
+            for (int j = 0; j < tiles[i].length; j++) {
+                if( tiles[i][j].getType().equals(TileType.Tunnel)) {
+                    tiles[i][j].render(g);
+                }
+            }
+        }
+    }
+
+
+    public void renderMiniMap(GraphicsContext g) {
+        for (int i = 0; i < tiles.length; i++) {
+            for (int j = 0; j < tiles[i].length; j++) {
+
+
+                tiles[i][j].minirender(g, tiles[0].length);
+
+            }
+        }
+
+
     }
 }
