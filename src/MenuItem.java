@@ -64,7 +64,6 @@ public class MenuItem {
             Game.addItem(getItemType());
             age = 0;
         }
-        System.out.println(getReplenishTimer() + " " + age);
     }
 
 	public ElementType getItemType() {

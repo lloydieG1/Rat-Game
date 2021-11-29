@@ -90,68 +90,50 @@ public class InGameController implements Initializable {
         return image;
     }
 
-    private ImageView getbomb() {
+    private String typeToString(ElementType type) {
+        if (type.equals(ElementType.Bomb)) {
+            return "bomb";
+        } else if (type.equals(ElementType.DeathRat)) {
+            return "deathRat";
+        }
+        return "invalid type";
+    }
 
-        ImageView bomb = new ImageView();
-        bomb.setImage(getImage("bomb.png"));
-        bomb.setCache(true);
-        bomb.setOnDragDetected(new EventHandler<MouseEvent>() {
+    private ImageView getItem(ElementType type) {
+        ImageView item = new ImageView();
+        item.setImage(getImage(typeToString(type) + ".png"));
+        item.setCache(true);
+        item.setOnDragDetected(new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
                 // Mark the drag as started.
                 // We do not use the transfer mode (this can be used to indicate different forms
                 // of drags operations, for example, moving files or copying files).
-                Dragboard db = bomb.startDragAndDrop(TransferMode.ANY);
+                Dragboard db = item.startDragAndDrop(TransferMode.ANY);
                 // db.setDragView(bomb.getImage());
 
                 // We have to put some content in the clipboard of the drag event.
                 // We do not use this, but we could use it to store extra data if we wished.
                 ClipboardContent content = new ClipboardContent();
-                content.putString("bomb");
+                content.putString(typeToString(type) );
                 db.setContent(content);
 
-                lastItem = ElementType.Bomb;
+                lastItem = type;
                 // Consume the event. This means we mark it as dealt with.
                 event.consume();
             }
         });
 
-        return bomb;
+        return item;
     }
 
-    private ImageView getDeathRat() {
 
-        ImageView deathRat = new ImageView();
-        deathRat.setImage(getImage("deathRat.png"));
-        deathRat.setCache(true);
-        deathRat.setOnDragDetected(new EventHandler<MouseEvent>() {
-            public void handle(MouseEvent event) {
-                // Mark the drag as started.
-                // We do not use the transfer mode (this can be used to indicate different forms
-                // of drags operations, for example, moving files or copying files).
-                Dragboard db = deathRat.startDragAndDrop(TransferMode.ANY);
-                // db.setDragView(bomb.getImage());
-
-                // We have to put some content in the clipboard of the drag event.
-                // We do not use this, but we could use it to store extra data if we wished.
-                ClipboardContent content = new ClipboardContent();
-                content.putString("deathRat");
-                db.setContent(content);
-
-                lastItem = ElementType.DeathRat;
-                // Consume the event. This means we mark it as dealt with.
-                event.consume();
-            }
-        });
-
-        return deathRat;
-    }
 
     /**
      * adds a bomb to the tilepane
      */
     public void addBomb() {
 
-        bombPane.getChildren().add(getbomb());
+        bombPane.getChildren().add(getItem(ElementType.Bomb));
     }
 
     /**
@@ -165,7 +147,7 @@ public class InGameController implements Initializable {
      */
     public void addDeathRat() {
 
-        deathRatPane.getChildren().add(getDeathRat());
+        deathRatPane.getChildren().add(getItem(ElementType.DeathRat));
     }
 
     /**
