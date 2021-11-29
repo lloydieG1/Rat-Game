@@ -16,7 +16,7 @@ GGGGGGGGGGGGGGG;
 GGGGGGGGGGGGGGG;
 GGGGGGGGGGGGGGG;
 /
-5
+10
 /
 3,2,True,north 13,4,False,east 7,6,True,south
 /

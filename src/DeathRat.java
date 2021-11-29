@@ -27,7 +27,7 @@ public class DeathRat extends Element {
         	killRat();
         }
         
-        if(ratsKilled > 5) {
+        if(ratsKilled > 0) {
         	level.removeElement(this);
         }
         
