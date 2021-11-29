@@ -38,6 +38,9 @@ public class InGameController implements Initializable {
     private TilePane deathRatPane;
 
     @FXML
+    private TilePane gasPane;
+
+    @FXML
     private Canvas minimap;
 
     public int buttonSize = 70;
@@ -95,6 +98,8 @@ public class InGameController implements Initializable {
             return "bomb";
         } else if (type.equals(ElementType.DeathRat)) {
             return "deathRat";
+        } else if (type.equals(ElementType.Gas)) {
+            return "gas";
         }
         return "invalid type";
     }
@@ -127,46 +132,65 @@ public class InGameController implements Initializable {
     }
 
     public void resetItems() {
-   
-        for (int i = 0; i < bombPane.getChildren().size(); i++) {
+
+        while(bombPane.getChildren().size() >0) {
             removeBomb();
         }
-        for (int i = 0; i < deathRatPane.getChildren().size(); i++) {
-            removeBomb();
+        while(deathRatPane.getChildren().size() >0) {
+            removeDeathRat();
+        }
+
+        while(gasPane.getChildren().size() >0) {
+            removeGas();
         }
     }
 
 
-    /**
-     * adds a bomb to the tilepane
-     */
-    public void addBomb() {
 
-        bombPane.getChildren().add(getItem(ElementType.Bomb));
-    }
+
 
     /**
      * adds a bomb to the tilepane
      */
     public void removeBomb() {
+
         bombPane.getChildren().remove(0);
     }
-    /**
-     * adds a death to the tilepane
-     */
-    public void addDeathRat() {
 
-        deathRatPane.getChildren().add(getItem(ElementType.DeathRat));
-    }
+
 
     /**
      * adds a bomb to the tilepane
      */
     public void removeDeathRat() {
+
         deathRatPane.getChildren().remove(0);
     }
 
+    /**
+     * adds a bomb to the tilepane
+     */
+    public void removeGas() {
 
+        gasPane.getChildren().remove(0);
+    }
+
+    public void addItem(ElementType itemType) {
+        if (itemType ==null) {
+            System.out.println("null item type");
+        } else {
+            if (itemType.equals(ElementType.Bomb)) {
+                bombPane.getChildren().add(getItem(ElementType.Bomb));
+            } else if (itemType.equals(ElementType.DeathRat)) {
+                deathRatPane.getChildren().add(getItem(ElementType.DeathRat));
+            } else if (itemType.equals(ElementType.Gas)) {
+                gasPane.getChildren().add(getItem(ElementType.Gas));
+            } else {
+                System.out.println("invalid item type");
+
+            }
+        }
+    }
 
     /**
      * React when an object is dragged onto the canvas.

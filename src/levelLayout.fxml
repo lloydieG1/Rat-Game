@@ -3,7 +3,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.TilePane?>
@@ -22,32 +21,7 @@
                <children>
                   <TilePane fx:id="bombPane" prefHeight="200.0" prefWidth="200.0" />
                   <TilePane fx:id="deathRatPane" prefHeight="200.0" prefWidth="200.0" />
-                  <ImageView id="radiationImageDrag" fitHeight="58.0" fitWidth="383.0" layoutX="10.0" layoutY="74.0" pickOnBounds="true" preserveRatio="true">
-                     <VBox.margin>
-                        <Insets />
-                     </VBox.margin>
-                  </ImageView>
-                  <ImageView id="poisonImageDrag" fitHeight="58.0" fitWidth="383.0" layoutX="10.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true">
-                     <VBox.margin>
-                        <Insets />
-                     </VBox.margin>
-                  </ImageView>
-                  <ImageView id="maleChangeImageDrag" fitHeight="58.0" fitWidth="383.0" layoutX="10.0" layoutY="202.0" pickOnBounds="true" preserveRatio="true">
-                     <VBox.margin>
-                        <Insets />
-                     </VBox.margin>
-                  </ImageView>
-                  <ImageView id="femaleChangeImageDrag" fitHeight="58.0" fitWidth="383.0" layoutX="10.0" layoutY="266.0" pickOnBounds="true" preserveRatio="true">
-                     <VBox.margin>
-                        <Insets />
-                     </VBox.margin>
-                  </ImageView>
-                  <ImageView id="noEntryImageDrag" fitHeight="58.0" fitWidth="383.0" layoutX="10.0" layoutY="330.0" pickOnBounds="true" preserveRatio="true">
-                     <VBox.margin>
-                        <Insets />
-                     </VBox.margin>
-                  </ImageView>
-                  <ImageView id="deathRatImageDrag" fitHeight="58.0" fitWidth="383.0" layoutX="10.0" layoutY="394.0" pickOnBounds="true" preserveRatio="true" />
+                  <TilePane fx:id="gasPane" prefHeight="200.0" prefWidth="200.0" />
                   <Button id="backToMenuButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#backClick" prefHeight="47.0" prefWidth="246.0" text="Back">
                      <font>
                         <Font size="24.0" />
