@@ -126,6 +126,15 @@ public class InGameController implements Initializable {
         return item;
     }
 
+    public void resetItems() {
+   
+        for (int i = 0; i < bombPane.getChildren().size(); i++) {
+            removeBomb();
+        }
+        for (int i = 0; i < deathRatPane.getChildren().size(); i++) {
+            removeBomb();
+        }
+    }
 
 
     /**

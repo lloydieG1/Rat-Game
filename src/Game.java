@@ -263,6 +263,7 @@ public class Game extends Application {
      */
     public static void openGameScene(String levelName) {
 
+        levelController.resetItems();
         currentLevel = LevelLoader.getLevel(levelName);
         primaryStage.setScene(levelLayout);
         gameLoop.play();
