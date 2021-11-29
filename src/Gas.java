@@ -27,6 +27,7 @@ public class Gas extends Element {
         this.health = health;
         damage = false;
         image = ImageLoader.getImage("gas.png", 64);
+        tickSpeed = (int)(Game.FPS/1.7);
       
     }
 
