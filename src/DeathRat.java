@@ -43,13 +43,6 @@ public class DeathRat extends Element {
             }
 		}
 
-        for (Element element : level.getElements(nextX, nextY)) {
-            if (element.getType().equals(ElementType.Rat)) {
-                level.removeElement(element);
-                ratsKilled++;
-                Game.score = Game.score+1;
-            }
-        }
 	}
 
 	@Override
@@ -58,6 +51,9 @@ public class DeathRat extends Element {
         if(currentTick > tickSpeed) {
             currentTick = 0;
             logic();
+        }
+        if (age > 12) {
+            killRat();
         }
 	}
 	
