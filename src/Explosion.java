@@ -60,12 +60,14 @@ public class Explosion extends Element  {
         double y = renderY();
         //calculating the position the rat should be in this frame
 
-
+        g.save();
+        g.translate(x+Game.gameSize/2.0, y+Game.gameSize/2.0);
+        g.rotate(interpolateDir(dirAsNum(lastDir),dirAsNum(dir)));
         
-        double blastOffset = size*((2+RADIUS))*(interpolate(health, health-1)+0.5);
-        g.drawImage(blast, x- blastOffset/2.0, y -blastOffset/2.0, blastOffset, blastOffset);
+        double blastOffset = size*((2+RADIUS))*(interpolate(health, health-1)+0.5); //takes into account bomb shrinking
+        g.drawImage(blast, - blastOffset/2.0,  -blastOffset/2.0, blastOffset, blastOffset);
 
-
+        g.restore();
 
 
 
