@@ -207,7 +207,7 @@ public class InGameController implements Initializable {
         } else if (type.equals(ElementType.DeathRat)) {
          Game.currentLevel.addElement(new DeathRat(ElementType.DeathRat, Game.currentLevel, x/Game.gameSize, y/Game.gameSize));
         } else if (type.equals(ElementType.Gas)) {
-            Game.currentLevel.addElement(new Gas(ElementType.Gas, Game.currentLevel, x/Game.gameSize, y/Game.gameSize));
+            Game.currentLevel.addElement(new Gas(ElementType.Gas, Game.currentLevel, x/Game.gameSize, y/Game.gameSize, 4));
         } else {
             System.out.println("invalid item type");
         }
