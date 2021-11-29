@@ -61,6 +61,9 @@ public class Game extends Application {
 
     public static int VISIBLE_TILES = 14;
 
+    private static final int ZOOM_MIN = 65;
+    private static final int ZOOM_MAX = 90;
+
 
     /**
      * open the main menu and loads the other menus
@@ -155,10 +158,11 @@ public class Game extends Application {
                 gameSize = gameSize + (int)(event.getTextDeltaY()*scrollFactor);
 
                 //make the scroll happen from the center instead of the top corner
-                if (minMax(gameSize, 65, 100) == gameSize) {
+                if (minMax(gameSize, ZOOM_MIN, ZOOM_MAX) == gameSize) {
                     int scroll = (int)(event.getTextDeltaY()*scrollFactor)*gameSize;
-                    gameX = gameX - scroll/8;
-                    gameY = gameY - scroll/8;
+                    int factorResize = 8;
+                    gameX = gameX - scroll/factorResize;
+                    gameY = gameY - scroll/factorResize;
                 }
 
                 break;
@@ -178,7 +182,7 @@ public class Game extends Application {
     }
 
     private static void clampMap() {
-        gameSize = minMax(gameSize, 65, 100);
+        gameSize = minMax(gameSize, ZOOM_MIN, ZOOM_MAX);
         VISIBLE_TILES = (int)gameGraphics.getCanvas().getWidth()/gameSize -3;
         int mapWidth = currentLevel.getMapBounds()[0]-2;
         int mapHeight = currentLevel.getMapBounds()[1]-1;
