@@ -177,14 +177,6 @@ public class Level {
 
     }
 
-    /**
-     * removes all elements from the map
-     */
-    public void removeAll() {
-
-        elements = new ArrayList<>();
-
-    }
 
     /**
      * has elements run their tick() behaviours, and adds
@@ -227,7 +219,9 @@ public class Level {
         renderTiles(g);
 
         for (Element element : elements) {
-            element.render(g);
+            if (element.isVisible(g)) {
+                element.render(g);
+            }
         }
 
         renderTunnels(g);

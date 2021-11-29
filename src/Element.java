@@ -93,6 +93,24 @@ public abstract class Element {
         return isFlagRemoval();
     }
 
+    public boolean isVisible(GraphicsContext g) {
+        int visibleTiles = Game.VISIBLE_TILES+1;
+        boolean visible = true;
+        if (renderY() < 0) {
+            visible = false;
+        }
+        if (renderX() < 0) {
+            visible = false;
+        }
+        if (renderX() > g.getCanvas().getWidth()) {
+            visible = false;
+        }
+        if (renderY() > g.getCanvas().getHeight()) {
+            visible = false;
+        }
+        return visible;
+    }
+
 
     /**
      * handles the movement of the rat

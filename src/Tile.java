@@ -16,6 +16,8 @@ public class Tile {
 
     private final TileType type;
 
+
+
     /**
      * @param type the variant of tile
      * @param y the y position of the tile
@@ -49,7 +51,7 @@ public class Tile {
         double y = this.y*factor + Game.gameY;
         int size = Game.gameSize;
         g.setFill(Color.RED);
-        
+
         if (type.equals(TileType.Grass)) {
             g.setFill(Color.color(0.3,0.6,0));
             g.fillRect(x, y, size, size);
@@ -63,8 +65,7 @@ public class Tile {
     }
 
 
-    public void minirender(GraphicsContext g, int width) {
-        //check if this tile is visible for the 4 directions
+    public boolean isVisible() {
         int visibleTiles = Game.VISIBLE_TILES+1;
         boolean visible = true;
         if (this.y-1 < -(Game.gameY/Game.gameSize)) {
@@ -79,6 +80,13 @@ public class Tile {
         if (this.y-1 > -(Game.gameY/Game.gameSize) + visibleTiles) {
             visible = false;
         }
+        return visible;
+    }
+
+
+    public void minirender(GraphicsContext g, int width) {
+        //check if this tile is visible for the 4 directions
+
 
         double size = g.getCanvas().getHeight()/width;
         double x = this.x*size;
@@ -97,7 +105,7 @@ public class Tile {
             g.fillRect(x, y, size, size);
         }
 
-        if (!(visible)) {
+        if (!(isVisible())) {
             g.setFill(Color.color(0, 0, 0, 0.3));
             g.fillRect(x, y, size, size);
         }
