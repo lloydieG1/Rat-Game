@@ -3,7 +3,6 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Scanner;
 
 public class PlayerProfileManager {
@@ -17,7 +16,7 @@ public class PlayerProfileManager {
 	
 	
 	public static void addNewProfile(String username) {
-		String fileName = PROFILE_FILE_PATH + username + ".txt";
+		String fileName = usernameToPath(username);
 		
 		//TODO needs to be refactored to remove repeated filewriter code
 		
@@ -28,9 +27,17 @@ public class PlayerProfileManager {
 			if (profileFile.createNewFile()) {
 				System.out.println("File created: " + profileFile.getName());
 				
-				//if the file does exist open it and write the username to file 
+				/*
+				 * if the file does exist open it and write the username to file on line 1
+				 * will look like this:
+				 * USER: *username*
+				 * HIGHSCORE: 
+				 * MAX LEVEL: 
+				 */
 				FileWriter writer = new FileWriter(fileName);
-				writer.write("USER: " + username);
+				writer.write(FIRST_LINE + username + "\n");
+				writer.write(SECOND_LINE + "\n");
+				writer.write(THIRD_LINE);
 				writer.close();
 			} else {
 				System.out.println("File already exists.");
@@ -45,24 +52,28 @@ public class PlayerProfileManager {
 		profiles.add(newProfile);
 	}
 	
-	public static void updateProfileData(String whichData, String data, String fileName) {
-		String profileFileContents = readProfileFile(fileName);
+	/*
+	 * TODO instead of using String whichdata make an enum type for profile data
+	 */
+	public static void updateProfileData(String whichData, int data, String username) {
+		String fileName = usernameToPath(username);
+		String profileFileContents = readProfileFile(username);
 		System.out.println("Contents of the file: "+ profileFileContents);
 		
-		Scanner in = openProfileFile(fileName);
+		Scanner in = openProfileFile(username);
 		
 		String oldLine = null;
 		String newLine = null;
 		
 		if(whichData == "highscore") {
-			in.nextLine(); //ignore first line (username)
-			oldLine = in.nextLine();
-			newLine = data;
+			String hs = in.nextLine(); //ignore first line (username)
+			oldLine = in.nextLine(); //old highscore
+			newLine = SECOND_LINE + data; //new highscore
 		}else if(whichData == "maxLevel") {
 			in.nextLine(); //ignore first line (username)
 			in.nextLine(); //ignore second line (highscore)
 			oldLine = in.nextLine();
-			newLine = data;
+			newLine = THIRD_LINE + data;
 		}else {
 			throw new IllegalArgumentException("whichData arguement is not highscore or maxLevel");
 		}
@@ -75,6 +86,7 @@ public class PlayerProfileManager {
 		try {
 			FileWriter writer = new FileWriter(fileName);
 			writer.append(profileFileContents);
+			writer.close();
 		} catch (IOException e) {
 			System.out.println("Cannot read file.");
 			e.printStackTrace();
@@ -82,8 +94,8 @@ public class PlayerProfileManager {
 	}
 	
 	public void removeProfile(String username) {
-		String fileName = PROFILE_FILE_PATH + username + ".txt";
-	    File fileToDelete = new File(fileName);
+		String filePath = usernameToPath(username);
+	    File fileToDelete = new File(filePath);
 	    if (fileToDelete.delete()) { 
 	      System.out.println("Deleted the user: " + username);;
 	    } else {
@@ -91,12 +103,12 @@ public class PlayerProfileManager {
 	    }
 	}
 	
-    private static String readProfileFile(String fileName) {
-        Scanner in = openProfileFile(fileName);
+    private static String readProfileFile(String username) {
+        Scanner in = openProfileFile(username);
 
         String fileText = "";
         while(in.hasNext()) {
-            fileText = fileText + in.nextLine();
+            fileText = fileText + in.nextLine() + "\n";
         }
 
         in.close();
@@ -104,8 +116,8 @@ public class PlayerProfileManager {
         return fileText;
     }
     
-    private static Scanner openProfileFile(String fileName) {
-        File inputFile = new File(PROFILE_FILE_PATH + fileName);
+    private static Scanner openProfileFile(String username) {
+        File inputFile = new File(usernameToPath(username));
         Scanner in = null;
 
         //attempts to open file and returns exception if it is not found
@@ -113,10 +125,20 @@ public class PlayerProfileManager {
             in = new Scanner (inputFile);
         }
         catch (FileNotFoundException e) {
-            System.out.println (OPEN_FILE_ERROR + fileName);
+            System.out.println (OPEN_FILE_ERROR + username);
             System.exit (0);
         }
 
         return in;
     }
+    
+    private static String usernameToPath(String username) {
+    	String filePath = PROFILE_FILE_PATH + username + ".txt";
+    	return filePath;
+    }
+    
+//    public static void main(String[] args) {
+//		updateProfileData("highscore", 1000, "User1");
+//		updateProfileData("maxLevel", 6, "User1");
+//	}
 }
