@@ -96,6 +96,12 @@ public class InGameController implements Initializable {
         return image;
     }
 
+    @FXML
+    private void minimapClick(MouseEvent event) {
+        Game.gameX = -(int)event.getX()*4;
+        Game.gameY = -(int)event.getY()*4;
+    }
+
     private String typeToString(ElementType type) {
         if (type.equals(ElementType.Bomb)) {
             return "bomb";
@@ -104,7 +110,7 @@ public class InGameController implements Initializable {
         } else if (type.equals(ElementType.Gas)) {
             return "gas";
         } else if (type.equals(ElementType.StopSign)) {
-            return "stopSign";
+            return "noEntry";
         }
         return "invalid type";
     }
@@ -156,17 +162,26 @@ public class InGameController implements Initializable {
 
 
     public void addItem(ElementType itemType) {
+        int maxItems = 5;
         if (itemType ==null) {
             System.out.println("null item type");
         } else {
             if (itemType.equals(ElementType.Bomb)) {
-                bombPane.getChildren().add(getItem(ElementType.Bomb));
+                if(bombPane.getChildren().size() <maxItems) {
+                    bombPane.getChildren().add(getItem(ElementType.Bomb));
+                }
             } else if (itemType.equals(ElementType.DeathRat)) {
-                deathRatPane.getChildren().add(getItem(ElementType.DeathRat));
+                if(deathRatPane.getChildren().size() <maxItems) {
+                    deathRatPane.getChildren().add(getItem(ElementType.DeathRat));
+                }
             } else if (itemType.equals(ElementType.Gas)) {
-                gasPane.getChildren().add(getItem(ElementType.Gas));
+                if(gasPane.getChildren().size() <maxItems) {
+                    gasPane.getChildren().add(getItem(ElementType.Gas));
+                }
             } else if (itemType.equals(ElementType.StopSign)) {
-                stopSignPane.getChildren().add(getItem(ElementType.StopSign));
+                if(stopSignPane.getChildren().size() <maxItems) {
+                    stopSignPane.getChildren().add(getItem(ElementType.StopSign));
+                }
             } else {
                 System.out.println("invalid item type");
 
