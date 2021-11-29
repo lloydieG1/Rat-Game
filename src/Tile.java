@@ -67,16 +67,16 @@ public class Tile {
         //check if this tile is visible for the 4 directions
         int visibleTiles = Game.VISIBLE_TILES;
         boolean visible = true;
-        if (this.y-1 < -(Game.gameY/Game.gameSize)) {
+        if (this.y < -(Game.gameY/Game.gameSize)) {
             visible = false;
         }
-        if (this.x-1 < -(Game.gameX/Game.gameSize)) {
+        if (this.x < -(Game.gameX/Game.gameSize)) {
             visible = false;
         }
-        if (this.x-1 > -(Game.gameX/Game.gameSize) + visibleTiles) {
+        if (this.x > -(Game.gameX/Game.gameSize) + visibleTiles) {
             visible = false;
         }
-        if (this.y-1 > -(Game.gameY/Game.gameSize) + visibleTiles) {
+        if (this.y > -(Game.gameY/Game.gameSize) + visibleTiles) {
             visible = false;
         }
 

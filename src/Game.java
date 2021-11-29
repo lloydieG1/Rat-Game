@@ -159,7 +159,6 @@ public class Game extends Application {
                 break;
         }
 
-        VISIBLE_TILES = (int)gameGraphics.getCanvas().getWidth()/gameSize -3;
         // Consume the event. This means we mark it as dealt with. This stops other GUI nodes (buttons etc) responding to it.
         event.consume();
     }
@@ -168,10 +167,12 @@ public class Game extends Application {
     }
 
     private static void clampMap() {
-        int mapWidth = currentLevel.getMapBounds()[0];
-        int mapHeight = currentLevel.getMapBounds()[1]+1;
-        gameY = minMax(gameY, -gameSize* (mapHeight-VISIBLE_TILES), gameSize);
-        gameX = minMax(gameX, -gameSize*(mapWidth-VISIBLE_TILES), gameSize);
+        VISIBLE_TILES = (int)gameGraphics.getCanvas().getWidth()/gameSize -3;
+        int mapWidth = currentLevel.getMapBounds()[0]-2;
+        int mapHeight = currentLevel.getMapBounds()[1]-1;
+
+        gameY = minMax(gameY, -gameSize* (mapHeight-VISIBLE_TILES), 0);
+        gameX = minMax(gameX, -gameSize*(mapWidth-VISIBLE_TILES), 0);
 
         gameSize = minMax(gameSize, 65, 100);
     }
