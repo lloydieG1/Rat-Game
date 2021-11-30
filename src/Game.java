@@ -43,7 +43,7 @@ public class Game extends Application {
 
     public static Random random = new Random();
 
-    public static int gameSize = 70;
+    public static double gameSize = 70;
 
     public static InGameController levelController;
 
@@ -51,8 +51,8 @@ public class Game extends Application {
 
     public static final int MAP_WIDTH = 961;
     public static final int MAP_HEIGHT = 861;
-    public static int gameX =0;
-    public static int gameY = 0;
+    public static double gameX =0;
+    public static double gameY = 0;
 
     public static double scrollX;
 
@@ -106,7 +106,7 @@ public class Game extends Application {
     public void processKeyEvent(KeyEvent event) {
         // We change the behaviour depending on the actual key that was pressed.
 
-        int scroll = gameSize;
+        double scroll = gameSize;
         switch (event.getCode()) {
             case RIGHT:
                 // Right key was pressed. So move the player right by one cell.
@@ -152,7 +152,7 @@ public class Game extends Application {
 
                 //make the scroll happen from the center instead of the top corner
                 if (minMax(gameSize, ZOOM_MIN, ZOOM_MAX) == gameSize) {
-                    int scroll = (int)(event.getTextDeltaY()*scrollFactor)*gameSize;
+                    double scroll = (int)(event.getTextDeltaY()*scrollFactor)*gameSize;
                     int factorResize = 8;
                     gameX = gameX - scroll/factorResize;
                     gameY = gameY - scroll/factorResize;
@@ -176,8 +176,8 @@ public class Game extends Application {
 
     private static void clampMap() {
         gameSize = minMax(gameSize, ZOOM_MIN, ZOOM_MAX);
-        VISIBLE_TILES = (int)gameGraphics.getCanvas().getWidth()/gameSize -3;
-        int mapWidth = currentLevel.getMapBounds()[0]-4;
+        VISIBLE_TILES = (int)(gameGraphics.getCanvas().getWidth()/gameSize -3);
+        int mapWidth = currentLevel.getMapBounds()[0]-3;
         int mapHeight = currentLevel.getMapBounds()[1]-3;
 
         gameY = minMax(gameY, -gameSize* (mapHeight-VISIBLE_TILES), gameSize);
@@ -308,7 +308,7 @@ public class Game extends Application {
      * @param max
      * @return
      */
-    public static int minMax(int var, int min, int max) {
+    public static double minMax(double var, double min, double max) {
         if(var >= max)
             return max;
         else if (var <=min)

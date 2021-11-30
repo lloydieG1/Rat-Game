@@ -32,7 +32,7 @@ public class LevelLoader {
         loadFile(fileName);
 
         int[] gridSize = parseGridSize(levelData[0]);
-        level = new Level(gridSize[0]-1,gridSize[1], Integer.parseInt(levelData[2]));
+        level = new Level(gridSize[0],gridSize[1], Integer.parseInt(levelData[2]));
         parseTiles(levelData[1]);
         parseRats(levelData[3]);
         parseItemData(levelData[5]);
@@ -141,6 +141,7 @@ public class LevelLoader {
         for (int i = rowSize-1; i >= 0; i--) {
 
             for (int j = 0; j < columnSize; j++) {
+                System.out.println(i);
                 char tileLetter = tileRows[j].charAt(i);
                 Tile tile = new Tile(getTile(tileLetter), j, i);
 

@@ -49,7 +49,7 @@ public class Tile {
         double factor = Game.gameSize;
         double x = this.x*factor + Game.gameX;
         double y = this.y*factor + Game.gameY;
-        int size = Game.gameSize;
+        double size = Game.gameSize;
         g.setFill(Color.RED);
 
         if (type.equals(TileType.Grass)) {

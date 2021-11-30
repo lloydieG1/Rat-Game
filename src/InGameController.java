@@ -230,15 +230,15 @@ public class InGameController implements Initializable {
      * @param x
      * @param y
      */
-    public static void placeItem(int x, int y, ElementType type) {
+    public static void placeItem(double x, double y, ElementType type) {
         x = x-Game.gameX;
         y=y-Game.gameY;
         if (type.equals(ElementType.Bomb)) {
-         Game.currentLevel.addElement(new Bomb(ElementType.Bomb,  Game.currentLevel, x/Game.gameSize, y/Game.gameSize));
+         Game.currentLevel.addElement(new Bomb(ElementType.Bomb,  Game.currentLevel, (int)(x/Game.gameSize), (int)(y/Game.gameSize)));
         } else if (type.equals(ElementType.DeathRat)) {
-         Game.currentLevel.addElement(new DeathRat(ElementType.DeathRat, Game.currentLevel, x/Game.gameSize, y/Game.gameSize));
+         Game.currentLevel.addElement(new DeathRat(ElementType.DeathRat, Game.currentLevel, (int)(x/Game.gameSize), (int)(y/Game.gameSize)));
         } else if (type.equals(ElementType.Gas)) {
-            Game.currentLevel.addElement(new Gas(ElementType.Gas, Game.currentLevel, x/Game.gameSize, y/Game.gameSize, 3));
+            Game.currentLevel.addElement(new Gas(ElementType.Gas, Game.currentLevel, (int)(x/Game.gameSize), (int)(y/Game.gameSize), 3));
         } else {
             System.out.println("invalid item type");
         }
