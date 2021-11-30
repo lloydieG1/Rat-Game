@@ -68,15 +68,16 @@ public class LevelsMenuController implements Initializable {
                                 saveConfirmation.setContentText("clicking ok resumes this save, cancel overwrites it.");
                                 Optional<ButtonType> resume = saveConfirmation.showAndWait();
 
-                                if (resume.get().equals(ButtonType.CANCEL)) {
+                                if (resume.get().equals(ButtonType.OK)) {
+                                    Game.openGameScene("save\\" + saveText);
+
+                                } else if (resume.get().equals(ButtonType.CANCEL)) {
                                     Game.openGameScene(buttonText);
-                                } else if (resume.get().equals(ButtonType.OK)) {
-                                    Game.openGameScene(saveText);
 
                                 }
                             }
                         }
-                        Game.openGameScene(buttonText);
+                     //   Game.openGameScene(buttonText);
                     }
                 });
 

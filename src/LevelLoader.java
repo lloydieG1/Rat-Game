@@ -31,6 +31,8 @@ public class LevelLoader {
         String fileName = levelName+".txt";
         loadFile(fileName);
 
+        levelName = levelName.replace("save\\", "");
+
         int[] gridSize = parseGridSize(levelData[0]);
         level = new Level(gridSize[0],gridSize[1], Integer.parseInt(levelData[2]), levelName, Integer.parseInt(levelData[4]),Integer.parseInt(levelData[5]));
         parseTiles(levelData[1]);
