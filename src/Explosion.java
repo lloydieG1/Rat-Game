@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class Explosion extends Element  {
 
-    private int health;
+
     private Image blast;
 
 
@@ -64,9 +64,6 @@ public class Explosion extends Element  {
 
     }
 
-    public String asString() {
-        return "explosion" + "," + health + "," + x + "," + y;
-    }
 
 
 }

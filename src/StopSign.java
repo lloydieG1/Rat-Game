@@ -61,8 +61,6 @@ public class StopSign extends Element {
 
     }
 
-    public String asString() {
-        return "stopSign" + "," + x + "," + y;
-    }
+
 
 }

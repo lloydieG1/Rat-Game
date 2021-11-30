@@ -9,7 +9,7 @@ import javafx.scene.paint.Color;
  */
 public class Gas extends Element {
 	
-    private int health;
+
     private boolean damage;
     private Image image;
 
@@ -134,7 +134,6 @@ public class Gas extends Element {
 
 
     }
-    public String asString() {
-        return "gas" + "," + health + "," + x + "," + y;
-    }
+
+
 }

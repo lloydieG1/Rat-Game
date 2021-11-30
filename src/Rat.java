@@ -26,7 +26,7 @@ public class Rat extends Element {
     private final int BREEDING_TIME = 5;
     private Image image;
 
-    private int health;
+
 
 
 
@@ -177,8 +177,9 @@ public class Rat extends Element {
 
     }
 
-    public String asString() {
-        return "rat" + "," + health + "," + x + "," + y;
+    @Override
+    protected String extraInfo() {
+        return "," +isMale;
     }
 
 }

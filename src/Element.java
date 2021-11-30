@@ -27,6 +27,7 @@ public abstract class Element {
     protected int nextX;
     protected int nextY;
     protected Direction lastDir = Direction.North;
+    protected int health;
 
     /**
      * constructs an element with x,y, level it is in and type.
@@ -86,7 +87,7 @@ public abstract class Element {
      * @param g
      */
     protected abstract void render(GraphicsContext g);
-    protected abstract String asString();
+
     /**
      * @return if the element needs to be removed from the level at the end of the tick.
      */
@@ -354,6 +355,60 @@ public abstract class Element {
         double nextY = this.nextY*factor+ Game.gameY;
 
         return interpolate(y, nextY);
+    }
+
+    private String typeAsString() {
+        if(type == null) {
+            return "-";
+        }
+        if (type.equals(ElementType.Rat)) {
+            return "rat";
+        }
+        if (type.equals(ElementType.Bomb)) {
+            return "bomb";
+        } else if (type.equals(ElementType.Gas)) {
+            return "gas";
+        }else if (type.equals(ElementType.Sterilise)) {
+            return "sterilize";
+        }
+        else if (type.equals(ElementType.Poison)) {
+            return "poison";
+        }
+        else if (type.equals(ElementType.FemaleGenderChange)) {
+            return "femaleGenderChange";
+        }
+        else if (type.equals(ElementType.MaleGenderChange)) {
+            return "maleGenderChange";
+        }
+        else if (type.equals(ElementType.StopSign)) {
+            return "stopSign";
+        }
+        else if (type.equals(ElementType.DeathRat)) {
+            return "deathRat";
+        } else {
+            return "-";
+        }
+    }
+
+    protected String extraInfo() {
+        return "";
+    }
+
+    protected String dirAsString() {
+        if (dir == Direction.North) {
+            return("north");
+        } else if (dir == Direction.East) {
+            return("east");
+        }else if (dir == Direction.South) {
+            return("south");
+        }else if (dir == Direction.West) {
+            return("west");
+        }
+        return "0";
+    }
+
+    public String asString() {
+        return typeAsString() + "," + health + "," + x + "," + y + dirAsString() + extraInfo();
     }
 
 

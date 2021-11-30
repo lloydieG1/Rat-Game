@@ -61,8 +61,6 @@ public class Sterilise extends Element {
 
     }
 
-    public String asString() {
-        return "sterilise" + "," + x + "," + y;
-    }
+
 
 }

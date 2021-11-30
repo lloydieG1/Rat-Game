@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class Poison extends Element {
 	
     private Image image;
-    private int health;
+
     private boolean damage;
 
 
@@ -50,7 +50,5 @@ public class Poison extends Element {
 
     }
 
-    public String asString() {
-        return "poison" + "," + health + "," + x + "," + y;
-    }
+
 }

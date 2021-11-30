@@ -8,12 +8,13 @@ import java.util.ArrayList;
 
 public class Bomb extends Element  {
 
-    private int health;
+
     private boolean damage;
     private Image image;
     private final int RADIUS = 1;
 
     private Image blast;
+
 
 
 
@@ -131,9 +132,7 @@ public class Bomb extends Element  {
 
     }
 
-    public String asString() {
-        return "bomb" + "," + health + "," + x + "," + y;
-    }
+
 
 
 }
