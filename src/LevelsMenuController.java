@@ -3,13 +3,16 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.TilePane;
 import javafx.scene.text.Font;
 
 import java.io.File;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 /**
@@ -52,6 +55,27 @@ public class LevelsMenuController implements Initializable {
 
                     @Override
                     public void handle(Event event) {
+                        File savesDirectory=new File("res\\maps\\save");
+                        File[] saves = directory.listFiles();
+                        int fileCount= directory.list().length;
+                        for (int i = 0; i < fileCount; i++) {
+
+                            String saveText = saves[i].getName().replace(".txt", "");
+                            if (saveText.equals(buttonText)) {
+                                Alert saveConfirmation = new Alert(Alert.AlertType.CONFIRMATION);
+                                saveConfirmation.setTitle("resume / overwrite");
+                                saveConfirmation.setHeaderText("there is a save file for this level.");
+                                saveConfirmation.setContentText("do you wish to resume this save?");
+                                Optional<ButtonType> resume = saveConfirmation.showAndWait();
+
+                                if (resume.get().equals(ButtonType.CANCEL)) {
+                                    Game.openGameScene(buttonText);
+                                } else if (resume.get().equals(ButtonType.OK)) {
+                                    Game.openGameScene(saveText);
+
+                                }
+                            }
+                        }
                         Game.openGameScene(buttonText);
                     }
                 });
@@ -59,34 +83,12 @@ public class LevelsMenuController implements Initializable {
                 levelPane.getChildren().add(levelButton);
             }
         }
-        levelPane.setPrefRows(levelPane.getChildren().size());
+        levelPane.setPrefColumns(3);
     }
 
 
 
-    private void addSaveButtons() {
-        File directory=new File("res\\maps\\save");
-        File[] levels = directory.listFiles();
-        int fileCount= directory.list().length;
 
-        for (int i = 0; i < fileCount; i++) {
-            if ( !(levels[i].getName().replace(".txt", "").equals(levels[i].getName()))) {
-                String buttonText = levels[i].getName().replace(".txt", "");
-                Button levelButton = new Button("resume?");
-                levelButton.setFont(new Font(10));
-
-                levelButton.setOnAction(new EventHandler() {
-
-                    @Override
-                    public void handle(Event event) {
-                        Game.openGameScene(buttonText);
-                    }
-                });
-
-                levelPane.getChildren().add(levelButton);
-            }
-        }
-    }
 
 
     /**
@@ -97,7 +99,7 @@ public class LevelsMenuController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         addLevelButtons();
-        addSaveButtons();
+
 
     }
 
