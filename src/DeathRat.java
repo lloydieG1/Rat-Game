@@ -84,5 +84,7 @@ public class DeathRat extends Element {
 
 
     }
-	
+    public String asString() {
+        return "deathRat" + "," + x + "," + y;
+    }
 }

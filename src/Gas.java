@@ -134,5 +134,7 @@ public class Gas extends Element {
 
 
     }
-
+    public String asString() {
+        return "gas" + "," + health + "," + x + "," + y;
+    }
 }

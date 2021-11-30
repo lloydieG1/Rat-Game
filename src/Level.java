@@ -280,4 +280,23 @@ public class Level {
         g.fillRect(0, -Game.gameY/mapFactorY+(Game.VISIBLE_TILES)*tileheight, g.getCanvas().getWidth(), g.getCanvas().getHeight());
         g.fillRect(-Game.gameX/mapFactorX+(Game.VISIBLE_TILES)*tilewidth, 0, g.getCanvas().getWidth(), g.getCanvas().getHeight());
     }
+
+
+    public void saveFile() {
+
+        String file = getMapBounds()[0] + "," + getMapBounds()[1];
+        file = file + "\n";
+
+        for (int i = 0; i < tiles.length; i++) {
+            for (int j = 0; j < tiles[i].length; j++) {
+                file = file + tiles[i][j].asString();
+            }
+            file = file + ";\n";
+        }
+        for(Element element : elements) {
+            file = file + element.asString() + " ";
+        }
+
+        System.out.println(file);
+    }
 }

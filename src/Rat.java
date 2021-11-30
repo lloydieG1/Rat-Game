@@ -177,4 +177,8 @@ public class Rat extends Element {
 
     }
 
+    public String asString() {
+        return "rat" + "," + health + "," + x + "," + y;
+    }
+
 }

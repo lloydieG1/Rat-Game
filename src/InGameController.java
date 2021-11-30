@@ -63,6 +63,7 @@ public class InGameController implements Initializable {
      */
     @FXML
     private void backClick() {
+        Game.currentLevel.saveFile();
         Game.openLevelMenu();
         Game.pauseGame();
 

@@ -48,8 +48,6 @@ public class Explosion extends Element  {
 
 
     protected void render(GraphicsContext g) {
-        System.out.println("£");
-
         double size = Game.gameSize;
 
 
@@ -64,6 +62,10 @@ public class Explosion extends Element  {
 
 
 
+    }
+
+    public String asString() {
+        return "explosion" + "," + health + "," + x + "," + y;
     }
 
 

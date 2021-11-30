@@ -90,4 +90,21 @@ public class Tile {
 
 
     }
+
+    public String tileType() {
+        if (type.equals(TileType.Grass)) {
+            return "G";
+        } else if (type.equals(TileType.Path)) {
+            return "P";
+        }else if (type.equals(TileType.Tunnel)) {
+            return "T";
+        } else {
+            return "-";
+        }
+    }
+
+
+    public String asString() {
+        return tileType();
+    }
 }

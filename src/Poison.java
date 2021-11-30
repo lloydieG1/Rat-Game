@@ -49,4 +49,8 @@ public class Poison extends Element {
 
 
     }
+
+    public String asString() {
+        return "poison" + "," + health + "," + x + "," + y;
+    }
 }

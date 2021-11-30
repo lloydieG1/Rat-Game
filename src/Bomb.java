@@ -131,5 +131,9 @@ public class Bomb extends Element  {
 
     }
 
+    public String asString() {
+        return "bomb" + "," + health + "," + x + "," + y;
+    }
+
 
 }

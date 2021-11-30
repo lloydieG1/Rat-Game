@@ -79,12 +79,14 @@ public abstract class Element {
      */
     protected abstract void tick();
 
+
+
     /**
      * draws the element on the canvas
      * @param g
      */
     protected abstract void render(GraphicsContext g);
-
+    protected abstract String asString();
     /**
      * @return if the element needs to be removed from the level at the end of the tick.
      */
