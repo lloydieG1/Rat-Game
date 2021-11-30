@@ -86,6 +86,7 @@ public class MenuItem {
 
 
     protected void tick() {
+        System.out.println(age + " " + currentTick);
         currentTick++;
         if(currentTick > tickSpeed) {
             currentTick = 0;
@@ -95,7 +96,7 @@ public class MenuItem {
     }
     private void logic() {
         age++;
-        if (getReplenishTimer() == age) {
+        if (getReplenishTimer() <= age) {
             Game.addItem(getItemType());
             age = 0;
         }

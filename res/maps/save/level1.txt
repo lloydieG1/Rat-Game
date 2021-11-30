@@ -19,10 +19,10 @@ GGGGGGGGGGGGGGG;
 /
 10
 /
-rat,3,3,2,south,true rat,3,13,4,south,false 
+rat,3,3,1,north,true rat,3,7,4,north,false rat,3,13,2,north,false rat,3,3,4,north,true rat,3,7,4,north,false 
 /
 180
 /
-0
+78
 /
-bomb,5,24,1 gas,10,24,1 sterilize,6,24,1 maleGenderChange,12,24,1 femaleGenderChange,12,24,1 stopSign,10,24,1 deathRat,20,24,1 
+bomb,5,17,4 gas,10,17,9 sterilize,6,17,3 maleGenderChange,12,17,9 femaleGenderChange,12,17,9 stopSign,10,17,9 deathRat,20,17,9 

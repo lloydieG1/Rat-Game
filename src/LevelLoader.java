@@ -176,6 +176,9 @@ public class LevelLoader {
 
                 Rat rat = new Rat(ElementType.Rat, level, xPos, yPos, isMale, initialDirection, health);
                 level.addElement(rat);
+            } else if(element[0].equals("bomb")) {
+                Bomb bomb = new Bomb(ElementType.Bomb, level, xPos,yPos,health);
+                level.addElement(bomb);
             }
         }
     }
