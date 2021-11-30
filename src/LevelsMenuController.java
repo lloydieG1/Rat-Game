@@ -65,7 +65,7 @@ public class LevelsMenuController implements Initializable {
                                 Alert saveConfirmation = new Alert(Alert.AlertType.CONFIRMATION);
                                 saveConfirmation.setTitle("resume / overwrite");
                                 saveConfirmation.setHeaderText("there is a save file for this level.");
-                                saveConfirmation.setContentText("do you wish to resume this save?");
+                                saveConfirmation.setContentText("clicking ok resumes this save, cancel overwrites it.");
                                 Optional<ButtonType> resume = saveConfirmation.showAndWait();
 
                                 if (resume.get().equals(ButtonType.CANCEL)) {
