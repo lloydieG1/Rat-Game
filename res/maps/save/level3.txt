@@ -34,10 +34,10 @@ GGGGGGGGGGGGGGGGGGGGGGGGGGGGGG;
 /
 5
 /
-rat,3,5,4,north,true rat,3,8,6,east,true 
+rat,3,2,10,east,true 
 /
 180
 /
-1
+22
 /
-bomb,5,28,2 gas,10,28,2 sterilize,6,28,2 maleGenderChange,12,28,2 femaleGenderChange,12,28,2 stopSign,10,28,2 deathRat,20,28,2 
+bomb,5,38,3 gas,10,38,3 sterilize,6,38,1 maleGenderChange,12,38,7 femaleGenderChange,12,38,7 stopSign,10,38,3 deathRat,20,38,3 
