@@ -268,5 +268,11 @@ public class Level {
         }
 
 
+
+        g.setFill(Color.color(0, 0, 0, 0.3));
+        double mapFactor = (Game.MAP_HEIGHT/g.getCanvas().getHeight())*(Game.currentLevel.getMapBounds()[1]*1.0 / Game.VISIBLE_TILES);
+        g.fillRect(0, 0, g.getCanvas().getWidth(), -Game.gameY/mapFactor);
+      //  g.fillRect(0, 0, g.getCanvas().getWidth(), g.getCanvas().getHeight());
+
     }
 }

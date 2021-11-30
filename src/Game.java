@@ -49,8 +49,8 @@ public class Game extends Application {
 
     public static EndGameController endGameController;
 
-    public static final int MAP_WIDTH = 961;
-    public static final int MAP_HEIGHT = 861;
+    public static final int MAP_WIDTH = 900;
+    public static final int MAP_HEIGHT = 900;
     public static double gameX =0;
     public static double gameY = 0;
 
@@ -59,7 +59,7 @@ public class Game extends Application {
 
     public static int score;
 
-    public static int VISIBLE_TILES = 14;
+    public static double VISIBLE_TILES = 14;
 
     private static final int ZOOM_MIN = 65;
     private static final int ZOOM_MAX = 90;
@@ -152,7 +152,7 @@ public class Game extends Application {
 
                 //make the scroll happen from the center instead of the top corner
                 if (minMax(gameSize, ZOOM_MIN, ZOOM_MAX) == gameSize) {
-                    double scroll = (int)(event.getTextDeltaY()*scrollFactor)*gameSize;
+                    double scroll = (event.getTextDeltaY()*scrollFactor)*gameSize;
                     int factorResize = 8;
                     gameX = gameX - scroll/factorResize;
                     gameY = gameY - scroll/factorResize;
@@ -176,9 +176,9 @@ public class Game extends Application {
 
     private static void clampMap() {
         gameSize = minMax(gameSize, ZOOM_MIN, ZOOM_MAX);
-        VISIBLE_TILES = (int)(gameGraphics.getCanvas().getWidth()/gameSize -3);
-        int mapWidth = currentLevel.getMapBounds()[0]-3;
-        int mapHeight = currentLevel.getMapBounds()[1]-3;
+        VISIBLE_TILES = (gameGraphics.getCanvas().getWidth()/gameSize);
+        int mapWidth = currentLevel.getMapBounds()[0]+1;
+        int mapHeight = currentLevel.getMapBounds()[1]+1;
 
         gameY = minMax(gameY, -gameSize* (mapHeight-VISIBLE_TILES), gameSize);
         gameX = minMax(gameX, -gameSize*(mapWidth-VISIBLE_TILES), gameSize);
@@ -214,9 +214,9 @@ public class Game extends Application {
 
     private static void drawButton(GraphicsContext g, int x, int y, int width, int height) {
         if(intersect((int)levelController.mouseX, (int)levelController.mouseY, x, y, width, height)) {
-            g.setFill(Color.color(0.2, 0.2, 0.2, 0.5));
+            g.setFill(Color.color(0.2, 0.2, 0.2, 0.2));
         } else {
-            g.setFill(Color.color(0.2, 0.2, 0.2));
+            g.setFill(Color.color(0.2, 0.2, 0.2, 0.8));
         }
         g.fillRect(x, y, width, height);
     }

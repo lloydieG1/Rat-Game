@@ -94,7 +94,7 @@ public abstract class Element {
     }
 
     public boolean isVisible(GraphicsContext g) {
-        int visibleTiles = Game.VISIBLE_TILES+1;
+        double visibleTiles = Game.VISIBLE_TILES+1;
         boolean visible = true;
         if (renderY() < 0) {
             visible = false;

@@ -66,7 +66,7 @@ public class Tile {
 
 
     public boolean isVisible() {
-        int visibleTiles = Game.VISIBLE_TILES+1;
+        double visibleTiles = Game.VISIBLE_TILES+1;
         boolean visible = true;
         if (this.y-1 < -(Game.gameY/Game.gameSize)) {
             visible = false;
@@ -105,10 +105,10 @@ public class Tile {
             g.fillRect(x, y, size, size);
         }
 
-        if (!(isVisible())) {
-            g.setFill(Color.color(0, 0, 0, 0.3));
-            g.fillRect(x, y, size, size);
-        }
+       // if (!(isVisible())) {
+          //  g.setFill(Color.color(0, 0, 0, 0.3));
+        //    g.fillRect(x, y, size, size);
+     //   }
 
 
     }
