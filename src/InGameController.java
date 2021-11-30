@@ -46,6 +46,9 @@ public class InGameController implements Initializable {
     @FXML
     private Canvas minimap;
 
+    @FXML
+    private Canvas ratLives;
+
     public int buttonSize = 70;
 
 

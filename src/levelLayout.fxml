@@ -11,18 +11,15 @@
 <?import javafx.scene.text.Text?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1350.0" stylesheets="@cssStyle.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="InGameController">
-   <padding>
-      <Insets bottom="10.0" left="20.0" right="10.0" top="10.0" />
-   </padding>
    <right>
-      <AnchorPane prefHeight="880.0" prefWidth="377.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="880.0" prefWidth="249.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox alignment="TOP_CENTER" layoutX="-4.0" layoutY="328.0" prefHeight="557.0" prefWidth="380.0">
+            <VBox alignment="TOP_CENTER" layoutX="68.0" layoutY="332.0" prefHeight="557.0" prefWidth="344.0">
                <children>
-                  <TilePane fx:id="bombPane" prefHeight="200.0" prefWidth="200.0" />
-                  <TilePane fx:id="deathRatPane" prefHeight="200.0" prefWidth="200.0" />
-                  <TilePane fx:id="gasPane" prefHeight="200.0" prefWidth="200.0" />
-                  <TilePane fx:id="stopSignPane" prefHeight="200.0" prefWidth="200.0" />
+                  <TilePane fx:id="bombPane" prefHeight="83.0" prefWidth="344.0" />
+                  <TilePane fx:id="deathRatPane" prefHeight="70.0" prefWidth="344.0" />
+                  <TilePane fx:id="gasPane" prefHeight="52.0" prefWidth="344.0" />
+                  <TilePane fx:id="stopSignPane" prefHeight="91.0" prefWidth="344.0" />
                   <Button id="backToMenuButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#backClick" prefHeight="47.0" prefWidth="246.0" text="Save and Exit">
                      <font>
                         <Font size="24.0" />
@@ -33,15 +30,16 @@
                   </Button>
                </children>
             </VBox>
-            <Canvas fx:id="minimap" height="300.0" layoutX="23.0" onMouseClicked="#minimapClick" width="300.0" />
-            <Text fx:id="score" fill="#1acd37" layoutX="329.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+            <Text fx:id="score" fill="#1acd37" layoutX="224.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font></Text>
+            <Canvas fx:id="minimap" height="300.0" layoutX="99.0" layoutY="32.0" onMouseClicked="#minimapClick" width="300.0" />
+            <Canvas fx:id="ratLives" height="598.0" layoutX="419.0" layoutY="227.0" width="60.0" />
          </children>
       </AnchorPane>
    </right>
-   <center>
-      <Canvas id="mapCanvas" fx:id="gameCanvas" height="900.0" onMouseClicked="#mapClick" onMouseExited="#canvasMouseLeave" onMouseMoved="#buttonsVisible" width="900.0" BorderPane.alignment="CENTER" />
-   </center>
+   <left>
+      <Canvas id="mapCanvas" fx:id="gameCanvas" height="900.0" onMouseClicked="#mapClick" onMouseExited="#canvasMouseLeave" onMouseMoved="#buttonsVisible" width="900.0" BorderPane.alignment="CENTER_LEFT" />
+   </left>
 </BorderPane>
