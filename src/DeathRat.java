@@ -10,6 +10,7 @@ public class DeathRat extends Element {
 	
 	private int ratsKilled;
 	private Image image;
+    private int maxKills = 1;
 
 	public DeathRat(ElementType type, Level level, int x, int y) {
 		super(type, level, x, y, Direction.North);
@@ -28,11 +29,7 @@ public class DeathRat extends Element {
         	movement();
         	killRat();
         }
-        
-        if(ratsKilled > 0) {
-        	level.removeElement(this);
-        }
-        
+                
         
     }
 	
@@ -42,6 +39,10 @@ public class DeathRat extends Element {
 				level.removeElement(element);
 				ratsKilled++;
                 Game.score = Game.score+1;
+
+                if(ratsKilled >= maxKills) {
+                    level.removeElement(this);
+                }
             }
 		}
 
@@ -51,7 +52,7 @@ public class DeathRat extends Element {
 	protected void tick() {
         if (level.getTile(x,y).getType().equals(TileType.Grass)) {
             level.removeElement(this);
-            System.out.println("deleting deathRat");
+
         }
 		currentTick++;
         if(currentTick > tickSpeed) {
