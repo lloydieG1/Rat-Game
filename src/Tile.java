@@ -47,8 +47,8 @@ public class Tile {
      */
     public void render(GraphicsContext g) {
         double factor = Game.gameSize;
-        double x = this.x*factor + Game.gameX;
-        double y = this.y*factor + Game.gameY;
+        double x = (int)(this.x*factor + Game.gameX);
+        double y = (int)(this.y*factor + Game.gameY);
         double size = Game.gameSize;
         g.setFill(Color.RED);
 
@@ -66,7 +66,7 @@ public class Tile {
 
 
 
-    public void minirender(GraphicsContext g, int width) {
+    public void minirender(GraphicsContext g, double width) {
         //check if this tile is visible for the 4 directions
 
         double size = g.getCanvas().getHeight()/width;
