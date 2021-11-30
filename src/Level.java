@@ -226,9 +226,7 @@ public class Level {
         renderTiles(g);
 
         for (Element element : elements) {
-            if (element.isVisible(g)) {
                 element.render(g);
-            }
         }
 
         renderTunnels(g);

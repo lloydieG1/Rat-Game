@@ -65,28 +65,9 @@ public class Tile {
     }
 
 
-    public boolean isVisible() {
-        double visibleTiles = Game.VISIBLE_TILES+1;
-        boolean visible = true;
-        if (this.y-1 < -(Game.gameY/Game.gameSize)) {
-            visible = false;
-        }
-        if (this.x-1 < -(Game.gameX/Game.gameSize)) {
-            visible = false;
-        }
-        if (this.x-1 > -(Game.gameX/Game.gameSize) + visibleTiles) {
-            visible = false;
-        }
-        if (this.y-1 > -(Game.gameY/Game.gameSize) + visibleTiles) {
-            visible = false;
-        }
-        return visible;
-    }
-
 
     public void minirender(GraphicsContext g, int width) {
         //check if this tile is visible for the 4 directions
-
 
         double size = g.getCanvas().getHeight()/width;
         double x = this.x*size;
@@ -105,10 +86,7 @@ public class Tile {
             g.fillRect(x, y, size, size);
         }
 
-       // if (!(isVisible())) {
-          //  g.setFill(Color.color(0, 0, 0, 0.3));
-        //    g.fillRect(x, y, size, size);
-     //   }
+
 
 
     }
