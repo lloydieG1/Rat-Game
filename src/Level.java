@@ -190,7 +190,7 @@ public class Level {
             currentTick = 0;
             timer++;
         }
-        
+
         for (Element element : elements) {
             element.factor = Game.gameSize;
             element.size = Game.gameSize;

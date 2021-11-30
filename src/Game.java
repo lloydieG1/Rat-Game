@@ -115,17 +115,14 @@ public class Game extends Application {
             case LEFT:
                 // Right key was pressed. So move the player right by one cell.
                 Game.gameX+=scroll;
-               // clampMap();
                 break;
             case UP:
                 // Right key was pressed. So move the player right by one cell.
                 Game.gameY+=scroll;
-             //   clampMap();
                 break;
             case DOWN:
                 // Right key was pressed. So move the player right by one cell.
                 Game.gameY-=scroll;
-              //  clampMap();
                 break;
             default:
                 // Do nothing for all other keys.

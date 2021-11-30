@@ -104,14 +104,18 @@ public class InGameController implements Initializable {
 
     @FXML
     private void minimapClick(MouseEvent event) {
-        double sizeFactor = (0.23)*Game.currentLevel.getMapBounds()[0];
-        Game.gameX = -(int)(event.getX()*sizeFactor);
-        Game.gameY = -(int)(event.getY()*sizeFactor);
 
-        //move to center
+        double tilewidth = minimap.getWidth() / Game.currentLevel.getMapBounds()[0];
+        double tileheight = minimap.getHeight() / Game.currentLevel.getMapBounds()[1];
+        double clickX = event.getX()/tilewidth;
+        double clickY = event.getY()/tileheight;
 
-        Game.gameX+=(Game.VISIBLE_TILES*Game.gameSize)/2;
-        Game.gameY+=(Game.VISIBLE_TILES*Game.gameSize)/2;
+        //adjust so centered:
+        clickX = clickX-Game.VISIBLE_TILES/2.0;
+        clickY = clickY-Game.VISIBLE_TILES/2.0;
+        Game.gameX=-(int)(clickX *Game.gameSize);
+        Game.gameY=-(int)(clickY*Game.gameSize);
+
     }
 
     private String typeToString(ElementType type) {
