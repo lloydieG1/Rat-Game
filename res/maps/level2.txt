@@ -28,4 +28,6 @@ GGGGGGGGGGGGGGGGGGGG;
 /
 180
 /
+0
+/
 Bomb,5 Gas,10 Sterilisation,6 MaleSexChange,12 FemaleSexChange,12 NoEntrySign,10 DeathRat,20

@@ -32,10 +32,10 @@ public class LevelLoader {
         loadFile(fileName);
 
         int[] gridSize = parseGridSize(levelData[0]);
-        level = new Level(gridSize[0],gridSize[1], Integer.parseInt(levelData[2]), levelName);
+        level = new Level(gridSize[0],gridSize[1], Integer.parseInt(levelData[2]), levelName, Integer.parseInt(levelData[4]),Integer.parseInt(levelData[5]));
         parseTiles(levelData[1]);
         parseRats(levelData[3]);
-        parseItemData(levelData[5]);
+        parseItemData(levelData[6]);
 
         return level;
     }

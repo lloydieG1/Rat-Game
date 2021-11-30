@@ -22,25 +22,28 @@ public class MenuItem {
 	public ElementType itemStringToItemType(String itemString) {
 		ElementType returnType;
 		switch(itemString) {
-			case "Bomb":
+			case "bomb":
 				returnType = ElementType.Bomb;
 				break;
-			case "Gas":
+			case "gas":
 				returnType = ElementType.Gas;
 				break;
-			case "Sterilise":
+			case "sterilize":
 				returnType = ElementType.Sterilise;
 				break;
-			case "Poison":
+			case "poison":
 				returnType = ElementType.Poison;
 				break;
-			case "GenderChange":
-				returnType = ElementType.GenderChange;
+			case "femaleGenderChange":
+				returnType = ElementType.FemaleGenderChange;
 				break;
-			case "NoEntry":
+            case "maleGenderChange":
+                returnType = ElementType.MaleGenderChange;
+                break;
+			case "stopSign":
 				returnType = ElementType.StopSign;
 				break;
-			case "DeathRat":
+			case "deathRat":
 				returnType = ElementType.DeathRat;
                 break;
 			default:
@@ -48,6 +51,38 @@ public class MenuItem {
 		}
 		return returnType; 
 	}
+
+    public String typeAsString() {
+        ElementType returnType;
+
+        if(itemType == null) {
+            return "-";
+        }
+        if (itemType.equals(ElementType.Bomb)) {
+            return "bomb";
+        } else if (itemType.equals(ElementType.Gas)) {
+            return "gas";
+        }else if (itemType.equals(ElementType.Sterilise)) {
+            return "sterilize";
+        }
+        else if (itemType.equals(ElementType.Poison)) {
+            return "poison";
+        }
+        else if (itemType.equals(ElementType.FemaleGenderChange)) {
+            return "femaleGenderChange";
+        }
+        else if (itemType.equals(ElementType.MaleGenderChange)) {
+            return "maleGenderChange";
+        }
+        else if (itemType.equals(ElementType.StopSign)) {
+            return "stopSign";
+        }
+        else if (itemType.equals(ElementType.DeathRat)) {
+            return "deathRat";
+        } else {
+            return "-";
+        }
+    }
 
 
     protected void tick() {
@@ -73,4 +108,8 @@ public class MenuItem {
 	public int getReplenishTimer() {
 		return replenishTimer;
 	}
+
+    public String asString() {
+        return typeAsString() + "," +replenishTimer + "," + currentTick + "," + age;
+    }
 }

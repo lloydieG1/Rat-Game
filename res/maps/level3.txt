@@ -38,4 +38,6 @@ GGGGGGGGGGGGGGGGGGGGGGGGGGGGGG;
 /
 180
 /
-Bomb,5 Gas,10 Sterilisation,6 MaleSexChange,12 FemaleSexChange,12 NoEntrySign,10 DeathRat,20
+0
+/
+bomb,5,0,0 gas,10,0,0 sterilize,6,0,0 maleGenderChange,12,0,0 femaleGenderChange,12,0,0 stopSign,10,0,0 deathRat,20,0,0

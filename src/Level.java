@@ -25,6 +25,7 @@ public class Level {
     private int currentTick = 0;
     public int timer =0;
     private String level;
+    private int timeLimit;
 
 
     /**
@@ -33,7 +34,7 @@ public class Level {
      * @param x width of map
      * @param y height of map
      */
-    public Level(int x, int y, int maxRats, String level) {
+    public Level(int x, int y, int maxRats, String level, int timeLimit, int timer) {
         tiles = new Tile[x][y];
         elements = new ArrayList<>();
         this.xSize = x;
@@ -49,6 +50,9 @@ public class Level {
         this.level = level;
 
         this.maxRats = maxRats;
+
+        this.timeLimit = timeLimit;
+        this.timer = timer;
     }
 
     /**
@@ -307,7 +311,14 @@ public class Level {
             file = file + element.asString() + " ";
         }
 
-
+        file = file + "\n" + lines;
+        file = file + timeLimit;
+        file = file + "\n" + lines;
+        file = file + timer;
+        file = file + "\n" + lines;
+        for( MenuItem menuItem : menuItems) {
+            file = file + menuItem.asString() + " ";
+        }
         try {
             File myObj = new File("res\\maps\\save\\" + level + ".txt");
             if (myObj.createNewFile()) {

@@ -13,7 +13,8 @@ public enum ElementType {
     Gas(),
     Sterilise(),
     Poison(),
-    GenderChange(),
+    FemaleGenderChange(),
+    MaleGenderChange(),
     Explosion();
     
 }
