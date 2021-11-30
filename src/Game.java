@@ -148,7 +148,7 @@ public class Game extends Application {
                 double scrollFactor = 1.5;
 
 
-                gameSize = gameSize + (int)(event.getTextDeltaY()*scrollFactor);
+                gameSize = gameSize + (event.getTextDeltaY()*scrollFactor);
 
                 //make the scroll happen from the center instead of the top corner
                 if (minMax(gameSize, ZOOM_MIN, ZOOM_MAX) == gameSize) {

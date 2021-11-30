@@ -46,7 +46,7 @@ public class Tile {
      * draws a Tile on the Map
      */
     public void render(GraphicsContext g) {
-        double factor = Game.gameSize;
+        double factor = (int)Game.gameSize;
         double x = (int)(this.x*factor + Game.gameX);
         double y = (int)(this.y*factor + Game.gameY);
         double size = Game.gameSize;

@@ -23,7 +23,7 @@
                   <TilePane fx:id="deathRatPane" prefHeight="200.0" prefWidth="200.0" />
                   <TilePane fx:id="gasPane" prefHeight="200.0" prefWidth="200.0" />
                   <TilePane fx:id="stopSignPane" prefHeight="200.0" prefWidth="200.0" />
-                  <Button id="backToMenuButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#backClick" prefHeight="47.0" prefWidth="246.0" text="Back">
+                  <Button id="backToMenuButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#backClick" prefHeight="47.0" prefWidth="246.0" text="Save and Exit">
                      <font>
                         <Font size="24.0" />
                      </font>
