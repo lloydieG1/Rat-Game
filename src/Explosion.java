@@ -9,16 +9,17 @@ import java.util.ArrayList;
 public class Explosion extends Element  {
 
 
-    private Image blast;
+
+    int maxHealth = 5;
 
 
 
     public Explosion(ElementType type, Level level, int x, int y, int health) {
         super(type, level, x, y, Direction.North, health);
 
+        tickSpeed=Game.FPS/10;
 
 
-        blast = ImageLoader.getImage("blast.png", 64);
     }
 
     protected void tick() {
@@ -58,7 +59,8 @@ public class Explosion extends Element  {
 
 
 
-        g.drawImage(blast,x, y, size, size);
+        g.setFill(Color.color((health*0.5/maxHealth)+0.5,0.5-(health*0.5/maxHealth),0));
+        g.fillRect(x, y, size, size);
 
 
 
