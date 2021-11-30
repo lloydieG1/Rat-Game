@@ -24,6 +24,8 @@ public class Level {
     private int xSize;
     private int ySize;
     private int currentTick = 0;
+    public int timer =0;
+
 
     /**
      * constructs a Level
@@ -184,6 +186,11 @@ public class Level {
      */
     public void tick() {
         currentTick++;
+        if (currentTick >= Game.FPS) {
+            currentTick = 0;
+            timer++;
+        }
+        
         for (Element element : elements) {
             element.factor = Game.gameSize;
             element.size = Game.gameSize;

@@ -29,7 +29,7 @@ public class DeathRat extends Element {
         	movement();
         	killRat();
         }
-                
+
         
     }
 	
