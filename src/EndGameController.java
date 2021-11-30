@@ -23,6 +23,7 @@ public class EndGameController implements Initializable {
     @FXML
     private void backClick() {
         Game.openMainMenu();
+        Game.currentLevel.deleteSave();
 
     }
 

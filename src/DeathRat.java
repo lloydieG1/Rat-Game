@@ -12,8 +12,9 @@ public class DeathRat extends Element {
 	private Image image;
     private int maxKills = 1;
 
-	public DeathRat(ElementType type, Level level, int x, int y, int health) {
+	public DeathRat(ElementType type, Level level, int x, int y, int health, Direction dir) {
 		super(type, level, x, y, Direction.North, health);
+        this.dir =dir;
 		// TODO Auto-generated constructor stub
 		ratsKilled = 0;
 

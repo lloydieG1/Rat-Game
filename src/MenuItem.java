@@ -1,5 +1,5 @@
 /**
- * @author lloyd
+ * @author lloyd, William Randle
  *
  */
 public class MenuItem {
@@ -86,7 +86,6 @@ public class MenuItem {
 
 
     protected void tick() {
-        System.out.println(age + " " + currentTick);
         currentTick++;
         if(currentTick > tickSpeed) {
             currentTick = 0;

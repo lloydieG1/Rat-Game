@@ -52,32 +52,43 @@ public class LevelsMenuController implements Initializable {
                 levelButton.setFont(new Font(25));
 
                 levelButton.setOnAction(new EventHandler() {
-
                     @Override
                     public void handle(Event event) {
                         File savesDirectory=new File("res\\maps\\save");
-                        File[] saves = directory.listFiles();
-                        int fileCount= directory.list().length;
+                        File[] saves = savesDirectory.listFiles();
+                        int fileCount= savesDirectory.list().length;
+                        String saveFileName = "";
+                        boolean found = false;
                         for (int i = 0; i < fileCount; i++) {
+
 
                             String saveText = saves[i].getName().replace(".txt", "");
                             if (saveText.equals(buttonText)) {
-                                Alert saveConfirmation = new Alert(Alert.AlertType.CONFIRMATION);
-                                saveConfirmation.setTitle("resume / overwrite");
-                                saveConfirmation.setHeaderText("there is a save file for this level.");
-                                saveConfirmation.setContentText("clicking ok resumes this save, cancel overwrites it.");
-                                Optional<ButtonType> resume = saveConfirmation.showAndWait();
-
-                                if (resume.get().equals(ButtonType.OK)) {
-                                    Game.openGameScene("save\\" + saveText);
-
-                                } else if (resume.get().equals(ButtonType.CANCEL)) {
-                                    Game.openGameScene(buttonText);
-
-                                }
+                                saveFileName = saveText;
+                                found = true;
+                                System.out.println(saveText);
                             }
                         }
-                     //   Game.openGameScene(buttonText);
+
+                        if(found) {
+
+                            Alert saveConfirmation = new Alert(Alert.AlertType.CONFIRMATION);
+                            saveConfirmation.setTitle("resume / overwrite");
+                            saveConfirmation.setHeaderText("there is a save file for this level.");
+                            saveConfirmation.setContentText("clicking ok resumes this save, cancel overwrites it.");
+                            Optional<ButtonType> resume = saveConfirmation.showAndWait();
+
+                            if (resume.get().equals(ButtonType.OK)) {
+
+                                Game.openGameScene("save\\" + saveFileName);
+
+                            } else if (resume.get().equals(ButtonType.CANCEL)) {
+                                Game.openGameScene(buttonText);
+
+                            }
+                        } else {
+                            Game.openGameScene(buttonText);
+                        }
                     }
                 });
 

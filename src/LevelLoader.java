@@ -39,6 +39,8 @@ public class LevelLoader {
         parseRats(levelData[3]);
         parseItemData(levelData[6]);
 
+        level.setScore(Integer.parseInt(levelData[7]));
+
         return level;
     }
 
@@ -169,16 +171,17 @@ public class LevelLoader {
             int health = Integer.parseInt(element[1]);
             int xPos = Integer.parseInt(element[2]);
             int yPos = Integer.parseInt(element[3]);
+            Direction initialDirection = getDirection(element[4]);
             if(element[0].equals("rat")) {
-                Direction initialDirection = getDirection(element[4]);
                 boolean isMale = Boolean.parseBoolean(element[5]);
-
-
                 Rat rat = new Rat(ElementType.Rat, level, xPos, yPos, isMale, initialDirection, health);
                 level.addElement(rat);
             } else if(element[0].equals("bomb")) {
                 Bomb bomb = new Bomb(ElementType.Bomb, level, xPos,yPos,health);
                 level.addElement(bomb);
+            } else if(element[0].equals("deathRat")) {
+                DeathRat deathRat = new DeathRat(ElementType.DeathRat, level, xPos,yPos,health,initialDirection);
+                level.addElement(deathRat);
             }
         }
     }

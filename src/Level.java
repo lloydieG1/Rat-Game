@@ -3,6 +3,7 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
 import java.io.*;
+import java.nio.file.*;
 import java.util.ArrayList;
 
 /**
@@ -24,7 +25,7 @@ public class Level {
     private int ySize;
     private int currentTick = 0;
     public int timer =0;
-    private String level;
+    public String level;
     private int timeLimit;
 
 
@@ -54,6 +55,12 @@ public class Level {
         this.timeLimit = timeLimit;
         this.timer = timer;
     }
+
+    public void setScore(int score) {
+        Game.score = score;
+    }
+
+
 
     /**
      *
@@ -286,6 +293,16 @@ public class Level {
         g.fillRect(-Game.gameX/mapFactorX+(Game.VISIBLE_TILES)*tilewidth, 0, g.getCanvas().getWidth(), g.getCanvas().getHeight());
     }
 
+    public void deleteSave() {
+
+        try {
+            Files.delete(Paths.get("res\\maps\\save\\" + level + ".txt"));
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
     public void saveFile() {
         String lines ="/\n";
@@ -319,6 +336,8 @@ public class Level {
         for( MenuItem menuItem : menuItems) {
             file = file + menuItem.asString() + " ";
         }
+        file = file + "\n" + lines;
+        file = file + Game.score;
         try {
             File myObj = new File("res\\maps\\save\\" + level + ".txt");
             if (myObj.createNewFile()) {
