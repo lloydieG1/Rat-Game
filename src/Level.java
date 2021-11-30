@@ -154,6 +154,10 @@ public class Level {
             Game.endGame("you won with a score of " + Game.score);
         }
 
+        if (timer > timeLimit) {
+            Game.endGame("you lost with a score of " + Game.score);
+        }
+
 
     }
 
@@ -233,6 +237,21 @@ public class Level {
 
 
         checkGameCondition();
+    }
+
+    public void loadSideBar(int[] sideBar) {
+        for (int i = 0; i < sideBar[0]; i++) {
+            Game.addItem(ElementType.Bomb);
+        }
+        for (int i = 0; i < sideBar[1]; i++) {
+            Game.addItem(ElementType.DeathRat);
+        }
+        for (int i = 0; i < sideBar[2]; i++) {
+            Game.addItem(ElementType.Gas);
+        }
+        for (int i = 0; i < sideBar[3]; i++) {
+            Game.addItem(ElementType.StopSign);
+        }
     }
 
 
@@ -367,6 +386,8 @@ public class Level {
         }
         file = file + "\n" + lines;
         file = file + Game.score;
+        file = file + "\n" + lines;
+        file = file + Game.sidebarAsString();
         try {
             File myObj = new File("res\\maps\\save\\" + level + ".txt");
             if (myObj.createNewFile()) {

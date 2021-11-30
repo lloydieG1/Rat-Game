@@ -95,6 +95,14 @@ public class InGameController implements Initializable {
 
     }
 
+    public String sideBarAsString() {
+        String sideBar = bombPane.getChildren().size() +",";
+        sideBar = sideBar + deathRatPane.getChildren().size() + ",";
+        sideBar = sideBar + gasPane.getChildren().size() + ",";
+        sideBar = sideBar + stopSignPane.getChildren().size() + ",";
+        return sideBar;
+    }
+
     private Image  getImage(String fileName) {
         Image image = ImageLoader.getImage(fileName, 64);
         return image;

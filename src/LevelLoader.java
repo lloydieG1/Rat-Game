@@ -41,6 +41,8 @@ public class LevelLoader {
 
         level.setScore(Integer.parseInt(levelData[7]));
 
+        level.loadSideBar(parseSideBar(levelData[8]));
+
         return level;
     }
 
@@ -124,6 +126,23 @@ public class LevelLoader {
 
         outputArr[0] = width;
         outputArr[1] = height;
+
+        return outputArr;
+    }
+
+    private static int[] parseSideBar(String sideBar){
+        String[] data = sideBar.split(INTERNAL_DATA_DELIMITER);
+        int[] outputArr = new int[4];
+
+        int bombs = Integer.parseInt(data[0]);
+        int deathRats = Integer.parseInt(data[1]);
+        int gas = Integer.parseInt(data[2]);
+        int stopSigns = Integer.parseInt(data[3]);
+
+        outputArr[0] = bombs;
+        outputArr[1] = deathRats;
+        outputArr[2] = gas;
+        outputArr[3] = stopSigns;
 
         return outputArr;
     }
@@ -219,7 +238,7 @@ public class LevelLoader {
             String itemType = individualItem[0];
             int replenishTimer = Integer.parseInt(individualItem[1]);
             int currentTick = Integer.parseInt(individualItem[2]);
-            int age = Integer.parseInt(individualItem[2]);
+            int age = Integer.parseInt(individualItem[3]);
             MenuItem menuItem = new MenuItem(itemType, replenishTimer, age, currentTick);
             
             level.addMenuItem(menuItem);

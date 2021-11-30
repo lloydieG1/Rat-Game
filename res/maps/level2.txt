@@ -43,3 +43,5 @@ rat,3,5,3,north,True rat,3,7,6,south,true
 bomb,5,0,0 gas,10,0,0 sterilize,6,0,0 maleGenderChange,12,0,0 femaleGenderChange,12,0,0 stopSign,10,0,0 deathRat,20,0,0
 /
 0
+/
+0,0,0,0,0,0,0,0

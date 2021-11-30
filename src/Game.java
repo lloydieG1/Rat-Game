@@ -188,6 +188,10 @@ public class Game extends Application {
 
     }
 
+    public static String sidebarAsString() {
+        return levelController.sideBarAsString();
+    }
+
 
     /**
      * runs the logic of the game
