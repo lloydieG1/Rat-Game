@@ -1,4 +1,5 @@
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
 
@@ -7,12 +8,15 @@ import javafx.scene.paint.Color;
  * @author William Randle, Jack Lennard,
  */
 public class StopSign extends Element {
-	
+
+    Image image;
 	protected int blocks = 0;
 
     public StopSign(ElementType type, Level level, int x, int y, int health) {
 		super(type, level, x, y, Direction.North, health);
 		// TODO Auto-generated constructor stub
+
+        image = ImageLoader.getImage("stopSign.png", 64);
 	}
 
     /**
@@ -51,12 +55,11 @@ public class StopSign extends Element {
      * @param g graphics context
      */
     protected void render(GraphicsContext g) {
-        double x = ((this.x-1)*factor)*-1.0 + 700;
-        double y = this.y*factor;
+        double x = renderX();
+        double y = renderY();
         //calculating the position the Sign should be in this frame
 
-        g.setFill(Color.color(0.2,0.2,0.3));
-        g.fillRect(x, y, size/2, size/2);
+        g.drawImage(image,x, y, size, size);
 
 
     }
