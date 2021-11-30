@@ -2,8 +2,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.ArrayList;
 
 /**
@@ -25,6 +24,7 @@ public class Level {
     private int ySize;
     private int currentTick = 0;
     public int timer =0;
+    private String level;
 
 
     /**
@@ -33,7 +33,7 @@ public class Level {
      * @param x width of map
      * @param y height of map
      */
-    public Level(int x, int y, int maxRats) {
+    public Level(int x, int y, int maxRats, String level) {
         tiles = new Tile[x][y];
         elements = new ArrayList<>();
         this.xSize = x;
@@ -46,6 +46,7 @@ public class Level {
 
         }
 
+        this.level = level;
 
         this.maxRats = maxRats;
     }
@@ -297,6 +298,27 @@ public class Level {
             file = file + element.asString() + " ";
         }
 
-        System.out.println(file);
+
+        try {
+            File myObj = new File("res\\maps\\save\\" + level + ".txt");
+            if (myObj.createNewFile()) {
+                System.out.println("save: " + myObj.getName());
+            } else {
+                System.out.println("save already exists. now writing to it");
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+        try {
+        FileWriter myWriter = new FileWriter("res\\maps\\save\\" +level + ".txt");
+        myWriter.write(file);
+        myWriter.close();
+        System.out.println("Successfully saved");
+    } catch (IOException e) {
+        System.out.println("An error occurred.");
+        e.printStackTrace();
     }
+    }
+
 }

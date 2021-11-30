@@ -42,19 +42,21 @@ public class LevelsMenuController implements Initializable {
         int fileCount= directory.list().length;
 
         for (int i = 0; i < fileCount; i++) {
-            String buttonText = levels[i].getName().replace(".txt", "");
-            Button levelButton = new Button(buttonText);
-            levelButton.setFont(new Font(25));
+            if ( !(levels[i].getName().replace(".txt", "").equals(levels[i].getName()))) {
+                String buttonText = levels[i].getName().replace(".txt", "");
+                Button levelButton = new Button(buttonText);
+                levelButton.setFont(new Font(25));
 
-            levelButton.setOnAction(new EventHandler() {
+                levelButton.setOnAction(new EventHandler() {
 
-                @Override
-                public void handle(Event event) {
-                    Game.openGameScene(buttonText);
-                }
-            });
+                    @Override
+                    public void handle(Event event) {
+                        Game.openGameScene(buttonText);
+                    }
+                });
 
-            levelPane.getChildren().add(levelButton);
+                levelPane.getChildren().add(levelButton);
+            }
         }
     }
 
