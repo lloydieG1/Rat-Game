@@ -95,13 +95,13 @@ public class Tile {
         if (type.equals(TileType.Grass)) {
 
 
-            g.setFill(Color.color(0, 1, 0));
+            g.setFill(Color.color(0.3,0.6,0));
             g.fillRect(x, y, size, size);
         } else if (type.equals(TileType.Path)) {
-            g.setFill(Color.color(0.6,0.5,0.3));
+            g.setFill(Color.color(0.4,0.3,0));
             g.fillRect(x, y, size, size);
         }else if (type.equals(TileType.Tunnel)) {
-            g.setFill(Color.color(0.4,0.5,0));
+            g.setFill(Color.color(0.4,0,0));
             g.fillRect(x, y, size, size);
         }
 
