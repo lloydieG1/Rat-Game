@@ -17,7 +17,6 @@ public class PlayerProfileManager {
 	
 	private static ArrayList<PlayerProfile> profiles = new ArrayList<>();
 	
-	
 	public static void addNewProfile(String username) {
 		String fileName = usernameToPath(username);
 		
@@ -58,7 +57,7 @@ public class PlayerProfileManager {
 	/*
 	 * TODO instead of using String whichdata make an enum type for profile data
 	 */
-	public static void updateProfileData(String whichData, int data, String username) {
+	public static void updateProfileData(ProfileData whichData, int data, String username) {
 		String fileName = usernameToPath(username);
 		String profileFileContents = readProfileFile(username);
 		System.out.println("Contents of the file: "+ profileFileContents);
@@ -68,22 +67,22 @@ public class PlayerProfileManager {
 		String oldLine = null;
 		String newLine = null;
 		
-		if(whichData == "highscore") {
-			String hs = in.nextLine(); //ignore first line (username)
+		if(whichData == ProfileData.Highscore) {
+			String usr = in.nextLine(); //ignore first line (username)
 			oldLine = in.nextLine(); //old highscore
 			newLine = SECOND_LINE + data; //new highscore
-		}else if(whichData == "maxLevel") {
+			getProfile(username).setHighscore(data); //update profile object
+		}else if(whichData == ProfileData.MaxLevel) {
 			in.nextLine(); //ignore first line (username)
 			in.nextLine(); //ignore second line (highscore)
-			oldLine = in.nextLine();
-			newLine = THIRD_LINE + data;
+			oldLine = in.nextLine(); //old max level
+			newLine = THIRD_LINE + data; //new max level
+			getProfile(username).setMaxLevel(data); //update profile object
 		}else {
-			throw new IllegalArgumentException("whichData arguement is not highscore or maxLevel");
+			throw new IllegalArgumentException("whichData argument is not highscore or maxLevel");
 		}
 		
-		
 		in.close();
-		
 		profileFileContents = profileFileContents.replaceAll(oldLine, newLine);
 		
 		try {
@@ -96,7 +95,7 @@ public class PlayerProfileManager {
 		}	
 	}
 	
-	public void removeProfile(String username) {
+	public static void removeProfile(String username) {
 		String filePath = usernameToPath(username);
 	    File fileToDelete = new File(filePath);
 	    if (fileToDelete.delete()) { 
@@ -135,13 +134,32 @@ public class PlayerProfileManager {
         return in;
     }
     
+    private static PlayerProfile getProfile(String username) {
+    	PlayerProfile profile = null;
+    	for (int i = 0; i < profiles.size(); i++) {
+			String storedUsername = (profiles.get(i)).getUsername();
+    		
+    		if(storedUsername == username) {
+    			profile = profiles.get(i);
+    		}
+		}
+    	
+    	if(profile == null) {
+    		System.out.println("Could not get profile with username " + username);
+    	}
+    	return profile;
+    }
+    
     private static String usernameToPath(String username) {
     	String filePath = PROFILE_FILE_PATH + username + ".txt";
     	return filePath;
     }
     
 //    public static void main(String[] args) {
-//		updateProfileData("highscore", 1000, "User1");
-//		updateProfileData("maxLevel", 6, "User1");
+//    	addNewProfile("User1");
+//		updateProfileData(ProfileData.Highscore, 1000, "User1");
+//		updateProfileData(ProfileData.MaxLevel, 6, "User1");
+//		PlayerProfile profile = getProfile("User1");
+//		System.out.println(profile.getMaxLevel()); //it all works whooo!!
 //	}
 }
