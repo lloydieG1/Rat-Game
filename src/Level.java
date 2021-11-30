@@ -284,16 +284,25 @@ public class Level {
 
 
     public void saveFile() {
+        String lines ="/\n";
 
         String file = getMapBounds()[0] + "," + getMapBounds()[1];
-        file = file + "\n";
+        file = file + "\n" + lines;
 
         for (int i = 0; i < tiles.length; i++) {
             for (int j = 0; j < tiles[i].length; j++) {
-                file = file + tiles[i][j].asString();
+                file = file + tiles[j][i].asString();
             }
             file = file + ";\n";
+
         }
+
+        file = file + "\n"+ lines;
+
+        file = file + maxRats;
+
+        file = file + "\n" + lines;
+
         for(Element element : elements) {
             file = file + element.asString() + " ";
         }
