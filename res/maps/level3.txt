@@ -34,7 +34,7 @@ GGGGGGGGGGGGGGGGGGGGGGGGGGGGGG;
 /
 5
 /
-5,3,True,north 7,6,True,south
+rat,3,5,3,north,True rat,3,7,6,south,true
 /
 180
 /

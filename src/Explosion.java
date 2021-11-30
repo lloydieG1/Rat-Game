@@ -13,9 +13,9 @@ public class Explosion extends Element  {
 
 
 
-    public Explosion(ElementType type, Level level, int x, int y) {
-        super(type, level, x, y, Direction.North);
-        health = 2;
+    public Explosion(ElementType type, Level level, int x, int y, int health) {
+        super(type, level, x, y, Direction.North, health);
+
 
 
         blast = ImageLoader.getImage("blast.png", 64);

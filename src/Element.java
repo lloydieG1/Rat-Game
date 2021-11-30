@@ -36,7 +36,7 @@ public abstract class Element {
      * @param x
      * @param y
      */
-    public Element(ElementType type, Level level, int x, int y, Direction dir) {
+    public Element(ElementType type, Level level, int x, int y, Direction dir, int health) {
         this.y = y;
         this.x = x;
         this.type = type;
@@ -45,6 +45,7 @@ public abstract class Element {
 
         this.nextX = x;
         this.nextY = y;
+        this.health = health;
 
     }
 
@@ -408,7 +409,7 @@ public abstract class Element {
     }
 
     public String asString() {
-        return typeAsString() + "," + health + "," + x + "," + y + dirAsString() + extraInfo();
+        return typeAsString() + "," + health + "," + x + "," + y + "," + dirAsString() + extraInfo();
     }
 
 

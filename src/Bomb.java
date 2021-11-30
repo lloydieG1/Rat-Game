@@ -18,9 +18,9 @@ public class Bomb extends Element  {
 
 
 
-    public Bomb(ElementType type, Level level, int x, int y) {
-        super(type, level, x, y, Direction.North);
-        health = 5;
+    public Bomb(ElementType type, Level level, int x, int y, int health) {
+        super(type, level, x, y, Direction.North, health);
+
         damage = false;
 
         image = ImageLoader.getImage("bomb.png", 64);
@@ -44,7 +44,6 @@ public class Bomb extends Element  {
         health--;
         if (health <= 0) {
             explode();
-            level.addElementLive(new Explosion(ElementType.Explosion,level, x, y));
             level.removeElement(this);
         }
 
@@ -52,13 +51,13 @@ public class Bomb extends Element  {
     }
 
     private void explode() {
-        level.addElementLive(new Explosion(ElementType.Explosion, level, (x), y));
+        level.addElementLive(new Explosion(ElementType.Explosion, level, (x), y, 1));
 
         int tempX = x;
         int tempY = y;
         tempX++;
         while (isSpreadable(tempX, tempY)) {
-            level.addElementLive(new Explosion(ElementType.Explosion, level, (tempX),tempY));
+            level.addElementLive(new Explosion(ElementType.Explosion, level, (tempX),tempY, 1));
             tempX++;
         }
         tempX = x;
@@ -66,7 +65,7 @@ public class Bomb extends Element  {
         tempX--;
         while (isSpreadable(tempX, tempY)) {
 
-            level.addElementLive(new Explosion(ElementType.Explosion, level, (tempX),tempY));
+            level.addElementLive(new Explosion(ElementType.Explosion, level, (tempX),tempY, 1));
             tempX--;
         }
         tempX = x;
@@ -74,7 +73,7 @@ public class Bomb extends Element  {
         tempY++;
         while (isSpreadable(tempX, tempY)) {
 
-            level.addElementLive(new Explosion(ElementType.Explosion, level, (tempX),tempY));
+            level.addElementLive(new Explosion(ElementType.Explosion, level, (tempX),tempY, 1));
             tempY++;
         }
         tempX = x;
@@ -82,7 +81,7 @@ public class Bomb extends Element  {
         tempY--;
         while (isSpreadable(tempX, tempY)) {
 
-            level.addElementLive(new Explosion(ElementType.Explosion, level, (tempX),tempY));
+            level.addElementLive(new Explosion(ElementType.Explosion, level, (tempX),tempY, 1));
             tempY--;
         }
     }

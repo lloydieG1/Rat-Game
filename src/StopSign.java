@@ -10,8 +10,8 @@ public class StopSign extends Element {
 	
 	protected int blocks = 0;
 
-    public StopSign(ElementType type, Level level, int x, int y) {
-		super(type, level, x, y, Direction.North);
+    public StopSign(ElementType type, Level level, int x, int y, int health) {
+		super(type, level, x, y, Direction.North, health);
 		// TODO Auto-generated constructor stub
 	}
 

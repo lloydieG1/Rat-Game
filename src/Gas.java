@@ -23,7 +23,7 @@ public class Gas extends Element {
      * @param y
      */
     public Gas(ElementType type, Level level, int x, int y, int health) {
-        super(type, level, x, y, Direction.North);
+        super(type, level, x, y, Direction.North, health);
         this.health = health;
         damage = false;
         image = ImageLoader.getImage("gas.png", 64);

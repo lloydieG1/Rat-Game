@@ -14,9 +14,8 @@ public class Poison extends Element {
     private boolean damage;
 
 
-	public Poison(ElementType type, Level level, int x, int y, Direction dir) {
-		super(type, level, x, y, dir);
-		health = 6;
+	public Poison(ElementType type, Level level, int x, int y, Direction dir, int health) {
+		super(type, level, x, y, dir, health);
         damage = false;
 
 

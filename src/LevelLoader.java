@@ -162,15 +162,19 @@ public class LevelLoader {
     private static void parseRats(String ratData){
         String[] seperateRats = ratData.split(SPACE);
         for (int i = 0; i < seperateRats.length; i++) {
-            String[] individualRat = seperateRats[i].split(INTERNAL_DATA_DELIMITER);
 
-            int xPos = Integer.parseInt(individualRat[0]);
-            int yPos = Integer.parseInt(individualRat[1]);
-            boolean isMale = Boolean.parseBoolean(individualRat[2]);
-            Direction initialDirection = getDirection(individualRat[3]);
+            String[] element = seperateRats[i].split(INTERNAL_DATA_DELIMITER);
+            int health = Integer.parseInt(element[1]);
+            int xPos = Integer.parseInt(element[2]);
+            int yPos = Integer.parseInt(element[3]);
+            if(element[0].equals("rat")) {
+                Direction initialDirection = getDirection(element[4]);
+                boolean isMale = Boolean.parseBoolean(element[5]);
 
-            Rat rat = new Rat(ElementType.Rat, level, xPos, yPos, isMale, initialDirection);
-            level.addElement(rat);
+
+                Rat rat = new Rat(ElementType.Rat, level, xPos, yPos, isMale, initialDirection, health);
+                level.addElement(rat);
+            }
         }
     }
 

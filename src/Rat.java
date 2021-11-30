@@ -40,15 +40,15 @@ public class Rat extends Element {
      * @param isMale
      * @param dir
      */
-    public Rat(ElementType type, Level level, int x, int y, boolean isMale, Direction dir) {
-        super(type, level, x, y, dir);
+    public Rat(ElementType type, Level level, int x, int y, boolean isMale, Direction dir, int health) {
+        super(type, level, x, y, dir, health);
 
         this.isMale = isMale;
 
         isChild = true;
 
         image = ImageLoader.getImage("ratChild.png", 64);
-        health = 3;
+
 
     }
 
@@ -149,7 +149,7 @@ public class Rat extends Element {
             if (element.getType().equals(ElementType.Rat)) {
                 Rat rat = (Rat) element;
                 if (rat.isMale == true) {
-                    level.addElementLive(new Rat(ElementType.Rat, level, x, y, Game.random.nextBoolean(), Direction.North));
+                    level.addElementLive(new Rat(ElementType.Rat, level, x, y, Game.random.nextBoolean(), Direction.North, 3));
                     breeding = BREEDING_TIME;
                     nextY = y;
                     nextX = x;
