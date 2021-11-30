@@ -27,7 +27,7 @@ public class Gas extends Element {
         this.health = health;
         damage = false;
         image = ImageLoader.getImage("gas.png", 64);
-        tickSpeed = (int)(Game.FPS/1.7);
+        tickSpeed = (int)(Game.FPS/1.2);
       
     }
 
@@ -38,14 +38,6 @@ public class Gas extends Element {
     protected void tick() {
         if (level.getTile(x,y).getType().equals(TileType.Grass)) {
             level.removeElement(this);
-            System.out.println("deleting deathRat");
-        }
-        for (Element element : level.getElements(x, y)) {
-            if (element.getType().equals(ElementType.Rat)) {
-                level.removeElement(element);
-                Game.score = Game.score+1;
-
-            }
         }
         currentTick++;
         if(currentTick > tickSpeed) {

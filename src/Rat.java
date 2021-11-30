@@ -26,6 +26,8 @@ public class Rat extends Element {
     private final int BREEDING_TIME = 5;
     private Image image;
 
+    private int health;
+
 
 
     /**
@@ -46,6 +48,7 @@ public class Rat extends Element {
         isChild = true;
 
         image = ImageLoader.getImage("ratChild.png", 64);
+        health = 3;
 
     }
 
@@ -54,6 +57,10 @@ public class Rat extends Element {
      * in time with other elements
      */
     protected void tick() {
+        if(health < 1) {
+            Game.score = Game.score+1;
+            level.removeElement(this);
+        }
 
         if (level.getTile(x,y).getType().equals(TileType.Grass)) {
             level.removeElement(this);
@@ -94,6 +101,12 @@ public class Rat extends Element {
 
         if (breeding < 0) {
             breeding = 0;
+        }
+
+        for (Element element : level.getElements(x,y)) {
+            if (element.getType().equals(ElementType.Gas)) {
+                health--;
+            }
         }
     }
 
