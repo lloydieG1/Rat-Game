@@ -149,6 +149,7 @@ public class Rat extends Element {
             if (element.getType().equals(ElementType.Rat)) {
                 Rat rat = (Rat) element;
                 if (rat.isMale == true) {
+                    System.out.println("should now mate");
                     level.addElementLive(new Rat(ElementType.Rat, level, x, y, Game.random.nextBoolean(), Direction.North, 3));
                     breeding = BREEDING_TIME;
                     nextY = y;

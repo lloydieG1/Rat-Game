@@ -24,7 +24,7 @@ public class Explosion extends Element  {
             blast = ImageLoader.getImage("blast.png", 32);
         }
 
-        tickSpeed=Game.FPS/10;
+        tickSpeed=Game.FPS/15;
 
         lastDir=dir;
         this.isCenter = isCenter;

@@ -226,6 +226,10 @@ public class InGameController implements Initializable {
             bombPane.getChildren().remove(0);
         } else if (lastItem.equals(ElementType.DeathRat)) {
             deathRatPane.getChildren().remove(0);
+        }else if (lastItem.equals(ElementType.Gas)) {
+            gasPane.getChildren().remove(0);
+        }else if (lastItem.equals(ElementType.StopSign)) {
+            stopSignPane.getChildren().remove(0);
         }
     }
 

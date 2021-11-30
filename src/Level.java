@@ -308,22 +308,26 @@ public class Level {
     }
 
     public void deleteSave() {
-
-        try {
-            Files.delete(Paths.get("res\\maps\\save\\" + level + ".txt"));
-        } catch(IOException e) {
-            e.printStackTrace();
+        File f = new File("res\\maps\\save\\" + level + ".txt");
+        if(f.exists()) {
+            try {
+                Files.delete(Paths.get("res\\maps\\save\\" + level + ".txt"));
+                System.out.println("deleting save");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
     }
 
     public void renderRatLives(GraphicsContext g) {
+        double sizeFactor = g.getCanvas().getHeight() / maxRats;
         g.setFill(Color.color(0,0,0));
         g.fillRect(0,0, g.getCanvas().getWidth(), g.getCanvas().getHeight());
         g.setFill(Color.color(0,0.3,1));
-        g.fillRect(0,0, g.getCanvas().getWidth(), maleRatCount()*10);
+        g.fillRect(0,g.getCanvas().getHeight()-maleRatCount()*sizeFactor, g.getCanvas().getWidth(), maleRatCount()*sizeFactor);
         g.setFill(Color.color(1,0.3,1));
-        g.fillRect(0,maleRatCount()*10, g.getCanvas().getWidth(), (ratCount()-maleRatCount())*10);
+        g.fillRect(0,g.getCanvas().getHeight()-ratCount()*sizeFactor, g.getCanvas().getWidth(), (ratCount()-maleRatCount())*sizeFactor);
 
 
     }
