@@ -51,19 +51,64 @@ public class Bomb extends Element  {
     }
 
     private void explode() {
+        level.addElementLive(new Explosion(ElementType.Explosion, level, (x), y));
 
-        for (int x = this.x-RADIUS; x <= this.x +RADIUS; x++) {
-            for (int y = this.y-RADIUS; y <= this.y+RADIUS; y++) {
-                for (Element element : level.getElements(x, y)) {
-                    if (element.getType().equals(ElementType.Rat)) {
-                        level.removeElement(element);
-                        Game.score = Game.score+1;
+        int tempX = x;
+        int tempY = y;
+        tempX++;
+        while (isSpreadable(tempX, tempY)) {
+            level.addElementLive(new Explosion(ElementType.Explosion, level, (tempX),tempY));
+            tempX++;
+        }
+        tempX = x;
+        tempY = y;
+        tempX--;
+        while (isSpreadable(tempX, tempY)) {
 
-                    }
-                }
-            }
+            level.addElementLive(new Explosion(ElementType.Explosion, level, (tempX),tempY));
+            tempX--;
+        }
+        tempX = x;
+        tempY = y;
+        tempY++;
+        while (isSpreadable(tempX, tempY)) {
+
+            level.addElementLive(new Explosion(ElementType.Explosion, level, (tempX),tempY));
+            tempY++;
+        }
+        tempX = x;
+        tempY = y;
+        tempY--;
+        while (isSpreadable(tempX, tempY)) {
+
+            level.addElementLive(new Explosion(ElementType.Explosion, level, (tempX),tempY));
+            tempY--;
         }
     }
+
+    /**
+     *  checks if the tile at parsed position is a eligable tile to go onto
+     *
+     * @return boolean if tile is safe
+     */
+    protected boolean isSpreadable(int x, int y) {
+        int boardSize = level.getLength();
+
+        if (x < 0 || y < 0) {
+            return false;
+        }
+
+        if (x > boardSize-1 || y > boardSize-1) {
+            return false;
+        }
+
+        if (level.getTile(x, y).getType().equals(TileType.Grass)) {
+            return false;
+        }
+
+        return true;
+    }
+
 
     protected void render(GraphicsContext g) {
 

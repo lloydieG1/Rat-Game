@@ -9,25 +9,26 @@ import java.util.ArrayList;
 public class Explosion extends Element  {
 
     private int health;
-    private boolean damage;
-
-    private final int RADIUS = 1;
-
     private Image blast;
 
 
 
     public Explosion(ElementType type, Level level, int x, int y) {
         super(type, level, x, y, Direction.North);
-        health = 1;
-        damage = false;
+        health = 2;
 
 
         blast = ImageLoader.getImage("blast.png", 64);
     }
 
     protected void tick() {
+        for (Element element : level.getElements(x, y)) {
+            if (element.getType().equals(ElementType.Rat)) {
+                level.removeElement(element);
+                Game.score = Game.score+1;
 
+            }
+        }
         currentTick++;
         if(currentTick > tickSpeed) {
             currentTick = 0;
@@ -42,17 +43,14 @@ public class Explosion extends Element  {
         if (health <= 0) {
             level.removeElement(this);
         }
-
-        damage = false;
     }
 
 
 
     protected void render(GraphicsContext g) {
-
+        System.out.println("£");
 
         double size = Game.gameSize;
-        double halfSize = size/2;
 
 
         //get the current interpolated frame positions of rat.
@@ -60,14 +58,9 @@ public class Explosion extends Element  {
         double y = renderY();
         //calculating the position the rat should be in this frame
 
-        g.save();
-        g.translate(x+Game.gameSize/2.0, y+Game.gameSize/2.0);
-        g.rotate(interpolateDir(dirAsNum(lastDir),dirAsNum(dir)));
 
-        double blastOffset = size*((2+RADIUS))*(interpolate(health, health-1)+0.5); //takes into account bomb shrinking
-        g.drawImage(blast, - blastOffset/2.0,  -blastOffset/2.0, blastOffset, blastOffset);
 
-        g.restore();
+        g.drawImage(blast,x, y, size, size);
 
 
 

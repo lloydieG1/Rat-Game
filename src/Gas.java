@@ -40,6 +40,13 @@ public class Gas extends Element {
             level.removeElement(this);
             System.out.println("deleting deathRat");
         }
+        for (Element element : level.getElements(x, y)) {
+            if (element.getType().equals(ElementType.Rat)) {
+                level.removeElement(element);
+                Game.score = Game.score+1;
+
+            }
+        }
         currentTick++;
         if(currentTick > tickSpeed) {
             currentTick = 0;
