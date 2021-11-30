@@ -2,9 +2,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
+
 
 public class Explosion extends Element  {
 
@@ -12,13 +10,24 @@ public class Explosion extends Element  {
 
     int maxHealth = 5;
 
+    private Image blast;
+    private boolean isCenter;
 
 
-    public Explosion(ElementType type, Level level, int x, int y, int health) {
-        super(type, level, x, y, Direction.North, health);
+
+    public Explosion(ElementType type, Level level, int x, int y, int health,Direction dir, boolean isCenter) {
+        super(type, level, x, y, dir, health);
+
+        if (isCenter) {
+            blast = ImageLoader.getImage("blastCenter.png", 32);
+        } else {
+            blast = ImageLoader.getImage("blast.png", 32);
+        }
 
         tickSpeed=Game.FPS/10;
 
+        lastDir=dir;
+        this.isCenter = isCenter;
 
     }
 
@@ -59,11 +68,16 @@ public class Explosion extends Element  {
 
 
 
-        g.setFill(Color.color((health*0.5/maxHealth)+0.5,0.5-(health*0.5/maxHealth),0));
+        g.setFill(Color.color(1-(health*0.5/maxHealth),(health*0.9/maxHealth),0));
         g.fillRect(x, y, size, size);
 
 
+    }
 
+    @Override
+    protected String extraInfo() {
+
+        return "," +isCenter;
     }
 
 
