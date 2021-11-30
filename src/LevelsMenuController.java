@@ -23,6 +23,7 @@ public class LevelsMenuController implements Initializable {
     @FXML
     TilePane levelPane;
 
+
     /**
      * switches back to the menu
      */
@@ -58,6 +59,33 @@ public class LevelsMenuController implements Initializable {
                 levelPane.getChildren().add(levelButton);
             }
         }
+        levelPane.setPrefRows(levelPane.getChildren().size());
+    }
+
+
+
+    private void addSaveButtons() {
+        File directory=new File("res\\maps\\save");
+        File[] levels = directory.listFiles();
+        int fileCount= directory.list().length;
+
+        for (int i = 0; i < fileCount; i++) {
+            if ( !(levels[i].getName().replace(".txt", "").equals(levels[i].getName()))) {
+                String buttonText = levels[i].getName().replace(".txt", "");
+                Button levelButton = new Button("resume?");
+                levelButton.setFont(new Font(10));
+
+                levelButton.setOnAction(new EventHandler() {
+
+                    @Override
+                    public void handle(Event event) {
+                        Game.openGameScene(buttonText);
+                    }
+                });
+
+                levelPane.getChildren().add(levelButton);
+            }
+        }
     }
 
 
@@ -69,6 +97,7 @@ public class LevelsMenuController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         addLevelButtons();
+        addSaveButtons();
 
     }
 
