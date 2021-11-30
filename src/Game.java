@@ -36,6 +36,8 @@ public class Game extends Application {
 
     private static GraphicsContext minimap;
 
+    private static GraphicsContext ratLives;
+
     private static Timeline gameLoop; //the loop in which the game runs
 
 
@@ -199,6 +201,7 @@ public class Game extends Application {
         updateScore();
         drawButtons(gameGraphics);
         currentLevel.renderMiniMap(minimap);
+        currentLevel.renderRatLives(ratLives);
         clampMap();
     }
 
@@ -280,6 +283,15 @@ public class Game extends Application {
      */
     public static void loadCanvas(GraphicsContext graphics) {
         gameGraphics = graphics;
+
+    }
+
+    /**
+     * loads the canvas to be drawn to in levels
+     * @param graphics game graphics
+     */
+    public static void loadRatLives(GraphicsContext graphics) {
+        ratLives = graphics;
 
     }
 

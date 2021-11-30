@@ -131,6 +131,20 @@ public class Level {
 
     }
 
+    private int maleRatCount() {
+        int rats = 0;
+        for (Element element : elements) {
+            if (element.getType().equals(ElementType.Rat)) {
+                Rat rat = (Rat) element;
+                if (rat.getIsMale()) {
+                    rats++;
+                }
+            }
+        }
+        return rats;
+
+    }
+
 
     private void checkGameCondition() {
         int rats = ratCount();
@@ -300,6 +314,15 @@ public class Level {
         } catch(IOException e) {
             e.printStackTrace();
         }
+
+    }
+
+    public void renderRatLives(GraphicsContext g) {
+        g.setFill(Color.color(0,0.3,1));
+        g.fillRect(0,0, g.getCanvas().getWidth(), maleRatCount()*10);
+        g.setFill(Color.color(1,0.3,1));
+        g.fillRect(0,maleRatCount()*10, g.getCanvas().getWidth(), (ratCount()-maleRatCount())*10);
+
 
     }
 

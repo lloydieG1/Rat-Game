@@ -182,7 +182,7 @@ public class InGameController implements Initializable {
 
 
     public void addItem(ElementType itemType) {
-        int maxItems = 5;
+        int maxItems = 4;
         if (itemType ==null) {
             System.out.println("null item type");
         } else {
@@ -259,6 +259,7 @@ public class InGameController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        Game.loadRatLives(ratLives.getGraphicsContext2D());
         Game.levelController = this;
         Game.setMiniMap(minimap.getGraphicsContext2D());
 
