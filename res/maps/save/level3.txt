@@ -40,4 +40,4 @@ rat,3,5,3 rat,3,7,6
 /
 0
 /
-bomb,5,16,1 gas,10,16,1 sterilize,6,16,1 maleGenderChange,12,16,1 femaleGenderChange,12,16,1 stopSign,10,16,1 deathRat,20,16,1 
+bomb,5,29,1 gas,10,29,1 sterilize,6,29,1 maleGenderChange,12,29,1 femaleGenderChange,12,29,1 stopSign,10,29,1 deathRat,20,29,1 

@@ -9,9 +9,11 @@ public class MenuItem {
     private int age = 0;
     private int tickSpeed = Game.FPS/2; //means logic only happens once this many ticks have passed
 
-    public MenuItem(String itemType, int replenishTimer) {
+    public MenuItem(String itemType, int replenishTimer, int age, int currentTick) {
 		this.itemType = itemStringToItemType(itemType);
 		this.replenishTimer = replenishTimer;
+        this.age = age;
+        this.replenishTimer = replenishTimer;
 	}
 	
 	/**
@@ -53,8 +55,6 @@ public class MenuItem {
 	}
 
     public String typeAsString() {
-        ElementType returnType;
-
         if(itemType == null) {
             return "-";
         }

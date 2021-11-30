@@ -206,8 +206,9 @@ public class LevelLoader {
             String[] individualItem = Items[i].split(INTERNAL_DATA_DELIMITER);
             String itemType = individualItem[0];
             int replenishTimer = Integer.parseInt(individualItem[1]);
-
-            MenuItem menuItem = new MenuItem(itemType, replenishTimer); 
+            int currentTick = Integer.parseInt(individualItem[2]);
+            int age = Integer.parseInt(individualItem[2]);
+            MenuItem menuItem = new MenuItem(itemType, replenishTimer, age, currentTick);
             
             level.addMenuItem(menuItem);
         }
