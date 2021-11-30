@@ -318,6 +318,8 @@ public class Level {
     }
 
     public void renderRatLives(GraphicsContext g) {
+        g.setFill(Color.color(0,0,0));
+        g.fillRect(0,0, g.getCanvas().getWidth(), g.getCanvas().getHeight());
         g.setFill(Color.color(0,0.3,1));
         g.fillRect(0,0, g.getCanvas().getWidth(), maleRatCount()*10);
         g.setFill(Color.color(1,0.3,1));
