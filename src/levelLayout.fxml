@@ -42,6 +42,6 @@
       </AnchorPane>
    </right>
    <center>
-      <Canvas id="mapCanvas" fx:id="gameCanvas" height="861.0" onMouseClicked="#mapClick" onMouseMoved="#buttonsVisible" width="961.0" BorderPane.alignment="CENTER" />
+      <Canvas id="mapCanvas" fx:id="gameCanvas" height="861.0" onMouseClicked="#mapClick" onMouseExited="#canvasMouseLeave" onMouseMoved="#buttonsVisible" width="961.0" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>

@@ -97,6 +97,12 @@ public class InGameController implements Initializable {
     }
 
     @FXML
+    private void canvasMouseLeave(){
+        mouseX = gameCanvas.getWidth()/2;
+        mouseY = gameCanvas.getHeight()/2;
+    }
+
+    @FXML
     private void minimapClick(MouseEvent event) {
         double sizeFactor = (0.23)*Game.currentLevel.getMapBounds()[0];
         Game.gameX = -(int)(event.getX()*sizeFactor);
