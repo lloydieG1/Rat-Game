@@ -214,9 +214,9 @@ public class Game extends Application {
 
     private static void drawButton(GraphicsContext g, int x, int y, int width, int height) {
         if(intersect((int)levelController.mouseX, (int)levelController.mouseY, x, y, width, height)) {
-            g.setFill(Color.color(0.2, 0.2, 0.2, 0.2));
+            g.setFill(Color.color(0.2, 0.2, 0.2, 0.1));
         } else {
-            g.setFill(Color.color(0.2, 0.2, 0.2, 0.8));
+            g.setFill(Color.color(0.2, 0.2, 0.2, 0.7));
         }
         g.fillRect(x, y, width, height);
     }

@@ -269,10 +269,17 @@ public class Level {
 
 
 
-        g.setFill(Color.color(0, 0, 0, 0.3));
-        double mapFactor = (Game.MAP_HEIGHT/g.getCanvas().getHeight())*(Game.currentLevel.getMapBounds()[1]*1.0 / Game.VISIBLE_TILES);
-        g.fillRect(0, 0, g.getCanvas().getWidth(), -Game.gameY/mapFactor);
-      //  g.fillRect(0, 0, g.getCanvas().getWidth(), g.getCanvas().getHeight());
+        g.setFill(Color.color(0, 0, 0, 0.2));
+        double mapFactorY = (Game.MAP_HEIGHT/g.getCanvas().getHeight())*(Game.currentLevel.getMapBounds()[1]*1.0 / Game.VISIBLE_TILES);
+        double mapFactorX = (Game.MAP_WIDTH/g.getCanvas().getWidth())*(Game.currentLevel.getMapBounds()[0]*1.0 / Game.VISIBLE_TILES);
+        g.fillRect(0, 0, g.getCanvas().getWidth(), -Game.gameY/mapFactorY);
+        g.fillRect(0, 0, -Game.gameX/mapFactorX, g.getCanvas().getHeight());
 
+
+        double tilewidth = g.getCanvas().getWidth() / Game.currentLevel.getMapBounds()[0];
+        double tileheight = g.getCanvas().getHeight()/ Game.currentLevel.getMapBounds()[1];
+
+        g.fillRect(0, -Game.gameY/mapFactorY+(Game.VISIBLE_TILES)*tileheight, g.getCanvas().getWidth(), g.getCanvas().getHeight());
+        g.fillRect(-Game.gameX/mapFactorX+(Game.VISIBLE_TILES)*tilewidth, 0, g.getCanvas().getWidth(), g.getCanvas().getHeight());
     }
 }
