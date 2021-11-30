@@ -1,5 +1,6 @@
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.text.Text;
 
 
 public class Bomb extends Element  {
@@ -121,6 +122,7 @@ public class Bomb extends Element  {
 
 
         g.drawImage(image,x, y, size, size);
+        g.fillText(Integer.toString(health),x+halfSize, y+halfSize, size);
 
 
 
