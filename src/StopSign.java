@@ -26,7 +26,7 @@ public class StopSign extends Element {
     protected void tick() {
         if (level.getTile(x,y).getType().equals(TileType.Grass)) {
             level.removeElement(this);
-            System.out.println("deleting deathRat");
+            System.out.println("deleting stopSign");
         }
 
         currentTick++;

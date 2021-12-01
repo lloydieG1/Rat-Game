@@ -42,6 +42,9 @@ public class InGameController implements Initializable {
 
     @FXML
     private TilePane stopSignPane;
+    
+    @FXML
+    private TilePane poisonPane;
 
     @FXML
     private Canvas minimap;
@@ -100,6 +103,7 @@ public class InGameController implements Initializable {
         sideBar = sideBar + deathRatPane.getChildren().size() + ",";
         sideBar = sideBar + gasPane.getChildren().size() + ",";
         sideBar = sideBar + stopSignPane.getChildren().size() + ",";
+        sideBar = sideBar + poisonPane.getChildren().size() + ",";
         return sideBar;
     }
 
@@ -139,6 +143,8 @@ public class InGameController implements Initializable {
             return "gas";
         } else if (type.equals(ElementType.StopSign)) {
             return "stopSign";
+        } else if (type.equals(ElementType.Poison)) {
+        	return "posion";
         }
         return "invalid type";
     }
@@ -186,6 +192,10 @@ public class InGameController implements Initializable {
         while(stopSignPane.getChildren().size() >0) {
             stopSignPane.getChildren().remove(0);
         }
+        
+        while(poisonPane.getChildren().size() >0) {
+        	poisonPane.getChildren().remove(0);
+        }
     }
 
 
@@ -210,6 +220,10 @@ public class InGameController implements Initializable {
                 if(stopSignPane.getChildren().size() <maxItems) {
                     stopSignPane.getChildren().add(getItem(ElementType.StopSign));
                 }
+            } else if(itemType.equals(ElementType.Poison)) {
+            	if(poisonPane.getChildren().size() <maxItems) {
+            		poisonPane.getChildren().add(getItem(ElementType.Poison));
+            	}
             } else {
                 System.out.println("invalid item type");
 
@@ -238,6 +252,8 @@ public class InGameController implements Initializable {
             gasPane.getChildren().remove(0);
         }else if (lastItem.equals(ElementType.StopSign)) {
             stopSignPane.getChildren().remove(0);
+        } else if (lastItem.equals(ElementType.Poison)) {
+        	poisonPane.getChildren().remove(0);
         }
     }
 
@@ -257,7 +273,9 @@ public class InGameController implements Initializable {
             Game.currentLevel.addElement(new Gas(ElementType.Gas, Game.currentLevel, (int)(x/Game.gameSize), (int)(y/Game.gameSize), 3));
         } else if (type.equals(ElementType.StopSign)) {
             Game.currentLevel.addElement(new StopSign(ElementType.StopSign, Game.currentLevel, (int)(x/Game.gameSize), (int)(y/Game.gameSize), 3));
-        } else {
+        } else if(type.equals(ElementType.Poison)) {
+        	Game.currentLevel.addElement(new Poison(ElementType.Poison, Game.currentLevel, (int)(x/Game.gameSize), (int)(y/Game.gameSize), 1));
+    	} else {
             System.out.println("invalid item type");
         }
     }

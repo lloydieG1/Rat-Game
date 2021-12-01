@@ -10,26 +10,47 @@ import java.util.ArrayList;
 public class Poison extends Element {
 	
     private Image image;
-
-    private boolean damage;
-
-
-	public Poison(ElementType type, Level level, int x, int y, Direction dir, int health) {
-		super(type, level, x, y, dir, health);
-        damage = false;
+    
+    private int ratKilled;
 
 
-        image = ImageLoader.getImage("Poison.png", 64);
+	public Poison(ElementType type, Level level, int x, int y, int health) {
+		super(type, level, x, y, Direction.North, health);
+      
+        ratKilled = 0;
+
+
+        image = ImageLoader.getImage("poison.png", 64);
 
 		}
 
 	  private void logic() {
-	        age++;
-	        movement();
+		  	poisonKill();
+	        if (ratKilled == 1) {
+	        	level.removeElement(this);
+	        }
 	    }
+	  
+	  
+	  public void poisonKill() {
+			for (Element element : level.getElements(x, y)) {
+				if (element.getType().equals(ElementType.Rat)) {
+					level.removeElement(element);
+					ratKilled++;
+	                Game.score = Game.score+1;
+
+	            }
+			}
+
+		}
 
 	@Override
 	protected void tick() {
+		if (level.getTile(x,y).getType().equals(TileType.Grass)) {
+            level.removeElement(this);
+            System.out.println("deleting poison");
+        }
+		
 		   currentTick++;
 	        if(currentTick > tickSpeed) {
 	            currentTick = 0;
@@ -43,9 +64,7 @@ public class Poison extends Element {
         double x = renderX();
         double y = renderY();
 
-        g.setFill(Color.color(0.2,0.2,0.3));
-        g.fillRect(x, y, size/2, size/2);
-
+        g.drawImage(image,x, y, size, size);
 
     }
 

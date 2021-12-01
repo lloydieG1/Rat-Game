@@ -16,10 +16,11 @@
          <children>
             <VBox alignment="TOP_CENTER" layoutX="68.0" layoutY="332.0" prefHeight="557.0" prefWidth="344.0">
                <children>
-                  <TilePane fx:id="bombPane" prefHeight="83.0" prefWidth="344.0" />
+                  <TilePane fx:id="bombPane" prefHeight="70.0" prefWidth="344.0" />
                   <TilePane fx:id="deathRatPane" prefHeight="70.0" prefWidth="344.0" />
-                  <TilePane fx:id="gasPane" prefHeight="52.0" prefWidth="344.0" />
-                  <TilePane fx:id="stopSignPane" prefHeight="91.0" prefWidth="344.0" />
+                  <TilePane fx:id="gasPane" prefHeight="70.0" prefWidth="344.0" />
+                  <TilePane fx:id="stopSignPane" prefHeight="70.0" prefWidth="344.0" />
+                  <TilePane fx:id="poisonPane" prefHeight="70.0" prefWidth="344.0" />
                   <Button id="backToMenuButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#backClick" prefHeight="47.0" prefWidth="246.0" text="Save and Exit">
                      <font>
                         <Font size="24.0" />
