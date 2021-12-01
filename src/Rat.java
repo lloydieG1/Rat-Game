@@ -40,10 +40,8 @@ public class Rat extends Element {
       if (getIsChild()) {
           tickSpeed = Game.FPS/2;
           image = ImageLoader.ratChild;
-      } else {
-          develop();
       }
-
+      develop();
   }
 
   public void setMatingTime(int timeLeftInMating) {
@@ -73,9 +71,7 @@ public class Rat extends Element {
    */
   private void logic() {  
     age++;
-    if (age > ADULT_AGE) {
       develop();
-    }
         
     //Can move only if mating time is finished
     if (isFinishedMating()) {	
@@ -120,12 +116,14 @@ public class Rat extends Element {
     }
 
   private void develop() {
-      tickSpeed = Game.FPS;
-    if (isMale) {
-      image = ImageLoader.ratMale;
-    } else {
-      image = ImageLoader.ratFemale;
-    }
+      if (getIsChild()) {
+          tickSpeed = Game.FPS;
+          if (isMale) {
+              image = ImageLoader.ratMale;
+          } else {
+              image = ImageLoader.ratFemale;
+          }
+      }
   }
 
   public boolean getIsMale() {
