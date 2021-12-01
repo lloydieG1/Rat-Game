@@ -27,7 +27,6 @@ public class Gas extends Element {
     image = ImageLoader.getImage("gas.png", 64);
     tickSpeed = (int) (Game.FPS / 1.2);
 
-    logic();
   }
 
   /**
