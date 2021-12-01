@@ -24,12 +24,10 @@ public class Explosion extends Element  {
    * @param x
    * @param y
    * @param health
-   * @param dir
-   * @param isCenter
+
    */
-  public Explosion(ElementType type, Level level, int x, int y, int health,
-                   Direction dir, boolean isCenter) {
-    super(type, level, x, y, dir, health);
+  public Explosion(ElementType type, Level level, int x, int y, int health) {
+    super(type, level, x, y, Direction.North, health);
 
     if (isCenter) {
       blast = ImageLoader.getImage("blastCenter.png", 32);
@@ -75,10 +73,5 @@ public class Explosion extends Element  {
     //calculating the position the rat should be in this frame
     g.setFill(Color.color(1 - (health * 0.5 / maxHealth), (health * 0.9 / maxHealth), 0));
     g.fillRect(x, y, size, size);
-  }
-
-  @Override
-  protected String extraInfo() {
-    return "," + isCenter;
   }
 }

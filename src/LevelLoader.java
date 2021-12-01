@@ -200,6 +200,36 @@ public class LevelLoader {
         DeathRat deathRat = new DeathRat(ElementType.DeathRat, level,
                                   xPos, yPos, health, initialDirection);
         level.addElement(deathRat);
+      }else if (element[0].equals("gas")) {
+          Gas gas= new Gas(ElementType.Gas, level,
+                  xPos, yPos, health);
+          level.addElement(gas);
+      }
+      else if (element[0].equals("sterilize")) {
+          Sterilise sterilise= new Sterilise(ElementType.Sterilise, level,
+                  xPos, yPos, health);
+          level.addElement(sterilise);
+      }
+      else if (element[0].equals("maleGenderChange")) {
+          MaleChanger maleChanger= new MaleChanger(ElementType.Sterilise, level,
+                  xPos, yPos, health);
+          level.addElement(maleChanger);
+      }else if (element[0].equals("femaleGenderChange")) {
+          FemaleChanger femaleChanger= new FemaleChanger(ElementType.Sterilise, level,
+                  xPos, yPos, health);
+          level.addElement(femaleChanger);
+      }else if (element[0].equals("stopSign")) {
+          StopSign stopSign= new StopSign(ElementType.StopSign, level,
+                  xPos, yPos, health);
+          level.addElement(stopSign);
+      }else if (element[0].equals("poison")) {
+          Poison poison= new Poison(ElementType.Poison, level,
+                  xPos, yPos, health);
+          level.addElement(poison);
+      }else if (element[0].equals("explosion")) {
+          Explosion explosion= new Explosion(ElementType.Explosion, level,
+                  xPos, yPos, health);
+          level.addElement(explosion);
       }
     }
   }

@@ -54,7 +54,7 @@ public class Bomb extends Element  {
 
   private void explode() {
     level.addElementLive(new Explosion(ElementType.Explosion, level, (x),
-                         y, 5, Direction.North, true));
+                         y, 5));
 
     int tempX = x;
     int tempY = y;
@@ -62,7 +62,7 @@ public class Bomb extends Element  {
     
     while (isSpreadable(tempX, tempY)) {
       level.addElementLive(new Explosion(ElementType.Explosion, level, (tempX),
-                           tempY, 5, Direction.East, false));
+                           tempY, 5));
       tempX++;
     }
     tempX = x;
@@ -71,7 +71,7 @@ public class Bomb extends Element  {
     
     while (isSpreadable(tempX, tempY)) {
       level.addElementLive(new Explosion(ElementType.Explosion, level, (tempX),
-                           tempY, 5, Direction.West, false));
+                           tempY, 5));
       tempX--;
     }
     tempX = x;
@@ -80,7 +80,7 @@ public class Bomb extends Element  {
     
     while (isSpreadable(tempX, tempY)) {
       level.addElementLive(new Explosion(ElementType.Explosion, level, (tempX),
-                           tempY, 5, Direction.South, false));
+                           tempY, 5));
       tempY++;
     }
     tempX = x;
@@ -89,7 +89,7 @@ public class Bomb extends Element  {
     
     while (isSpreadable(tempX, tempY)) {
       level.addElementLive(new Explosion(ElementType.Explosion, level, (tempX),
-                           tempY, 5, Direction.North, false));
+                           tempY, 5));
       tempY--;
     }
   }
