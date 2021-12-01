@@ -189,8 +189,11 @@ public class LevelLoader {
       int yPos = Integer.parseInt(element[3]);
       Direction initialDirection = getDirection(element[4]);
       if (element[0].equals("rat")) {
+
         boolean isMale = Boolean.parseBoolean(element[5]);
-        Rat rat = new Rat(ElementType.Rat, level, xPos, yPos, isMale, initialDirection, health);
+          int age = Integer.parseInt(element[6]);
+        boolean isSterile = Boolean.parseBoolean(element[7]);
+        Rat rat = new Rat(ElementType.Rat, level, xPos, yPos, isMale, initialDirection, health, age, isSterile);
         level.addElement(rat);
       } else if (element[0].equals("bomb")) {
         Bomb bomb = new Bomb(ElementType.Bomb, level,

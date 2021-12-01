@@ -18,7 +18,7 @@ GGGGGGGGGGGGGGG;
 /
 10
 /
-rat,3,3,2,north,True rat,3,13,4,south,false
+rat,3,3,2,north,True,0,false rat,3,13,4,south,false,0,false
 /
 180
 /

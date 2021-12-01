@@ -21,17 +21,18 @@ GPGPPGGPPGPGPGPGPPPPPGGPG;
 GPGPGGGGPGPTTTPGTGGGGGGPG;
 GPTTTTTTTTPGGGPPPPPPPPPPG;
 GGGGGGGGGGGGGGGGGGGGGGGGG;
+
 /
 10
 /
-rat,1,2,1,east,True,0,false rat,1,18,3,east,True,0,false rat,1,21,3,west,false,0,false rat,1,21,6,north,false,0,false rat,1,18,5,north,false,0,false rat,1,5,15,north,true,0,false
+rat,1,4,1,north,true,4,false rat,1,16,3,north,true,4,false rat,1,19,3,west,false,4,false rat,1,20,7,west,false,4,false rat,1,18,3,west,false,4,false rat,1,4,16,north,true,4,false 
 /
 180
 /
+1
+/
+bomb,15,21,3 gas,15,21,3 sterilize,30,21,3 maleGenderChange,45,21,3 femaleGenderChange,45,21,3 stopSign,15,21,3 deathRat,90,21,3 poison,45,21,3 
+/
 0
 /
-bomb,15,0,0 gas,15,0,0 sterilize,30,0,0 maleGenderChange,45,0,0 femaleGenderChange,45,0,0 stopSign,15,0,0 deathRat,90,0,0 poison,45,0,0
-/
-0
-/
-0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,

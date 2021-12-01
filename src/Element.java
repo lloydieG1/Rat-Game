@@ -44,6 +44,7 @@ public abstract class Element {
     this.nextX = x;
     this.nextY = y;
     this.health = health;
+    this.age = age;
   }
 
   /**

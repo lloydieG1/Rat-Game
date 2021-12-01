@@ -14,11 +14,10 @@ import javafx.scene.canvas.GraphicsContext;
  */      
 public class Rat extends Element {
 	
-  private static final int MATING_TIME = 5; //5 Refers to 5 ticks which is 2 seconds
-  private static final int ADULT_AGE = 5;
+  private static final int MATING_TIME = 8;
+  private static final int ADULT_AGE = 8;
   private boolean isMale;
   private boolean isSterile;
-  private boolean isChild;
   private int timeLeftInMating;  
   private Image image;
 
@@ -33,12 +32,20 @@ public class Rat extends Element {
    * @param health
    */
   public Rat(ElementType type, Level level, int x, int y, boolean isMale,
-             Direction dir, int health) {
+             Direction dir, int health, int age, boolean sterile) {
     super(type, level, x, y, dir, health);
+    this.age = age;
     this.isMale = isMale;   
-    this.isSterile = false;
-    isChild = true;
-    image = ImageLoader.getImage("ratChild.png", 64);   
+    this.isSterile = sterile;
+
+      if (getIsChild()) {
+          tickSpeed = Game.FPS/3;
+          image = ImageLoader.getImage("ratChild.png", 64);
+          System.out.println("*****");
+      } else {
+          develop();
+      }
+
   }
 
   protected void tick() {  
@@ -74,7 +81,7 @@ public class Rat extends Element {
         level.removeElement(this);
       }
       movement();  
-      if (!isChild) {
+      if (!getIsChild()) {
         if (isMale == false) {
           breed();
         }
@@ -106,8 +113,12 @@ public class Rat extends Element {
     }
   }
 
-  private void develop() {  
-    isChild = false;
+    public boolean getIsChild() {
+        return age < ADULT_AGE;
+    }
+
+  private void develop() {
+      tickSpeed = Game.FPS/2;
     if (isMale) {
       image = ImageLoader.getImage("ratMale.png", 64);
     } else {
@@ -139,7 +150,7 @@ public class Rat extends Element {
           if (rat.isMale == true) {
             System.out.println("should now mate");
             level.addElementLive(new Rat(ElementType.Rat, level, x, y,
-                                 Game.random.nextBoolean(), Direction.North, 3));
+                                 Game.random.nextBoolean(), Direction.North, 3, 0, false));
             timeLeftInMating = MATING_TIME;
             nextY = y;
             nextX = x;
@@ -169,7 +180,7 @@ public class Rat extends Element {
 
   @Override
   protected String extraInfo() {
-    return "," + isMale;
+    return "," +  isMale + "," + age + "," + isSterile;
   }
   
 }
