@@ -108,7 +108,7 @@ public class Game extends Application {
     public void processKeyEvent(KeyEvent event) {
         // We change the behaviour depending on the actual key that was pressed.
 
-        double scroll = gameSize;
+        double scroll = Game.gameSize/2;
         switch (event.getCode()) {
             case RIGHT:
                 // Right key was pressed. So move the player right by one cell.

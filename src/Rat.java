@@ -32,20 +32,22 @@ public class Rat extends Element {
    * @param health
    */
   public Rat(ElementType type, Level level, int x, int y, boolean isMale,
-             Direction dir, int health, int age, boolean sterile) {
+             Direction dir, int health, boolean sterile) {
     super(type, level, x, y, dir, health);
-    this.age = age;
-    this.isMale = isMale;   
+    this.isMale = isMale;
     this.isSterile = sterile;
 
       if (getIsChild()) {
           tickSpeed = Game.FPS/2;
-          image = ImageLoader.getImage("ratChild.png", 64);
-          System.out.println("*****");
+          image = ImageLoader.ratChild;
       } else {
           develop();
       }
 
+  }
+
+  public void setMatingTime(int timeLeftInMating) {
+      this.timeLeftInMating = timeLeftInMating;
   }
 
   protected void tick() {  
@@ -120,9 +122,9 @@ public class Rat extends Element {
   private void develop() {
       tickSpeed = Game.FPS;
     if (isMale) {
-      image = ImageLoader.getImage("ratMale.png", 64);
+      image = ImageLoader.ratMale;
     } else {
-      image = ImageLoader.getImage("ratFemale.png", 64);
+      image = ImageLoader.ratFemale;
     }
   }
 
@@ -150,7 +152,7 @@ public class Rat extends Element {
           if (rat.isMale == true) {
             System.out.println("should now mate");
             level.addElementLive(new Rat(ElementType.Rat, level, x, y,
-                                 Game.random.nextBoolean(), Direction.North, 3, 0, false));
+                                 Game.random.nextBoolean(), Direction.North, 0, false));
             timeLeftInMating = MATING_TIME;
             nextY = y;
             nextX = x;
@@ -180,7 +182,7 @@ public class Rat extends Element {
 
   @Override
   protected String extraInfo() {
-    return "," +  isMale + "," + age + "," + isSterile;
+    return "," +  isMale + "," + age + "," + isSterile + "," + timeLeftInMating;
   }
   
 }

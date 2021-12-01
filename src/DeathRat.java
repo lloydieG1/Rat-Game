@@ -17,6 +17,8 @@ public class DeathRat extends Element {
   private int ratsKilled;
   private Image image;
   private int maxKills = 1;
+
+  private final int KILLING_AGE = 5;
   
   /**
    * Description.
@@ -38,7 +40,7 @@ public class DeathRat extends Element {
 
   private void logic() {
     age++;
-    if (age > 12) {
+    if (age > KILLING_AGE ) {
       movement();
       killRat();
     }      
@@ -70,7 +72,7 @@ public class DeathRat extends Element {
       currentTick = 0;
       logic();
     }
-    if (age > 12) {
+    if (age > KILLING_AGE ) {
       killRat();
     }
   }
@@ -91,4 +93,9 @@ public class DeathRat extends Element {
     g.drawImage(image, - (size / 2), - (size / 2), size, size);
     g.restore();
   }
+
+    @Override
+    protected String extraInfo() {
+        return "," + age;
+    }
 }

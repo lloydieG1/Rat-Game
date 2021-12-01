@@ -24,7 +24,7 @@ public class Gas extends Element {
     super(type, level, x, y, Direction.North, health);
     this.health = health;
     damage = false;
-    image = ImageLoader.getImage("gas.png", 64);
+    image = ImageLoader.gas;
     tickSpeed = (int) (Game.FPS / 1.2);
 
   }

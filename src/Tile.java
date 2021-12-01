@@ -1,4 +1,5 @@
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ public class Tile {
   private final TileType type;
   private final int dist = 5;
   private int dist2 = dist-1;
+  Image image;
 
 
 
@@ -31,6 +33,12 @@ public class Tile {
     this.type = type;
     this.x = x;
     this.y = y;
+
+    if (type.equals(TileType.Grass)) {
+        image = ImageLoader.grass;
+    } else if (type.equals(TileType.Tunnel)) {
+        image = ImageLoader.grass;
+    }
   }
 
   /**
@@ -178,8 +186,7 @@ public class Tile {
     if (type.equals(TileType.Grass)) {
 
 
-        g.setFill(Color.color(0.3, 0.6, 0));
-        g.fillRect(x, y, size, size);//draw tile
+        g.drawImage(image, x, y, size, size);
 
 
 
@@ -191,8 +198,7 @@ public class Tile {
     } else if (type.equals(TileType.Tunnel)) {
 
 
-        g.setFill(Color.color(0.3, 0.6, 0));
-        g.fillRect(x, y, size, size);
+        g.drawImage(image, x, y, size, size);
         renderSideTunnel(g,nextToType(TileType.Path));
     }
   }

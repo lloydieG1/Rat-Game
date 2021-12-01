@@ -29,7 +29,7 @@ public class Bomb extends Element  {
   public Bomb(ElementType type, Level level, int x, int y, int health) {
     super(type, level, x, y, Direction.North, health);
     damage = false;
-    image = ImageLoader.getImage("bomb.png", 64);
+    image = ImageLoader.bomb;
   }
 
   protected void tick() {

@@ -24,7 +24,7 @@ GGGGGGGGGGGGGGGGGGGGGGGGG;
 /
 10
 /
-rat,1,2,1,east,True,0,false rat,1,18,3,east,True,0,false rat,1,21,3,west,false,0,false rat,1,21,6,north,false,0,false rat,1,18,5,north,false,0,false rat,1,5,15,north,true,0,false
+rat,1,2,1,east,True,0,false,0 rat,1,18,3,east,True,0,false,0 rat,1,21,3,west,false,0,false,0 rat,1,21,6,north,false,0,false,0 rat,1,18,5,north,false,0,false,0 rat,1,5,15,north,true,0,false,0
 /
 180
 /

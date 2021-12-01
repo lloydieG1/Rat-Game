@@ -1,6 +1,3 @@
-import javafx.scene.Scene;
-import javafx.scene.paint.Stop;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -39,7 +36,7 @@ public class LevelLoader {
     level = new Level(gridSize[0], gridSize[1], Integer.parseInt(levelData[2]), levelName,
                    Integer.parseInt(levelData[4]), Integer.parseInt(levelData[5]));
     parseTiles(levelData[1]);
-    parseRats(levelData[3]);
+    parseElements(levelData[3]);
     parseItemData(levelData[6]);
 
     level.setScore(Integer.parseInt(levelData[7]));
@@ -180,7 +177,7 @@ public class LevelLoader {
    *
    * @param ratData The full list of rats and their coordinates for this level
    */
-  private static void parseRats(String ratData) {
+  private static void parseElements(String ratData) {
     String[] seperateRats = ratData.split(SPACE);
     for (int i = 0; i < seperateRats.length; i++) {
       String[] element = seperateRats[i].split(INTERNAL_DATA_DELIMITER);
@@ -193,15 +190,20 @@ public class LevelLoader {
         boolean isMale = Boolean.parseBoolean(element[5]);
           int age = Integer.parseInt(element[6]);
         boolean isSterile = Boolean.parseBoolean(element[7]);
-        Rat rat = new Rat(ElementType.Rat, level, xPos, yPos, isMale, initialDirection, health, age, isSterile);
+        int timeLeftMating = Integer.parseInt(element[8]);
+        Rat rat = new Rat(ElementType.Rat, level, xPos, yPos, isMale, initialDirection, health, isSterile);
+        rat.setMatingTime(timeLeftMating);
+        rat.setAge(age);
         level.addElement(rat);
       } else if (element[0].equals("bomb")) {
         Bomb bomb = new Bomb(ElementType.Bomb, level,
                              xPos, yPos, health);
         level.addElement(bomb);
       } else if (element[0].equals("deathRat")) {
+          int age = Integer.parseInt(element[5]);
         DeathRat deathRat = new DeathRat(ElementType.DeathRat, level,
                                   xPos, yPos, health, initialDirection);
+        deathRat.setAge(age);
         level.addElement(deathRat);
       }else if (element[0].equals("gas")) {
           Gas gas= new Gas(ElementType.Gas, level,

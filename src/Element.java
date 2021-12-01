@@ -47,6 +47,10 @@ public abstract class Element {
     this.age = age;
   }
 
+  public void setAge(int age) {
+      this.age = age;
+  }
+
   /**
    * Get type of an Element.
    *
