@@ -1,5 +1,6 @@
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.scene.image.Image;
 
 
 /**
@@ -9,10 +10,14 @@ import javafx.scene.paint.Color;
 public class Sterilise extends Element {
 	
 	protected int stopRats = 0;
+	
+	private Image image;
 
     public Sterilise(ElementType type, Level level, int x, int y, int health) {
 		super(type, level, x, y, Direction.North, health);
 		// TODO Auto-generated constructor stub
+		
+		image = ImageLoader.getImage("sterilise.png", 64);
 	}
 
     /**
