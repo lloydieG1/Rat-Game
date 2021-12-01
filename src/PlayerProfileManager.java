@@ -72,13 +72,13 @@ public class PlayerProfileManager {
 			oldLine = in.nextLine(); //old highscore
 			newLine = SECOND_LINE + data; //new highscore
 			getProfile(username).setHighscore(data); //update profile object
-		}else if(whichData == ProfileData.MaxLevel) {
+		} else if(whichData == ProfileData.MaxLevel) {
 			in.nextLine(); //ignore first line (username)
 			in.nextLine(); //ignore second line (highscore)
 			oldLine = in.nextLine(); //old max level
 			newLine = THIRD_LINE + data; //new max level
 			getProfile(username).setMaxLevel(data); //update profile object
-		}else {
+		} else {
 			throw new IllegalArgumentException("whichData argument is not highscore or maxLevel");
 		}
 		
