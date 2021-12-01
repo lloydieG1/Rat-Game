@@ -16,7 +16,7 @@ public class Tile {
   private final int y; //y position of the tile
 
   private final TileType type;
-  private final int dist = 5;
+  private final int dist = 6;
   private int dist2 = dist-1;
   Image image;
 
