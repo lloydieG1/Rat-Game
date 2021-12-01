@@ -228,9 +228,7 @@ public class Level {
       element.size = Game.gameSize;
       element.tick();
     }
-    for (Element element : nextElements) {
-      elements.add(element);
-    }
+      elements.addAll(nextElements);
     nextElements = new ArrayList<>();
     tickMenuItems();
     checkGameCondition();

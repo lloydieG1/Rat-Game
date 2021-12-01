@@ -14,7 +14,7 @@ import javafx.scene.canvas.GraphicsContext;
  */      
 public class Rat extends Element {
 	
-  private static final int MATING_TIME = 8;
+  private static final int MATING_TIME = 4;
   private static final int ADULT_AGE = 8;
   private boolean isMale;
   private boolean isSterile;
@@ -22,6 +22,7 @@ public class Rat extends Element {
   private Image image;
   private static final int PREGNANT_TIME = 4;
   private boolean isPregnant;
+  private final int MAX_HEALTH = 3;
 
   /**
    * Rat.
@@ -58,37 +59,39 @@ public class Rat extends Element {
       
     if (level.getTile(x, y).getType().equals(TileType.Grass)) {
       level.removeElement(this);
-      System.out.println("deleting deathRat");
+
     }
         
     currentTick++;
     if (currentTick > tickSpeed) {
       currentTick = 0;
       logic();
-    } 
+    }
+
+      if (isFinishedMating()) {
+          if (!getIsChild()) {
+              if (!(isMale)) {
+                  breed();
+              }
+          }
+      }
   }
 
   /**
    * The logic of the rat, only ran at the rats slower speed.
    */
   private void logic() {
+      timeLeftInMating--;
       if (timeLeftInMating < 0) {
           timeLeftInMating = 0;
       }
     age++;
       develop();
-        pregnant();
+
     //Can move only if mating time is finished
-    if (isFinishedMating()) {	
-      if (level.getTile(x, y).getType().equals(TileType.Grass)) {  
-        level.removeElement(this);
-      }
-      movement();  
-      if (!getIsChild()) {
-        if (!(isMale)) {
-          breed();
-        }
-      }   
+    if (isFinishedMating()) {
+        pregnant();
+      movement();
     }
         
     for (Element element : level.getElements(x, y)) {
@@ -137,35 +140,49 @@ public class Rat extends Element {
     return dir;
   }
 
+  public void setPregnant(boolean isPregnant) {
+      this.isPregnant = isPregnant;
+  }
+
   public void makeSterile() {
     this.isSterile = true;
   }
 
   private void pregnant() {
       if (isPregnant) {
+
           if (Game.random.nextInt(4) == 2) {
-              level.addElementLive(new Rat(ElementType.Rat, level, x, y,
-                      Game.random.nextBoolean(), Direction.North, 0, false));
+              Rat rat = new Rat(ElementType.Rat, level, x, y,
+                      Game.random.nextBoolean(), Direction.North, MAX_HEALTH, false);
+              rat.setPregnant(false);
+              rat.setAge(0);
+              rat.setMatingTime(0);
+              level.addElementLive(rat);
+
+              System.out.println("has been Born!");
           }
       }
   }
 
   private void breed() {
-      if (!isPregnant)
-    for (Element element : level.getElements(x, y)) {
-      if (element.getType().equals(ElementType.Rat)) {
-        Rat rat = (Rat) element;
-        if (rat.isSterile == false) {
-          if (rat.isMale == true) {
-              rat.setMatingTime(MATING_TIME);
-              isPregnant = true;
-            timeLeftInMating = MATING_TIME;
-            nextY = y;
-            nextX = x;
+      if (!isPregnant) {
+          for (Element element : level.getElements(x, y)) {
+              if (element.getType().equals(ElementType.Rat)) {
+                  Rat rat = (Rat) element;
+                  if (!(rat.isSterile)) {
+                      if (rat.timeLeftInMating <= 0) {
+                          if (rat.isMale) {
+                              rat.setMatingTime(MATING_TIME);
+                              isPregnant = true;
+                              timeLeftInMating = MATING_TIME;
+                              nextY = y;
+                              nextX = x;
+                          }
+                      }
+                  }
+              }
           }
-        }
       }
-    }
   }
 
   /**

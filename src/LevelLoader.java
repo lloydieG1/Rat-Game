@@ -195,6 +195,7 @@ public class LevelLoader {
         Rat rat = new Rat(ElementType.Rat, level, xPos, yPos, isMale, initialDirection, health, isSterile);
         rat.setMatingTime(timeLeftMating);
         rat.setAge(age);
+        rat.setPregnant(isPregnant);
         level.addElement(rat);
       } else if (element[0].equals("bomb")) {
         Bomb bomb = new Bomb(ElementType.Bomb, level,
