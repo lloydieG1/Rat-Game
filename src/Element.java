@@ -9,7 +9,7 @@ public abstract class Element {
   protected int x; //x position in the map
   protected int y; //y position in the map
   protected ElementType type; //the type of element
-  protected int tickSpeed = Game.FPS / 2; //Logic only happens once this many ticks have passed
+  protected int tickSpeed = Game.FPS; //Logic only happens once this many ticks have passed
   protected int currentTick = 0; //the current tick in the cycle (eg 3/(maxfps))
   protected Level level; //the level the element is in so it can use getElements
   protected int age = 0; //age of the element in ticks

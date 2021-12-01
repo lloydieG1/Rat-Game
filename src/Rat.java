@@ -39,7 +39,7 @@ public class Rat extends Element {
     this.isSterile = sterile;
 
       if (getIsChild()) {
-          tickSpeed = Game.FPS/3;
+          tickSpeed = Game.FPS/2;
           image = ImageLoader.getImage("ratChild.png", 64);
           System.out.println("*****");
       } else {
@@ -118,7 +118,7 @@ public class Rat extends Element {
     }
 
   private void develop() {
-      tickSpeed = Game.FPS/2;
+      tickSpeed = Game.FPS;
     if (isMale) {
       image = ImageLoader.getImage("ratMale.png", 64);
     } else {
