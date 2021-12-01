@@ -26,7 +26,7 @@ public class Sterilise extends Element {
   public Sterilise(ElementType type, Level level, int x, int y, int health) {
     super(type, level, x, y, Direction.North, health);
     // TODO Auto-generated constructor stub
-    image = ImageLoader.getImage("sterilise.png", 64);
+    image = ImageLoader.sterilize;
     sterilisedRats = 0;
   }
   

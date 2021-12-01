@@ -33,12 +33,8 @@ public class Tile {
     this.type = type;
     this.x = x;
     this.y = y;
+      image = ImageLoader.grass;
 
-    if (type.equals(TileType.Grass)) {
-        image = ImageLoader.grass;
-    } else if (type.equals(TileType.Tunnel)) {
-        image = ImageLoader.grass;
-    }
   }
 
   /**
@@ -82,33 +78,33 @@ public class Tile {
       double x = (int) (this.x * factor + Game.gameX);
       double y = (int) (this.y * factor + Game.gameY);
       double size = Game.gameSize;
-      Color dark = Color.color(0.2, 0.4, 0,0.5);
-      Color light =Color.color(0.4, 0.8, 0,0.5);
-      Color normal = Color.color(0.3, 0.6, 0);
+      Color dark = Color.color(0.1, 0.2, 0,0.2);
+      Color light =Color.color(0.5, 1, 0,0.2);
+
 
 
       if (edges[0]) {
 
-          g.setFill(normal);
-          g.fillRect(x+(size*dist2)/dist, y, size/dist, size);
+
+          g.drawImage(image,x+(size*dist2)/dist, y, size/dist, size);
       }
       if (edges[1]) {
 
-          g.setFill(normal);
-          g.fillRect(x, y, size/dist, size);
+
+          g.drawImage(image,x, y, size/dist, size);
 
       }
 
       if (edges[2]) {
 
-          g.setFill(normal);
-          g.fillRect(x, y+(size*dist2/dist), size, size/dist);
+
+          g.drawImage(image,x, y+(size*dist2/dist), size, size/dist);
       }
 
       if (edges[3]) {
 
-          g.setFill(normal);
-          g.fillRect(x, y, size, size/dist);
+
+          g.drawImage(image,x, y, size, size/dist);
 
       }
 
