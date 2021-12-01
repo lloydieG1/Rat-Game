@@ -107,6 +107,8 @@ public class InGameController implements Initializable {
 
     }
 
+
+
     public String sideBarAsString() {
         String sideBar = bombPane.getChildren().size() + ",";
         sideBar = sideBar + deathRatPane.getChildren().size() + ",";

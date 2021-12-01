@@ -66,6 +66,10 @@ public class Game extends Application {
     private static final int ZOOM_MIN = 65;
     private static final int ZOOM_MAX = 90;
 
+    public static boolean rightArrow;
+    public static boolean leftArrow;
+    public static boolean upArrow;
+    public static boolean downArrow;
 
     /**
      * open the main menu and loads the other menus
@@ -94,7 +98,8 @@ public class Game extends Application {
 
         gameLoop.setCycleCount(Timeline.INDEFINITE);
 
-        levelLayout.addEventFilter(KeyEvent.KEY_PRESSED, event -> processKeyEvent(event));
+        levelLayout.addEventFilter(KeyEvent.KEY_PRESSED, event -> keyDown(event));
+        levelLayout.addEventFilter(KeyEvent.KEY_RELEASED, event -> keyUp(event));
         levelLayout.addEventFilter(ScrollEvent.SCROLL, event -> scrollKeyEvent(event));
 
     }
@@ -105,26 +110,26 @@ public class Game extends Application {
      * scrolls the map with arrow keys
      * @param event
      */
-    public void processKeyEvent(KeyEvent event) {
+    public void keyDown(KeyEvent event) {
+
         // We change the behaviour depending on the actual key that was pressed.
 
-        double scroll = Game.gameSize/2;
         switch (event.getCode()) {
             case RIGHT:
                 // Right key was pressed. So move the player right by one cell.
-                Game.gameX-=scroll;
+                rightArrow = true;
                 break;
             case LEFT:
                 // Right key was pressed. So move the player right by one cell.
-                Game.gameX+=scroll;
+                leftArrow = true;
                 break;
             case UP:
                 // Right key was pressed. So move the player right by one cell.
-                Game.gameY+=scroll;
+                upArrow = true;
                 break;
             case DOWN:
                 // Right key was pressed. So move the player right by one cell.
-                Game.gameY-=scroll;
+                downArrow = true;
                 break;
             default:
                 // Do nothing for all other keys.
@@ -135,6 +140,55 @@ public class Game extends Application {
     }
 
 
+    /**
+     * scrolls the map with arrow keys
+     * @param event
+     */
+    public void keyUp(KeyEvent event) {
+
+        // We change the behaviour depending on the actual key that was pressed.
+
+
+        switch (event.getCode()) {
+            case RIGHT:
+                // Right key was pressed. So move the player right by one cell.
+                rightArrow = false;
+                break;
+            case LEFT:
+                // Right key was pressed. So move the player right by one cell.
+                leftArrow = false;
+                break;
+            case UP:
+                // Right key was pressed. So move the player right by one cell.
+                upArrow = false;
+                break;
+            case DOWN:
+                // Right key was pressed. So move the player right by one cell.
+                downArrow = false;
+                break;
+            default:
+                // Do nothing for all other keys.
+                break;
+        }
+        // Consume the event. This means we mark it as dealt with. This stops other GUI nodes (buttons etc) responding to it.
+        event.consume();
+    }
+
+    private static void moveMap() {
+        double scroll = (Game.gameSize*5)/FPS;
+        if (rightArrow) {
+            Game.gameX-=scroll;
+        }
+        if (leftArrow) {
+            Game.gameX+=scroll;
+        }
+        if (upArrow) {
+            Game.gameY+=scroll;
+        }
+        if (downArrow) {
+            Game.gameY-=scroll;
+        }
+    }
 
     /**
      * scrolls the size of the map on the screen
@@ -188,6 +242,7 @@ public class Game extends Application {
 
     }
 
+
     public static String sidebarAsString() {
         return levelController.sideBarAsString();
     }
@@ -197,6 +252,7 @@ public class Game extends Application {
      * runs the logic of the game
      */
     private static void tick() {
+        moveMap();
         clampMap();
         currentLevel.tick();
         gameGraphics.setFill(Color.color(0.3,0.6,0));
