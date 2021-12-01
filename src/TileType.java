@@ -1,3 +1,9 @@
+/**
+ * Description.
+ *
+ * @author 
+ *
+ */
 public enum TileType {
 
     Path(),
