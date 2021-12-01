@@ -144,7 +144,7 @@ public class InGameController implements Initializable {
         } else if (type.equals(ElementType.StopSign)) {
             return "stopSign";
         } else if (type.equals(ElementType.Poison)) {
-        	return "posion";
+        	return "poison";
         }
         return "invalid type";
     }
