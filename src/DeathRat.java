@@ -20,6 +20,7 @@ public class DeathRat extends Element {
   
   /**
    * Description.
+   *
    * @param type
    * @param level
    * @param x
