@@ -21,6 +21,9 @@
                   <TilePane fx:id="gasPane" prefHeight="70.0" prefWidth="344.0" />
                   <TilePane fx:id="stopSignPane" prefHeight="70.0" prefWidth="344.0" />
                   <TilePane fx:id="poisonPane" prefHeight="70.0" prefWidth="344.0" />
+                  <TilePane fx:id="sterilisePane" prefHeight="70.0" prefWidth="344.0" />
+                  <TilePane fx:id="maleGenderChangePane" prefHeight="70.0" prefWidth="344.0" />
+                  <TilePane fx:id="femaleGenderChangePane" prefHeight="70.0" prefWidth="344.0" />
                   <Button id="backToMenuButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#backClick" prefHeight="47.0" prefWidth="246.0" text="Save and Exit">
                      <font>
                         <Font size="24.0" />

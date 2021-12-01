@@ -3,33 +3,35 @@ import javafx.scene.paint.Color;
 import javafx.scene.image.Image;
 
 
-/**
- * Class used for construction and behaviours of Steriliser elements
- * @author William Randle, Jack Lennard,
- */
-public class Sterilise extends Element {
-	
-	protected int sterilisedRats;
+
+public class MaleChanger extends Element {
 	
 	private Image image;
+	
+	private int maleChangeCount;
+	
+	
 
-    public Sterilise(ElementType type, Level level, int x, int y, int health) {
+	public MaleChanger(ElementType type, Level level, int x, int y, int health) {
 		super(type, level, x, y, Direction.North, health);
 		// TODO Auto-generated constructor stub
 		
-		image = ImageLoader.getImage("sterilise.png", 64);
+		maleChangeCount = 0;
 		
-		sterilisedRats = 0;
+		image = ImageLoader.getImage("maleGenderChange.png", 64);
+		
 	}
-
-    /**
+	
+	
+	/**
      * Runs Tick() behaviours, allowing them to run logics automatically 
      * in time with other elements
      */
-    protected void tick() {
+	@Override
+	protected void tick() {
         if (level.getTile(x,y).getType().equals(TileType.Grass)) {
             level.removeElement(this);
-            System.out.println("deleting sterilise");
+            System.out.println("deleting male changer");
         }
         currentTick++;
         if(currentTick > tickSpeed) {
@@ -38,26 +40,24 @@ public class Sterilise extends Element {
         }
 
     }
-
-    /**
+	
+	/**
      * the logic of the Element
      */
     private void logic() {
-        if (this.sterilisedRats > 4){
+        if (this.maleChangeCount == 1){
         	level.removeElement(this);
         }
     }
+    
 
-    public void steriliseRat(Rat rat) {
-        sterilisedRats++ ;
-        rat.makeSterile();
-    }
-              
 
-    /**
-     * renders a Sterilise sign
+	
+	/**
+     * renders a Male Changer sign
      * @param g graphics context
      */
+    @Override
     protected void render(GraphicsContext g) {
         double x = renderX();
         double y = renderY();
@@ -65,7 +65,5 @@ public class Sterilise extends Element {
         g.drawImage(image,x, y, size, size);
 
     }
-
-
 
 }

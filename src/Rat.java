@@ -44,6 +44,8 @@ public class Rat extends Element {
         super(type, level, x, y, dir, health);
 
         this.isMale = isMale;
+        
+        this.isSterile = false;
 
         isChild = true;
 
@@ -130,6 +132,10 @@ public class Rat extends Element {
     public boolean getIsMale () {
         return isMale;
     }
+    
+    public void setIsMale(boolean isMale) {
+    	this.isMale = isMale;
+    }
 
     public Direction getDirection () {
         return dir;
@@ -148,12 +154,14 @@ public class Rat extends Element {
         for (Element element : level.getElements(x, y)) {
             if (element.getType().equals(ElementType.Rat)) {
                 Rat rat = (Rat) element;
-                if (rat.isMale == true) {
-                    System.out.println("should now mate");
-                    level.addElementLive(new Rat(ElementType.Rat, level, x, y, Game.random.nextBoolean(), Direction.North, 3));
-                    breeding = BREEDING_TIME;
-                    nextY = y;
-                    nextX = x;
+                if (rat.isSterile == false) {
+	                if (rat.isMale == true) {
+	                    System.out.println("should now mate");
+	                    level.addElementLive(new Rat(ElementType.Rat, level, x, y, Game.random.nextBoolean(), Direction.North, 3));
+	                    breeding = BREEDING_TIME;
+	                    nextY = y;
+	                    nextX = x;
+	                }
                 }
             }
         }

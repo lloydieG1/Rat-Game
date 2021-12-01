@@ -45,6 +45,15 @@ public class InGameController implements Initializable {
     
     @FXML
     private TilePane poisonPane;
+    
+    @FXML
+    private TilePane sterilisePane;
+    
+    @FXML
+    private TilePane maleGenderChangePane;
+    
+    @FXML
+    private TilePane femaleGenderChangePane;
 
     @FXML
     private Canvas minimap;
@@ -104,6 +113,9 @@ public class InGameController implements Initializable {
         sideBar = sideBar + gasPane.getChildren().size() + ",";
         sideBar = sideBar + stopSignPane.getChildren().size() + ",";
         sideBar = sideBar + poisonPane.getChildren().size() + ",";
+        sideBar = sideBar + sterilisePane.getChildren().size() + ",";
+        sideBar = sideBar + maleGenderChangePane.getChildren().size() + ",";
+        sideBar = sideBar + femaleGenderChangePane.getChildren().size() + ",";
         return sideBar;
     }
 
@@ -145,6 +157,12 @@ public class InGameController implements Initializable {
             return "stopSign";
         } else if (type.equals(ElementType.Poison)) {
         	return "poison";
+        } else if (type.equals(ElementType.Sterilise)) {
+        	return "sterilise";
+        } else if (type.equals(ElementType.MaleGenderChange)) {
+        	return "maleGenderChange";
+        } else if (type.equals(ElementType.FemaleGenderChange)) {
+        	return "femaleGenderChange";
         }
         return "invalid type";
     }
@@ -196,6 +214,18 @@ public class InGameController implements Initializable {
         while(poisonPane.getChildren().size() >0) {
         	poisonPane.getChildren().remove(0);
         }
+        
+        while(sterilisePane.getChildren().size() > 0) {
+        	sterilisePane.getChildren().remove(0);
+        }
+        
+        while(maleGenderChangePane.getChildren().size() > 0) {
+        	maleGenderChangePane.getChildren().remove(0);
+        }
+        
+        while(femaleGenderChangePane.getChildren().size() > 0) {
+        	femaleGenderChangePane.getChildren().remove(0);
+        }
     }
 
 
@@ -220,11 +250,23 @@ public class InGameController implements Initializable {
                 if(stopSignPane.getChildren().size() <maxItems) {
                     stopSignPane.getChildren().add(getItem(ElementType.StopSign));
                 }
-            } else if(itemType.equals(ElementType.Poison)) {
+            } else if (itemType.equals(ElementType.Poison)) {
             	if(poisonPane.getChildren().size() <maxItems) {
             		poisonPane.getChildren().add(getItem(ElementType.Poison));
             	}
-            } else {
+            } else if (itemType.equals(ElementType.Sterilise)) {
+            	if (sterilisePane.getChildren().size() < maxItems) {
+            		sterilisePane.getChildren().add(getItem(ElementType.Sterilise));
+            	}
+        	} else if (itemType.equals(ElementType.MaleGenderChange)) {
+        		if (maleGenderChangePane.getChildren().size() < maxItems) {
+        			maleGenderChangePane.getChildren().add(getItem(ElementType.MaleGenderChange));
+        		}
+        	} else if (itemType.equals(ElementType.FemaleGenderChange)) {
+        		if (femaleGenderChangePane.getChildren().size() < maxItems) {
+        			femaleGenderChangePane.getChildren().add(getItem(ElementType.FemaleGenderChange));
+        		}
+        	} else {
                 System.out.println("invalid item type");
 
             }
@@ -254,6 +296,12 @@ public class InGameController implements Initializable {
             stopSignPane.getChildren().remove(0);
         } else if (lastItem.equals(ElementType.Poison)) {
         	poisonPane.getChildren().remove(0);
+        } else if (lastItem.equals(ElementType.Sterilise)) {
+        	sterilisePane.getChildren().remove(0);
+        } else if (lastItem.equals(ElementType.MaleGenderChange)) {
+        	maleGenderChangePane.getChildren().remove(0);
+        } else if (lastItem.equals(ElementType.FemaleGenderChange)) {
+        	femaleGenderChangePane.getChildren().remove(0);
         }
     }
 
@@ -275,6 +323,12 @@ public class InGameController implements Initializable {
             Game.currentLevel.addElement(new StopSign(ElementType.StopSign, Game.currentLevel, (int)(x/Game.gameSize), (int)(y/Game.gameSize), 3));
         } else if(type.equals(ElementType.Poison)) {
         	Game.currentLevel.addElement(new Poison(ElementType.Poison, Game.currentLevel, (int)(x/Game.gameSize), (int)(y/Game.gameSize), 1));
+    	} else if(type.equals(ElementType.Sterilise)) {
+    		Game.currentLevel.addElement(new Sterilise(ElementType.Sterilise, Game.currentLevel, (int)(x/Game.gameSize), (int)(y/Game.gameSize), 2));
+    	} else if(type.equals(ElementType.MaleGenderChange)) {
+    		Game.currentLevel.addElement(new MaleChanger(ElementType.MaleGenderChange, Game.currentLevel, (int)(x/Game.gameSize), (int)(y/Game.gameSize), 1));
+    	} else if(type.equals(ElementType.FemaleGenderChange)) {
+    		Game.currentLevel.addElement(new FemaleChanger(ElementType.FemaleGenderChange, Game.currentLevel, (int)(x/Game.gameSize), (int)(y/Game.gameSize), 1));
     	} else {
             System.out.println("invalid item type");
         }
