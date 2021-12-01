@@ -185,58 +185,69 @@ public class LevelLoader {
       int xPos = Integer.parseInt(element[2]);
       int yPos = Integer.parseInt(element[3]);
       Direction initialDirection = getDirection(element[4]);
-      if (element[0].equals("rat")) {
-
-        boolean isMale = Boolean.parseBoolean(element[5]);
-          int age = Integer.parseInt(element[6]);
-        boolean isSterile = Boolean.parseBoolean(element[7]);
-        int timeLeftMating = Integer.parseInt(element[8]);
-          int pregnantTime = Integer.parseInt(element[9]);
-        Rat rat = new Rat(ElementType.Rat, level, xPos, yPos, isMale, initialDirection, health, isSterile);
-        rat.setMatingTime(timeLeftMating);
-        rat.setAge(age);
-        rat.setPregnantTime(pregnantTime);
-        level.addElement(rat);
-      } else if (element[0].equals("bomb")) {
-        Bomb bomb = new Bomb(ElementType.Bomb, level,
-                             xPos, yPos, health);
-        level.addElement(bomb);
-      } else if (element[0].equals("deathRat")) {
-          int age = Integer.parseInt(element[5]);
-        DeathRat deathRat = new DeathRat(ElementType.DeathRat, level,
-                                  xPos, yPos, health, initialDirection);
-        deathRat.setAge(age);
-        level.addElement(deathRat);
-      }else if (element[0].equals("gas")) {
-          Gas gas= new Gas(ElementType.Gas, level,
-                  xPos, yPos, health);
-          level.addElement(gas);
-      }
-      else if (element[0].equals("sterilize")) {
-          Sterilise sterilise= new Sterilise(ElementType.Sterilise, level,
-                  xPos, yPos, health);
-          level.addElement(sterilise);
-      }
-      else if (element[0].equals("maleGenderChange")) {
-          MaleChanger maleChanger= new MaleChanger(ElementType.Sterilise, level,
-                  xPos, yPos, health);
-          level.addElement(maleChanger);
-      }else if (element[0].equals("femaleGenderChange")) {
-          FemaleChanger femaleChanger= new FemaleChanger(ElementType.Sterilise, level,
-                  xPos, yPos, health);
-          level.addElement(femaleChanger);
-      }else if (element[0].equals("stopSign")) {
-          StopSign stopSign= new StopSign(ElementType.StopSign, level,
-                  xPos, yPos, health);
-          level.addElement(stopSign);
-      }else if (element[0].equals("poison")) {
-          Poison poison= new Poison(ElementType.Poison, level,
-                  xPos, yPos, health);
-          level.addElement(poison);
-      }else if (element[0].equals("explosion")) {
-          Explosion explosion= new Explosion(ElementType.Explosion, level,
-                  xPos, yPos, health);
-          level.addElement(explosion);
+      //TODO change to switch statement
+      switch(element[0]) {
+      	case "rat":
+            boolean isMale = Boolean.parseBoolean(element[5]);
+            int age = Integer.parseInt(element[6]);
+            boolean isSterile = Boolean.parseBoolean(element[7]);
+            int timeLeftMating = Integer.parseInt(element[8]);
+            int pregnantTime = Integer.parseInt(element[9]);
+            Rat rat = new Rat(ElementType.Rat, level, xPos, yPos, isMale, initialDirection, health, isSterile);
+            rat.setMatingTime(timeLeftMating);
+            rat.setAge(age);
+            rat.setPregnantTime(pregnantTime);
+            level.addElement(rat);
+            break;
+      	case "bomb":
+            Bomb bomb = new Bomb(ElementType.Bomb, level,
+                    xPos, yPos, health);
+            level.addElement(bomb);
+            break;
+      	case "deathRat":
+            int drAge = Integer.parseInt(element[5]);
+            DeathRat deathRat = new DeathRat(ElementType.DeathRat, level,
+                                      xPos, yPos, health, initialDirection);
+            deathRat.setAge(drAge);
+            level.addElement(deathRat);
+      		break;
+      	case "gas":
+            Gas gas= new Gas(ElementType.Gas, level,
+                    		xPos, yPos, health);
+            level.addElement(gas);
+      		break;
+      	case "sterilzse":
+            Sterilise sterilise= new Sterilise(ElementType.Sterilise, level,
+                    xPos, yPos, health);
+            level.addElement(sterilise);
+      		break;
+      	case "maleGenderChange":
+            MaleChanger maleChanger= new MaleChanger(ElementType.Sterilise, level,
+                    xPos, yPos, health);
+            level.addElement(maleChanger);
+      		break;
+      	case "femaleGenderChange":
+            FemaleChanger femaleChanger= new FemaleChanger(ElementType.Sterilise, level,
+                    xPos, yPos, health);
+            level.addElement(femaleChanger);
+      		break;
+      	case "stopSign":
+            StopSign stopSign= new StopSign(ElementType.StopSign, level,
+                    xPos, yPos, health);
+            level.addElement(stopSign);
+      		break;
+      	case "poison":
+            Poison poison= new Poison(ElementType.Poison, level,
+                    xPos, yPos, health);
+            level.addElement(poison);
+      		break;
+      	case "explosion":
+            Explosion explosion= new Explosion(ElementType.Explosion, level,
+                    xPos, yPos, health);
+            level.addElement(explosion);
+      		break;
+      	default:
+      		throw new IllegalArgumentException(element[0] + " is not a valid element"); 
       }
     }
   }
