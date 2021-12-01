@@ -118,7 +118,7 @@ public class Rat extends Element {
     }
 
   private void develop() {
-      if (getIsChild()) {
+      if (!getIsChild()) {
           tickSpeed = Game.FPS;
           if (isMale) {
               image = ImageLoader.ratMale;
