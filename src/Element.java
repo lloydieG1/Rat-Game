@@ -47,6 +47,12 @@ public abstract class Element {
     this.age = age;
   }
 
+  protected void alignPosition() {
+      nextY = y;
+      nextX = x;
+      dir = lastDir;
+  }
+
   public void setAge(int age) {
       this.age = age;
   }

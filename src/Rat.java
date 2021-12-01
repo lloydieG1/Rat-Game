@@ -18,11 +18,12 @@ public class Rat extends Element {
   private static final int ADULT_AGE = 8;
   private boolean isMale;
   private boolean isSterile;
-  private int timeLeftInMating;  
+  private int timeLeftInMating;
+  private int timeLeftPregnant = 0;
   private Image image;
   private static final int PREGNANT_TIME = 4;
-  private boolean isPregnant;
   private final int MAX_HEALTH = 3;
+  private final int CHILD_LIKELIHOOD =4;
 
   /**
    * Rat.
@@ -49,6 +50,10 @@ public class Rat extends Element {
 
   public void setMatingTime(int timeLeftInMating) {
       this.timeLeftInMating = timeLeftInMating;
+  }
+
+  public void setPregnantTime(int pregnantTime) {
+      this.timeLeftPregnant = pregnantTime;
   }
 
   protected void tick() {  
@@ -140,21 +145,25 @@ public class Rat extends Element {
     return dir;
   }
 
-  public void setPregnant(boolean isPregnant) {
-      this.isPregnant = isPregnant;
-  }
 
   public void makeSterile() {
     this.isSterile = true;
   }
 
-  private void pregnant() {
-      if (isPregnant) {
+  private boolean isPregnant() {
+      return timeLeftPregnant >0;
+  }
 
-          if (Game.random.nextInt(4) == 2) {
+  private void pregnant() {
+      timeLeftPregnant--;
+      if (timeLeftPregnant < 0) {
+          timeLeftPregnant = 0;
+      }
+      if (isPregnant()) {
+
+          if (Game.random.nextInt(CHILD_LIKELIHOOD) == 1) {
               Rat rat = new Rat(ElementType.Rat, level, x, y,
                       Game.random.nextBoolean(), Direction.North, MAX_HEALTH, false);
-              rat.setPregnant(false);
               rat.setAge(0);
               rat.setMatingTime(0);
               level.addElementLive(rat);
@@ -165,18 +174,18 @@ public class Rat extends Element {
   }
 
   private void breed() {
-      if (!isPregnant) {
+      if (!isPregnant()) {
           for (Element element : level.getElements(x, y)) {
               if (element.getType().equals(ElementType.Rat)) {
                   Rat rat = (Rat) element;
                   if (!(rat.isSterile)) {
                       if (rat.timeLeftInMating <= 0) {
                           if (rat.isMale) {
+                              rat.alignPosition();
                               rat.setMatingTime(MATING_TIME);
-                              isPregnant = true;
                               timeLeftInMating = MATING_TIME;
-                              nextY = y;
-                              nextX = x;
+                              timeLeftPregnant = PREGNANT_TIME;
+                              alignPosition();
                           }
                       }
                   }
@@ -205,7 +214,7 @@ public class Rat extends Element {
 
   @Override
   protected String extraInfo() {
-    return "," +  isMale + "," + age + "," + isSterile + "," + timeLeftInMating + "," + isPregnant;
+    return "," +  isMale + "," + age + "," + isSterile + "," + timeLeftInMating + "," + timeLeftPregnant;
   }
   
 }
