@@ -285,9 +285,18 @@ public class Level {
   public void renderTiles(GraphicsContext g) {
     for (int i = 0; i < tiles.length; i++) {
       for (int j = 0; j < tiles[i].length; j++) {
-        tiles[i][j].render(g);
+          if (tiles[i][j].getType().equals(TileType.Path)) {
+              tiles[i][j].render(g);
+          }
       }
     }
+      for (int i = 0; i < tiles.length; i++) {
+          for (int j = 0; j < tiles[i].length; j++) {
+              if (tiles[i][j].getType().equals(TileType.Grass)) {
+                  tiles[i][j].render(g);
+              }
+          }
+      }
   }
   
   /**
@@ -378,7 +387,6 @@ public class Level {
     for (int i = 0; i < getMapBounds()[1]; i++) {
     	
       for (int j = 0; j < getMapBounds()[0]; j++) {
-          System.out.println(i + " " + j);
         file = file + tiles[j][i].asString();
       }
 
