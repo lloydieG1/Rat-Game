@@ -191,6 +191,7 @@ public class LevelLoader {
           int age = Integer.parseInt(element[6]);
         boolean isSterile = Boolean.parseBoolean(element[7]);
         int timeLeftMating = Integer.parseInt(element[8]);
+          boolean isPregnant = Boolean.parseBoolean(element[9]);
         Rat rat = new Rat(ElementType.Rat, level, xPos, yPos, isMale, initialDirection, health, isSterile);
         rat.setMatingTime(timeLeftMating);
         rat.setAge(age);

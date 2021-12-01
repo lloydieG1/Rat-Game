@@ -1,4 +1,6 @@
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.effect.BoxBlur;
+import javafx.scene.effect.Effect;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -130,9 +132,11 @@ public class Bomb extends Element  {
     
     //calculating the position the rat should be in this frame
     g.drawImage(image, x, y, size, size);
-    g.setFont(new Font("monospace", size / 3.2));
 
-      g.setFill(Color.color(1-(health *1.0/ BLAST_TIME), (health * 1.0 / BLAST_TIME), 0));
+    g.setFont(new Font("mono-space", size / 4));
+
+    g.setFill(Color.color(1-(health *1.0/ BLAST_TIME), (health * 1.0 / BLAST_TIME), 0));
     g.fillText(Integer.toString(health), x + size / 2.3, y + size / 1.4);
+
   }
 }

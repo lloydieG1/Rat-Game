@@ -20,6 +20,8 @@ public class Rat extends Element {
   private boolean isSterile;
   private int timeLeftInMating;  
   private Image image;
+  private static final int PREGNANT_TIME = 4;
+  private boolean isPregnant;
 
   /**
    * Rat.
@@ -69,10 +71,13 @@ public class Rat extends Element {
   /**
    * The logic of the rat, only ran at the rats slower speed.
    */
-  private void logic() {  
+  private void logic() {
+      if (timeLeftInMating < 0) {
+          timeLeftInMating = 0;
+      }
     age++;
       develop();
-        
+        pregnant();
     //Can move only if mating time is finished
     if (isFinishedMating()) {	
       if (level.getTile(x, y).getType().equals(TileType.Grass)) {  
@@ -80,7 +85,7 @@ public class Rat extends Element {
       }
       movement();  
       if (!getIsChild()) {
-        if (isMale == false) {
+        if (!(isMale)) {
           breed();
         }
       }   
@@ -99,16 +104,10 @@ public class Rat extends Element {
    * @return Whether mating time is finished
    */
   public boolean isFinishedMating() {
-    if (timeLeftInMating < 0) {
-      timeLeftInMating = 0;
-    }
-    
-    if (timeLeftInMating == 0) {
-      return true;
-    } else {
-      timeLeftInMating--;
-      return false;
-    }
+
+
+      return timeLeftInMating <= 0;
+
   }
 
     public boolean getIsChild() {
@@ -142,15 +141,24 @@ public class Rat extends Element {
     this.isSterile = true;
   }
 
+  private void pregnant() {
+      if (isPregnant) {
+          if (Game.random.nextInt(4) == 2) {
+              level.addElementLive(new Rat(ElementType.Rat, level, x, y,
+                      Game.random.nextBoolean(), Direction.North, 0, false));
+          }
+      }
+  }
+
   private void breed() {
+      if (!isPregnant)
     for (Element element : level.getElements(x, y)) {
       if (element.getType().equals(ElementType.Rat)) {
         Rat rat = (Rat) element;
         if (rat.isSterile == false) {
           if (rat.isMale == true) {
-            System.out.println("should now mate");
-            level.addElementLive(new Rat(ElementType.Rat, level, x, y,
-                                 Game.random.nextBoolean(), Direction.North, 0, false));
+              rat.setMatingTime(MATING_TIME);
+              isPregnant = true;
             timeLeftInMating = MATING_TIME;
             nextY = y;
             nextX = x;
@@ -180,7 +188,7 @@ public class Rat extends Element {
 
   @Override
   protected String extraInfo() {
-    return "," +  isMale + "," + age + "," + isSterile + "," + timeLeftInMating;
+    return "," +  isMale + "," + age + "," + isSterile + "," + timeLeftInMating + "," + isPregnant;
   }
   
 }
