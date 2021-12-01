@@ -170,6 +170,17 @@ public class Level {
     nextElements.add(element);
   }
 
+  public boolean canAddItem(int x, int y) {
+      if (getTile(x,y).getType().equals(TileType.Path)) {
+
+          return true;
+      }
+      return false;
+  }
+
+
+
+
   /**
    * Description.
    *

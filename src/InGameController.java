@@ -297,25 +297,30 @@ public class InGameController implements Initializable {
 
         // Print a string showing the location.
 
+        x = x - Game.gameX;
+        y= y - Game.gameY;
+        x = (x / Game.gameSize);
+        y = (y / Game.gameSize);
 
-
-        placeItem((int)x, (int)y, lastItem);
-        if (lastItem.equals(ElementType.Bomb)) {
-            bombPane.getChildren().remove(0);
-        } else if (lastItem.equals(ElementType.DeathRat)) {
-            deathRatPane.getChildren().remove(0);
-        }else if (lastItem.equals(ElementType.Gas)) {
-            gasPane.getChildren().remove(0);
-        }else if (lastItem.equals(ElementType.StopSign)) {
-            stopSignPane.getChildren().remove(0);
-        } else if (lastItem.equals(ElementType.Poison)) {
-        	poisonPane.getChildren().remove(0);
-        } else if (lastItem.equals(ElementType.Sterilise)) {
-        	sterilisePane.getChildren().remove(0);
-        } else if (lastItem.equals(ElementType.MaleGenderChange)) {
-        	maleGenderChangePane.getChildren().remove(0);
-        } else if (lastItem.equals(ElementType.FemaleGenderChange)) {
-        	femaleGenderChangePane.getChildren().remove(0);
+        if (Game.currentLevel.canAddItem((int)x, (int)y)) {
+            placeItem((int) x, (int) y, lastItem);
+            if (lastItem.equals(ElementType.Bomb)) {
+                bombPane.getChildren().remove(0);
+            } else if (lastItem.equals(ElementType.DeathRat)) {
+                deathRatPane.getChildren().remove(0);
+            } else if (lastItem.equals(ElementType.Gas)) {
+                gasPane.getChildren().remove(0);
+            } else if (lastItem.equals(ElementType.StopSign)) {
+                stopSignPane.getChildren().remove(0);
+            } else if (lastItem.equals(ElementType.Poison)) {
+                poisonPane.getChildren().remove(0);
+            } else if (lastItem.equals(ElementType.Sterilise)) {
+                sterilisePane.getChildren().remove(0);
+            } else if (lastItem.equals(ElementType.MaleGenderChange)) {
+                maleGenderChangePane.getChildren().remove(0);
+            } else if (lastItem.equals(ElementType.FemaleGenderChange)) {
+                femaleGenderChangePane.getChildren().remove(0);
+            }
         }
     }
 
@@ -325,32 +330,39 @@ public class InGameController implements Initializable {
      * @param y
      */
     public static void placeItem(double x, double y, ElementType type) {
-        x = x - Game.gameX;
-        y= y - Game.gameY;
+
         if (type.equals(ElementType.Bomb)) {
-         Game.currentLevel.addElement(new Bomb(ElementType.Bomb,  Game.currentLevel, 
-        		 (int) (x / Game.gameSize), (int) (y / Game.gameSize), 4));
+         Game.currentLevel.addElement(new Bomb(ElementType.Bomb,  Game.currentLevel,
+        		 (int) x, (int) y, 4));
+
         } else if (type.equals(ElementType.DeathRat)) {
          Game.currentLevel.addElement(new DeathRat(ElementType.DeathRat, Game.currentLevel,
-        		 (int) (x / Game.gameSize), (int) (y / Game.gameSize), 1, Direction.North));
+        		 (int) x, (int) y, 1, Direction.North));
+
         } else if (type.equals(ElementType.Gas)) {
             Game.currentLevel.addElement(new Gas(ElementType.Gas, Game.currentLevel,
-            		(int) (x / Game.gameSize), (int) (y / Game.gameSize), 3));
+            		(int) x, (int) y, 3));
+
         } else if (type.equals(ElementType.StopSign)) {
             Game.currentLevel.addElement(new StopSign(ElementType.StopSign, Game.currentLevel,
-            		(int) (x / Game.gameSize), (int) (y / Game.gameSize), 3));
+            		(int) x, (int) y, 3));
+
         } else if(type.equals(ElementType.Poison)) {
         	Game.currentLevel.addElement(new Poison(ElementType.Poison, Game.currentLevel,
-        			(int) (x / Game.gameSize), (int) (y / Game.gameSize), 1));
+        			(int) x, (int) y, 1));
+
     	} else if(type.equals(ElementType.Sterilise)) {
     		Game.currentLevel.addElement(new Sterilise(ElementType.Sterilise, Game.currentLevel,
-    				(int) (x / Game.gameSize), (int) (y / Game.gameSize), 2));
+    				(int) x, (int) y, 2));
+
     	} else if(type.equals(ElementType.MaleGenderChange)) {
     		Game.currentLevel.addElement(new MaleChanger(ElementType.MaleGenderChange,
-    				Game.currentLevel, (int) (x / Game.gameSize), (int) (y / Game.gameSize), 1));
+    				Game.currentLevel, (int) x, (int) y, 1));
+
     	} else if(type.equals(ElementType.FemaleGenderChange)) {
     		Game.currentLevel.addElement(new FemaleChanger(ElementType.FemaleGenderChange,
-    				Game.currentLevel, (int) (x / Game.gameSize), (int) (y / Game.gameSize), 1));
+    				Game.currentLevel, (int) x, (int) y, 1));
+
     	} else {
             System.out.println("invalid item type");
         }
