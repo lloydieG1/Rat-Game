@@ -114,6 +114,10 @@ public class Rat extends Element {
       image = ImageLoader.getImage("ratFemale.png", 64);
     }
   }
+
+  public boolean getIsMale() {
+      return isMale;
+  }
     
   public void setIsMale(boolean isMale) {
     this.isMale = isMale;
