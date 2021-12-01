@@ -128,7 +128,7 @@ public class Bomb extends Element  {
     
     //calculating the position the rat should be in this frame
     g.drawImage(image, x, y, size, size);
-      g.setFont(new Font("monospace", size/3.2));
+    g.setFont(new Font("monospace", size / 3.2));
     g.fillText(Integer.toString(health), x + size / 2.3, y + size / 1.4);
   }
 }
