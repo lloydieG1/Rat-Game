@@ -375,13 +375,14 @@ public class Level {
     String lines = "/\n";
     String file = getMapBounds()[0] + "," + getMapBounds()[1];
     file = file + "\n" + lines;
-    for (int i = 0; i < tiles.length; i++) {
+    for (int i = 0; i < getMapBounds()[1]; i++) {
     	
-      for (int j = 0; j < tiles[i].length; j++) {
+      for (int j = 0; j < getMapBounds()[0]; j++) {
+          System.out.println(i + " " + j);
         file = file + tiles[j][i].asString();
       }
+
       file = file + ";\n";
-      
     }
 
     file = file + "\n" + lines;
