@@ -161,7 +161,8 @@ public class Rat extends Element {
       }
       if (isPregnant()) {
 
-          if (Game.random.nextInt(CHILD_LIKELIHOOD) == 1) {
+
+              tickSpeed = Game.FPS*2;
               Rat rat = new Rat(ElementType.Rat, level, x, y,
                       Game.random.nextBoolean(), Direction.North, MAX_HEALTH, false);
               rat.setAge(0);
@@ -169,8 +170,21 @@ public class Rat extends Element {
               level.addElementLive(rat);
 
               System.out.println("has been Born!");
+          
+      }
+  }
+
+  public boolean canBreed() {
+      if (isMale) {
+          if (!getIsChild()) {
+              if (!isSterile) {
+                  if ((timeLeftInMating <= 0)) {
+                      return true;
+                  }
+              }
           }
       }
+      return false;
   }
 
   private void breed() {
@@ -178,17 +192,15 @@ public class Rat extends Element {
           for (Element element : level.getElements(x, y)) {
               if (element.getType().equals(ElementType.Rat)) {
                   Rat rat = (Rat) element;
-                  if (!(rat.isSterile)) {
-                      if (rat.timeLeftInMating <= 0) {
-                          if (rat.isMale) {
-                              rat.alignPosition();
-                              rat.setMatingTime(MATING_TIME);
-                              timeLeftInMating = MATING_TIME;
-                              timeLeftPregnant = PREGNANT_TIME;
-                              alignPosition();
-                          }
-                      }
-                  }
+
+                if (rat.canBreed()) {
+                    rat.alignPosition();
+                    rat.setMatingTime(MATING_TIME);
+                    timeLeftInMating = MATING_TIME;
+                    timeLeftPregnant = PREGNANT_TIME;
+                    alignPosition();
+                }
+
               }
           }
       }

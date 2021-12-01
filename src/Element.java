@@ -50,7 +50,7 @@ public abstract class Element {
   protected void alignPosition() {
       nextY = y;
       nextX = x;
-      dir = lastDir;
+      lastDir =dir;
   }
 
   public void setAge(int age) {
