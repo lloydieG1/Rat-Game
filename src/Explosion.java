@@ -2,76 +2,83 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
 
+/**
+ * Description.
+ *
+ * @author 
+ *
+ */
 public class Explosion extends Element  {
 
-    private int health;
-    private boolean damage;
-
-    private final int RADIUS = 1;
-
-    private Image blast;
+  int maxHealth = 5;
+  private Image blast;
+  private boolean isCenter;
 
 
+  /**
+   * Description.
+   *
+   * @param type
+   * @param level
+   * @param x
+   * @param y
+   * @param health
+   * @param dir
+   * @param isCenter
+   */
+  public Explosion(ElementType type, Level level, int x, int y, int health,
+                   Direction dir, boolean isCenter) {
+    super(type, level, x, y, dir, health);
 
-    public Explosion(ElementType type, Level level, int x, int y) {
-        super(type, level, x, y, Direction.North);
-        health = 1;
-        damage = false;
-
-
-        blast = ImageLoader.getImage("blast.png", 64);
+    if (isCenter) {
+      blast = ImageLoader.getImage("blastCenter.png", 32);
+    } else {
+      blast = ImageLoader.getImage("blast.png", 32);
     }
+    tickSpeed = Game.FPS / 15;
+    lastDir = dir;
+    this.isCenter = isCenter;
+  }
 
-    protected void tick() {
-
-        currentTick++;
-        if(currentTick > tickSpeed) {
-            currentTick = 0;
-
-            logic();
-        }
-
+  protected void tick() {
+    for (Element element : level.getElements(x, y)) {
+      if (element.getType().equals(ElementType.Rat)) {
+        level.removeElement(element);
+        Game.score = Game.score + 1;
+      }
     }
-
-    private void logic() {
-        health--;
-        if (health <= 0) {
-            level.removeElement(this);
-        }
-
-        damage = false;
+    currentTick++;
+    if (currentTick > tickSpeed) {
+      currentTick = 0;
+      logic();
     }
+    
+  }
 
-
-
-    protected void render(GraphicsContext g) {
-
-
-        double size = Game.gameSize;
-        double halfSize = size/2;
-
-
-        //get the current interpolated frame positions of rat.
-        double x = renderX();
-        double y = renderY();
-        //calculating the position the rat should be in this frame
-
-        g.save();
-        g.translate(x+Game.gameSize/2.0, y+Game.gameSize/2.0);
-        g.rotate(interpolateDir(dirAsNum(lastDir),dirAsNum(dir)));
-
-        double blastOffset = size*((2+RADIUS))*(interpolate(health, health-1)+0.5); //takes into account bomb shrinking
-        g.drawImage(blast, - blastOffset/2.0,  -blastOffset/2.0, blastOffset, blastOffset);
-
-        g.restore();
-
-
-
+  private void logic() {
+    health--;
+    if (health <= 0) {
+      level.removeElement(this);
     }
+  }
 
 
+
+  protected void render(GraphicsContext g) {
+    double size = Game.gameSize;
+
+    //get the current interpolated frame positions of rat.
+    double x = renderX();
+    double y = renderY();
+    
+    //calculating the position the rat should be in this frame
+    g.setFill(Color.color(1 - (health * 0.5 / maxHealth), (health * 0.9 / maxHealth), 0));
+    g.fillRect(x, y, size, size);
+  }
+
+  @Override
+  protected String extraInfo() {
+    return "," + isCenter;
+  }
 }

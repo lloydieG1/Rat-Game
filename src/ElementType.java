@@ -2,7 +2,7 @@
  * This enum contains each Element type for use whenever
  * a method needs to know what it is interacting with.
  *
- * @author William Randle, Mosead, LLoyd
+ * @author William Randle, Mosaed, LLoyd
  */
 
 public enum ElementType {
@@ -13,7 +13,8 @@ public enum ElementType {
     Gas(),
     Sterilise(),
     Poison(),
-    GenderChange(),
+    FemaleGenderChange(),
+    MaleGenderChange(),
     Explosion();
     
 }

@@ -1,17 +1,18 @@
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import javafx.scene.image.Image;
 
 
 /**
- * Class used for construction and behaviours of StopSign elements.
+ * Description.
  *
- * @author William Randle, Jack Lennard
+ * @author 
+ *
  */
-public class StopSign extends Element {
-	
-  Image image;
-  protected int blocks = 0;
+public class FemaleChanger extends Element {
+  private Image image;	
+  private int femaleChangeCount;	
+
 
   /**
    * Description.
@@ -22,20 +23,23 @@ public class StopSign extends Element {
    * @param y
    * @param health
    */
-  public StopSign(ElementType type, Level level, int x, int y, int health) {
+  public FemaleChanger(ElementType type, Level level, int x, int y, int health) {
     super(type, level, x, y, Direction.North, health);
-	// TODO Auto-generated constructor stub
-    image = ImageLoader.getImage("stopSign.png", 64);
+    // TODO Auto-generated constructor stub
+    femaleChangeCount = 0;
+    image = ImageLoader.getImage("femaleGenderChange.png", 64);
   }
-
+	
+	
   /**
    * Runs Tick() behaviours, allowing them to run logics automatically 
    * in time with other elements.
    */
+  @Override
   protected void tick() {
     if (level.getTile(x, y).getType().equals(TileType.Grass)) {
       level.removeElement(this);
-      System.out.println("deleting stopSign");
+      System.out.println("deleting female changer");
     }
     currentTick++;
     if (currentTick > tickSpeed) {
@@ -43,30 +47,28 @@ public class StopSign extends Element {
       logic();
     }
   }
-
+  
   /**
-   * The logic of the StopSign.
+   * The logic of the Element.
    */
   private void logic() {
-    if (this.blocks > 4) {
+    if (this.femaleChangeCount == 1) {
       level.removeElement(this);
     }
   }
+    
 
-  public void blocksUp() {
-    blocks++;
-  }
-              
 
+	
   /**
-   * Renders a Stop Sign.
+   * Renders a Male Changer sign.
    *
    * @param g graphics context
    */
+  @Override
   protected void render(GraphicsContext g) {
     double x = renderX();
     double y = renderY();
-    //calculating the position the Sign should be in this frame
     g.drawImage(image, x, y, size, size);
   }
 }

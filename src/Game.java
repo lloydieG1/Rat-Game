@@ -23,7 +23,7 @@ public class Game extends Application {
 
     private static final int WIDTH = 1350; //width of the window
     private static final int HEIGHT = 900; //height of the window
-    public static final int FPS = 120; //the fps of the game
+    public static final int FPS = 80; //the fps of the game
     
     private static Stage primaryStage; //the stage everything is shown on
 
@@ -36,6 +36,8 @@ public class Game extends Application {
 
     private static GraphicsContext minimap;
 
+    private static GraphicsContext ratLives;
+
     private static Timeline gameLoop; //the loop in which the game runs
 
 
@@ -43,23 +45,23 @@ public class Game extends Application {
 
     public static Random random = new Random();
 
-    public static int gameSize = 70;
+    public static double gameSize = 70;
 
     public static InGameController levelController;
 
     public static EndGameController endGameController;
 
-    public static final int MAP_WIDTH = 961;
-    public static final int MAP_HEIGHT = 861;
-    public static int gameX =0;
-    public static int gameY = 0;
+    public static final int MAP_WIDTH = 900;
+    public static final int MAP_HEIGHT = 900;
+    public static double gameX =0;
+    public static double gameY = 0;
 
     public static double scrollX;
 
 
     public static int score;
 
-    public static int VISIBLE_TILES = 14;
+    public static double VISIBLE_TILES = 14;
 
     private static final int ZOOM_MIN = 65;
     private static final int ZOOM_MAX = 90;
@@ -106,7 +108,7 @@ public class Game extends Application {
     public void processKeyEvent(KeyEvent event) {
         // We change the behaviour depending on the actual key that was pressed.
 
-        int scroll = gameSize;
+        double scroll = gameSize;
         switch (event.getCode()) {
             case RIGHT:
                 // Right key was pressed. So move the player right by one cell.
@@ -115,17 +117,14 @@ public class Game extends Application {
             case LEFT:
                 // Right key was pressed. So move the player right by one cell.
                 Game.gameX+=scroll;
-               // clampMap();
                 break;
             case UP:
                 // Right key was pressed. So move the player right by one cell.
                 Game.gameY+=scroll;
-             //   clampMap();
                 break;
             case DOWN:
                 // Right key was pressed. So move the player right by one cell.
                 Game.gameY-=scroll;
-              //  clampMap();
                 break;
             default:
                 // Do nothing for all other keys.
@@ -151,11 +150,11 @@ public class Game extends Application {
                 double scrollFactor = 1.5;
 
 
-                gameSize = gameSize + (int)(event.getTextDeltaY()*scrollFactor);
+                gameSize = gameSize + (event.getTextDeltaY()*scrollFactor);
 
                 //make the scroll happen from the center instead of the top corner
                 if (minMax(gameSize, ZOOM_MIN, ZOOM_MAX) == gameSize) {
-                    int scroll = (int)(event.getTextDeltaY()*scrollFactor)*gameSize;
+                    double scroll = (event.getTextDeltaY()*scrollFactor)*gameSize;
                     int factorResize = 8;
                     gameX = gameX - scroll/factorResize;
                     gameY = gameY - scroll/factorResize;
@@ -179,14 +178,18 @@ public class Game extends Application {
 
     private static void clampMap() {
         gameSize = minMax(gameSize, ZOOM_MIN, ZOOM_MAX);
-        VISIBLE_TILES = (int)gameGraphics.getCanvas().getWidth()/gameSize -3;
-        int mapWidth = currentLevel.getMapBounds()[0]-4;
-        int mapHeight = currentLevel.getMapBounds()[1]-3;
+        VISIBLE_TILES = (gameGraphics.getCanvas().getWidth()/gameSize);
+        int mapWidth = currentLevel.getMapBounds()[0];
+        int mapHeight = currentLevel.getMapBounds()[1];
 
-        gameY = minMax(gameY, -gameSize* (mapHeight-VISIBLE_TILES), gameSize);
-        gameX = minMax(gameX, -gameSize*(mapWidth-VISIBLE_TILES), gameSize);
+        gameY = minMax(gameY, -gameSize* (mapHeight-VISIBLE_TILES), 0);
+        gameX = minMax(gameX, -gameSize*(mapWidth-VISIBLE_TILES), 0);
 
 
+    }
+
+    public static String sidebarAsString() {
+        return levelController.sideBarAsString();
     }
 
 
@@ -202,6 +205,7 @@ public class Game extends Application {
         updateScore();
         drawButtons(gameGraphics);
         currentLevel.renderMiniMap(minimap);
+        currentLevel.renderRatLives(ratLives);
         clampMap();
     }
 
@@ -217,9 +221,9 @@ public class Game extends Application {
 
     private static void drawButton(GraphicsContext g, int x, int y, int width, int height) {
         if(intersect((int)levelController.mouseX, (int)levelController.mouseY, x, y, width, height)) {
-            g.setFill(Color.color(0.2, 0.2, 0.2, 0.5));
+            g.setFill(Color.color(0.2, 0.2, 0.2, 0.1));
         } else {
-            g.setFill(Color.color(0.2, 0.2, 0.2));
+            g.setFill(Color.color(0.2, 0.2, 0.2, 0.7));
         }
         g.fillRect(x, y, width, height);
     }
@@ -286,6 +290,15 @@ public class Game extends Application {
 
     }
 
+    /**
+     * loads the canvas to be drawn to in levels
+     * @param graphics game graphics
+     */
+    public static void loadRatLives(GraphicsContext graphics) {
+        ratLives = graphics;
+
+    }
+
 
     /**
      * loads an fxml file from parsed filename string
@@ -311,7 +324,7 @@ public class Game extends Application {
      * @param max
      * @return
      */
-    public static int minMax(int var, int min, int max) {
+    public static double minMax(double var, double min, double max) {
         if(var >= max)
             return max;
         else if (var <=min)

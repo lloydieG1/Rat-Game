@@ -2,270 +2,429 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.*;
+import java.nio.file.*;
 import java.util.ArrayList;
 
 /**
- * scene manager contains and manages all of the tiles and elements in a level
- * @author william randle, lloyd, adrian, yazan
- * @version 1
+ * Scene manager contains and manages all of the tiles and elements in a level.
+ *
+ * @author William Randle, Lloyd, Adrian, Yazan
  */
 
 public class Level {
-    private Tile[][] tiles; // 2d array of all the tiles and what they contain
+  public int timer = 0;
+  public String level;
+  
+  private Tile[][] tiles; // 2d array of all the tiles and what they contain
 
-    private ArrayList<Element> elements;
-    private ArrayList<Element> nextElements = new ArrayList<>();
-    private ArrayList<MenuItem> menuItems = new ArrayList<>();
+  private ArrayList<Element> elements;
+  private ArrayList<Element> nextElements = new ArrayList<>();
+  private ArrayList<MenuItem> menuItems = new ArrayList<>();
 
-    private int maxRats;
+  private int maxRats;
 
-    private int xSize;
-    private int ySize;
-    private int currentTick = 0;
+  private int xSize;
+  private int ySize;
+  private int currentTick = 0;
+  private int timeLimit;
 
-    /**
-     * constructs a Level
-     *
-     * @param x width of map
-     * @param y height of map
-     */
-    public Level(int x, int y, int maxRats) {
-        tiles = new Tile[x][y];
-        elements = new ArrayList<>();
-        this.xSize = x;
-        this.ySize = y;
 
-        for (int i = 0; i < x; i++) {
-            for (int j = 0; j < y; j++) {
-                addTile(i, j ,new Tile(TileType.Grass,i,j));
-            }
+  /**
+   * Constructs a Level.
+   *
+   * @param x width of map
+   * @param y height of map
+   */
+  public Level(int x, int y, int maxRats, String level, int timeLimit, int timer) {
+    tiles = new Tile[x][y];
+    elements = new ArrayList<>();
+    this.xSize = x;
+    this.ySize = y;
+    for (int i = 0; i < x; i++) {
+      for (int j = 0; j < y; j++) {
+        addTile(i, j, new Tile(TileType.Grass, i, j));
+      }
+    }
+    this.level = level;
+    this.maxRats = maxRats;
+    this.timeLimit = timeLimit;
+    this.timer = timer;
+  }
 
+  public void setScore(int score) {
+    Game.score = score;
+  }
+
+
+
+  /**
+   * Get Tile type.
+   *
+   * @param x horizontal map coordinate
+   * @param y Vertical map coordinate
+   * @return tile at parsed position
+   */
+  public Tile getTile(int x, int y) {
+    return tiles[x][y];
+  }
+
+  /**
+   * Adds a tile of the select Type to the map at coordinates x,y.
+   *
+   * @param x 
+   * @param y 
+   * @param tile 
+   */
+  public void addTile(int x, int y, Tile tile) {
+    tiles[x][y] = tile;
+  }
+    
+  /**
+   * Get length of map.
+   *
+   * @return the total amount of tiles on the map
+   */
+  public int getLength() {
+    return tiles.length;
+  }
+
+  /**
+   * Description.
+   *
+   * @param x 
+   * @param y
+   * @return an arraylist of elements that are contained in the tile that has coordinates x,y
+   */
+  public ArrayList<Element> getElements(int x, int y) {
+    ArrayList<Element> stack = new ArrayList<>(); //returning elements at x,y
+    for (Element element : elements) {
+      if (element.getX() == x && element.getY() == y) {
+        stack.add(element);
+      }
+    }
+    return stack;
+  }
+
+  /**
+   * Gives the bounds of the map.
+   *
+   * @return
+   */
+  public int[] getMapBounds() {
+    int[] bounds = new int[2];
+    bounds[0] = xSize;
+    bounds[1] = ySize;
+    return bounds;
+  }
+
+
+  /**
+   * Description.
+   *
+   * @return
+   */
+  public int ratCount() {
+    int rats = 0;
+    for (Element element : elements) {
+      if (element.getType().equals(ElementType.Rat)) {
+        rats++;
+      }
+    }
+    return rats;
+  }
+
+  private int maleRatCount() {
+    int rats = 0;
+    for (Element element : elements) {
+      if (element.getType().equals(ElementType.Rat)) {
+        Rat rat = (Rat) element;
+        if (rat.getIsMale()) {
+          rats++;
         }
-
-
-        this.maxRats = maxRats;
+      }
     }
+    return rats;
 
-    /**
-     *
-     * @param x horizontal map coordinate
-     * @param y Vertical map coordinate
-     * @return tile at parsed position
-     */
-    public Tile getTile(int x, int y) {
-        return tiles[x][y];
+  }
+
+
+  private void checkGameCondition() {
+    int rats = ratCount();
+    if (rats > maxRats) {
+      Game.endGame("you lost with a score of " + Game.score);
+    } else if (rats == 0) {
+      Game.endGame("you won with a score of " + Game.score);
     }
+    if (timer > timeLimit) {
+      Game.endGame("you lost with a score of " + Game.score);
+    }
+  }
 
-    /**
-     * @param x 
-     * @param y 
-     * @param tile 
-     * adds a tile of the selected Type to the map at
-     * coordinates x,y
-     */
-    public void addTile(int x, int y, Tile tile) {
-        tiles[x][y] = tile;
+  /**
+   * Description.
+   *
+   * @param element An object that interacts with others on the map
+   */
+  public void addElementLive(Element element) {
+    nextElements.add(element);
+  }
+
+  /**
+   * Description.
+   *
+   * @param element
+   */
+  public void addElement(Element element) {
+    elements.add(element);
+  }
+  
+  /**
+   * Description.
+   *
+   * @param menuItem
+   */
+  public void addMenuItem(MenuItem menuItem) {
+    menuItems.add(menuItem);
     }
     
-    /**
-     * @return the total amount of tiles on the map
-     */
-    public int getLength() {
-        return tiles.length;
-    }
+  /**
+   * Description.
+   *
+   * @param element
+   */
+  public void removeElement(Element element) {
+    element.flagRemoval = true;
+    removeFlagged();
+    // this.elements.remove(element);
+  }
 
-    /**
-     * @param x 
-     * @param
-     * @return an arraylist of elements that are contained in the tile
-     * that has coordinates x,y
-     */
-    public ArrayList<Element> getElements(int x, int y) {
-        ArrayList<Element> stack = new ArrayList<>(); //returning elements at x,y
-        for (Element element : elements) {
-            if (element.getX() == x && element.getY() == y) {
-                stack.add(element);
-            }
-        }
-        return stack;
-
-    }
-
-    /**
-     * gives the bounds of the map
-     * @return
-     */
-    public int[] getMapBounds() {
-        int[] bounds = new int[2];
-        bounds[0]= xSize;
-        bounds[1] = ySize;
-        return bounds;
-    }
-
-
-
-    public int ratCount() {
-        int rats = 0;
-        for (Element element : elements) {
-            if (element.getType().equals(ElementType.Rat)) {
-                rats++;
-            }
-        }
-        return rats;
-
-    }
-
-
-    private void checkGameCondition() {
-        int rats = ratCount();
-        if (rats > maxRats) {
-            Game.endGame("you lost with a score of " + Game.score);
-        } else if (rats == 0) {
-            Game.endGame("you won with a score of " + Game.score);
-        }
-
-
-    }
-
-    /**
-     * @param element An object that interacts with others on the map
-     */
-    public void addElementLive(Element element) {
-        nextElements.add(element);
-
-    }
-
-    /**
-     * @param element
-     */
-    public void addElement(Element element) {
+  /**
+   * Removes elements which are flagged for removal.
+   */
+  public void removeFlagged() {
+    ArrayList<Element> oldElements = elements;
+    elements = new ArrayList<>();
+    for (Element element : oldElements) {
+      if (!(element.flagRemoval)) {
         elements.add(element);
-
+      }
     }
+  }
 
-    /**
-     * @param menuItem
-     */
-    public void addMenuItem(MenuItem menuItem) {
-        menuItems.add(menuItem);
 
+  /**
+   * Has elements run their tick() behaviours, and adds
+   * buffered elements to the map.
+   */
+  public void tick() {
+    currentTick++;
+    if (currentTick >= Game.FPS) {
+      currentTick = 0;
+      timer++;
+    }
+    for (Element element : elements) {
+      element.factor = Game.gameSize;
+      element.size = Game.gameSize;
+      element.tick();
+    }
+    for (Element element : nextElements) {
+      elements.add(element);
+    }
+    nextElements = new ArrayList<>();
+    tickMenuItems();
+    checkGameCondition();
+    }
+  
+  /**
+   * Description.
+   *
+   * @param sideBar
+   */
+  public void loadSideBar(int[] sideBar) {
+    for (int i = 0; i < sideBar[0]; i++) {
+      Game.addItem(ElementType.Bomb);
+    }
+    for (int i = 0; i < sideBar[1]; i++) {
+      Game.addItem(ElementType.DeathRat);
+    }
+    for (int i = 0; i < sideBar[2]; i++) {
+      Game.addItem(ElementType.Gas);
+    }
+    for (int i = 0; i < sideBar[3]; i++) {
+      Game.addItem(ElementType.StopSign);
+    }
+  }
+
+
+  private void tickMenuItems() {
+    for (MenuItem menuItem : menuItems) {
+      menuItem.tick();
+    }
+  }
+
+
+  /**
+   * Calls to draw elements and tiles on the map.
+   *
+   * @param g Graphics Context
+   */
+  public void render(GraphicsContext g) {
+    renderTiles(g);
+    for (Element element : elements) {
+      element.render(g);
+    }
+    renderTunnels(g);
+  }
+
+  /**
+   * Draws tiles on the map.
+   *
+   * @param g
+   */
+  public void renderTiles(GraphicsContext g) {
+    for (int i = 0; i < tiles.length; i++) {
+      for (int j = 0; j < tiles[i].length; j++) {
+        tiles[i][j].render(g);
+      }
+    }
+  }
+  
+  /**
+   * Description.
+   *
+   * @param g
+   */
+  public void renderTunnels(GraphicsContext g) {
+    for (int i = 0; i < tiles.length; i++) {
+      for (int j = 0; j < tiles[i].length; j++) {
+        if (tiles[i][j].getType().equals(TileType.Tunnel)) {
+          tiles[i][j].render(g);
+        }
+      }
+    }
+  }
+
+  /**
+   * Description.
+   *
+   * @param g
+   */
+  public void renderMiniMap(GraphicsContext g) {
+    for (int i = 0; i < tiles.length; i++) {
+      for (int j = 0; j < tiles[i].length; j++) {
+        tiles[i][j].minirender(g, tiles[0].length);
+      }
     }
     
-    /**
-     * @param element
-     */
-    public void removeElement(Element element) {
-        element.flagRemoval = true;
-        removeFlagged();
-        // this.elements.remove(element);
+    g.setFill(Color.color(0, 0, 0, 0.2));
+    double mapFactorY = (Game.MAP_HEIGHT / g.getCanvas().getHeight())
+             * (Game.currentLevel.getMapBounds()[1] * 1.0 / Game.VISIBLE_TILES);
+    
+    double mapFactorX = (Game.MAP_WIDTH / g.getCanvas().getWidth())
+             * (Game.currentLevel.getMapBounds()[0] * 1.0 / Game.VISIBLE_TILES);
+    
+    g.fillRect(0, 0, g.getCanvas().getWidth(), - Game.gameY / mapFactorY);
+    g.fillRect(0, 0, -Game.gameX / mapFactorX, g.getCanvas().getHeight());
+    
+    double tilewidth = g.getCanvas().getWidth() / Game.currentLevel.getMapBounds()[0];
+    double tileheight = g.getCanvas().getHeight() / Game.currentLevel.getMapBounds()[1];
 
+    g.fillRect(0, -Game.gameY / mapFactorY + (Game.VISIBLE_TILES) * tileheight,
+               g.getCanvas().getWidth(), g.getCanvas().getHeight());
+    g.fillRect(-Game.gameX / mapFactorX + (Game.VISIBLE_TILES) * tilewidth,
+               0, g.getCanvas().getWidth(), g.getCanvas().getHeight());
+  }
+  
+  /**
+   * Description.
+   */
+  public void deleteSave() {
+    File f = new File("res\\maps\\save\\" + level + ".txt");
+    if (f.exists()) {
+      try {
+        Files.delete(Paths.get("res\\maps\\save\\" + level + ".txt"));
+        System.out.println("deleting save");
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    }
+  }
+
+  /**
+   * Description.
+   *
+   * @param g
+   */
+  public void renderRatLives(GraphicsContext g) {
+    double sizeFactor = g.getCanvas().getHeight() / maxRats;
+    g.setFill(Color.color(0, 0, 0));
+    g.fillRect(0, 0, g.getCanvas().getWidth(), g.getCanvas().getHeight());
+    g.setFill(Color.color(0, 0.3, 1));
+    g.fillRect(0, g.getCanvas().getHeight() - maleRatCount() * sizeFactor,
+               g.getCanvas().getWidth(), maleRatCount() * sizeFactor);
+    g.setFill(Color.color(1, 0.3, 1));
+    g.fillRect(0, g.getCanvas().getHeight() - ratCount() * sizeFactor,
+               g.getCanvas().getWidth(), (ratCount() - maleRatCount()) * sizeFactor);
+  }
+
+  /**
+   * Description.
+   */
+  public void saveFile() {
+    String lines = "/\n";
+    String file = getMapBounds()[0] + "," + getMapBounds()[1];
+    file = file + "\n" + lines;
+    for (int i = 0; i < tiles.length; i++) {
+    	
+      for (int j = 0; j < tiles[i].length; j++) {
+        file = file + tiles[j][i].asString();
+      }
+      file = file + ";\n";
+      
     }
 
-    /**
-     * removes elements which are flagged for removal
-     */
-    public void removeFlagged() {
-        ArrayList<Element> oldElements = elements;
-        elements = new ArrayList<>();
-        for (Element element : oldElements) {
-            if (!(element.flagRemoval)) {
-                elements.add(element);
-            }
-        }
+    file = file + "\n" + lines;
 
+    file = file + maxRats;
+
+    file = file + "\n" + lines;
+
+    for (Element element : elements) {
+      file = file + element.asString() + " ";
     }
 
-    /**
-     * removes all elements from the map
-     */
-    public void removeAll() {
-
-        elements = new ArrayList<>();
-
+    file = file + "\n" + lines;
+    file = file + timeLimit;
+    file = file + "\n" + lines;
+    file = file + timer;
+    file = file + "\n" + lines;
+    for (MenuItem menuItem : menuItems) {
+      file = file + menuItem.asString() + " ";
     }
-
-    /**
-     * has elements run their tick() behaviours, and adds
-     * buffered elements to the map
-     */
-    public void tick() {
-        currentTick++;
-        for (Element element : elements) {
-            element.factor = Game.gameSize;
-            element.size = Game.gameSize;
-            element.tick();
-        }
-
-
-        for(Element element : nextElements) {
-            elements.add(element);
-        }
-        nextElements = new ArrayList<>();
-
-        tickMenuItems();
-
-
-        checkGameCondition();
+    file = file + "\n" + lines;
+    file = file + Game.score;
+    file = file + "\n" + lines;
+    file = file + Game.sidebarAsString();
+    try {
+      File myObj = new File("res\\maps\\save\\" + level + ".txt");
+      if (myObj.createNewFile()) {
+        System.out.println("save: " + myObj.getName());
+      } else {
+        System.out.println("save already exists. now writing to it");
+      }
+    } catch (IOException e) {
+      System.out.println("An error occurred.");
+      e.printStackTrace();
     }
-
-
-    private void tickMenuItems() {
-        for(MenuItem menuItem : menuItems) {
-            menuItem.tick();
-
-        }
+    try {
+      FileWriter myWriter = new FileWriter("res\\maps\\save\\" + level + ".txt");
+      myWriter.write(file);
+      myWriter.close();
+      System.out.println("Successfully saved");
+    } catch (IOException e) {
+      System.out.println("An error occurred.");
+      e.printStackTrace();
     }
-
-
-    /**
-     * calls to draw elements and tiles on the map.
-     * @param g Graphics Context
-     */
-    public void render(GraphicsContext g) {
-        renderTiles(g);
-
-        for (Element element : elements) {
-            element.render(g);
-        }
-
-        renderTunnels(g);
-    }
-
-    /**
-     * draws tiles on the map.
-     * @param g
-     */
-    public void renderTiles(GraphicsContext g) {
-        for (int i = 0; i < tiles.length; i++) {
-            for (int j = 0; j < tiles[i].length; j++) {
-                tiles[i][j].render(g);
-            }
-        }
-    }
-
-    public void renderTunnels(GraphicsContext g) {
-        for (int i = 0; i < tiles.length; i++) {
-            for (int j = 0; j < tiles[i].length; j++) {
-                if( tiles[i][j].getType().equals(TileType.Tunnel)) {
-                    tiles[i][j].render(g);
-                }
-            }
-        }
-    }
-
-
-    public void renderMiniMap(GraphicsContext g) {
-        for (int i = 0; i < tiles.length; i++) {
-            for (int j = 0; j < tiles[i].length; j++) {
-
-
-                tiles[i][j].minirender(g, tiles[0].length);
-
-            }
-        }
-
-
-    }
+  }
 }
