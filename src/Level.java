@@ -320,24 +320,32 @@ public class Level {
    * @param g
    */
   public void renderMiniMap(GraphicsContext g) {
+      g.setFill(Color.color(0.3, 0.6, 0));
+      g.fillRect(0, 0, g.getCanvas().getWidth(), g.getCanvas().getHeight());
+      double widthX = Game.currentLevel.getMapBounds()[0];
+      double widthY = Game.currentLevel.getMapBounds()[1];
+      double width = widthX;
+      if (widthX < widthY) {
+          width = widthY;
+      }
     for (int i = 0; i < tiles.length; i++) {
       for (int j = 0; j < tiles[i].length; j++) {
-        tiles[i][j].minirender(g, tiles[0].length,tiles.length);
+        tiles[i][j].minirender(g, width);
       }
     }
     
     g.setFill(Color.color(0, 0, 0, 0.2));
     double mapFactorY = (Game.MAP_HEIGHT / g.getCanvas().getHeight())
-             * (Game.currentLevel.getMapBounds()[1] * 1.0 / Game.VISIBLE_TILES);
+             * (width * 1.0 / Game.VISIBLE_TILES);
     
     double mapFactorX = (Game.MAP_WIDTH / g.getCanvas().getWidth())
-             * (Game.currentLevel.getMapBounds()[0] * 1.0 / Game.VISIBLE_TILES);
+             * (width * 1.0 / Game.VISIBLE_TILES);
     
     g.fillRect(0, 0, g.getCanvas().getWidth(), - Game.gameY / mapFactorY);
     g.fillRect(0, 0, -Game.gameX / mapFactorX, g.getCanvas().getHeight());
     
-    double tilewidth = g.getCanvas().getWidth() / Game.currentLevel.getMapBounds()[0];
-    double tileheight = g.getCanvas().getHeight() / Game.currentLevel.getMapBounds()[1];
+    double tilewidth = g.getCanvas().getWidth() / width;
+    double tileheight = g.getCanvas().getHeight() / width;
 
     g.fillRect(0, -Game.gameY / mapFactorY + (Game.VISIBLE_TILES) * tileheight,
                g.getCanvas().getWidth(), g.getCanvas().getHeight());

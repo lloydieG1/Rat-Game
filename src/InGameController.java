@@ -132,9 +132,16 @@ public class InGameController implements Initializable {
 
     @FXML
     private void minimapClick(MouseEvent event) {
+        double widthX = Game.currentLevel.getMapBounds()[0];
+        double widthY = Game.currentLevel.getMapBounds()[1];
+        double width;
+        width = widthX;
+        if (widthX < widthY) {
+            width = widthY;
+        }
 
-        double tilewidth = minimap.getWidth() / Game.currentLevel.getMapBounds()[0];
-        double tileheight = minimap.getHeight() / Game.currentLevel.getMapBounds()[1];
+        double tilewidth = minimap.getWidth() / width;
+        double tileheight = minimap.getHeight() / width;
         double clickX = event.getX( )/ tilewidth;
         double clickY = event.getY() / tileheight;
 

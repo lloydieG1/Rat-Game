@@ -203,11 +203,11 @@ public class Tile {
    * @param g
    * @param width
    */
-  public void minirender(GraphicsContext g, double widthY,double widthX) {
+  public void minirender(GraphicsContext g, double width) {
     //check if this tile is visible for the 4 directions
 
-    double sizeX = g.getCanvas().getWidth() / widthX;
-    double sizeY = g.getCanvas().getHeight() / widthY;
+    double sizeX = g.getCanvas().getWidth() / width;
+    double sizeY = g.getCanvas().getHeight() / width;
     double x = this.x * sizeX;
     double y = this.y * sizeY;
     g.setFill(Color.RED);
