@@ -73,7 +73,7 @@ public class Rat extends Element {
    */
   private void logic() {  
     age++;
-    if (age == ADULT_AGE) {
+    if (age > ADULT_AGE) {
       develop();
     }
         
