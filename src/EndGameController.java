@@ -9,37 +9,42 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * This class handles interactions with the end game screen.
- *
+ * this class handles interactions with the end game screen
  * @author William Randle
+ * @version 2
  */
 public class EndGameController implements Initializable {
-  @FXML
-  Text text;
+    @FXML
+    Text text;
 
-  /**
-   * Switches back to the menu.
-   */
-  @FXML
-  private void backClick() {
-    Game.openMainMenu();
-    Game.currentLevel.deleteSave();
-  }
+    /**
+     * switches back to the menu
+     */
+    @FXML
+    private void backClick() {
+        Game.openMainMenu();
 
-  @FXML
-  public void setText(String input) {
-    text.setText(input);
-  }
+    }
 
-  /**
-   * Give game access to this class.
-   *
-   * @param url
-   * @param resourceBundle
-   */
-  @Override
-  public void initialize(URL url, ResourceBundle resourceBundle) {
-    Game.endGameController = this;
-  }
+
+
+    @FXML
+    public void setText(String input) {
+        text.setText(input);
+    }
+
+
+    /**
+     * give game access to this class
+     *
+     * @param url
+     * @param resourceBundle
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        Game.endGameController = this;
+
+
+    }
 }
 
