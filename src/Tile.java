@@ -70,22 +70,23 @@ public class Tile {
    * @param g
    * @param width
    */
-  public void minirender(GraphicsContext g, double width) {
+  public void minirender(GraphicsContext g, double widthY,double widthX) {
     //check if this tile is visible for the 4 directions
 
-    double size = g.getCanvas().getHeight() / width;
-    double x = this.x * size;
-    double y = this.y * size;
+    double sizeX = g.getCanvas().getWidth() / widthX;
+    double sizeY = g.getCanvas().getHeight() / widthY;
+    double x = this.x * sizeX;
+    double y = this.y * sizeY;
     g.setFill(Color.RED);
     if (type.equals(TileType.Grass)) {
       g.setFill(Color.color(0.3, 0.6, 0));
-      g.fillRect(x, y, size, size);
+      g.fillRect(x, y, sizeX, sizeY);
     } else if (type.equals(TileType.Path)) {
       g.setFill(Color.color(0.4, 0.3, 0));
-      g.fillRect(x, y, size, size);
+        g.fillRect(x, y, sizeX, sizeY);
     } else if (type.equals(TileType.Tunnel)) {
       g.setFill(Color.color(0.4, 0, 0));
-      g.fillRect(x, y, size, size);
+        g.fillRect(x, y, sizeX, sizeY);
     }
   }
 
