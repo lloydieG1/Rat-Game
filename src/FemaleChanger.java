@@ -13,6 +13,7 @@ public class FemaleChanger extends Element {
   private Image image;	
   private int femaleChangeCount;	
 
+
   /**
    * Description.
    *
@@ -36,12 +37,12 @@ public class FemaleChanger extends Element {
    */
   @Override
   protected void tick() {
-    if (level.getTile(x,y).getType().equals(TileType.Grass)) {
+    if (level.getTile(x, y).getType().equals(TileType.Grass)) {
       level.removeElement(this);
       System.out.println("deleting female changer");
     }
     currentTick++;
-    if(currentTick > tickSpeed) {
+    if (currentTick > tickSpeed) {
       currentTick = 0;
       logic();
     }
@@ -51,7 +52,7 @@ public class FemaleChanger extends Element {
    * The logic of the Element.
    */
   private void logic() {
-    if (this.femaleChangeCount == 1){
+    if (this.femaleChangeCount == 1) {
       level.removeElement(this);
     }
   }
