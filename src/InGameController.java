@@ -42,24 +42,9 @@ public class InGameController implements Initializable {
 
     @FXML
     private TilePane stopSignPane;
-    
-    @FXML
-    private TilePane poisonPane;
-    
-    @FXML
-    private TilePane sterilisePane;
-    
-    @FXML
-    private TilePane maleGenderChangePane;
-    
-    @FXML
-    private TilePane femaleGenderChangePane;
 
     @FXML
     private Canvas minimap;
-
-    @FXML
-    private Canvas ratLives;
 
     public int buttonSize = 70;
 
@@ -78,7 +63,6 @@ public class InGameController implements Initializable {
      */
     @FXML
     private void backClick() {
-        Game.currentLevel.saveFile();
         Game.openLevelMenu();
         Game.pauseGame();
 
@@ -90,60 +74,26 @@ public class InGameController implements Initializable {
         double y = event.getY();
 
         if (x < buttonSize) {
-            Game.gameX = Game.gameX + buttonSize;
+            Game.gameX = Game.gameX+buttonSize;
         }
 
         if (y < buttonSize) {
-            Game.gameY = Game.gameY + buttonSize;
+            Game.gameY = Game.gameY+buttonSize;
         }
 
         if (x > Game.MAP_WIDTH-buttonSize) {
-            Game.gameX = Game.gameX - buttonSize;
+            Game.gameX = Game.gameX-buttonSize;
         }
 
         if (y > Game.MAP_HEIGHT-buttonSize) {
-            Game.gameY = Game.gameY - buttonSize;
+            Game.gameY = Game.gameY-buttonSize;
         }
 
-    }
-
-    public String sideBarAsString() {
-        String sideBar = bombPane.getChildren().size() + ",";
-        sideBar = sideBar + deathRatPane.getChildren().size() + ",";
-        sideBar = sideBar + gasPane.getChildren().size() + ",";
-        sideBar = sideBar + stopSignPane.getChildren().size() + ",";
-        sideBar = sideBar + poisonPane.getChildren().size() + ",";
-        sideBar = sideBar + sterilisePane.getChildren().size() + ",";
-        sideBar = sideBar + maleGenderChangePane.getChildren().size() + ",";
-        sideBar = sideBar + femaleGenderChangePane.getChildren().size() + ",";
-        return sideBar;
     }
 
     private Image  getImage(String fileName) {
         Image image = ImageLoader.getImage(fileName, 64);
         return image;
-    }
-
-    @FXML
-    private void canvasMouseLeave() {
-        mouseX = gameCanvas.getWidth() / 2;
-        mouseY = gameCanvas.getHeight() / 2;
-    }
-
-    @FXML
-    private void minimapClick(MouseEvent event) {
-
-        double tilewidth = minimap.getWidth() / Game.currentLevel.getMapBounds()[0];
-        double tileheight = minimap.getHeight() / Game.currentLevel.getMapBounds()[1];
-        double clickX = event.getX( )/ tilewidth;
-        double clickY = event.getY() / tileheight;
-
-        //adjust so centered:
-        clickX = clickX-Game.VISIBLE_TILES / 2.0;
-        clickY = clickY-Game.VISIBLE_TILES / 2.0;
-        Game.gameX =- (int)(clickX * Game.gameSize);
-        Game.gameY =- (int)(clickY * Game.gameSize);
-
     }
 
     private String typeToString(ElementType type) {
@@ -155,14 +105,6 @@ public class InGameController implements Initializable {
             return "gas";
         } else if (type.equals(ElementType.StopSign)) {
             return "stopSign";
-        } else if (type.equals(ElementType.Poison)) {
-        	return "poison";
-        } else if (type.equals(ElementType.Sterilise)) {
-        	return "sterilise";
-        } else if (type.equals(ElementType.MaleGenderChange)) {
-        	return "maleGenderChange";
-        } else if (type.equals(ElementType.FemaleGenderChange)) {
-        	return "femaleGenderChange";
         }
         return "invalid type";
     }
@@ -182,7 +124,7 @@ public class InGameController implements Initializable {
                 // We have to put some content in the clipboard of the drag event.
                 // We do not use this, but we could use it to store extra data if we wished.
                 ClipboardContent content = new ClipboardContent();
-                content.putString(typeToString(type));
+                content.putString(typeToString(type) );
                 db.setContent(content);
 
                 lastItem = type;
@@ -196,82 +138,36 @@ public class InGameController implements Initializable {
 
     public void resetItems() {
 
-        while (bombPane.getChildren().size() >0) {
+        while(bombPane.getChildren().size() >0) {
             bombPane.getChildren().remove(0);
         }
-        while (deathRatPane.getChildren().size() >0) {
+        while(deathRatPane.getChildren().size() >0) {
             deathRatPane.getChildren().remove(0);
         }
 
-        while (gasPane.getChildren().size() >0) {
+        while(gasPane.getChildren().size() >0) {
             gasPane.getChildren().remove(0);
         }
 
-        while (stopSignPane.getChildren().size() >0) {
+        while(stopSignPane.getChildren().size() >0) {
             stopSignPane.getChildren().remove(0);
-        }
-        
-        while (poisonPane.getChildren().size() >0) {
-        	poisonPane.getChildren().remove(0);
-        }
-        
-        while (sterilisePane.getChildren().size() > 0) {
-        	sterilisePane.getChildren().remove(0);
-        }
-        
-        while (maleGenderChangePane.getChildren().size() > 0) {
-        	maleGenderChangePane.getChildren().remove(0);
-        }
-        
-        while (femaleGenderChangePane.getChildren().size() > 0) {
-        	femaleGenderChangePane.getChildren().remove(0);
         }
     }
 
 
-    /**
-     * Description.
-     *
-     * @param itemType
-     */
     public void addItem(ElementType itemType) {
-        int maxItems = 4;
-        if (itemType == null) {
+        if (itemType ==null) {
             System.out.println("null item type");
         } else {
             if (itemType.equals(ElementType.Bomb)) {
-                if(bombPane.getChildren().size() < maxItems) {
-                    bombPane.getChildren().add(getItem(ElementType.Bomb));
-                }
+                bombPane.getChildren().add(getItem(ElementType.Bomb));
             } else if (itemType.equals(ElementType.DeathRat)) {
-                if(deathRatPane.getChildren().size() < maxItems) {
-                    deathRatPane.getChildren().add(getItem(ElementType.DeathRat));
-                }
+                deathRatPane.getChildren().add(getItem(ElementType.DeathRat));
             } else if (itemType.equals(ElementType.Gas)) {
-                if(gasPane.getChildren().size() <maxItems) {
-                    gasPane.getChildren().add(getItem(ElementType.Gas));
-                }
+                gasPane.getChildren().add(getItem(ElementType.Gas));
             } else if (itemType.equals(ElementType.StopSign)) {
-                if(stopSignPane.getChildren().size() <maxItems) {
-                    stopSignPane.getChildren().add(getItem(ElementType.StopSign));
-                }
-            } else if (itemType.equals(ElementType.Poison)) {
-            	if(poisonPane.getChildren().size() <maxItems) {
-            		poisonPane.getChildren().add(getItem(ElementType.Poison));
-            	}
-            } else if (itemType.equals(ElementType.Sterilise)) {
-            	if (sterilisePane.getChildren().size() < maxItems) {
-            		sterilisePane.getChildren().add(getItem(ElementType.Sterilise));
-            	}
-        	} else if (itemType.equals(ElementType.MaleGenderChange)) {
-        		if (maleGenderChangePane.getChildren().size() < maxItems) {
-        			maleGenderChangePane.getChildren().add(getItem(ElementType.MaleGenderChange));
-        		}
-        	} else if (itemType.equals(ElementType.FemaleGenderChange)) {
-        		if (femaleGenderChangePane.getChildren().size() < maxItems) {
-        			femaleGenderChangePane.getChildren().add(getItem(ElementType.FemaleGenderChange));
-        		}
-        	} else {
+                stopSignPane.getChildren().add(getItem(ElementType.StopSign));
+            } else {
                 System.out.println("invalid item type");
 
             }
@@ -295,18 +191,6 @@ public class InGameController implements Initializable {
             bombPane.getChildren().remove(0);
         } else if (lastItem.equals(ElementType.DeathRat)) {
             deathRatPane.getChildren().remove(0);
-        }else if (lastItem.equals(ElementType.Gas)) {
-            gasPane.getChildren().remove(0);
-        }else if (lastItem.equals(ElementType.StopSign)) {
-            stopSignPane.getChildren().remove(0);
-        } else if (lastItem.equals(ElementType.Poison)) {
-        	poisonPane.getChildren().remove(0);
-        } else if (lastItem.equals(ElementType.Sterilise)) {
-        	sterilisePane.getChildren().remove(0);
-        } else if (lastItem.equals(ElementType.MaleGenderChange)) {
-        	maleGenderChangePane.getChildren().remove(0);
-        } else if (lastItem.equals(ElementType.FemaleGenderChange)) {
-        	femaleGenderChangePane.getChildren().remove(0);
         }
     }
 
@@ -315,34 +199,16 @@ public class InGameController implements Initializable {
      * @param x
      * @param y
      */
-    public static void placeItem(double x, double y, ElementType type) {
-        x = x - Game.gameX;
-        y= y - Game.gameY;
+    public static void placeItem(int x, int y, ElementType type) {
+        x = x-Game.gameX;
+        y=y-Game.gameY;
         if (type.equals(ElementType.Bomb)) {
-         Game.currentLevel.addElement(new Bomb(ElementType.Bomb,  Game.currentLevel, 
-        		 (int) (x / Game.gameSize), (int) (y / Game.gameSize), 5));
+         Game.currentLevel.addElement(new Bomb(ElementType.Bomb,  Game.currentLevel, x/Game.gameSize, y/Game.gameSize));
         } else if (type.equals(ElementType.DeathRat)) {
-         Game.currentLevel.addElement(new DeathRat(ElementType.DeathRat, Game.currentLevel,
-        		 (int) (x / Game.gameSize), (int) (y / Game.gameSize), 1, Direction.North));
+         Game.currentLevel.addElement(new DeathRat(ElementType.DeathRat, Game.currentLevel, x/Game.gameSize, y/Game.gameSize));
         } else if (type.equals(ElementType.Gas)) {
-            Game.currentLevel.addElement(new Gas(ElementType.Gas, Game.currentLevel,
-            		(int) (x / Game.gameSize), (int) (y / Game.gameSize), 3));
-        } else if (type.equals(ElementType.StopSign)) {
-            Game.currentLevel.addElement(new StopSign(ElementType.StopSign, Game.currentLevel,
-            		(int) (x / Game.gameSize), (int) (y / Game.gameSize), 3));
-        } else if(type.equals(ElementType.Poison)) {
-        	Game.currentLevel.addElement(new Poison(ElementType.Poison, Game.currentLevel,
-        			(int) (x / Game.gameSize), (int) (y / Game.gameSize), 1));
-    	} else if(type.equals(ElementType.Sterilise)) {
-    		Game.currentLevel.addElement(new Sterilise(ElementType.Sterilise, Game.currentLevel,
-    				(int) (x / Game.gameSize), (int) (y / Game.gameSize), 2));
-    	} else if(type.equals(ElementType.MaleGenderChange)) {
-    		Game.currentLevel.addElement(new MaleChanger(ElementType.MaleGenderChange,
-    				Game.currentLevel, (int) (x / Game.gameSize), (int) (y / Game.gameSize), 1));
-    	} else if(type.equals(ElementType.FemaleGenderChange)) {
-    		Game.currentLevel.addElement(new FemaleChanger(ElementType.FemaleGenderChange,
-    				Game.currentLevel, (int) (x / Game.gameSize), (int) (y / Game.gameSize), 1));
-    	} else {
+            Game.currentLevel.addElement(new Gas(ElementType.Gas, Game.currentLevel, x/Game.gameSize, y/Game.gameSize, 3));
+        } else {
             System.out.println("invalid item type");
         }
     }
@@ -358,7 +224,6 @@ public class InGameController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Game.loadRatLives(ratLives.getGraphicsContext2D());
         Game.levelController = this;
         Game.setMiniMap(minimap.getGraphicsContext2D());
 

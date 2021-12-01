@@ -9,9 +9,9 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1350.0" stylesheets="@cssStyle.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainMenuController">
    <center>
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="75.0" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="25.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="levelButton" mnemonicParsing="false" onAction="#levelsClick" prefWidth="270.0" text="Levels">
+            <Button fx:id="levelButton" mnemonicParsing="false" onAction="#levelsClick" text="Levels">
                <font>
                   <Font size="65.0" />
                </font>
