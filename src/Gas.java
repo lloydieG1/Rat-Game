@@ -90,6 +90,12 @@ public class Gas extends Element {
         return false;
       }
     }
+
+      for (Element element : level.getElements(x, y)) {
+          if (element.getType().equals(ElementType.StopSign)) {
+              return false;
+          }
+      }
     return true;
   }
 
