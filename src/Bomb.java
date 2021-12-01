@@ -5,16 +5,14 @@ import javafx.scene.text.Text;
 
 /**
  * Description.
- * 
- * @author 
+ *
+ * @author  
  *
  */
 public class Bomb extends Element  {
   private final int RADIUS = 1;
   private boolean damage;
   private Image image;
-  
-
   private Image blast;
   
   /**
