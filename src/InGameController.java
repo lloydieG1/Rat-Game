@@ -320,7 +320,7 @@ public class InGameController implements Initializable {
         y= y - Game.gameY;
         if (type.equals(ElementType.Bomb)) {
          Game.currentLevel.addElement(new Bomb(ElementType.Bomb,  Game.currentLevel, 
-        		 (int) (x / Game.gameSize), (int) (y / Game.gameSize), 5));
+        		 (int) (x / Game.gameSize), (int) (y / Game.gameSize), 4));
         } else if (type.equals(ElementType.DeathRat)) {
          Game.currentLevel.addElement(new DeathRat(ElementType.DeathRat, Game.currentLevel,
         		 (int) (x / Game.gameSize), (int) (y / Game.gameSize), 1, Direction.North));

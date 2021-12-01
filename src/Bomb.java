@@ -15,6 +15,7 @@ public class Bomb extends Element  {
   private boolean damage;
   private Image image;
   private Image blast;
+  private final int BLAST_TIME =4;
   
   /**
    * Description.
@@ -54,7 +55,7 @@ public class Bomb extends Element  {
 
   private void explode() {
     level.addElementLive(new Explosion(ElementType.Explosion, level, (x),
-                         y, 5));
+                         y, BLAST_TIME ));
 
     int tempX = x;
     int tempY = y;
@@ -62,7 +63,7 @@ public class Bomb extends Element  {
     
     while (isSpreadable(tempX, tempY)) {
       level.addElementLive(new Explosion(ElementType.Explosion, level, (tempX),
-                           tempY, 5));
+                           tempY, BLAST_TIME ));
       tempX++;
     }
     tempX = x;
@@ -71,7 +72,7 @@ public class Bomb extends Element  {
     
     while (isSpreadable(tempX, tempY)) {
       level.addElementLive(new Explosion(ElementType.Explosion, level, (tempX),
-                           tempY, 5));
+                           tempY, BLAST_TIME ));
       tempX--;
     }
     tempX = x;
@@ -80,7 +81,7 @@ public class Bomb extends Element  {
     
     while (isSpreadable(tempX, tempY)) {
       level.addElementLive(new Explosion(ElementType.Explosion, level, (tempX),
-                           tempY, 5));
+                           tempY, BLAST_TIME ));
       tempY++;
     }
     tempX = x;
@@ -89,7 +90,7 @@ public class Bomb extends Element  {
     
     while (isSpreadable(tempX, tempY)) {
       level.addElementLive(new Explosion(ElementType.Explosion, level, (tempX),
-                           tempY, 5));
+                           tempY, BLAST_TIME ));
       tempY--;
     }
   }
