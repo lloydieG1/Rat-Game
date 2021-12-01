@@ -1,5 +1,6 @@
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 
@@ -119,7 +120,6 @@ public class Bomb extends Element  {
 
   protected void render(GraphicsContext g) {
 
-    double size = Game.gameSize;
     double halfSize = size / 2;
 
     //get the current interpolated frame positions of rat.
@@ -128,6 +128,7 @@ public class Bomb extends Element  {
     
     //calculating the position the rat should be in this frame
     g.drawImage(image, x, y, size, size);
-    g.fillText(Integer.toString(health), x + halfSize, y + halfSize, size);
+      g.setFont(new Font("monospace", size/3.2));
+    g.fillText(Integer.toString(health), x + size / 2.3, y + size / 1.4);
   }
 }
