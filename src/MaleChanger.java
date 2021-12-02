@@ -52,9 +52,24 @@ public class MaleChanger extends Element {
    * The logic of the Element.
    */
   private void logic() {
+	changeSex();
     if (this.maleChangeCount == 1) {
       level.removeElement(this);
     }
+  }
+  
+  private void changeSex() {
+	  for (Element element : level.getElements(x, y)) {
+	      if (element.getType().equals(ElementType.Rat)) {
+	        Rat rat = (Rat) element;
+	        if (!rat.getIsMale()) {
+	        	rat.setIsMale(true);
+	        	maleChangeCount++;
+	        }
+	        
+	        Game.score = Game.score + 1;
+	      }
+	    }
   }
 	
   /**
