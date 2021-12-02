@@ -163,8 +163,23 @@ public abstract class Element {
     } else if (checkX == x - 1) {
       dir = Direction.West;
     }
-    this.nextX = checkX;
-    this.nextY = checkY;
+
+
+    boolean hitStopSign = false;
+      for (Element element : level.getElements(checkX, checkY)) {
+          if (element.getType().equals(ElementType.StopSign)) {
+              StopSign stopsign = (StopSign) element;
+              stopsign.blocksUp();
+              hitStopSign = true;
+          }
+      }
+      if (!hitStopSign) {
+          this.nextX = checkX;
+          this.nextY = checkY;
+      } else {
+          dir = rightDir(dir);
+          movement();
+      }
   }
 
   /**
@@ -193,13 +208,7 @@ public abstract class Element {
     if (level.getTile(x, y).getType().equals(TileType.Grass)) {
       return false;
     }
-    for (Element element : level.getElements(x, y)) {
-      if (element.getType().equals(ElementType.StopSign)) {
-        StopSign stopsign = (StopSign) element;
-        stopsign.blocksUp();
-        return false;
-      }
-    }   
+
 
     return true;
   }

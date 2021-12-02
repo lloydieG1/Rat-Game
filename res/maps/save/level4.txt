@@ -25,14 +25,14 @@ GGGGGGGGGGGGGGGGGGGGGGGGG;
 /
 25
 /
-rat,1,1,11,north,true,94,false,0,0 rat,3,7,16,north,false,82,false,0,0 rat,1,6,19,east,false,80,false,0,0 gas,-1,12,11,north gas,-1,13,10,north 
+rat,1,9,19,west,true,93,false,0,0 rat,1,12,10,north,true,93,false,4,0 rat,1,12,10,east,false,90,true,4,4 rat,1,2,9,east,true,93,true,0,0 sterilise,2,10,11,north rat,3,6,6,west,false,73,true,0,0 rat,3,17,13,west,false,71,false,0,0 rat,3,14,3,south,false,69,false,0,0 stopSign,4,16,7,north stopSign,5,20,1,north stopSign,5,14,4,north stopSign,3,14,7,north stopSign,5,10,6,north 
 /
 180
 /
-91
+90
 /
-bomb,15,38,0 gas,15,38,0 sterilize,30,38,0 maleGenderChange,45,38,0 femaleGenderChange,45,38,0 stopSign,15,38,0 deathRat,90,38,0 poison,45,38,0 
+bomb,15,38,13 gas,15,38,13 sterilize,30,38,28 maleGenderChange,45,38,43 femaleGenderChange,45,38,43 stopSign,15,38,13 deathRat,90,38,88 poison,45,38,43 
 /
-60
+20
 /
-4,2,3,4,4,4,4,4,
+4,1,4,2,4,3,3,3,

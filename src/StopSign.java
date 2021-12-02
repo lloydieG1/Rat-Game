@@ -11,7 +11,7 @@ import javafx.scene.paint.Color;
 public class StopSign extends Element {
 	
   Image image;
-  protected int blocks = 0;
+  public static final int MAX_HEALTH = 5;
 
   /**
    * Description.
@@ -48,13 +48,14 @@ public class StopSign extends Element {
    * The logic of the StopSign.
    */
   private void logic() {
-    if (this.blocks > 4) {
+    if (this.health > MAX_HEALTH) {
       level.removeElement(this);
     }
   }
 
   public void blocksUp() {
-    blocks++;
+
+    health++;
   }
               
 
