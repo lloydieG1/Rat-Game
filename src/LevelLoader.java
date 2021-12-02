@@ -224,7 +224,7 @@ public class LevelLoader {
                     		xPos, yPos, health);
             level.addElement(gas);
       		break;
-      	case "sterilzse":
+      	case "sterilise":
             Sterilise sterilise= new Sterilise(ElementType.Sterilise, level,
                     xPos, yPos, health);
             level.addElement(sterilise);
