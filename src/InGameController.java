@@ -365,7 +365,7 @@ public class InGameController implements Initializable {
 
         } else if (type.equals(ElementType.StopSign)) {
             Game.currentLevel.addElement(new StopSign(ElementType.StopSign, Game.currentLevel,
-            		(int) x, (int) y, 3));
+            		(int) x, (int) y, 0));
 
         } else if(type.equals(ElementType.Poison)) {
         	Game.currentLevel.addElement(new Poison(ElementType.Poison, Game.currentLevel,

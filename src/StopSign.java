@@ -48,7 +48,8 @@ public class StopSign extends Element {
    * The logic of the StopSign.
    */
   private void logic() {
-    if (this.health > MAX_HEALTH) {
+      changeSkin();
+    if (this.health >= MAX_HEALTH) {
       level.removeElement(this);
     }
   }
@@ -56,6 +57,21 @@ public class StopSign extends Element {
   public void blocksUp() {
 
     health++;
+
+  }
+
+  private void changeSkin() {
+      if (health == 0) {
+          image = ImageLoader.stopSign;
+      } else if (health == 1) {
+          image = ImageLoader.stopSign1;
+      } else if (health == 2) {
+        image = ImageLoader.stopSign2;
+    } else if (health == 3) {
+        image = ImageLoader.stopSign3;
+    } else if (health == 4) {
+        image = ImageLoader.stopSign4;
+    }
   }
               
 
