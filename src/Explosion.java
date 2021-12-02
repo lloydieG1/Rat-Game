@@ -43,7 +43,7 @@ public class Explosion extends Element  {
     for (Element element : level.getElements(x, y)) {
       if (element.getType().equals(ElementType.Rat)) {
         level.removeElement(element);
-        Game.score = Game.score + 1;
+        Game.score = Game.score + 10;
       }
     }
     currentTick++;

@@ -16,7 +16,7 @@ public class DeathRat extends Element {
 
   private int ratsKilled;
   private Image image;
-  private int maxKills = 1;
+  private int maxKills = 5;
 
   private final int KILLING_AGE = 5;
   
@@ -54,7 +54,7 @@ public class DeathRat extends Element {
       if (element.getType().equals(ElementType.Rat)) {
         level.removeElement(element);
         ratsKilled++;
-        Game.score = Game.score + 1;
+        Game.score = Game.score + 10;
         if (ratsKilled >= maxKills) {
           level.removeElement(this);
         }

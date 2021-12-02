@@ -47,7 +47,7 @@ public class Poison extends Element {
       if (element.getType().equals(ElementType.Rat)) {
         level.removeElement(element);
         ratKilled++;
-        Game.score = Game.score + 1;
+        Game.score = Game.score + 10;
       }
     }
   }

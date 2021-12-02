@@ -66,8 +66,6 @@ public class MaleChanger extends Element {
 	        	rat.setIsMale(true);
 	        	maleChangeCount++;
 	        }
-	        
-	        Game.score = Game.score + 1;
 	      }
 	    }
   }
