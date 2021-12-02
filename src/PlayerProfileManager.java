@@ -177,8 +177,6 @@ public class PlayerProfileManager {
 	      String storedUsername = (profiles.get(i)).getUsername();
 	      if (storedUsername.equals(username)) {
 	        profile = profiles.get(i);
-	      }else {
-	    	System.out.println("Could not get profile with username " + username);
 	      }
 	    }
 	    return profile;
