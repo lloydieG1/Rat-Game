@@ -17,12 +17,16 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
+/**
+ *
+ * @author lloyd, William Randle
+ */
 public class UserSelectionController implements Initializable {
 	@FXML
 	TextField usernameInput;
 	
 	@FXML
-	VBox profileVbox;
+	TilePane profileVbox;
 	
 	private void addProfileButtons() {
 		File directory = new File("res\\profiles");
@@ -43,6 +47,7 @@ public class UserSelectionController implements Initializable {
 		    profileVbox.getChildren().add(profileButton); 
 		  }
 	}
+
 	
 	private void profileButtonClick(String username) {
 		Game.currentProfile = PlayerProfileManager.getProfile(username);
@@ -51,18 +56,28 @@ public class UserSelectionController implements Initializable {
 	
 	@FXML
 	private void createUserClick() {
-        if (!(usernameInput.getText() == null)) {
+        if (!(usernameInput.getText() == null) || !(usernameInput.getText().equals(" "))) {
             PlayerProfileManager.addNewProfile(usernameInput.getText());
-            Game.openMainMenu();
-            Game.openUserSelection(); // refresh to show changes to buttons
+            removeProfiles();
+            addProfileButtons();
         }
 	}
+
+
+    private void removeProfiles() {
+        while(profileVbox.getChildren().size() > 0) {
+            profileVbox.getChildren().remove(0);
+        }
+    }
 	
 	@FXML
 	private void removeUserClick() {
-	  PlayerProfileManager.removeProfile(usernameInput.getText());
-	  Game.openMainMenu();
-	  Game.openUserSelection(); // refresh to show changes to buttons
+
+        if (!(usernameInput.getText() == null) || !(usernameInput.getText().equals(" "))) {
+            PlayerProfileManager.removeProfile(usernameInput.getText());
+            removeProfiles();
+              addProfileButtons();
+        }
 	}
 	
 	/**
