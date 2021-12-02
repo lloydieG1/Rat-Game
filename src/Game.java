@@ -65,8 +65,8 @@ public class Game extends Application {
 
     public static double VISIBLE_TILES = 14;
 
-    private static final int ZOOM_MIN = 65;
-    private static final int ZOOM_MAX = 90;
+    private static final int ZOOM_MIN = 50;
+    private static final int ZOOM_MAX = 100;
 
     public static boolean rightArrow;
     public static boolean leftArrow;
@@ -204,16 +204,16 @@ public class Game extends Application {
             case LINES:
                 // scroll about event.getTextDeltaY() lines
                 double scrollFactor = 1.5;
+                double scroll = (event.getTextDeltaY()*scrollFactor);
 
 
-                gameSize = gameSize + (event.getTextDeltaY()*scrollFactor);
+                gameSize = gameSize + scroll;
 
                 //make the scroll happen from the center instead of the top corner
                 if (minMax(gameSize, ZOOM_MIN, ZOOM_MAX) == gameSize) {
-                    double scroll = (event.getTextDeltaY()*scrollFactor)*gameSize;
-                    int factorResize = 8;
-                    gameX = gameX - scroll/factorResize;
-                    gameY = gameY - scroll/factorResize;
+                    double factor = 7;
+                    gameX = gameX -scroll*gameSize/factor;
+                    gameY = gameY - scroll*gameSize/factor;
                 }
 
                 break;
