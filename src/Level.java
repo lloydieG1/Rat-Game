@@ -318,13 +318,6 @@ public class Level {
           }
       }
     }
-      for (int i = 0; i < tiles.length; i++) {
-          for (int j = 0; j < tiles[i].length; j++) {
-              if (tiles[i][j].getType().equals(TileType.Grass)) {
-                  tiles[i][j].render(g);
-              }
-          }
-      }
   }
 
   public void renderDetails(GraphicsContext g) {
@@ -345,7 +338,8 @@ public class Level {
   public void renderTunnels(GraphicsContext g) {
     for (int i = 0; i < tiles.length; i++) {
       for (int j = 0; j < tiles[i].length; j++) {
-        if (tiles[i][j].getType().equals(TileType.Tunnel)) {
+          TileType type = tiles[i][j].getType();
+        if (type.equals(TileType.Tunnel) || type.equals(TileType.Grass)) {
           tiles[i][j].render(g);
         }
       }
