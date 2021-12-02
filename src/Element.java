@@ -263,8 +263,8 @@ public abstract class Element {
    * @return
    */
   protected double renderX() {
-    double x = this.x * factor + Game.gameX;
-    double nextX = this.nextX * factor + Game.gameX;
+    double x = (int)(this.x * factor + Game.gameX);
+    double nextX = (int)(this.nextX * factor + Game.gameX);
     return interpolate(x, nextX);
   }
 
@@ -334,8 +334,8 @@ public abstract class Element {
    * @return
    */
   protected double renderY() {
-    double y = this.y * factor + Game.gameY;
-    double nextY = this.nextY * factor + Game.gameY;
+    double y = (int)(this.y * factor + Game.gameY);
+    double nextY = (int)(this.nextY * factor + Game.gameY);
     return interpolate(y, nextY);
 
   }
