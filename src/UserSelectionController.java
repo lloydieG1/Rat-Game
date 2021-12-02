@@ -72,13 +72,22 @@ public class UserSelectionController implements Initializable {
 	
 	@FXML
 	private void removeUserClick() {
-
         if (!(usernameInput.getText() == null) || !(usernameInput.getText().equals(" "))) {
+        Alert saveConfirmation = new Alert(Alert.AlertType.CONFIRMATION);
+        saveConfirmation.setTitle("Remove player profile");
+        saveConfirmation.setHeaderText("are you sure you want to remove " + usernameInput.getText() + "?");
+        saveConfirmation.setContentText("removing this profile deletes all the information for that user");
+        Optional<ButtonType> resume = saveConfirmation.showAndWait();
+        if (resume.get().equals(ButtonType.OK)) {
             PlayerProfileManager.removeProfile(usernameInput.getText());
             removeProfiles();
-              addProfileButtons();
+            addProfileButtons();
         }
-	}
+
+    }
+
+        }
+
 	
 	/**
 	 * Quits the game.
