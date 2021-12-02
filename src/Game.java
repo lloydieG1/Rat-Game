@@ -4,7 +4,6 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.ScrollEvent;
@@ -198,22 +197,24 @@ public class Game extends Application {
      */
     public void scrollKeyEvent(ScrollEvent event) {
         // We change the behaviour depending on the actual key that was pressed.
+        double centerX = gameX + (VISIBLE_TILES/2*gameSize);
 
+        double centerY = gameY + (VISIBLE_TILES/2*gameSize);
 
         switch(event.getTextDeltaYUnits()) {
             case LINES:
                 // scroll about event.getTextDeltaY() lines
-                double scrollFactor = 1.5;
-                double scroll = (event.getTextDeltaY()*scrollFactor);
+
+                double scroll = event.getTextDeltaY()*(Math.log((gameSize))/Math.log(10));
 
 
                 gameSize = gameSize + scroll;
 
+
                 //make the scroll happen from the center instead of the top corner
                 if (minMax(gameSize, ZOOM_MIN, ZOOM_MAX) == gameSize) {
-                    double factor = 8;
-                    gameX = gameX -scroll*gameSize/factor;
-                    gameY = gameY - scroll*gameSize/factor ;
+                    gameX = centerX-(VISIBLE_TILES/2*gameSize);
+                    gameY = centerY - (VISIBLE_TILES/2*gameSize);
                 }
 
                 break;
