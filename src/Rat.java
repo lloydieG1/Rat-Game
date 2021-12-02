@@ -103,6 +103,16 @@ public class Rat extends Element {
       if (element.getType().equals(ElementType.Gas)) {
         health--;
       }
+      if (health <= 0) {
+    	  if(this.getIsPregnant()) {
+    		  level.removeElement(this);
+    	      Game.score = Game.score + 20;
+    	  } else {
+	        level.removeElement(this);
+	        Game.score = Game.score + 10;
+    	  }
+    	  
+      }
     }  
   }
     
@@ -144,7 +154,10 @@ public class Rat extends Element {
   public Direction getDirection() {
     return dir;
   }
-
+  
+  public boolean getIsPregnant() {
+	  return isPregnant();
+  }
 
   public void makeSterile() {
     this.isSterile = true;
