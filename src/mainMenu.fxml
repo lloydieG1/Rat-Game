@@ -20,6 +20,16 @@
                <font>
                   <Font size="33.0" />
                </font></Button>
+            <Button mnemonicParsing="false" onAction="#setProfileText" text="Display Current User">
+               <font>
+                  <Font size="33.0" />
+               </font>
+            </Button>
+            <Button layoutX="629.0" layoutY="437.0" mnemonicParsing="false" onAction="#backClick" text="Change User ">
+               <font>
+                  <Font size="33.0" />
+               </font>
+            </Button>
             <Button mnemonicParsing="false" onAction="#quit" text="Quit">
                <font>
                   <Font size="35.0" />
@@ -38,4 +48,11 @@
          </effect>
       </Text>
    </top>
+   <bottom>
+      <Text fx:id="currentUser" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="1078.13671875" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="40.0" />
+         </font>
+      </Text>
+   </bottom>
 </BorderPane>

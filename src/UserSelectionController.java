@@ -19,7 +19,7 @@ import javafx.scene.text.Text;
 
 public class UserSelectionController implements Initializable {
 	@FXML
-	TextField username;
+	TextField usernameInput;
 	
 	@FXML
 	VBox profileVbox;
@@ -44,21 +44,21 @@ public class UserSelectionController implements Initializable {
 		  }
 	}
 	
-	private void profileButtonClick(String user) {
-		Game.currentProfile = PlayerProfileManager.getProfile(user);
+	private void profileButtonClick(String username) {
+		Game.currentProfile = PlayerProfileManager.getProfile(username);
 		Game.openMainMenu();
 	}
 	
 	@FXML
 	private void createUserClick() {
-	  PlayerProfileManager.addNewProfile(username.getText());
+	  PlayerProfileManager.addNewProfile(usernameInput.getText());
 	  Game.openMainMenu();
 	  Game.openUserSelection(); // refresh to show changes to buttons
 	}
 	
 	@FXML
 	private void removeUserClick() {
-	  PlayerProfileManager.removeProfile(username.getText());
+	  PlayerProfileManager.removeProfile(usernameInput.getText());
 	  Game.openMainMenu();
 	  Game.openUserSelection(); // refresh to show changes to buttons
 	}

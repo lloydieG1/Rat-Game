@@ -183,7 +183,7 @@ public class PlayerProfileManager {
 	    }
 	    return profile;
 	} catch (Exception e) {
-		System.out.println("Could not get profile with username " + username);
+		System.out.println("Error caused by " + username);
 		return null;
 	}
   }
