@@ -5,7 +5,7 @@
 .button {
 -fx-text-fill: white;
 -fx-background-color: #000000;
--fx-effect:dropshadow(three-pass-box,black,30,0,0,0);
+-fx-effect:dropshadow(three-pass-box,black,30,0,0,20);
 }
 .button:hover {
     -fx-background-color: #777777;
