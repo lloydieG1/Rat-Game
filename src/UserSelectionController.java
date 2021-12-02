@@ -56,12 +56,21 @@ public class UserSelectionController implements Initializable {
 	
 	@FXML
 	private void createUserClick() {
-        if (!(usernameInput.getText() == null) || !(usernameInput.getText().equals(" "))) {
-            PlayerProfileManager.addNewProfile(usernameInput.getText());
+        String userName = usernameInput.getText();
+        boolean tooLong = userName.length() > 10;
+        boolean tooLittle = userName.equals("");
+        if (!tooLittle && !tooLong) {
+
+            PlayerProfileManager.addNewProfile(userName);
             removeProfiles();
             addProfileButtons();
+        } else {
+            Alert invalidDataAlert= new Alert(Alert.AlertType.ERROR);
+            invalidDataAlert.setTitle("incorrect input");
+            invalidDataAlert.setHeaderText("the information entered is invalid");
+            Optional<ButtonType> resume = invalidDataAlert.showAndWait();
         }
-	}
+    }
 
 
     private void removeProfiles() {
@@ -72,21 +81,28 @@ public class UserSelectionController implements Initializable {
 	
 	@FXML
 	private void removeUserClick() {
-        if (!(usernameInput.getText() == null) || !(usernameInput.getText().equals(" "))) {
-        Alert saveConfirmation = new Alert(Alert.AlertType.CONFIRMATION);
-        saveConfirmation.setTitle("Remove player profile");
-        saveConfirmation.setHeaderText("are you sure you want to remove " + usernameInput.getText() + "?");
-        saveConfirmation.setContentText("removing this profile deletes all the information for that user");
-        Optional<ButtonType> resume = saveConfirmation.showAndWait();
-        if (resume.get().equals(ButtonType.OK)) {
-            PlayerProfileManager.removeProfile(usernameInput.getText());
-            removeProfiles();
-            addProfileButtons();
+        String userName = usernameInput.getText();
+        boolean tooLittle = userName.equals("");
+        if (!tooLittle) {
+            Alert removePlayerConfirm = new Alert(Alert.AlertType.CONFIRMATION);
+            removePlayerConfirm.setTitle("Remove player profile");
+            removePlayerConfirm.setHeaderText("are you sure you want to remove " + usernameInput.getText() + "?");
+            removePlayerConfirm.setContentText("removing this profile deletes all the information for that user");
+            Optional<ButtonType> resume = removePlayerConfirm.showAndWait();
+            if (resume.get().equals(ButtonType.OK)) {
+                PlayerProfileManager.removeProfile(usernameInput.getText());
+                removeProfiles();
+                addProfileButtons();
+            }
+
+    } else {
+            Alert invalidDataAlert= new Alert(Alert.AlertType.ERROR);
+            invalidDataAlert.setTitle("incorrect input");
+            invalidDataAlert.setHeaderText("the information entered is invalid");
+            Optional<ButtonType> resume = invalidDataAlert.showAndWait();
         }
 
     }
-
-        }
 
 	
 	/**
