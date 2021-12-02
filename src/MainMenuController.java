@@ -20,7 +20,7 @@ public class MainMenuController implements Initializable {
 	Text currentUser; //user that is logged in
 	
 	@FXML
-	private void setProfileText() {
+	public void setProfileText() {
 		currentUser.setText("Current User: " + Game.currentProfile.getUsername());
 	}
 	
@@ -57,6 +57,7 @@ public class MainMenuController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
+        Game.mainMenuController = this;
 		try {
 			motd.setText(DailyMessage.getMessage(null));
 		} catch (IOException e) {

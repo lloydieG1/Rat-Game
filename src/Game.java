@@ -53,6 +53,8 @@ public class Game extends Application {
 
     public static EndGameController endGameController;
 
+    public static MainMenuController mainMenuController;
+
     public static final int MAP_WIDTH = 900;
     public static final int MAP_HEIGHT = 900;
     public static double gameX =0;
@@ -304,6 +306,7 @@ public class Game extends Application {
      *changes the menu to the main Menu
      */
     public static void openMainMenu() {
+        mainMenuController.setProfileText();
         primaryStage.setScene(mainMenu);
 
     }

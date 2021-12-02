@@ -51,9 +51,11 @@ public class UserSelectionController implements Initializable {
 	
 	@FXML
 	private void createUserClick() {
-	  PlayerProfileManager.addNewProfile(usernameInput.getText());
-	  Game.openMainMenu();
-	  Game.openUserSelection(); // refresh to show changes to buttons
+        if (!(usernameInput.getText() == null)) {
+            PlayerProfileManager.addNewProfile(usernameInput.getText());
+            Game.openMainMenu();
+            Game.openUserSelection(); // refresh to show changes to buttons
+        }
 	}
 	
 	@FXML
