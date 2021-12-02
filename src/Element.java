@@ -257,16 +257,6 @@ public abstract class Element {
     return x1 + ((x2 - x1) / tickSpeed) * currentTick;
   }
 
-  /**
-   * Gets the rendered version of x.
-   *
-   * @return
-   */
-  protected double renderX() {
-    double x = (int)(this.x * factor + Game.gameX);
-    double nextX = (int)(this.nextX * factor + Game.gameX);
-    return interpolate(x, nextX);
-  }
 
   /**
    * Smoothly interpolates rotations.
@@ -328,7 +318,19 @@ public abstract class Element {
     return 0;
   }
 
-  /**
+
+    /**
+     * Gets the rendered version of x.
+     *
+     * @return
+     */
+    protected double renderX() {
+        double x = (int)(this.x * factor + Game.gameX);
+        double nextX = (int)(this.nextX * factor + Game.gameX);
+        return interpolate(x, nextX);
+    }
+
+    /**
    * Gets the rendered version of y.
    *
    * @return
