@@ -20,6 +20,8 @@ public class ImageLoader {
     public static Image bomb = getImage("bomb.png", 64);
     public static Image sterilize = getImage("sterilise.png", 64);
 
+    public static Image sterilizeAura = getImage("steriliseAura.png", 64);
+
     /**
    * Description.
    *

@@ -54,6 +54,10 @@ public class Rat extends Element {
       develop();
   }
 
+  public boolean isSterile() {
+      return isSterile;
+  }
+
   public void setMatingTime(int timeLeftInMating) {
       this.timeLeftInMating = timeLeftInMating;
   }
@@ -62,7 +66,14 @@ public class Rat extends Element {
       this.timeLeftPregnant = pregnantTime;
   }
 
-  protected void tick() {  
+  protected void tick() {
+      if (isFinishedMating()) {
+          if (!getIsChild()) {
+              if (!(isMale)) {
+                  breed();
+              }
+          }
+      }
     if (health < 1) {
       Game.score = Game.score + 1;
       level.removeElement(this);

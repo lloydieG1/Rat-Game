@@ -200,13 +200,7 @@ public abstract class Element {
         return false;
       }
     }   
-    for (Element element : level.getElements(x, y)) {
-      if (element.getType().equals(ElementType.Sterilise)) {
-        Sterilise sterilise = (Sterilise) element;
-        sterilise.steriliseRat((Rat) this);
-        return false;
-      }
-    }
+
     return true;
   }
 
@@ -343,9 +337,13 @@ public abstract class Element {
     double y = this.y * factor + Game.gameY;
     double nextY = this.nextY * factor + Game.gameY;
     return interpolate(y, nextY);
+
   }
 
-  private String typeAsString() {
+
+
+
+    private String typeAsString() {
     if (type == null) {
       return "-";
     }

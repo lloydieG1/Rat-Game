@@ -13,6 +13,7 @@ public class Sterilise extends Element {
   protected int sterilisedRats;
 	
   private Image image;
+  private Image aura;
 
   /**
    * Description.
@@ -27,6 +28,8 @@ public class Sterilise extends Element {
     super(type, level, x, y, Direction.North, health);
     // TODO Auto-generated constructor stub
     image = ImageLoader.sterilize;
+
+      aura = ImageLoader.sterilizeAura;
     sterilisedRats = 0;
   }
   
@@ -39,6 +42,7 @@ public class Sterilise extends Element {
       level.removeElement(this);
       System.out.println("deleting sterilise");
     }
+      sterilise();
     currentTick++;
     if (currentTick > tickSpeed) {
       currentTick = 0;
@@ -50,14 +54,29 @@ public class Sterilise extends Element {
    * The logic of the Element.
    */
   private void logic() {
+
     if (this.sterilisedRats > 4) {
       level.removeElement(this);
     }
   }
 
-  public void steriliseRat(Rat rat) {
-    sterilisedRats++;
-    rat.makeSterile();
+  public void sterilise() {
+      int radius = 1;
+      for (int x = this.x-radius; x <= this.x +radius; x++) {
+          for (int y = this.y-radius; y <= this.y+radius; y++) {
+              for (Element element : level.getElements(x, y)) {
+                  if (element.getType().equals(ElementType.Rat)) {
+
+                        Rat rat = (Rat) element;
+                        if (!rat.isSterile()) {
+                            rat.makeSterile();
+                            sterilisedRats++;
+                        }
+
+                  }
+              }
+          }
+      }
   }
               
 
@@ -69,6 +88,12 @@ public class Sterilise extends Element {
   protected void render(GraphicsContext g) {
     double x = renderX();
     double y = renderY();
-    g.drawImage(image, x, y, size, size);
+    g.save();
+    g.setGlobalAlpha(currentTick*1.0/tickSpeed*1.0);
+      g.drawImage(aura, x-(size/Math.cos(currentTick*1.0/tickSpeed*1.0))/2+ size/2,
+              y-(size/Math.cos(currentTick*1.0/tickSpeed*1.0))/2 + size/2, size/Math.cos(currentTick*1.0/tickSpeed*1.0), size/Math.cos(currentTick*1.0/tickSpeed*1.0));
+      g.restore();
+      g.drawImage(image, x, y, size, size);
+
   }
 }
