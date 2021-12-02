@@ -180,16 +180,16 @@ public class Game extends Application {
 
     private static void moveMap() {
         double scroll = (Game.gameSize*5)/FPS;
-        if (rightArrow) {
+        if (rightArrow || levelController.rightArrow) {
             Game.gameX-=scroll;
         }
-        if (leftArrow) {
+        if (leftArrow || levelController.leftArrow) {
             Game.gameX+=scroll;
         }
-        if (upArrow) {
+        if (upArrow || levelController.upArrow) {
             Game.gameY+=scroll;
         }
-        if (downArrow) {
+        if (downArrow || levelController.downArrow) {
             Game.gameY-=scroll;
         }
     }

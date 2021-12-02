@@ -21,6 +21,10 @@ public class InGameController implements Initializable {
     public double mouseX;
     public double mouseY;
 
+    public boolean rightArrow = false;
+    public boolean leftArrow= false;
+    public boolean upArrow= false;
+    public boolean downArrow= false;
 
     @FXML
     Canvas gameCanvas; //canvas the game is shown on
@@ -87,20 +91,32 @@ public class InGameController implements Initializable {
         double y = event.getY();
 
         if (x < buttonSize) {
-            Game.gameX = Game.gameX + Game.gameSize/2;
+            leftArrow = true;
+
         }
 
         if (y < buttonSize) {
-            Game.gameY = Game.gameY + Game.gameSize/2;
+            upArrow =true;
         }
 
         if (x > Game.MAP_WIDTH-buttonSize) {
-            Game.gameX = Game.gameX - Game.gameSize/2;
+           rightArrow = true;
         }
 
         if (y > Game.MAP_HEIGHT-buttonSize) {
-            Game.gameY = Game.gameY - Game.gameSize/2;
+            downArrow =true;
         }
+
+    }
+
+
+    @FXML
+    private void mapRelease(MouseEvent event) {
+
+        upArrow =false;
+        downArrow =false;
+        rightArrow = false;
+        leftArrow = false;
 
     }
 
@@ -127,7 +143,13 @@ public class InGameController implements Initializable {
     private void canvasMouseLeave() {
         mouseX = gameCanvas.getWidth() / 2;
         mouseY = gameCanvas.getHeight() / 2;
+        upArrow =false;
+        downArrow =false;
+        rightArrow = false;
+        leftArrow = false;
+
     }
+
 
     @FXML
     private void minimapClick(MouseEvent event) {
