@@ -52,11 +52,15 @@ public class UserSelectionController implements Initializable {
 	@FXML
 	private void createUserClick() {
 	  PlayerProfileManager.addNewProfile(username.getText());
+	  Game.openMainMenu();
+	  Game.openUserSelection(); // refresh to show changes to buttons
 	}
 	
 	@FXML
 	private void removeUserClick() {
 	  PlayerProfileManager.removeProfile(username.getText());
+	  Game.openMainMenu();
+	  Game.openUserSelection(); // refresh to show changes to buttons
 	}
 	
 	/**
