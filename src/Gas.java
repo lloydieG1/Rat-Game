@@ -11,7 +11,7 @@ import javafx.scene.paint.Color;
 public class Gas extends Element {
   private boolean damage;
   private Image image;
-  public static final int MAX_HEALTH = 3;
+  public static final int MAX_HEALTH = 2;
 
   /**
    * Gas constructor.
@@ -53,7 +53,7 @@ public class Gas extends Element {
    */
   private void logic() {
     age++;
-    if (health >0) {
+    if (health >=0) {
         health--;
         if (isSpreadable(x - 1, y)) {
             level.addElementLive(new Gas(ElementType.Gas, level, (x - 1), y, health));
