@@ -53,9 +53,18 @@ public class DeathRat extends Element {
   public void killRat() {
     for (Element element : level.getElements(x, y)) {
       if (element.getType().equals(ElementType.Rat)) {
-        level.removeElement(element);
-        ratsKilled++;
-        Game.score = Game.score + 10;
+    	  if (element.getType().equals(ElementType.Rat)) {
+        	  Rat rat = (Rat) element;
+        	  if(rat.getIsPregnant()) {
+        		  level.removeElement(element);
+        	       ratsKilled = ratsKilled + 2;
+        	       Game.score = Game.score + 20;
+        	  } else {
+    	        level.removeElement(element);
+    	        ratsKilled++;
+    	        Game.score = Game.score + 10;
+        	  }
+          }
         if (ratsKilled >= maxKills) {
           level.removeElement(this);
         }
