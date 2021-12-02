@@ -1,17 +1,13 @@
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.TilePane;
 import javafx.scene.text.Text;
 
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -24,6 +20,7 @@ public class InGameController implements Initializable {
 
     public double mouseX;
     public double mouseY;
+
 
     @FXML
     Canvas gameCanvas; //canvas the game is shown on
@@ -71,7 +68,7 @@ public class InGameController implements Initializable {
 
     }
 
-    
+
     private static ElementType lastItem;
     /**
      * switches back to the menu

@@ -34,14 +34,14 @@ GGGGGGGGGGGGGGGGGGGGGGGGGGGGGG;
 /
 5
 /
-rat,3,9,8,north,true,10,false,0,0 rat,3,9,9,north,true,10,false,0,0 
+rat,3,6,9,north,true,64,false,0,0 rat,3,1,9,south,true,64,false,0,0 
 /
 180
 /
-6
+60
 /
-bomb,5,5,3 gas,10,5,3 sterilize,6,5,1 maleGenderChange,12,5,1 femaleGenderChange,12,5,1 stopSign,10,5,3 deathRat,20,5,13 poison,12,5,1 
+bomb,5,30,4 gas,10,30,9 sterilize,6,30,5 maleGenderChange,12,30,11 femaleGenderChange,12,30,11 stopSign,10,30,9 deathRat,20,30,19 poison,12,30,11 
 /
 0
 /
-2,0,1,1,2,1,1,1,
+4,4,4,4,4,4,4,4,
