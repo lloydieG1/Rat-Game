@@ -51,6 +51,8 @@ public class Explosion extends Element  {
   	        Game.score = Game.score + 10;
       	  }
         }
+    if (!element.getType().equals(ElementType.Explosion))
+        level.removeElement(element);
     }
     currentTick++;
     if (currentTick > tickSpeed) {

@@ -190,13 +190,20 @@ public class Tile {
     } else if (type.equals(TileType.Path)) {
       g.setFill(Color.color(0.5, 0.5, 0.5));
       g.fillRect(x, y, size, size);
-        renderSideGrass(g, nextToType(TileType.Grass)); //draw sides meeting paths
     } else if (type.equals(TileType.Tunnel)) {
 
 
         g.drawImage(image, x, y, size, size);
-        renderSideTunnel(g,nextToType(TileType.Path));
     }
+  }
+
+  public void renderDetails(GraphicsContext g) {
+      g.setFill(Color.RED);
+      if (type.equals(TileType.Path)) {
+          renderSideGrass(g, nextToType(TileType.Grass)); //draw sides meeting paths
+      } else if (type.equals(TileType.Tunnel)) {
+          renderSideTunnel(g,nextToType(TileType.Path));
+      }
   }
 
   /**

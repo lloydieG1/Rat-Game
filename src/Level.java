@@ -302,6 +302,7 @@ public class Level {
       element.render(g);
     }
     renderTunnels(g);
+    renderDetails(g);
   }
 
   /**
@@ -322,6 +323,16 @@ public class Level {
               if (tiles[i][j].getType().equals(TileType.Grass)) {
                   tiles[i][j].render(g);
               }
+          }
+      }
+  }
+
+  public void renderDetails(GraphicsContext g) {
+      for (int i = 0; i < tiles.length; i++) {
+          for (int j = 0; j < tiles[i].length; j++) {
+
+                  tiles[i][j].renderDetails(g);
+
           }
       }
   }
