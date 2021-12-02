@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.TilePane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
@@ -21,7 +22,7 @@ public class UserSelectionController implements Initializable {
 	TextField username;
 	
 	@FXML
-	TilePane profileVbox;
+	VBox profileVbox;
 	
 	private void addProfileButtons() {
 		File directory = new File("res\\profiles");
@@ -37,11 +38,9 @@ public class UserSelectionController implements Initializable {
 		    	public void handle(Event event){
 		    		profileButtonClick(buttonText);//button text is the same as the username
 		    	}
-		    	
 		    });
 
 		    profileVbox.getChildren().add(profileButton); 
-		    profileVbox.setPrefColumns(3);
 		  }
 	}
 	

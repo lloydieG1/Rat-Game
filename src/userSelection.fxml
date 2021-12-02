@@ -22,15 +22,7 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <VBox fx:id="profileVbox" alignment="CENTER" layoutX="31.0" layoutY="10.0" prefHeight="384.0" prefWidth="1272.0" spacing="30.0">
-                     <children>
-                        <Button mnemonicParsing="false" text="xXratdestroy3rXx">
-                           <font>
-                              <Font size="33.0" />
-                           </font>
-                        </Button>
-                     </children>
-                  </VBox>
+                  <VBox fx:id="profileVbox" alignment="CENTER" layoutX="31.0" layoutY="10.0" prefHeight="384.0" prefWidth="1272.0" spacing="30.0" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="296.0" prefWidth="1348.0">
