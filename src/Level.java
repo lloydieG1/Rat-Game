@@ -56,6 +56,9 @@ public class Level {
     Game.score = score;
   }
 
+  public int calcFinalScore() {
+	  return timeLimit - timer + Game.score;
+  }
 
 
   /**
@@ -152,12 +155,12 @@ public class Level {
   private void checkGameCondition() {
     int rats = ratCount();
     if (rats > maxRats) {
-      Game.endGame("you lost with a score of " + Game.score);
+      Game.endGame("You lost with a score of " + Game.score);
     } else if (rats == 0) {
-      Game.endGame("you won with a score of " + Game.score);
+      Game.endGame("You won with a score of " + calcFinalScore());
     }
     if (timer > timeLimit) {
-      Game.endGame("you lost with a score of " + Game.score);
+      Game.endGame("You lost with a score of " + Game.score);
     }
   }
 
