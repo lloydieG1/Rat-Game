@@ -100,6 +100,11 @@ public class PlayerProfileManager {
       e.printStackTrace();
     }	
   }
+  
+  public static void incrementMaxLevel(String username) {
+	  int currentLevel = getProfile(username).getMaxLevel();
+	  updateProfileData(ProfileData.MaxLevel, currentLevel + 1, username);
+  }
 	
   /**
    * Description.
@@ -114,6 +119,7 @@ public class PlayerProfileManager {
     } else {
       System.out.println("Failed to delete the file.");
     }
+    profiles.remove(getProfile(username)); //remove profile from global profile array
   }
 	
   private static String readProfileFile(String username) {
