@@ -357,7 +357,7 @@ public abstract class Element {
     } else if (type.equals(ElementType.Gas)) {
       return "gas";
     } else if (type.equals(ElementType.Sterilise)) {
-      return "sterilize";
+      return "sterilise";
     } else if (type.equals(ElementType.Poison)) {
       return "poison";
     } else if (type.equals(ElementType.FemaleGenderChange)) {
