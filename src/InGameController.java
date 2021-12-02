@@ -87,25 +87,26 @@ public class InGameController implements Initializable {
 
     @FXML
     private void mapClick(MouseEvent event) {
-        double x = event.getX();
-        double y = event.getY();
+        mouseX = event.getX();
+        mouseY = event.getY();
 
-        if (x < buttonSize) {
+        if (mouseX < buttonSize) {
             leftArrow = true;
 
         }
 
-        if (y < buttonSize) {
+        if (mouseY < buttonSize) {
             upArrow =true;
         }
 
-        if (x > Game.MAP_WIDTH-buttonSize) {
+        if (mouseX > Game.MAP_WIDTH-buttonSize) {
            rightArrow = true;
         }
 
-        if (y > Game.MAP_HEIGHT-buttonSize) {
+        if (mouseY> Game.MAP_HEIGHT-buttonSize) {
             downArrow =true;
         }
+
 
     }
 

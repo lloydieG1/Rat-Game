@@ -73,6 +73,8 @@ public class Game extends Application {
     public static boolean upArrow;
     public static boolean downArrow;
 
+
+
     /**
      * open the main menu and loads the other menus
      * @param primaryStage stage javafx shows things on
