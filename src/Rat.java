@@ -48,6 +48,12 @@ public class Rat extends Element {
       develop();
   }
 
+  @Override
+  public void setAge(int age){
+      this.age = age;
+      develop();
+  }
+
   public void setMatingTime(int timeLeftInMating) {
       this.timeLeftInMating = timeLeftInMating;
   }
