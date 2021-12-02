@@ -145,7 +145,7 @@ public class PlayerProfileManager {
     return in;
   }
     
-  private static PlayerProfile getProfile(String username) {
+  public static PlayerProfile getProfile(String username) {
     PlayerProfile profile = null;
     for (int i = 0; i < profiles.size(); i++) {
       String storedUsername = (profiles.get(i)).getUsername();
