@@ -36,6 +36,7 @@ public class DeathRat extends Element {
     // TODO Auto-generated constructor stub
     ratsKilled = 0;
     image = ImageLoader.getImage("deathRat.png", 64);
+    tickSpeed = Game.FPS / 2;
   }
 
   private void logic() {
