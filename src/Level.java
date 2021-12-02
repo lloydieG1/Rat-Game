@@ -263,6 +263,21 @@ public class Level {
     for (int i = 0; i < sideBar[3]; i++) {
       Game.addItem(ElementType.StopSign);
     }
+
+      for (int i = 0; i < sideBar[4]; i++) {
+          Game.addItem(ElementType.Sterilise);
+      }
+      for (int i = 0; i < sideBar[5]; i++) {
+          Game.addItem(ElementType.MaleGenderChange);
+      }
+
+      for (int i = 0; i < sideBar[6]; i++) {
+          Game.addItem(ElementType.FemaleGenderChange);
+      }
+
+      for (int i = 0; i < sideBar[7]; i++) {
+          Game.addItem(ElementType.Poison);
+      }
   }
 
 

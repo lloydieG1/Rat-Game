@@ -132,17 +132,25 @@ public class LevelLoader {
 
   private static int[] parseSideBar(String sideBar) {
     String[] data = sideBar.split(INTERNAL_DATA_DELIMITER);
-    int[] outputArr = new int[4];
+    int[] outputArr = new int[8];
 
     int bombs = Integer.parseInt(data[0]);
     int deathRats = Integer.parseInt(data[1]);
     int gas = Integer.parseInt(data[2]);
-    int stopSigns = Integer.parseInt(data[3]);// maybe this should be final?
+    int stopSigns = Integer.parseInt(data[3]);
+    int sterilize = Integer.parseInt(data[4]);
+    int maleGend = Integer.parseInt(data[5]);
+    int femaleGend = Integer.parseInt(data[6]);
+    int poison = Integer.parseInt(data[7]);
 
     outputArr[0] = bombs;
     outputArr[1] = deathRats;
     outputArr[2] = gas;
     outputArr[3] = stopSigns;
+    outputArr[4] = sterilize;
+    outputArr[5] = maleGend;
+    outputArr[6] = femaleGend;
+    outputArr[7] = poison;
 
     return outputArr;
   }

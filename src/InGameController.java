@@ -114,10 +114,10 @@ public class InGameController implements Initializable {
         sideBar = sideBar + deathRatPane.getChildren().size() + ",";
         sideBar = sideBar + gasPane.getChildren().size() + ",";
         sideBar = sideBar + stopSignPane.getChildren().size() + ",";
-        sideBar = sideBar + poisonPane.getChildren().size() + ",";
         sideBar = sideBar + sterilisePane.getChildren().size() + ",";
         sideBar = sideBar + maleGenderChangePane.getChildren().size() + ",";
         sideBar = sideBar + femaleGenderChangePane.getChildren().size() + ",";
+        sideBar = sideBar + poisonPane.getChildren().size() + ",";
         return sideBar;
     }
 
