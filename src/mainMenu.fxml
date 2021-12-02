@@ -20,11 +20,6 @@
                <font>
                   <Font size="33.0" />
                </font></Button>
-            <Button mnemonicParsing="false" onAction="#setProfileText" text="Display Current User">
-               <font>
-                  <Font size="33.0" />
-               </font>
-            </Button>
             <Button layoutX="629.0" layoutY="437.0" mnemonicParsing="false" onAction="#backClick" text="Change User ">
                <font>
                   <Font size="33.0" />

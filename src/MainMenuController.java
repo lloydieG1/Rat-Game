@@ -19,7 +19,7 @@ public class MainMenuController implements Initializable {
 	@FXML
 	Text currentUser; //user that is logged in
 	
-	@FXML
+
 	public void setProfileText() {
 		currentUser.setText("Current User: " + Game.currentProfile.getUsername());
 	}
