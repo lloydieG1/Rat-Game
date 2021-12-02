@@ -56,7 +56,7 @@ public class Level {
     Game.score = score;
   }
 
-  public int calcFinalScore() {
+  public int bonusScore() {
 	  return timeLimit - timer + Game.score;
   }
 
@@ -157,7 +157,7 @@ public class Level {
     if (rats > maxRats) {
       Game.endGame("You lost with a score of " + Game.score);
     } else if (rats == 0) {
-      Game.endGame("You won with a score of " + calcFinalScore());
+      Game.endGame("You won with a score of " + bonusScore());
     }
     if (timer > timeLimit) {
       Game.endGame("You lost with a score of " + Game.score);
