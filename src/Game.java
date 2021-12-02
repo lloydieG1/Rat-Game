@@ -83,6 +83,8 @@ public class Game extends Application {
 
         Game.primaryStage = primaryStage;
 
+        PlayerProfileManager.initializeProfileArray();
+        
         userSelection = loadScene("userSelection.fxml");
         mainMenu = loadScene("mainMenu.fxml");
         levelMenu = loadScene("levelMenu.fxml");

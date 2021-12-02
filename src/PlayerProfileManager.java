@@ -12,8 +12,7 @@ public class PlayerProfileManager {
   private static final String OPEN_FILE_ERROR = "Could not find ";
   private static final String PROFILE_FILE_PATH = "res/profiles/";
   private static final String FIRST_LINE = "USER: ";
-  private static final String SECOND_LINE = "HIGHSCORE: ";
-  private static final String THIRD_LINE = "MAX LEVEL: ";
+  private static final String SECOND_LINE = "MAX LEVEL: ";
 	
   private static ArrayList<PlayerProfile> profiles = new ArrayList<>();
 	
@@ -34,13 +33,11 @@ public class PlayerProfileManager {
 				 * if the file does exist open it and write the username to file on line 1
 				 * will look like this:
 				 * USER: *username*
-				 * HIGHSCORE: 
-				 * MAX LEVEL: 
+				 * MAX LEVEL: 1
 				 */
         FileWriter writer = new FileWriter(fileName);
         writer.write(FIRST_LINE + username + "\n");
-        writer.write(SECOND_LINE + "\n");
-        writer.write(THIRD_LINE);
+        writer.write(SECOND_LINE + "1 \n"); //player starts at level 1
         writer.close();
       } else {
         System.out.println("File already exists.");
@@ -64,7 +61,7 @@ public class PlayerProfileManager {
    * @param data
    * @param username
    */
-  public static void updateProfileData(ProfileData whichData, int data, String username) {
+  public static void updateProfileData(ProfileData whichData, String data, String username) {
     String fileName = usernameToPath(username);
     String profileFileContents = readProfileFile(username);
     System.out.println("Contents of the file: " + profileFileContents);
@@ -73,17 +70,16 @@ public class PlayerProfileManager {
     String oldLine = null;
     String newLine = null;
 
-    if (whichData == ProfileData.Highscore) {
-      String usr = in.nextLine(); //ignore first line (username)
+    if (whichData == ProfileData.Username) {
       oldLine = in.nextLine(); //old highscore
-      newLine = SECOND_LINE + data; //new highscore
-      getProfile(username).setHighscore(data); //update profile object
+      newLine = FIRST_LINE + data; //new highscore
+      getProfile(username).setUsername(data); //update profile object
     } else if (whichData == ProfileData.MaxLevel) {
       in.nextLine(); //ignore first line (username)
       in.nextLine(); //ignore second line (highscore)
       oldLine = in.nextLine(); //old max level
-      newLine = THIRD_LINE + data; //new max level
-      getProfile(username).setMaxLevel(data); //update profile object
+      newLine = SECOND_LINE + data; //new max level
+      getProfile(username).setMaxLevel(Integer.parseInt(data)); //update profile object
     } else {
       throw new IllegalArgumentException("whichData argument is not highscore or maxLevel");
     }
@@ -101,19 +97,38 @@ public class PlayerProfileManager {
     }	
   }
   
+  public static PlayerProfile parseProfileFile(String username) {
+	try {
+		Scanner in = openProfileFile(username);
+		  
+		in.findInLine(FIRST_LINE); //Skips past "USER: " 
+		String user = in.nextLine();
+		in.findInLine(SECOND_LINE); //Skips past "MAX LEVEL: " 
+		int maxLevel = in.nextInt();
+
+		PlayerProfile profile = new PlayerProfile(user, maxLevel);
+		return profile;
+		
+	} catch (Exception e) {
+		System.out.println("Failed to parse profile " + username);
+		return null;
+	}
+  }
+  
   public static void initializeProfileArray() {
 	  File directory = new File("res\\profiles");
-	  File[] profiles = directory.listFiles();
+	  File[] files = directory.listFiles();
 	  
-	  for (int i = 0; i < profiles.length; i++) {
-		String user = profiles[i].getName().replace(".txt", "");
-		
+	  for (int i = 0; i < files.length; i++) {
+		String user = files[i].getName().replace(".txt", "");
+		profiles.add(parseProfileFile(user));
 	}
   }
   
   public static void incrementMaxLevel(String username) {
 	  int currentLevel = getProfile(username).getMaxLevel();
-	  updateProfileData(ProfileData.MaxLevel, currentLevel + 1, username);
+	  String nextLevel = Integer.toString(currentLevel + 1);
+	  updateProfileData(ProfileData.MaxLevel, nextLevel, username);
   }
 	
   /**
@@ -156,17 +171,21 @@ public class PlayerProfileManager {
   }
     
   public static PlayerProfile getProfile(String username) {
-    PlayerProfile profile = null;
-    for (int i = 0; i < profiles.size(); i++) {
-      String storedUsername = (profiles.get(i)).getUsername();
-      if (storedUsername == username) {
-        profile = profiles.get(i);
-      }
-    }
-    if (profile == null) {
-      System.out.println("Could not get profile with username " + username);
-    }
-    return profile;
+	try {
+		PlayerProfile profile = null;
+	    for (int i = 0; i < profiles.size(); i++) {
+	      String storedUsername = (profiles.get(i)).getUsername();
+	      if (storedUsername.equals(username)) {
+	        profile = profiles.get(i);
+	      }else {
+	    	System.out.println("Could not get profile with username " + username);
+	      }
+	    }
+	    return profile;
+	} catch (Exception e) {
+		System.out.println("Could not get profile with username " + username);
+		return null;
+	}
   }
     
   private static String usernameToPath(String username) {
