@@ -373,7 +373,7 @@ public class InGameController implements Initializable {
 
     	} else if(type.equals(ElementType.Sterilise)) {
     		Game.currentLevel.addElement(new Sterilise(ElementType.Sterilise, Game.currentLevel,
-    				(int) x, (int) y, 2));
+    				(int) x, (int) y, Sterilise.MAX_HEALTH));
 
     	} else if(type.equals(ElementType.MaleGenderChange)) {
     		Game.currentLevel.addElement(new MaleChanger(ElementType.MaleGenderChange,

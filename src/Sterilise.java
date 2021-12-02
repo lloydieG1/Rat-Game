@@ -15,6 +15,8 @@ public class Sterilise extends Element {
   private Image image;
   private Image aura;
 
+  public static final int MAX_HEALTH = 4;
+
   /**
    * Description.
    *
@@ -55,9 +57,11 @@ public class Sterilise extends Element {
    */
   private void logic() {
 
-    if (this.sterilisedRats > 4) {
+
+    if (health <=0) {
       level.removeElement(this);
     }
+    health--;
   }
 
   public void sterilise() {
@@ -70,7 +74,6 @@ public class Sterilise extends Element {
                         Rat rat = (Rat) element;
                         if (!rat.isSterile()) {
                             rat.makeSterile();
-                            sterilisedRats++;
                         }
 
                   }
