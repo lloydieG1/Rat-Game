@@ -298,10 +298,11 @@ public class Level {
    */
   public void render(GraphicsContext g) {
     renderTiles(g);
+
     for (Element element : elements) {
       element.render(g);
     }
-    renderTunnels(g);
+    renderGrass(g);
     renderDetails(g);
   }
 
@@ -335,7 +336,7 @@ public class Level {
    *
    * @param g
    */
-  public void renderTunnels(GraphicsContext g) {
+  public void renderGrass(GraphicsContext g) {
     for (int i = 0; i < tiles.length; i++) {
       for (int j = 0; j < tiles[i].length; j++) {
           TileType type = tiles[i][j].getType();

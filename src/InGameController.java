@@ -361,7 +361,7 @@ public class InGameController implements Initializable {
 
         } else if (type.equals(ElementType.Gas)) {
             Game.currentLevel.addElement(new Gas(ElementType.Gas, Game.currentLevel,
-            		(int) x, (int) y, 3));
+            		(int) x, (int) y, Gas.MAX_HEALTH));
 
         } else if (type.equals(ElementType.StopSign)) {
             Game.currentLevel.addElement(new StopSign(ElementType.StopSign, Game.currentLevel,

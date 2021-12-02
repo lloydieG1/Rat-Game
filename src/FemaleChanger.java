@@ -64,7 +64,7 @@ public class FemaleChanger extends Element {
 	        Rat rat = (Rat) element;
 	        if (rat.getIsMale()) {
 	        	rat.setIsMale(false);
-	
+
 	        }
               femaleChangeCount++;
 	      }

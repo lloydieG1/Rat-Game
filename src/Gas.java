@@ -11,6 +11,7 @@ import javafx.scene.paint.Color;
 public class Gas extends Element {
   private boolean damage;
   private Image image;
+  public static final int MAX_HEALTH = 3;
 
   /**
    * Gas constructor.
@@ -42,7 +43,7 @@ public class Gas extends Element {
       currentTick = 0;
       logic();
     }
-    if (health <= 0) {
+    if (health <= -MAX_HEALTH) {
       level.removeElement(this);
     }
   }
@@ -52,20 +53,26 @@ public class Gas extends Element {
    */
   private void logic() {
     age++;
-    health--;
-    if (isSpreadable(x - 1, y)) {
-      level.addElementLive(new Gas(ElementType.Gas, level, (x - 1), y, health));
-    }
-    if (isSpreadable(x + 1, y)) {
-      level.addElementLive(new Gas(ElementType.Gas, level, (x + 1), y, health));
-    }
-    if (isSpreadable(x, y - 1)) {
-      level.addElementLive(new Gas(ElementType.Gas, level, x, y - 1, health));
-      System.out.println("test");
-    }
-    if (isSpreadable(x, y + 1)) {
-      level.addElementLive(new Gas(ElementType.Gas, level, x, y + 1, health));
-      System.out.println("test");
+    if (health >0) {
+        health--;
+        if (isSpreadable(x - 1, y)) {
+            level.addElementLive(new Gas(ElementType.Gas, level, (x - 1), y, health));
+        }
+        if (isSpreadable(x + 1, y)) {
+            level.addElementLive(new Gas(ElementType.Gas, level, (x + 1), y, health));
+        }
+        if (isSpreadable(x, y - 1)) {
+            level.addElementLive(new Gas(ElementType.Gas, level, x, y - 1, health));
+            System.out.println("test");
+        }
+        if (isSpreadable(x, y + 1)) {
+            level.addElementLive(new Gas(ElementType.Gas, level, x, y + 1, health));
+            System.out.println("test");
+        }
+    } else {
+        if (Game.random.nextInt(2) == 1) {
+            health--;
+        }
     }
     
   }
