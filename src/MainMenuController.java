@@ -23,6 +23,11 @@ public class MainMenuController implements Initializable {
   private void levelsClick() {
     Game.openLevelMenu();
   }
+
+  @FXML
+  private void changeUser() {
+      Game.openUserSelection();
+  }
   
   /**
    * Quits the game.
