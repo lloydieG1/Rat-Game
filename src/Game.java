@@ -27,6 +27,7 @@ public class Game extends Application {
     
     private static Stage primaryStage; //the stage everything is shown on
 
+    private static Scene userSelection; //the main menu
     private static Scene mainMenu; //the main menu
     private static Scene levelMenu; //the levels menu
     private static Scene endGame; //the levels menu
@@ -81,13 +82,13 @@ public class Game extends Application {
 
         Game.primaryStage = primaryStage;
 
-
+        userSelection = loadScene("userSelection.fxml");
         mainMenu = loadScene("mainMenu.fxml");
         levelMenu = loadScene("levelMenu.fxml");
         levelLayout = loadScene("levelLayout.fxml");
         endGame = loadScene("EndGameScreen.fxml");
 
-        openMainMenu();
+        openUserSelection();
         primaryStage.show();
 
         int fpstime = 1000/FPS;
@@ -286,6 +287,14 @@ public class Game extends Application {
         g.fillRect(x, y, width, height);
     }
 
+    /**
+     *sets the scene to the user menu
+     */
+    public static void openUserSelection() {
+        primaryStage.setScene(userSelection);
+
+    }
+    
     /**
      *changes the menu to the main Menu
      */

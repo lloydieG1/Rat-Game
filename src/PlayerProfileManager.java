@@ -101,6 +101,16 @@ public class PlayerProfileManager {
     }	
   }
   
+  public static void initializeProfileArray() {
+	  File directory = new File("res\\profiles");
+	  File[] profiles = directory.listFiles();
+	  
+	  for (int i = 0; i < profiles.length; i++) {
+		String user = profiles[i].getName().replace(".txt", "");
+		
+	}
+  }
+  
   public static void incrementMaxLevel(String username) {
 	  int currentLevel = getProfile(username).getMaxLevel();
 	  updateProfileData(ProfileData.MaxLevel, currentLevel + 1, username);
@@ -163,12 +173,4 @@ public class PlayerProfileManager {
     String filePath = PROFILE_FILE_PATH + username + ".txt";
     return filePath;
   }
-    
-//    public static void main(String[] args) {
-//    	addNewProfile("User1");
-//		updateProfileData(ProfileData.Highscore, 1000, "User1");
-//		updateProfileData(ProfileData.MaxLevel, 6, "User1");
-//		PlayerProfile profile = getProfile("User1");
-//		System.out.println(profile.getMaxLevel()); //it all works whooo!!
-//	}
 }
