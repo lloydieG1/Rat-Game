@@ -45,9 +45,16 @@ public class Poison extends Element {
   public void poisonKill() {
     for (Element element : level.getElements(x, y)) {
       if (element.getType().equals(ElementType.Rat)) {
-        level.removeElement(element);
-        ratKilled++;
-        Game.score = Game.score + 10;
+    	  Rat rat = (Rat) element;
+    	  if(rat.getIsPregnant()) {
+    		  level.removeElement(element);
+    	       ratKilled++;
+    	       Game.score = Game.score + 20;
+    	  } else {
+	        level.removeElement(element);
+	        ratKilled++;
+	        Game.score = Game.score + 10;
+    	  }
       }
     }
   }

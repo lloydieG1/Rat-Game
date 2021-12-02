@@ -41,10 +41,16 @@ public class Explosion extends Element  {
 
   protected void tick() {
     for (Element element : level.getElements(x, y)) {
-      if (element.getType().equals(ElementType.Rat)) {
-        level.removeElement(element);
-        Game.score = Game.score + 10;
-      }
+    	if (element.getType().equals(ElementType.Rat)) {
+      	  Rat rat = (Rat) element;
+      	  if(rat.getIsPregnant()) {
+      		  level.removeElement(element);
+      	      Game.score = Game.score + 20;
+      	  } else {
+  	        level.removeElement(element);
+  	        Game.score = Game.score + 10;
+      	  }
+        }
     }
     currentTick++;
     if (currentTick > tickSpeed) {
