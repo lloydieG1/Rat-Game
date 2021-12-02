@@ -211,9 +211,9 @@ public class Game extends Application {
 
                 //make the scroll happen from the center instead of the top corner
                 if (minMax(gameSize, ZOOM_MIN, ZOOM_MAX) == gameSize) {
-                    double factor = 7;
+                    double factor = 8;
                     gameX = gameX -scroll*gameSize/factor;
-                    gameY = gameY - scroll*gameSize/factor;
+                    gameY = gameY - scroll*gameSize/factor ;
                 }
 
                 break;
