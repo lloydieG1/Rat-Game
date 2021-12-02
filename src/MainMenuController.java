@@ -48,6 +48,7 @@ public class MainMenuController implements Initializable {
 		Game.quit();
 	}
 
+
 	/**
 	 * Code run on initalization, displays updated message of the day.
 	 *
