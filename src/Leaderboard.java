@@ -48,16 +48,19 @@ public class Leaderboard {
 
             while(in.hasNextLine()) {
                 Score score = new Score(in.next(), in.nextInt());
+                System.out.println(score.toString());
                 scores.add(score);
+                in.nextLine();
             }
-
+            return scores;
 
 
         } catch (Exception e) {
+            e.printStackTrace();
             System.out.println("Failed to parse leaderboard " + levelName);
             return null;
         }
-        return scores;
+
     }
 
     private static void createFileIfNotExists(String level) {
@@ -97,6 +100,7 @@ public class Leaderboard {
         //attempts to open file and returns exception if it is not found
         try {
             in = new Scanner(inputFile);
+            System.out.println(inputFile);
         } catch (FileNotFoundException e) {
             System.out.println(OPEN_FILE_ERROR + level);
             System.exit(0);
