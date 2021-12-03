@@ -62,7 +62,13 @@ public class Leaderboard {
             Scanner in = openLeaderboard(levelName);
 
             while(in.hasNextLine()) {
-                Score score = new Score(in.next(), in.nextInt());
+                String username = in.next();
+                in.next();
+                int points = in.nextInt();
+                in.next();
+                in.next();
+                int time = in.nextInt();
+                Score score = new Score(username, points, time);
                 System.out.println(score.toString());
                 scores.add(score);
                 in.nextLine();

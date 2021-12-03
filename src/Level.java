@@ -78,6 +78,10 @@ public class Level {
 	  return timeLimit - timer + Game.score;
   }
 
+  public int getTimer() {
+      return timer;
+  }
+
 
   /**
    * Get Tile type.
@@ -175,7 +179,7 @@ public class Level {
     if (rats > maxRats) {
       Game.endGame("You lost with a score of " + Game.score);
     } else if (rats == 0) {
-        Leaderboard.addScore(level,new Score(Game.currentProfile.getUsername(), bonusScore()));
+        Leaderboard.addScore(level,new Score(Game.currentProfile.getUsername(), bonusScore(), timer));
         Game.endGame("You won with a score of " + bonusScore());
         PlayerProfileManager.setMaxLevel(Game.currentProfile.getUsername(), level);
 
