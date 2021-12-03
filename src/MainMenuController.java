@@ -78,7 +78,10 @@ public class MainMenuController implements Initializable {
             ex.printStackTrace();
         }
 
-        swap.play();
+        if (!oldMotd.equals(motd)) {
+            swap.play();
+        }
+
 
 
 
