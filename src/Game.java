@@ -71,11 +71,13 @@ public class Game extends Application {
 
     private static final int ZOOM_MIN = 50;
     private static final int ZOOM_MAX = 100;
+    private static int currentZoomMin = 50;
 
     public static boolean rightArrow;
     public static boolean leftArrow;
     public static boolean upArrow;
     public static boolean downArrow;
+
 
 
 
@@ -243,15 +245,33 @@ public class Game extends Application {
     }
 
     private static void clampMap() {
-        gameSize = minMax(gameSize, ZOOM_MIN, ZOOM_MAX);
+        int zoomBefore = (int)gameSize;
+
+        gameSize = minMax(gameSize, currentZoomMin, ZOOM_MAX);
         VISIBLE_TILES = (gameGraphics.getCanvas().getWidth()/gameSize);
-        int mapWidth = currentLevel.getMapBounds()[0];
-        int mapHeight = currentLevel.getMapBounds()[1];
+        clampMapZoom();
 
-        gameY = minMax(gameY, -gameSize* (mapHeight-VISIBLE_TILES), 0);
-        gameX = minMax(gameX, -gameSize*(mapWidth-VISIBLE_TILES), 0);
+        if (!(zoomBefore == (int)gameSize)) {
+            int mapWidth = currentLevel.getMapBounds()[0];
+            int mapHeight = currentLevel.getMapBounds()[1];
+            gameY = minMax(gameY, -gameSize * (mapHeight - VISIBLE_TILES), 0);
+            gameX = minMax(gameX, -gameSize * (mapWidth - VISIBLE_TILES), 0);
+            System.out.println("?");
+        }
 
+    }
 
+    private static void clampMapZoom() {
+        //prevent the map extending too far
+        if (VISIBLE_TILES > currentLevel.getMapBounds()[0]*0.75) {
+            while (VISIBLE_TILES > currentLevel.getMapBounds()[0] * 0.75) {
+                gameSize++;
+                gameSize = minMax(gameSize, currentZoomMin, ZOOM_MAX);
+                VISIBLE_TILES = (gameGraphics.getCanvas().getWidth() / gameSize);
+                currentZoomMin = (int) gameSize;
+            }
+            currentZoomMin = (int) gameSize;
+        }
     }
 
 
@@ -347,8 +367,10 @@ public class Game extends Application {
     public static void openGameScene(String levelName) {
 
 
+        currentZoomMin = ZOOM_MIN;
         levelController.resetItems();
         currentLevel = LevelLoader.getLevel(levelName);
+        currentLevel.applyStartPosition();
         primaryStage.setScene(levelLayout);
         levelController.setUserNameText(currentProfile.getUsername());
         levelController.setLevelNameText(currentLevel.level);

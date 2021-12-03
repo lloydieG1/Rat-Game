@@ -31,6 +31,10 @@ public class Level {
 
   private String saveFolder = "res\\maps\\save\\";
 
+  private double startX;
+  private double startY;
+  private double startZoom;
+
 
   /**
    * Constructs a Level.
@@ -53,6 +57,18 @@ public class Level {
     this.timeLimit = timeLimit;
     this.timer = timer;
   }
+
+  public void setStart(double zoom, double x, double y) {
+      this.startY = y;
+      this.startX = x;
+      this.startZoom = zoom;
+  }
+
+    public void applyStartPosition() {
+        Game.gameY = startY;
+        Game.gameX = startX;
+        Game.gameSize = startZoom;
+    }
 
   public void setScore(int score) {
     Game.score = score;
@@ -462,6 +478,12 @@ public class Level {
     file = file + Game.score;
     file = file + "\n" + lines;
     file = file + Game.sidebarAsString();
+    file = file + "\n" + lines;
+    file = file +  Game.gameSize;
+      file = file + "\n" + lines;
+      file = file +  Game.gameX;
+      file = file + "\n" + lines;
+      file = file +  Game.gameY;
     try {
       File levelFile = new File(saveFolder + Game.currentProfile.getUsername() + level + ".txt");
       if (levelFile.createNewFile()) {

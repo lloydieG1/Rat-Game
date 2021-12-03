@@ -44,8 +44,11 @@ public class LevelLoader {
 
     level.loadSideBar(parseSideBar(levelData[8]));
 
+    level.setStart(Double.parseDouble(levelData[9]), Double.parseDouble(levelData[10]),Double.parseDouble(levelData[11]));
+
     return level;
   }
+
 
   /**
    * Description.
@@ -94,7 +97,7 @@ public class LevelLoader {
   /**
    * Description.
    *
-   * @param tileS a char that relates to a type of Tile
+   * @param tileChar a char that relates to a type of Tile
    * @return the type of the tile to be taken from TileType.emnum
    */
   private static TileType getTile(char tileChar) {
