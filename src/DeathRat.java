@@ -1,9 +1,5 @@
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
 
 
 /**
@@ -16,7 +12,7 @@ public class DeathRat extends Element {
 
   private int ratsKilled;
   private Image image;
-  private int maxKills = 5;
+  public static final int MAX_HEALTH = 5;
 
   private final int KILLING_AGE = 5;
   
@@ -43,33 +39,40 @@ public class DeathRat extends Element {
     age++;
     if (age > KILLING_AGE ) {
       movement();
-      killRat();
+      checkRat();
     }      
   }
   
   /**
    * Description.
    */
-  public void killRat() {
+  public void checkRat() {
     for (Element element : level.getElements(x, y)) {
       if (element.getType().equals(ElementType.Rat)) {
     	  if (element.getType().equals(ElementType.Rat)) {
         	  Rat rat = (Rat) element;
-        	  if(rat.getIsPregnant()) {
-        		  level.removeElement(element);
-        	       ratsKilled = ratsKilled + 2;
-        	       Game.score = Game.score + 20;
-        	  } else {
-    	        level.removeElement(element);
-    	        ratsKilled++;
-    	        Game.score = Game.score + 10;
-        	  }
+        	  killRat(rat);
           }
-        if (ratsKilled >= maxKills) {
+        if (health <= 0) {
           level.removeElement(this);
         }
       }
     }
+  }
+
+
+
+  @Override
+  protected void killRat(Rat rat) {
+      if(rat.getIsPregnant()) {
+          level.removeElement(rat);
+          health = health - 1 - rat.getPregnantTime();;
+          Game.score = Game.score + 10 + 10*rat.getPregnantTime();
+      } else {
+          level.removeElement(rat);
+          health--;
+          Game.score = Game.score + 10;
+      }
   }
 
   @Override
@@ -83,7 +86,7 @@ public class DeathRat extends Element {
       logic();
     }
     if (age > KILLING_AGE ) {
-      killRat();
+      checkRat();
     }
   }
 

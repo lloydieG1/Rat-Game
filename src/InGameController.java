@@ -357,7 +357,7 @@ public class InGameController implements Initializable {
 
         } else if (type.equals(ElementType.DeathRat)) {
          Game.currentLevel.addElement(new DeathRat(ElementType.DeathRat, Game.currentLevel,
-        		 (int) x, (int) y, 1, Direction.North));
+        		 (int) x, (int) y, DeathRat.MAX_HEALTH, Direction.North));
 
         } else if (type.equals(ElementType.Gas)) {
             Game.currentLevel.addElement(new Gas(ElementType.Gas, Game.currentLevel,
@@ -369,7 +369,7 @@ public class InGameController implements Initializable {
 
         } else if(type.equals(ElementType.Poison)) {
         	Game.currentLevel.addElement(new Poison(ElementType.Poison, Game.currentLevel,
-        			(int) x, (int) y, 1));
+        			(int) x, (int) y, Poison.MAX_HEALTH));
 
     	} else if(type.equals(ElementType.Sterilise)) {
     		Game.currentLevel.addElement(new Sterilise(ElementType.Sterilise, Game.currentLevel,

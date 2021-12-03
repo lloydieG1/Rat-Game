@@ -1,10 +1,5 @@
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
-
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
 
 /**
  * Description.
@@ -14,8 +9,9 @@ import java.util.ArrayList;
  */
 public class Poison extends Element {
 	
-  private Image image;  
-  private int ratKilled;
+  private Image image;
+  public static final int MAX_HEALTH = 1;
+
 
   /**
    * Description.
@@ -28,13 +24,13 @@ public class Poison extends Element {
    */
   public Poison(ElementType type, Level level, int x, int y, int health) {
     super(type, level, x, y, Direction.North, health);  
-    ratKilled = 0;
+
     image = ImageLoader.getImage("poison.png", 64);
   }
   
   private void logic() {
-    poisonKill();
-    if (ratKilled == 1) {
+    checkRat();
+    if (health <= 0) {
       level.removeElement(this);
     }
   }
@@ -42,22 +38,28 @@ public class Poison extends Element {
   /**
    * Description.
    */
-  public void poisonKill() {
+  public void checkRat() {
     for (Element element : level.getElements(x, y)) {
       if (element.getType().equals(ElementType.Rat)) {
     	  Rat rat = (Rat) element;
-    	  if(rat.getIsPregnant()) {
-    		  level.removeElement(element);
-    	       ratKilled++;
-    	       Game.score = Game.score + 20;
-    	  } else {
-	        level.removeElement(element);
-	        ratKilled++;
-	        Game.score = Game.score + 10;
-    	  }
+    	  killRat(rat);
       }
     }
   }
+
+    @Override
+    protected void killRat(Rat rat) {
+        if(rat.getIsPregnant()) {
+            level.removeElement(rat);
+            health = health - 1 - rat.getPregnantTime();;
+            Game.score = Game.score + 10 + 10*rat.getPregnantTime();
+        } else {
+            level.removeElement(rat);
+            health--;
+            Game.score = Game.score + 10;
+        }
+    }
+
 
   @Override
   protected void tick() {

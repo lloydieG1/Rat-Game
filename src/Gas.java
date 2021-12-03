@@ -63,11 +63,11 @@ public class Gas extends Element {
         }
         if (isSpreadable(x, y - 1)) {
             level.addElementLive(new Gas(ElementType.Gas, level, x, y - 1, health));
-            System.out.println("test");
+
         }
         if (isSpreadable(x, y + 1)) {
             level.addElementLive(new Gas(ElementType.Gas, level, x, y + 1, health));
-            System.out.println("test");
+
         }
     } else {
         if (Game.random.nextInt(2) == 1) {

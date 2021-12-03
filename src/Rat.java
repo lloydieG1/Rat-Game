@@ -125,13 +125,7 @@ public class Rat extends Element {
         health--;
       }
       if (health <= 0) {
-    	  if(this.getIsPregnant()) {
-    		  level.removeElement(this);
-    	      Game.score = Game.score + 20;
-    	  } else {
-	        level.removeElement(this);
-	        Game.score = Game.score + 10;
-    	  }
+    	  killRat(this);
     	  
       }
     }  
