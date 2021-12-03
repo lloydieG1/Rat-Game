@@ -29,10 +29,13 @@ public class Leaderboard {
         createFileIfNotExists(levelName);
 
         String fileName = levelToPath(levelName);
-
+        ArrayList<Score> scores = getScores(levelName);
 
         try {
             FileWriter writer = new FileWriter(fileName);
+            for (Score score : scores) {
+                writer.append(score.toString() + "\n"); 
+            }
             writer.append(newScore.toString() + "\n");
             writer.close();
         } catch (IOException e) {
