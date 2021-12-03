@@ -22,7 +22,7 @@ public class Game extends Application {
 
     private static final int WIDTH = 1350; //width of the window
     private static final int HEIGHT = 900; //height of the window
-    public static final int FPS = 80; //the fps of the game
+    public static final int FPS = 100; //the fps of the game
     
     private static Stage primaryStage; //the stage everything is shown on
 
@@ -40,6 +40,7 @@ public class Game extends Application {
 
     private static Timeline gameLoop; //the loop in which the game runs
 
+    private static Timeline dailyMessageLoop; //the loop for the daily message updating
 
     public static Level currentLevel;
     
@@ -90,6 +91,12 @@ public class Game extends Application {
         Game.primaryStage = primaryStage;
 
         PlayerProfileManager.initializeProfileArray();
+
+        //daily message refreshing
+        dailyMessageLoop = new Timeline(new KeyFrame(Duration.millis(10000), (ActionEvent event) -> {
+            mainMenuController.refreshDailyMessage();
+        }));
+        dailyMessageLoop.setCycleCount(Timeline.INDEFINITE);
         
         userSelection = loadScene("userSelection.fxml");
         mainMenu = loadScene("mainMenu.fxml");
@@ -106,8 +113,6 @@ public class Game extends Application {
         gameLoop = new Timeline(new KeyFrame(Duration.millis(fpstime), (ActionEvent event) -> {
             tick();
         }));
-
-
         gameLoop.setCycleCount(Timeline.INDEFINITE);
 
         levelLayout.addEventFilter(KeyEvent.KEY_PRESSED, event -> keyDown(event));
@@ -251,13 +256,12 @@ public class Game extends Application {
         VISIBLE_TILES = (gameGraphics.getCanvas().getWidth()/gameSize);
         clampMapZoom();
 
-        if (!(zoomBefore == (int)gameSize)) {
+
             int mapWidth = currentLevel.getMapBounds()[0];
             int mapHeight = currentLevel.getMapBounds()[1];
             gameY = minMax(gameY, -gameSize * (mapHeight - VISIBLE_TILES), 0);
             gameX = minMax(gameX, -gameSize * (mapWidth - VISIBLE_TILES), 0);
-            System.out.println("?");
-        }
+
 
     }
 
@@ -321,14 +325,17 @@ public class Game extends Application {
      *sets the scene to the user menu
      */
     public static void openUserSelection() {
-        primaryStage.setScene(userSelection);
 
+        primaryStage.setScene(userSelection);
+        dailyMessageLoop.stop();
     }
     
     /**
      *changes the menu to the main Menu
      */
     public static void openMainMenu() {
+        mainMenuController.refreshDailyMessage();
+        dailyMessageLoop.play();
         mainMenuController.setProfileText();
         primaryStage.setScene(mainMenu);
 
@@ -347,6 +354,7 @@ public class Game extends Application {
      *changes the menu to the level Menu
      */
     public static void openLevelMenu() {
+        dailyMessageLoop.stop();
         levelMenuController.refreshButtons();
         primaryStage.setScene(levelMenu);
 
