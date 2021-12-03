@@ -1,5 +1,7 @@
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
@@ -13,8 +15,11 @@ import java.util.ResourceBundle;
  */
 public class MainMenuController implements Initializable {
 			
-	@FXML
-	Text motd; //text on screen for message of the day
+
+	String motd = ""; //text on screen for message of the day
+
+    @FXML
+    Canvas motdCanvas;
 	
 	@FXML
 	Text currentUser; //user that is logged in
@@ -49,17 +54,19 @@ public class MainMenuController implements Initializable {
 	}
 
     public void refreshDailyMessage() {
-
+        GraphicsContext g = motdCanvas.getGraphicsContext2D();
 
         try {
             String newMessage = DailyMessage.getMessage(null);
 
-            if (!(newMessage.equals(motd.getText()))) {
-                motd.setText(newMessage);
+            if (!(newMessage.equals(motd))) {
+                motd = newMessage;
             }
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+
+        g.fillText(motd, 0,20);
 
 
     }
@@ -74,12 +81,7 @@ public class MainMenuController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
         Game.mainMenuController = this;
-		try {
-			motd.setText(DailyMessage.getMessage(null));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		refreshDailyMessage();
 	}
 }
 

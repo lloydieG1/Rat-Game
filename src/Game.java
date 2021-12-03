@@ -93,7 +93,7 @@ public class Game extends Application {
         PlayerProfileManager.initializeProfileArray();
 
         //daily message refreshing
-        dailyMessageLoop = new Timeline(new KeyFrame(Duration.millis(30000), (ActionEvent event) -> {
+        dailyMessageLoop = new Timeline(new KeyFrame(Duration.millis(10000), (ActionEvent event) -> {
             mainMenuController.refreshDailyMessage();
         }));
         dailyMessageLoop.setCycleCount(Timeline.INDEFINITE);
