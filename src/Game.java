@@ -104,6 +104,8 @@ public class Game extends Application {
         levelLayout = loadScene("levelLayout.fxml");
         endGame = loadScene("EndGameScreen.fxml");
 
+      //  primaryStage.setResizable(false);
+
         openUserSelection();
         primaryStage.show();
 

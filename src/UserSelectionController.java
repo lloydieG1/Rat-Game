@@ -111,6 +111,21 @@ public class UserSelectionController implements Initializable {
             profileVbox.getChildren().remove(0);
         }
     }
+
+    @FXML
+    private void select() {
+        String userName = usernameInput.getText();
+        ArrayList<Boolean> valid = new ArrayList<>();
+        valid.add(playerExists(userName));
+
+        if (valid.contains(false)) {
+            Alert invalidDataAlert= new Alert(Alert.AlertType.ERROR);
+            invalidDataAlert.setHeaderText("this user doesn't exist");
+            Optional<ButtonType> resume = invalidDataAlert.showAndWait();
+        } else {
+            profileButtonClick(userName);
+        }
+    }
 	
 	@FXML
 	private void removeUserClick() {

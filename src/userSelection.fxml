@@ -9,11 +9,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1350.0" stylesheets="@cssStyle.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UserSelectionController">
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1350.0" stylesheets="@cssStyle.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UserSelectionController">
    <top>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Select or create a user profile" textAlignment="CENTER" wrappingWidth="367.13671875" BorderPane.alignment="CENTER">
          <font>
-            <Font size="35.0" />
+            <Font name="Monospaced Regular" size="35.0" />
          </font>
       </Text>
    </top>
@@ -29,12 +29,12 @@
                <children>
                   <Button layoutX="1171.0" layoutY="287.0" mnemonicParsing="false" onAction="#quit" text="Quit">
                      <font>
-                        <Font size="35.0" />
+                        <Font name="Monospaced Regular" size="35.0" />
                      </font>
                   </Button>
-                  <Button layoutX="676.0" layoutY="250.0" mnemonicParsing="false" onAction="#removeUserClick" text="Remove">
+                  <Button layoutX="706.0" layoutY="250.0" mnemonicParsing="false" onAction="#removeUserClick" text="Remove">
                      <font>
-                        <Font size="35.0" />
+                        <Font name="Monospaced Regular" size="30.0" />
                      </font>
                   </Button>
                   <TextField fx:id="usernameInput" layoutX="503.0" layoutY="162.0" prefHeight="55.0" prefWidth="352.0">
@@ -44,14 +44,19 @@
                   </TextField>
                   <Button layoutX="503.0" layoutY="250.0" mnemonicParsing="false" onAction="#createUserClick" text="Create">
                      <font>
-                        <Font size="35.0" />
+                        <Font name="Monospaced Regular" size="30.0" />
                      </font>
                   </Button>
                   <Text layoutX="304.0" layoutY="202.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:" wrappingWidth="198.72899627685547">
                      <font>
-                        <Font size="33.0" />
+                        <Font name="Monospaced Regular" size="35.0" />
                      </font>
                   </Text>
+                  <Button layoutX="873.0" layoutY="167.0" mnemonicParsing="false" onAction="#select" text="Select">
+                     <font>
+                        <Font name="Monospaced Regular" size="35.0" />
+                     </font>
+                  </Button>
                </children></AnchorPane>
         </items>
       </SplitPane>

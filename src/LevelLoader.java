@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Level loader takes in text input and constructs a scenemanager with info
+ * Level loader takes in text input and constructs a level with info
  * from said text file.
  *
  * @author William Randle, Lloyd, Adrian, Yazan
