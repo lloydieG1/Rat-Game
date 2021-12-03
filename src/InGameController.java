@@ -64,11 +64,27 @@ public class InGameController implements Initializable {
 
     public int buttonSize = 70;
 
+    @FXML
+    private Text userName;
+
+    @FXML
+    private Text levelName;
+
 
     @FXML
     private void buttonsVisible(MouseEvent event) {
         mouseX = event.getX();
         mouseY = event.getY();
+
+    }
+
+    public void setUserNameText(String name) {
+        userName.setText(name);
+
+    }
+
+    public void setLevelNameText(String name) {
+        levelName.setText(name);
 
     }
 

@@ -345,9 +345,12 @@ public class Game extends Application {
      */
     public static void openGameScene(String levelName) {
 
+
         levelController.resetItems();
         currentLevel = LevelLoader.getLevel(levelName);
         primaryStage.setScene(levelLayout);
+        levelController.setUserNameText(currentProfile.getUsername());
+        levelController.setLevelNameText(currentLevel.level);
         gameLoop.play();
 
     }
