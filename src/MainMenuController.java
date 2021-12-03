@@ -29,7 +29,7 @@ public class MainMenuController implements Initializable {
 
     private int fontSize = 30;
 
-    private final int MAX_WRAP = 75;
+    private final int MAX_WRAP = 73;
     private final int TEXT_WRAP = 65;
 
     private final int GRID_OFFSET = 8;
@@ -56,9 +56,6 @@ public class MainMenuController implements Initializable {
         if (s1.equals(s2)) {
             return false;
         }
-
-
-
 
         return true;
     }
@@ -95,6 +92,7 @@ public class MainMenuController implements Initializable {
         try {
             String newMessage = " " + DailyMessage.getMessage(null);
 
+          //  newMessage = "----------------------------------------------------------------------------------------------------------------------------";
             if (differentEnough(newMessage, motd)) {
                 motd = newMessage;
                 swap.play();
@@ -151,7 +149,7 @@ public class MainMenuController implements Initializable {
         ArrayList<String> lines = new ArrayList<>();
         while(motd.length()> TEXT_WRAP) {
             int pos = TEXT_WRAP;
-            while (!(motd.charAt(pos) == ' ' || motd.charAt(pos) == '(')) {
+            while (!(motd.charAt(pos) == ' ' || motd.charAt(pos) == '(' || pos >= MAX_WRAP)) {
                 pos++;
             }
             lines.add(motd.substring(0,pos));
