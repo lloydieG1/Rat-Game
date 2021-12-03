@@ -373,7 +373,7 @@ public class Game extends Application {
      *changes the menu to the level Menu
      */
     public static void openGameScene(String levelName) {
-
+        levelController.wrongScreen = false;
 
         currentZoomMin = ZOOM_MIN;
         levelController.resetItems();
@@ -458,6 +458,7 @@ public class Game extends Application {
 
 
     public static void endGame(String message) {
+        levelController.wrongScreen =true;
         pauseGame();
         endGameController.setText(message);
         openEndGame();

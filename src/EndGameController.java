@@ -22,6 +22,8 @@ public class EndGameController implements Initializable {
     private Button sortByButton;
 
 
+
+
   @FXML
   Text endgameMessage;
 
@@ -33,6 +35,7 @@ public class EndGameController implements Initializable {
    */
   @FXML
   private void backClick() {
+
     Game.openMainMenu();
     Game.currentLevel.deleteSave();
   }

@@ -71,6 +71,9 @@ public class InGameController implements Initializable {
     private Text levelName;
 
 
+    public boolean wrongScreen = false;
+
+
     @FXML
     private void buttonsVisible(MouseEvent event) {
         mouseX = event.getX();
@@ -95,6 +98,7 @@ public class InGameController implements Initializable {
      */
     @FXML
     private void backClick() {
+        wrongScreen = true;
         Game.currentLevel.saveFile();
         Game.openMainMenu();
         Game.pauseGame();
@@ -218,21 +222,21 @@ public class InGameController implements Initializable {
         item.setCache(true);
         item.setOnDragDetected(new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
-                // Mark the drag as started.
-                // We do not use the transfer mode (this can be used to indicate different forms
-                // of drags operations, for example, moving files or copying files).
-                Dragboard db = item.startDragAndDrop(TransferMode.ANY);
-                // db.setDragView(bomb.getImage());
+                    // Mark the drag as started.
+                    // We do not use the transfer mode (this can be used to indicate different forms
+                    // of drags operations, for example, moving files or copying files).
+                    Dragboard db = item.startDragAndDrop(TransferMode.ANY);
+                     db.setDragView(item.getImage());
 
-                // We have to put some content in the clipboard of the drag event.
-                // We do not use this, but we could use it to store extra data if we wished.
-                ClipboardContent content = new ClipboardContent();
-                content.putString(typeToString(type));
-                db.setContent(content);
+                    // We have to put some content in the clipboard of the drag event.
+                    // We do not use this, but we could use it to store extra data if we wished.
+                    ClipboardContent content = new ClipboardContent();
+                    content.putString(typeToString(type));
+                    db.setContent(content);
 
-                lastItem = type;
-                // Consume the event. This means we mark it as dealt with.
-                event.consume();
+                    lastItem = type;
+                    // Consume the event. This means we mark it as dealt with.
+                    event.consume();
             }
         });
 
@@ -424,22 +428,27 @@ public class InGameController implements Initializable {
         // This code allows the canvas to receive a dragged object within its bounds.
         gameCanvas.setOnDragOver(new EventHandler<DragEvent>() {
             public void handle(DragEvent event) {
-                // Mark the drag as acceptable if the source was the draggable image.
-                // (for example, we don't want to allow the user to drag things or files into our application)
+
+                    // Mark the drag as acceptable if the source was the draggable image.
+                    // (for example, we don't want to allow the user to drag things or files into our application)
                     // Mark the drag event as acceptable by the canvas.
                     event.acceptTransferModes(TransferMode.ANY);
                     // Consume the event. This means we mark it as dealt with.
                     event.consume();
+
             }
         });
 
         // This code allows the canvas to react to a dragged object when it is finally dropped.
         gameCanvas.setOnDragDropped(new EventHandler<DragEvent>() {
+
             public void handle(DragEvent event) {
-                // We call this method which is where the bulk of the behaviour takes place.
-                canvasDragDroppedOccured(event);
-                // Consume the event. This means we mark it as dealt with.
-                event.consume();
+
+                    // We call this method which is where the bulk of the behaviour takes place.
+                    canvasDragDroppedOccured(event);
+                    // Consume the event. This means we mark it as dealt with.
+                    event.consume();
+
             }
         });
 
