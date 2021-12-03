@@ -183,8 +183,9 @@ public class Level {
     } else if (rats == 0) {
         double winTime = System.nanoTime();
         double precision = 1000000000;
+
         Leaderboard.addScore(level,new Score(Game.currentProfile.getUsername(), bonusScore(), (winTime-time)/precision), 0);
-        Game.endGame("You won with a score of " + bonusScore());
+        Game.endGame("You won with a score of: \n" + bonusScore() + "\nin:\n" + String.format("%.3f", (winTime-time)/precision) + " seconds");
         PlayerProfileManager.setMaxLevel(Game.currentProfile.getUsername(), level);
 
 
