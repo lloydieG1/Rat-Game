@@ -7,6 +7,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
@@ -27,8 +28,8 @@ public class MainMenuController implements Initializable {
 	String motd = ""; //text on screen for message of the day
 
 
-    private int textWrap = 70;
-    private int fontSize = 35;
+    private int textWrap = 40;
+    private int fontSize = 30;
 
     @FXML
     Canvas motdCanvas;
@@ -110,7 +111,7 @@ public class MainMenuController implements Initializable {
         text1Pos-= moveHeight;
         text2Pos-= moveHeight;
         g.setFill(Color.color(1,0.8,0));
-        g.setFont(new Font("monospaced",fontSize));
+        g.setFont(Font.font("monospace", FontWeight.NORMAL,fontSize));
         renderMotd(motdLines(oldMotd), text1Pos, g);
         renderMotd(motdLines(motd), text2Pos, g);
     }
@@ -126,7 +127,7 @@ public class MainMenuController implements Initializable {
         ArrayList<String> lines = new ArrayList<>();
         while(motd.length()>textWrap) {
             int pos = textWrap;
-            while (!(motd.charAt(pos) == ' ')) {
+            while (!(motd.charAt(pos) == ' ' || motd.charAt(pos) == '(')) {
                 pos++;
             }
             pos++;
