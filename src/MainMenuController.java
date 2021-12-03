@@ -129,6 +129,7 @@ public class MainMenuController implements Initializable {
             while (!(motd.charAt(pos) == ' ')) {
                 pos++;
             }
+            pos++;
             lines.add(motd.substring(0,pos));
             motd = motd.substring(pos);
         }
