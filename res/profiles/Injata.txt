@@ -1,2 +1,2 @@
 USER: Injata
-MAX LEVEL: 5
+MAX LEVEL: 6

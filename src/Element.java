@@ -26,6 +26,8 @@ public abstract class Element {
   protected Direction lastDir = Direction.North;
   protected int health;
 
+  protected boolean hitStopSign = false;
+
   /**
    * Constructs an element with x,y, level it is in and type.
    *
@@ -109,6 +111,7 @@ public abstract class Element {
    * Handles the movement of the rat.
    */
   protected void movement() {
+      hitStopSign = false;
     lastDir = dir;
     x = nextX;
     y = nextY;
@@ -120,66 +123,61 @@ public abstract class Element {
     int randomNum = Game.random.nextInt(4);
 
     // changes direction until nolonger stuck
-    while (isStuck()) {
-      dir = rightDir(dir);
+    for (int i = 0; i < 4; i++)  {
+        if (isStuck()) {
+            dir = rightDir(dir);
+        }
     }
-
-    if (randomNum == 0) {
-      checkX = x;
-      checkY = y + 1;
-    } else if (randomNum == 1) {
-      checkX = x + 1;
-      checkY = y;
-    } else if (randomNum == 2) {
-      checkX = x;
-      checkY = y - 1;
-    } else if (randomNum == 3) {
-      checkX = x - 1;
-      checkY = y;
-    }
-    while (!(isTile(checkX, checkY))) {
-      randomNum = Game.random.nextInt(4);
-      if (randomNum == 0) {
+    if(isStuck()) {
         checkX = x;
-        checkY = y + 1;
-      } else if (randomNum == 1) {
-        checkX = x + 1;
         checkY = y;
-      } else if (randomNum == 2) {
-        checkX = x;
-        checkY = y - 1;
-      } else if (randomNum == 3) {
-        checkX = x - 1;
-        checkY = y;
-      }
+    } else {
+
+        if (randomNum == 0) {
+            checkX = x;
+            checkY = y + 1;
+        } else if (randomNum == 1) {
+            checkX = x + 1;
+            checkY = y;
+        } else if (randomNum == 2) {
+            checkX = x;
+            checkY = y - 1;
+        } else if (randomNum == 3) {
+            checkX = x - 1;
+            checkY = y;
+        }
+        while (!(isTile(checkX, checkY))) {
+            randomNum = Game.random.nextInt(4);
+            if (randomNum == 0) {
+                checkX = x;
+                checkY = y + 1;
+            } else if (randomNum == 1) {
+                checkX = x + 1;
+                checkY = y;
+            } else if (randomNum == 2) {
+                checkX = x;
+                checkY = y - 1;
+            } else if (randomNum == 3) {
+                checkX = x - 1;
+                checkY = y;
+            }
+        }
+
+        if (checkY == y + 1) {
+            dir = Direction.North;
+        } else if (checkY == y - 1) {
+            dir = Direction.South;
+        } else if (checkX == x + 1) {
+            dir = Direction.East;
+        } else if (checkX == x - 1) {
+            dir = Direction.West;
+        }
     }
 
-    if (checkY == y + 1) {
-      dir = Direction.North;
-    } else if (checkY == y - 1) {
-      dir = Direction.South;
-    } else if (checkX == x + 1) {
-      dir = Direction.East;
-    } else if (checkX == x - 1) {
-      dir = Direction.West;
-    }
-
-
-    boolean hitStopSign = false;
-      for (Element element : level.getElements(checkX, checkY)) {
-          if (element.getType().equals(ElementType.StopSign)) {
-              StopSign stopsign = (StopSign) element;
-              stopsign.blocksUp();
-              hitStopSign = true;
-          }
-      }
-      if (!hitStopSign) {
           this.nextX = checkX;
           this.nextY = checkY;
-      } else {
-          dir = rightDir(dir);
-          movement();
-      }
+
+
   }
 
   /**
@@ -208,6 +206,17 @@ public abstract class Element {
     if (level.getTile(x, y).getType().equals(TileType.Grass)) {
       return false;
     }
+      for (Element element : level.getElements(x, y)) {
+          if (element.getType().equals(ElementType.StopSign)) {
+              StopSign stopsign = (StopSign) element;
+              if (!hitStopSign) {
+                  stopsign.blocksUp();
+                  hitStopSign = true;
+              }
+              return false;
+
+          }
+      }
 
 
     return true;
