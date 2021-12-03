@@ -34,6 +34,8 @@ public class MainMenuController implements Initializable {
 
     private final int GRID_OFFSET = 8;
 
+    private final double LINE_FACTOR = 1.6666;
+
 
     @FXML
     Canvas motdCanvas;
@@ -86,11 +88,12 @@ public class MainMenuController implements Initializable {
 	}
 
     public void refreshDailyMessage() {
+        System.out.println(motd);
         text1Pos = 0;
         text2Pos = motdCanvas.getHeight();
         oldMotd = motd;
         try {
-            String newMessage = DailyMessage.getMessage(null);
+            String newMessage = " " + DailyMessage.getMessage(null);
 
             if (differentEnough(newMessage, motd)) {
                 motd = newMessage;
@@ -107,7 +110,8 @@ public class MainMenuController implements Initializable {
     }
 
     private void renderMessage(GraphicsContext g) {
-        System.out.println(motd);
+
+
         double moveHeight = motdCanvas.getHeight()/Game.FPS;
         text1Pos-= moveHeight;
         text2Pos-= moveHeight;
@@ -117,7 +121,7 @@ public class MainMenuController implements Initializable {
 
         g.setStroke(Color.color(0,0,0, 0.1));
         for (int i = 0; i < MAX_WRAP; i++) {
-            g.strokeRect(0,0, i*fontSize/1.6666, motdCanvas.getHeight());
+            g.strokeRect(0,0, i*fontSize/LINE_FACTOR, motdCanvas.getHeight());
         }
         for (int i = 0; i < MAX_WRAP; i++) {
             g.strokeRect(0,0, motdCanvas.getWidth(), i*fontSize+GRID_OFFSET-text1Pos - motdCanvas.getHeight());
