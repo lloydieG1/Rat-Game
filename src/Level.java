@@ -3,6 +3,7 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
 import java.io.*;
+import java.math.BigDecimal;
 import java.nio.file.*;
 import java.util.ArrayList;
 
@@ -34,7 +35,7 @@ public class Level {
   private double startX;
   private double startY;
   private double startZoom;
-  private double time;
+  private long time; //the time since the level was started
 
 
 
@@ -60,7 +61,6 @@ public class Level {
     this.maxRats = maxRats;
     this.timeLimit = timeLimit;
     this.timer = timer;
-    time = System.nanoTime();
   }
 
   public void setStart(double zoom, double x, double y) {
@@ -85,6 +85,10 @@ public class Level {
 
   public int getTimer() {
       return timer;
+  }
+
+  public void setTime(long time) {
+      this.time = time;
   }
 
 
@@ -496,6 +500,11 @@ public class Level {
       file = file +  Game.gameX;
       file = file + "\n" + lines;
       file = file +  Game.gameY;
+      file = file + "\n" + lines;
+      BigDecimal preciseValue = new BigDecimal(time);
+
+      file = file +  preciseValue;
+      System.out.println(preciseValue);
     try {
       File levelFile = new File(saveFolder + Game.currentProfile.getUsername() + level + ".txt");
       if (levelFile.createNewFile()) {
@@ -518,8 +527,4 @@ public class Level {
     }
   }
 
-
-  private void saveScore() {
-
-  }
 }

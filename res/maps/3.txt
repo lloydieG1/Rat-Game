@@ -50,3 +50,5 @@ bomb,15,0,0 gas,20,0,0 sterilize,30,0,0 maleGenderChange,45,0,0 femaleGenderChan
 0
 /
 0
+/
+0
