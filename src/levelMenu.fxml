@@ -17,10 +17,10 @@
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Levels" TilePane.alignment="TOP_CENTER">
                <font>
-                  <Font size="34.0" />
+                  <Font size="35.0" />
                </font>
             </Text>
-              <TilePane fx:id="levelPane" alignment="TOP_CENTER" hgap="25.0" prefHeight="160.0" prefWidth="708.0" vgap="25.0" TilePane.alignment="TOP_CENTER" />
+              <TilePane fx:id="levelPane" alignment="TOP_CENTER" hgap="25.0" prefHeight="169.0" prefWidth="876.0" vgap="25.0" TilePane.alignment="TOP_CENTER" />
          </children>
       </TilePane>
    </center>

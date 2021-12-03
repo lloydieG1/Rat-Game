@@ -6,12 +6,15 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.TilePane;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -91,6 +94,17 @@ public class LevelsMenuController implements Initializable {
         } else {
             levelButton.setStyle("-fx-text-fill: grey; -fx-background-color: #555555;");
         }
+
+          ArrayList<Score> scores = Leaderboard.getScores(buttonText, 0);
+          String text = "leaderboard: \n";
+
+          for (Score score : scores) {
+              text = text + score + "\n";
+          }
+        Tooltip leaderboard = new Tooltip();
+          leaderboard.setText(text);
+
+        levelButton.setTooltip(leaderboard);
         levelPane.getChildren().add(levelButton);
       }
     }
