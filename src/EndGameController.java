@@ -1,6 +1,7 @@
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 import java.net.URL;
@@ -34,8 +35,15 @@ public class EndGameController implements Initializable {
       ArrayList<Score> scores = Leaderboard.getScores(Game.currentLevel.level);
       removeScores();
 
+      Text header = new Text("leaderboard: ");
+      header.setFont(new Font(25));
+
+      leaderboard.getChildren().add(header);
       for (Score score : scores) {
-          leaderboard.getChildren().add(new Text(score.toString()));
+          Text scoreT = new Text(score.toString());
+          scoreT.setFont(new Font(20));
+
+          leaderboard.getChildren().add(scoreT);
       }
 
   }
