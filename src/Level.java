@@ -390,10 +390,10 @@ public class Level {
    * Description.
    */
   public void deleteSave() {
-    File f = new File("res\\maps\\save\\" + level + ".txt");
+    File f = new File("res\\maps\\save\\" +Game.currentProfile.getUsername() +level + ".txt");
     if (f.exists()) {
       try {
-        Files.delete(Paths.get("res\\maps\\save\\" + level + ".txt"));
+        Files.delete(Paths.get("res\\maps\\save\\" + Game.currentProfile.getUsername() +level + ".txt"));
         System.out.println("deleting save");
       } catch (IOException e) {
         e.printStackTrace();
