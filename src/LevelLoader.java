@@ -295,10 +295,6 @@ public class LevelLoader {
   private static ArrayList<MenuItem> parseItemData(String itemData) {
     ArrayList<MenuItem> menuItems = new ArrayList<MenuItem>();
     String[] items = itemData.split(SPACE);
-	
-    for (int i = 0; i < items.length; i++) {
-      System.out.println(items[i]);
-    }
 
     for (int i = 0; i < items.length; i++) {
       String[] individualItem = items[i].split(INTERNAL_DATA_DELIMITER);

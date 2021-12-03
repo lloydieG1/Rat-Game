@@ -196,9 +196,6 @@ public class Rat extends Element {
               rat.setAge(0);
               rat.setMatingTime(0);
               level.addElementLive(rat);
-
-              System.out.println("has been Born!");
-          
       }
   }
 
