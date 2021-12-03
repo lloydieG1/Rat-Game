@@ -140,28 +140,25 @@ public class Tile {
         double y = (int) (this.y * factor + Game.gameY);
         double size = Game.gameSize;
         Color dark = Color.color(0, 0, 0,0.6);
-
+        g.setFill(dark);
          if (edges[0]) {
 
-            g.setFill(dark);
             g.fillRect(x+(size*dist2)/dist, y+size/dist, size/dist, size-size*2/dist);
+
         }
         if (edges[1]) {
 
-            g.setFill(dark);
             g.fillRect(x, y+size/dist, size/dist, size-size*2/dist);
 
         }
 
         if (edges[2]) {
 
-            g.setFill(dark);
+
             g.fillRect(x+size/dist, y+(size*dist2/dist), size-size*2/dist, size/dist);
         }
 
         if (edges[3]) {
-
-            g.setFill(dark);
             g.fillRect(x+size/dist, y, size-size*2/dist, size/dist);
 
         }
