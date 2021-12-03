@@ -173,11 +173,9 @@ public class LevelLoader {
     //TODO quite a scuffed nested for loop, want to change
     for (int i = rowSize - 1; i >= 0; i--) {
       for (int j = 0; j < columnSize; j++) {
-        System.out.println(i);
         char tileLetter = tileRows[j].charAt(i);
         Tile tile = new Tile(getTile(tileLetter), j, i);
         level.addTile(i, j, tile);
-        System.out.println(tileLetter);
       }
     }
   }
