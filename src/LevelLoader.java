@@ -31,6 +31,7 @@ public class LevelLoader {
     loadFile(fileName);
 
     levelName = levelName.replace("save\\", "");
+    levelName = levelName.replace(Game.currentProfile.getUsername(), "");
 
     int[] gridSize = parseGridSize(levelData[0]);
     level = new Level(gridSize[0], gridSize[1], Integer.parseInt(levelData[2]), levelName,
