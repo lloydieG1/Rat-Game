@@ -70,7 +70,7 @@ public class Game extends Application {
     public static double VISIBLE_TILES = 14;
 
     private static final int ZOOM_MIN = 50;
-    private static final int ZOOM_MAX = 100;
+    private static final int ZOOM_MAX = 200;
     private static int currentZoomMin = 50;
 
     public static boolean rightArrow;
@@ -223,7 +223,7 @@ public class Game extends Application {
 
 
                 //make the scroll happen from the center instead of the top corner
-                if (minMax(gameSize, ZOOM_MIN, ZOOM_MAX) == gameSize) {
+                if (minMax(gameSize, currentZoomMin, ZOOM_MAX) == gameSize) {
                     gameX = centerX-(VISIBLE_TILES/2*gameSize);
                     gameY = centerY - (VISIBLE_TILES/2*gameSize);
                 }
@@ -262,9 +262,10 @@ public class Game extends Application {
     }
 
     private static void clampMapZoom() {
+        double fractionVisible = 0.5;
         //prevent the map extending too far
-        if (VISIBLE_TILES > currentLevel.getMapBounds()[0]*0.75) {
-            while (VISIBLE_TILES > currentLevel.getMapBounds()[0] * 0.75) {
+        if (VISIBLE_TILES > currentLevel.getMapBounds()[0]*fractionVisible) {
+            while (VISIBLE_TILES > currentLevel.getMapBounds()[0] * fractionVisible) {
                 gameSize++;
                 gameSize = minMax(gameSize, currentZoomMin, ZOOM_MAX);
                 VISIBLE_TILES = (gameGraphics.getCanvas().getWidth() / gameSize);
