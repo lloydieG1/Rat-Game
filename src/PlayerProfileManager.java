@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * @author lloyd
+ * @author Lloyd
  */
 public class PlayerProfileManager {
 	private static final String OPEN_FILE_ERROR = "Error with file ";
