@@ -55,6 +55,8 @@ public class Game extends Application {
 
     public static MainMenuController mainMenuController;
 
+    public static LevelsMenuController levelMenuController;
+
     public static final int MAP_WIDTH = 900;
     public static final int MAP_HEIGHT = 900;
     public static double gameX =0;
@@ -324,6 +326,7 @@ public class Game extends Application {
      *changes the menu to the level Menu
      */
     public static void openLevelMenu() {
+        levelMenuController.refreshButtons();
         primaryStage.setScene(levelMenu);
 
     }

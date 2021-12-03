@@ -431,9 +431,9 @@ public class Level {
         file = file + tiles[j][i].asString();
       }
 
+
       file = file + ";\n";
     }
-
     file = file + "\n" + lines;
 
     file = file + maxRats;
@@ -457,7 +457,7 @@ public class Level {
     file = file + "\n" + lines;
     file = file + Game.sidebarAsString();
     try {
-      File myObj = new File("res\\maps\\save\\" + level + ".txt");
+      File myObj = new File("res\\maps\\save\\" + Game.currentProfile.getUsername() + level + ".txt");
       if (myObj.createNewFile()) {
         System.out.println("save: " + myObj.getName());
       } else {
@@ -468,7 +468,7 @@ public class Level {
       e.printStackTrace();
     }
     try {
-      FileWriter myWriter = new FileWriter("res\\maps\\save\\" + level + ".txt");
+      FileWriter myWriter = new FileWriter("res\\maps\\save\\" + Game.currentProfile.getUsername() + level + ".txt");
       myWriter.write(file);
       myWriter.close();
       System.out.println("Successfully saved");

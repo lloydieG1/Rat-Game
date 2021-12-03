@@ -60,6 +60,7 @@ public class LevelsMenuController implements Initializable {
             
             for (int i = 0; i < fileCount; i++) {
               String saveText = saves[i].getName().replace(".txt", "");
+                saveText = saveText.replace(Game.currentProfile.getUsername(), "");
               if (saveText.equals(buttonText)) {
                 saveFileName = saveText;
                 found = true;
@@ -74,7 +75,7 @@ public class LevelsMenuController implements Initializable {
               saveConfirmation.setContentText("clicking ok resumes this save, cancel overwrites it.");
               Optional<ButtonType> resume = saveConfirmation.showAndWait();
               if (resume.get().equals(ButtonType.OK)) {
-                Game.openGameScene("save\\" + saveFileName);
+                Game.openGameScene("save\\" +Game.currentProfile.getUsername() + saveFileName);
               } else if (resume.get().equals(ButtonType.CANCEL)) {
                 Game.openGameScene(buttonText);
               }
@@ -89,9 +90,17 @@ public class LevelsMenuController implements Initializable {
     levelPane.setPrefColumns(3);
   }
 
+  public void refreshButtons() {
+      removebuttons();
+      addLevelButtons();
+  }
 
 
-
+    private void removebuttons() {
+        while(levelPane.getChildren().size() > 0) {
+            levelPane.getChildren().remove(0);
+        }
+    }
 
 
   /**
@@ -101,6 +110,7 @@ public class LevelsMenuController implements Initializable {
    */
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
+      Game.levelMenuController = this;
     addLevelButtons();
   }
 }
