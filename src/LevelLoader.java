@@ -190,14 +190,15 @@ public class LevelLoader {
     for (int i = 0; i < seperateRats.length; i++) {
       String[] element = seperateRats[i].split(INTERNAL_DATA_DELIMITER);
       int health = Integer.parseInt(element[1]);
-      int xPos = Integer.parseInt(element[2]);
-      int yPos = Integer.parseInt(element[3]);
-      Direction initialDirection = getDirection(element[4]);
+      int age = Integer.parseInt(element[2]);
+      int xPos = Integer.parseInt(element[3]);
+      int yPos = Integer.parseInt(element[4]);
+      Direction initialDirection = getDirection(element[5]);
       //TODO change to switch statement
       switch(element[0]) {
       	case "rat":
-            boolean isMale = Boolean.parseBoolean(element[5]);
-            int age = Integer.parseInt(element[6]);
+            boolean isMale = Boolean.parseBoolean(element[6]);
+
             boolean isSterile = Boolean.parseBoolean(element[7]);
             int timeLeftMating = Integer.parseInt(element[8]);
             int pregnantTime = Integer.parseInt(element[9]);
@@ -210,48 +211,55 @@ public class LevelLoader {
       	case "bomb":
             Bomb bomb = new Bomb(ElementType.Bomb, level,
                     xPos, yPos, health);
+            bomb.setAge(age);
             level.addElement(bomb);
             break;
       	case "deathRat":
-            int drAge = Integer.parseInt(element[5]);
             DeathRat deathRat = new DeathRat(ElementType.DeathRat, level,
                                       xPos, yPos, health, initialDirection);
-            deathRat.setAge(drAge);
+            deathRat.setAge(age);
             level.addElement(deathRat);
       		break;
       	case "gas":
             Gas gas= new Gas(ElementType.Gas, level,
                     		xPos, yPos, health);
+            gas.setAge(age);
             level.addElement(gas);
       		break;
       	case "sterilise":
             Sterilise sterilise= new Sterilise(ElementType.Sterilise, level,
                     xPos, yPos, health);
+            sterilise.setAge(age);
             level.addElement(sterilise);
       		break;
       	case "maleGenderChange":
             MaleChanger maleChanger= new MaleChanger(ElementType.Sterilise, level,
                     xPos, yPos, health);
+            maleChanger.setAge(age);
             level.addElement(maleChanger);
       		break;
       	case "femaleGenderChange":
             FemaleChanger femaleChanger= new FemaleChanger(ElementType.Sterilise, level,
                     xPos, yPos, health);
+            femaleChanger.setAge(age);
             level.addElement(femaleChanger);
       		break;
       	case "stopSign":
             StopSign stopSign= new StopSign(ElementType.StopSign, level,
                     xPos, yPos, health);
+            stopSign.setAge(age);
             level.addElement(stopSign);
       		break;
       	case "poison":
             Poison poison= new Poison(ElementType.Poison, level,
                     xPos, yPos, health);
+            poison.setAge(age);
             level.addElement(poison);
       		break;
       	case "explosion":
             Explosion explosion= new Explosion(ElementType.Explosion, level,
                     xPos, yPos, health);
+            explosion.setAge(age);
             level.addElement(explosion);
       		break;
       	default:

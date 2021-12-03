@@ -106,9 +106,4 @@ public class DeathRat extends Element {
     g.drawImage(image, - (size / 2), - (size / 2), size, size);
     g.restore();
   }
-
-    @Override
-    protected String extraInfo() {
-        return "," + age;
-    }
 }

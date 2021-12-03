@@ -254,7 +254,7 @@ public class Rat extends Element {
 
   @Override
   protected String extraInfo() {
-    return "," +  isMale + "," + age + "," + isSterile + "," + timeLeftInMating + "," + timeLeftPregnant;
+    return "," +  isMale + "," + isSterile + "," + timeLeftInMating + "," + timeLeftPregnant;
   }
   
 }

@@ -425,6 +425,6 @@ public abstract class Element {
    * @return
    */
   public String asString() {
-    return typeAsString() + "," + health + "," + x + "," + y + "," + dirAsString() + extraInfo();
+    return typeAsString() + "," + health + "," + age + "," + x + "," + y + "," + dirAsString() + extraInfo();
   }
 }
