@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -57,21 +58,48 @@ public class UserSelectionController implements Initializable {
 	@FXML
 	private void createUserClick() {
         String userName = usernameInput.getText();
-        boolean tooLong = userName.length() > 10;
-        boolean tooLittle = userName.equals("");
-        if (!tooLittle && !tooLong) {
 
-            PlayerProfileManager.addNewProfile(userName);
-            removeProfiles();
-            addProfileButtons();
-        } else {
+        //check the validity of the name
+        ArrayList<Boolean> valid = new ArrayList<>();
+        valid.add(!(userName.length() > 10));
+        valid.add(!userName.equals(""));
+        valid.add(!userName.contains("level"));
+        valid.add(!illegalString(userName));
+
+        if (valid.contains(false)) {
             Alert invalidDataAlert= new Alert(Alert.AlertType.ERROR);
             invalidDataAlert.setTitle("incorrect input");
             invalidDataAlert.setHeaderText("the information entered is invalid");
             Optional<ButtonType> resume = invalidDataAlert.showAndWait();
+
+        } else {
+            PlayerProfileManager.addNewProfile(userName);
+            removeProfiles();
+            addProfileButtons();
         }
     }
 
+    private boolean illegalString(String username) {
+        for (int i = 0; i < username.length(); i++) {
+            if (illegalChar(username.charAt(i))) {
+                return true;
+            }
+
+        }
+        return false;
+    }
+
+    private boolean illegalChar(char letter) {
+        if ((int)letter <=90 && (int)letter >= 65) {
+            return false;
+        } else if ((int)letter <=122 && (int)letter >= 97) {
+            return false;
+        } else if (((int)letter <=57 && (int)letter >= 48)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
     private void removeProfiles() {
         while(profileVbox.getChildren().size() > 0) {

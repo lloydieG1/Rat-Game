@@ -25,13 +25,13 @@ GGGGGGGGGGGGGGGGGGGGGGGGG;
 /
 25
 /
-rat,3,34,4,3,north,true,false,0,0 rat,3,34,21,4,north,true,false,0,0 rat,3,34,16,4,south,false,false,0,0 rat,3,34,20,7,east,false,false,2,4 rat,3,31,21,3,north,false,false,0,3 rat,3,34,9,11,west,true,false,0,0 rat,3,15,19,7,west,false,false,0,2 rat,3,15,20,7,east,true,false,1,0 rat,3,13,18,7,west,true,false,0,0 rat,3,6,19,5,west,false,false,0,0 rat,3,2,19,7,west,false,false,0,0 rat,3,0,21,3,north,false,false,0,0 
+rat,3,34,4,3,north,true,false,0,0 rat,3,34,21,4,north,true,false,0,0 rat,3,34,16,4,south,false,false,0,0 rat,3,34,20,7,east,false,false,2,4 rat,3,31,21,3,north,false,false,0,3 rat,3,34,9,11,west,true,false,0,0 rat,3,15,19,7,west,false,false,0,2 rat,3,15,20,7,east,true,false,1,0 rat,3,13,18,7,west,true,false,0,0 rat,3,7,19,5,west,false,false,0,0 rat,3,3,19,7,west,false,false,0,0 rat,3,1,21,3,north,false,false,0,0 
 /
 180
 /
 30
 /
-bomb,15,0,1 gas,15,0,1 sterilize,30,0,1 maleGenderChange,45,0,16 femaleGenderChange,45,0,16 stopSign,15,0,1 deathRat,90,0,61 poison,45,0,16 
+bomb,15,22,2 gas,15,22,2 sterilize,30,22,2 maleGenderChange,45,22,17 femaleGenderChange,45,22,17 stopSign,15,22,2 deathRat,90,22,62 poison,45,22,17 
 /
 0
 /
