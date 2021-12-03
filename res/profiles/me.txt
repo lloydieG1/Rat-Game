@@ -1,2 +1,0 @@
-USER: me
-MAX LEVEL: 1 

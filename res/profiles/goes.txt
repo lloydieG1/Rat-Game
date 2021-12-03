@@ -1,2 +1,0 @@
-USER: goes
-MAX LEVEL: 1 

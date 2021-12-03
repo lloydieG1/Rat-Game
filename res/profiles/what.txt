@@ -1,2 +1,0 @@
-USER: what
-MAX LEVEL: 1 

@@ -190,4 +190,9 @@ public class PlayerProfileManager {
     String filePath = PROFILE_FILE_PATH + username + ".txt";
     return filePath;
   }
+
+  public static boolean userExists(String username) {
+      File user = new File(usernameToPath(username));
+      return user.exists();
+  }
 }

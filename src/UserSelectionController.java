@@ -65,11 +65,12 @@ public class UserSelectionController implements Initializable {
         valid.add(!userName.equals(""));
         valid.add(!userName.contains("level"));
         valid.add(!illegalString(userName));
+        valid.add(!playerExists(userName));
 
         if (valid.contains(false)) {
             Alert invalidDataAlert= new Alert(Alert.AlertType.ERROR);
-            invalidDataAlert.setTitle("incorrect input");
-            invalidDataAlert.setHeaderText("the information entered is invalid");
+            invalidDataAlert.setTitle("incorrect input:");
+            invalidDataAlert.setHeaderText(getErrorDetail(userName));
             Optional<ButtonType> resume = invalidDataAlert.showAndWait();
 
         } else {
@@ -77,6 +78,10 @@ public class UserSelectionController implements Initializable {
             removeProfiles();
             addProfileButtons();
         }
+    }
+
+    private boolean playerExists(String username) {
+        return PlayerProfileManager.userExists(username);
     }
 
     private boolean illegalString(String username) {
@@ -109,9 +114,20 @@ public class UserSelectionController implements Initializable {
 	
 	@FXML
 	private void removeUserClick() {
+
         String userName = usernameInput.getText();
-        boolean tooLittle = userName.equals("");
-        if (!tooLittle) {
+
+        //check validity
+        ArrayList<Boolean> valid = new ArrayList<>();
+        valid.add(playerExists(userName));
+
+        if (valid.contains(false)) {
+            Alert invalidDataAlert= new Alert(Alert.AlertType.ERROR);
+            invalidDataAlert.setHeaderText("this user doesn't exist");
+            Optional<ButtonType> resume = invalidDataAlert.showAndWait();
+
+
+    } else {
             Alert removePlayerConfirm = new Alert(Alert.AlertType.CONFIRMATION);
             removePlayerConfirm.setTitle("Remove player profile");
             removePlayerConfirm.setHeaderText("are you sure you want to remove " + usernameInput.getText() + "?");
@@ -122,14 +138,29 @@ public class UserSelectionController implements Initializable {
                 removeProfiles();
                 addProfileButtons();
             }
-
-    } else {
-            Alert invalidDataAlert= new Alert(Alert.AlertType.ERROR);
-            invalidDataAlert.setTitle("incorrect input");
-            invalidDataAlert.setHeaderText("the information entered is invalid");
-            Optional<ButtonType> resume = invalidDataAlert.showAndWait();
         }
 
+    }
+
+    private String getErrorDetail(String userName) {
+        String error = "";
+
+        if ((userName.length() > 10)) {
+            error = error + "Name is too long. \n";
+        }
+        if (userName.equals("")) {
+            error = error + "Name is too short. \n";
+        }
+        if (userName.contains("level")) {
+            error = error + "Name contains illegal String 'level'. \n";
+        }
+        if (illegalString(userName)) {
+            error = error + "Name contains non letter/num character. \n";
+        }
+        if (playerExists(userName)) {
+            error = error + "player already exists! \n";
+        }
+        return error;
     }
 
 	

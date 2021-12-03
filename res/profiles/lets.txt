@@ -1,2 +1,0 @@
-USER: lets
-MAX LEVEL: 1 

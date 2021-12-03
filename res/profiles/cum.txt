@@ -1,2 +1,0 @@
-USER: cum
-MAX LEVEL: 1 

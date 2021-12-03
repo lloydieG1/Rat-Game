@@ -1,2 +1,0 @@
-USER: dgf3
-MAX LEVEL: 1 

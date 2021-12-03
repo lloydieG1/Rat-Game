@@ -1,2 +1,0 @@
-USER: code
-MAX LEVEL: 1 
