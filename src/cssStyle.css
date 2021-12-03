@@ -17,3 +17,7 @@
 TilePane {
     -fx-background-color: #aaaaaa;
 }
+
+VBox {
+    -fx-background-color: #aaaaaa;
+}
