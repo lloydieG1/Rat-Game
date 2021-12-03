@@ -9,25 +9,25 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1350.0" stylesheets="@cssStyle.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainMenuController">
    <center>
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="75.0" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" fillWidth="false" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="100.0" spacing="75.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="levelButton" mnemonicParsing="false" onAction="#levelsClick" prefWidth="270.0" text="Levels">
+            <Button fx:id="levelButton" mnemonicParsing="false" onAction="#levelsClick" prefHeight="84.0" prefWidth="324.0" text="Levels">
                <font>
-                  <Font size="65.0" />
+                  <Font name="Monospaced Regular" size="65.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" text="Help">
+            <Button mnemonicParsing="false" prefHeight="72.0" prefWidth="138.0" text="Help">
                <font>
-                  <Font size="33.0" />
+                  <Font name="Monospaced Regular" size="33.0" />
                </font></Button>
             <Button layoutX="629.0" layoutY="437.0" mnemonicParsing="false" onAction="#backClick" text="Change User ">
                <font>
-                  <Font size="33.0" />
+                  <Font name="Monospaced Regular" size="34.0" />
                </font>
             </Button>
             <Button mnemonicParsing="false" onAction="#quit" text="Quit">
                <font>
-                  <Font size="35.0" />
+                  <Font name="Monospaced Regular" size="37.0" />
                </font>
             </Button>
          </children>
@@ -36,7 +36,7 @@
    <bottom>
       <Text fx:id="currentUser" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="1078.13671875" BorderPane.alignment="CENTER">
          <font>
-            <Font size="40.0" />
+            <Font name="Monospaced Regular" size="40.0" />
          </font>
       </Text>
    </bottom>
