@@ -50,8 +50,10 @@ public class EndGameController implements Initializable {
       header.setFont(new Font(25));
 
       leaderboard.getChildren().add(header);
+      int i = 0;
       for (Score score : scores) {
-          Text scoreT = new Text(score.toString());
+          i++;
+          Text scoreT = new Text("#" + i + " "  + score.toString());
           scoreT.setFont(new Font(20));
 
           leaderboard.getChildren().add(scoreT);

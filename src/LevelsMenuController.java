@@ -25,6 +25,8 @@ import java.util.ResourceBundle;
  */
 public class LevelsMenuController implements Initializable {
 
+    private static int DISPLAY_COUNT = 10;
+
   @FXML
   TilePane levelPane;
 
@@ -98,8 +100,12 @@ public class LevelsMenuController implements Initializable {
           ArrayList<Score> scores = Leaderboard.getScores(buttonText, 0);
           String text = "leaderboard: \n";
 
+          int j = 0;
           for (Score score : scores) {
-              text = text + score + "\n";
+              j++;
+              if (j < DISPLAY_COUNT) {
+                  text = text + "#" + j + " " +score + "\n";
+              }
           }
         Tooltip leaderboard = new Tooltip();
           leaderboard.setText(text);
