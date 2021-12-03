@@ -29,6 +29,8 @@ public class Level {
   private int currentTick = 0;
   private int timeLimit;
 
+  private String saveFolder = "res\\maps\\save\\";
+
 
   /**
    * Constructs a Level.
@@ -390,10 +392,10 @@ public class Level {
    * Description.
    */
   public void deleteSave() {
-    File f = new File("res\\maps\\save\\" +Game.currentProfile.getUsername() +level + ".txt");
+    File f = new File(saveFolder +Game.currentProfile.getUsername() +level + ".txt");
     if (f.exists()) {
       try {
-        Files.delete(Paths.get("res\\maps\\save\\" + Game.currentProfile.getUsername() +level + ".txt"));
+        Files.delete(Paths.get(saveFolder + Game.currentProfile.getUsername() +level + ".txt"));
         System.out.println("deleting save");
       } catch (IOException e) {
         e.printStackTrace();
@@ -457,7 +459,7 @@ public class Level {
     file = file + "\n" + lines;
     file = file + Game.sidebarAsString();
     try {
-      File myObj = new File("res\\maps\\save\\" + Game.currentProfile.getUsername() + level + ".txt");
+      File myObj = new File(saveFolder + Game.currentProfile.getUsername() + level + ".txt");
       if (myObj.createNewFile()) {
         System.out.println("save: " + myObj.getName());
       } else {
@@ -468,7 +470,7 @@ public class Level {
       e.printStackTrace();
     }
     try {
-      FileWriter myWriter = new FileWriter("res\\maps\\save\\" + Game.currentProfile.getUsername() + level + ".txt");
+      FileWriter myWriter = new FileWriter(saveFolder + Game.currentProfile.getUsername() + level + ".txt");
       myWriter.write(file);
       myWriter.close();
       System.out.println("Successfully saved");
