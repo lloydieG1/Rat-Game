@@ -52,7 +52,7 @@ public class LevelsMenuController implements Initializable {
     for (int i = 0; i < fileCount; i++) {
       if (!(levels[i].getName().replace(".txt", "").equals(levels[i].getName()))) {
         String buttonText = levels[i].getName().replace(".txt", "");
-        Button levelButton = new Button(buttonText);
+        Button levelButton = new Button("level: " + buttonText);
         levelButton.setFont(Font.font("monospace", 35));
 
         if (PlayerProfileManager.getMaxLevel(Game.currentProfile.getUsername()) >= Integer.parseInt(buttonText)) {
