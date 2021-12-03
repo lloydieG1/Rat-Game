@@ -27,9 +27,13 @@ public class MainMenuController implements Initializable {
     String oldMotd = "";
 	String motd = ""; //text on screen for message of the day
 
-
-    private int textWrap = 40;
     private int fontSize = 30;
+
+    private final int MAX_WRAP = 75;
+    private final int TEXT_WRAP = 65;
+
+    private final int GRID_OFFSET = 8;
+
 
     @FXML
     Canvas motdCanvas;
@@ -103,17 +107,33 @@ public class MainMenuController implements Initializable {
     }
 
     private void renderMessage(GraphicsContext g) {
+        System.out.println(motd);
         double moveHeight = motdCanvas.getHeight()/Game.FPS;
-
+        text1Pos-= moveHeight;
+        text2Pos-= moveHeight;
 
         g.setFill(Color.color(0.6,0.6,0.6));
         g.fillRect(0,0, motdCanvas.getWidth(), motdCanvas.getHeight());
-        text1Pos-= moveHeight;
-        text2Pos-= moveHeight;
+
+        g.setStroke(Color.color(0,0,0, 0.1));
+        for (int i = 0; i < MAX_WRAP; i++) {
+            g.strokeRect(0,0, i*fontSize/1.6666, motdCanvas.getHeight());
+        }
+        for (int i = 0; i < MAX_WRAP; i++) {
+            g.strokeRect(0,0, motdCanvas.getWidth(), i*fontSize+GRID_OFFSET-text1Pos - motdCanvas.getHeight());
+        }
+
+
         g.setFill(Color.color(1,0.8,0));
         g.setFont(Font.font("monospace", FontWeight.NORMAL,fontSize));
         renderMotd(motdLines(oldMotd), text1Pos, g);
         renderMotd(motdLines(motd), text2Pos, g);
+    }
+
+    private void renderGrid(GraphicsContext g) {
+
+        //
+
     }
 
     private void renderMotd(ArrayList<String> lines, double position, GraphicsContext g) {
@@ -125,12 +145,11 @@ public class MainMenuController implements Initializable {
     private ArrayList<String> motdLines(String motd) {
         motd = motd + " ";
         ArrayList<String> lines = new ArrayList<>();
-        while(motd.length()>textWrap) {
-            int pos = textWrap;
+        while(motd.length()> TEXT_WRAP) {
+            int pos = TEXT_WRAP;
             while (!(motd.charAt(pos) == ' ' || motd.charAt(pos) == '(')) {
                 pos++;
             }
-            pos++;
             lines.add(motd.substring(0,pos));
             motd = motd.substring(pos);
         }
