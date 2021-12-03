@@ -1,9 +1,11 @@
+import java.util.Comparator;
+
 /**
  * Description.
  *
  * @author William Randle
  */
-public class Score {
+public class Score implements Comparable {
     private static final String PROFILE_FILE_PATH = "res/maps/highScores";
 
     private String username;
@@ -43,4 +45,10 @@ public class Score {
     }
 
 
+
+    @Override
+    public int compareTo(Object o) {
+        Score score1 = (Score) o;
+        return score1.getScore()-this.score;
+    }
 }

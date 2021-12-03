@@ -3,6 +3,8 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
 
 /**
@@ -30,19 +32,29 @@ public class Leaderboard {
 
         String fileName = levelToPath(levelName);
         ArrayList<Score> scores = getScores(levelName);
-
+        scores.add(newScore);
+        scores = sortScores(scores);
         try {
             FileWriter writer = new FileWriter(fileName);
             for (Score score : scores) {
-                writer.append(score.toString() + "\n"); 
+                writer.append(score.toString() + "\n");
             }
-            writer.append(newScore.toString() + "\n");
             writer.close();
         } catch (IOException e) {
             System.out.println("Cannot read file.");
             e.printStackTrace();
         }
+
+
     }
+
+    private static ArrayList<Score> sortScores(ArrayList<Score> scores) {
+        Collections.sort(scores);
+
+        return scores;
+    }
+
+
 
     public static ArrayList<Score> getScores(String levelName) {
         ArrayList<Score> scores = new ArrayList<>();
@@ -63,6 +75,15 @@ public class Leaderboard {
             System.out.println("Failed to parse leaderboard " + levelName);
             return null;
         }
+
+    }
+
+    public class CustomComparator implements Comparator<Score> {
+        @Override
+        public int compare(Score o1, Score  o2) {
+            return o1.compareTo(o2);
+        }
+
 
     }
 
