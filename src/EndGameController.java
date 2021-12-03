@@ -14,11 +14,15 @@ import java.util.ResourceBundle;
  * @author William Randle
  */
 public class EndGameController implements Initializable {
+
+    private int sortBy = 0;
+
+
   @FXML
   Text endgameMessage;
 
   @FXML
-    private VBox leaderboard;
+  private VBox leaderboard;
 
   /**
    * Switches back to the menu.
@@ -32,7 +36,7 @@ public class EndGameController implements Initializable {
 
   public void updateLeaderboard() {
 
-      ArrayList<Score> scores = Leaderboard.getScores(Game.currentLevel.level);
+      ArrayList<Score> scores = Leaderboard.getScores(Game.currentLevel.level, sortBy);
       removeScores();
 
       Text header = new Text("leaderboard: ");
@@ -52,6 +56,16 @@ public class EndGameController implements Initializable {
         while(leaderboard.getChildren().size() > 0) {
             leaderboard.getChildren().remove(0);
         }
+    }
+
+    @FXML
+    private void sortBy() {
+      sortBy++;
+      if (sortBy > 1) {
+          sortBy=0;
+      }
+      updateLeaderboard();
+
     }
 
   @FXML

@@ -1,3 +1,4 @@
+import java.math.MathContext;
 import java.util.Comparator;
 
 /**
@@ -9,8 +10,10 @@ public class Score implements Comparable {
     private static final String PROFILE_FILE_PATH = "res/maps/highScores";
 
     private String username;
-    private int time;
+    private double time;
     private int score;
+
+    public static final int PRECISION = 1000;
 
 
     /**
@@ -19,7 +22,7 @@ public class Score implements Comparable {
      * @param username
      * @param score
      */
-    public Score(String username, int score, int time) {
+    public Score(String username, int score, double time) {
         this.username = username;
         this.score = score;
         this.time =  time;
@@ -33,7 +36,7 @@ public class Score implements Comparable {
         this.score = score;
     }
 
-    public int getTime() {
+    public double getTime() {
         return time;
     }
 
@@ -51,7 +54,7 @@ public class Score implements Comparable {
     }
 
     public String toString() {
-        return username + " - " + score + " - in: "  +time + " seconds" ;
+        return username + " - " + score + " - in: "  +String.format("%.3f", time) + " seconds" ;
     }
 
 
@@ -61,4 +64,17 @@ public class Score implements Comparable {
         Score score1 = (Score) o;
         return score1.getScore()-this.score;
     }
+
+    public static Comparator<Score> ScoreTimeComparator
+
+            = new Comparator<Score>() {
+
+        public int compare(Score score1, Score score2) {
+
+
+            return (int)(score1.getTime()*Score.PRECISION - score2.getTime()*Score.PRECISION);
+
+        }
+
+    };
 }

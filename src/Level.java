@@ -34,6 +34,7 @@ public class Level {
   private double startX;
   private double startY;
   private double startZoom;
+  private double time;
 
 
   /**
@@ -56,6 +57,7 @@ public class Level {
     this.maxRats = maxRats;
     this.timeLimit = timeLimit;
     this.timer = timer;
+    time = System.nanoTime();
   }
 
   public void setStart(double zoom, double x, double y) {
@@ -179,7 +181,9 @@ public class Level {
     if (rats > maxRats) {
       Game.endGame("You lost with a score of " + Game.score);
     } else if (rats == 0) {
-        Leaderboard.addScore(level,new Score(Game.currentProfile.getUsername(), bonusScore(), timer));
+        double winTime = System.nanoTime();
+        double precision = 1000000000;
+        Leaderboard.addScore(level,new Score(Game.currentProfile.getUsername(), bonusScore(), (winTime-time)/precision), 0);
         Game.endGame("You won with a score of " + bonusScore());
         PlayerProfileManager.setMaxLevel(Game.currentProfile.getUsername(), level);
 

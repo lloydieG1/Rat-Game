@@ -27,13 +27,13 @@ public class Leaderboard {
      * @param newScore
      * @param levelName
      */
-    public static void addScore(String levelName, Score newScore) {
+    public static void addScore(String levelName, Score newScore, int type) {
         createFileIfNotExists(levelName);
 
         String fileName = levelToPath(levelName);
-        ArrayList<Score> scores = getScores(levelName);
+        ArrayList<Score> scores = getScores(levelName, type);
         scores.add(newScore);
-        scores = sortScores(scores);
+        scores = sortScores(scores, type);
         try {
             FileWriter writer = new FileWriter(fileName);
             for (Score score : scores) {
@@ -48,15 +48,26 @@ public class Leaderboard {
 
     }
 
-    private static ArrayList<Score> sortScores(ArrayList<Score> scores) {
-        Collections.sort(scores);
+    private static ArrayList<Score> sortScores(ArrayList<Score> scores, int type) {
+        switch (type) {
+            case 0:
+                Collections.sort(scores);
+                break;
+            case 1:
+                Collections.sort(scores, Score.ScoreTimeComparator);
+                break;
+            default:
+                System.out.println("invalid sort type");
+
+        }
 
         return scores;
     }
 
 
 
-    public static ArrayList<Score> getScores(String levelName) {
+
+    public static ArrayList<Score> getScores(String levelName, int type) {
         ArrayList<Score> scores = new ArrayList<>();
         try {
             Scanner in = openLeaderboard(levelName);
@@ -67,13 +78,12 @@ public class Leaderboard {
                 int points = in.nextInt();
                 in.next();
                 in.next();
-                int time = in.nextInt();
+                double time = in.nextDouble();
                 Score score = new Score(username, points, time);
-                System.out.println(score.toString());
                 scores.add(score);
                 in.nextLine();
             }
-            return scores;
+            return sortScores(scores, type);
 
 
         } catch (Exception e) {
@@ -81,15 +91,6 @@ public class Leaderboard {
             System.out.println("Failed to parse leaderboard " + levelName);
             return null;
         }
-
-    }
-
-    public class CustomComparator implements Comparator<Score> {
-        @Override
-        public int compare(Score o1, Score  o2) {
-            return o1.compareTo(o2);
-        }
-
 
     }
 
