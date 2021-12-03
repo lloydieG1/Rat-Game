@@ -336,6 +336,7 @@ public class Game extends Application {
      *changes the menu to the end game scene
      */
     public static void openEndGame() {
+        endGameController.updateLeaderboard();
         primaryStage.setScene(endGame);
 
     }

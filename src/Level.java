@@ -159,8 +159,10 @@ public class Level {
     if (rats > maxRats) {
       Game.endGame("You lost with a score of " + Game.score);
     } else if (rats == 0) {
+        Leaderboard.addScore(level,new Score(Game.currentProfile.getUsername(), bonusScore()));
         Game.endGame("You won with a score of " + bonusScore());
         PlayerProfileManager.setMaxLevel(Game.currentProfile.getUsername(), level);
+
 
     }
     if (timer > timeLimit) {
@@ -461,9 +463,9 @@ public class Level {
     file = file + "\n" + lines;
     file = file + Game.sidebarAsString();
     try {
-      File myObj = new File(saveFolder + Game.currentProfile.getUsername() + level + ".txt");
-      if (myObj.createNewFile()) {
-        System.out.println("save: " + myObj.getName());
+      File levelFile = new File(saveFolder + Game.currentProfile.getUsername() + level + ".txt");
+      if (levelFile.createNewFile()) {
+        System.out.println("save: " + levelFile.getName());
       } else {
         System.out.println("save already exists. now writing to it");
       }
@@ -480,5 +482,10 @@ public class Level {
       System.out.println("An error occurred.");
       e.printStackTrace();
     }
+  }
+
+
+  private void saveScore() {
+
   }
 }

@@ -1,11 +1,10 @@
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.input.DragEvent;
-import javafx.scene.input.TransferMode;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
@@ -15,7 +14,10 @@ import java.util.ResourceBundle;
  */
 public class EndGameController implements Initializable {
   @FXML
-  Text text;
+  Text endgameMessage;
+
+  @FXML
+    private VBox leaderboard;
 
   /**
    * Switches back to the menu.
@@ -26,9 +28,27 @@ public class EndGameController implements Initializable {
     Game.currentLevel.deleteSave();
   }
 
+
+  public void updateLeaderboard() {
+
+      ArrayList<Score> scores = Leaderboard.getScores(Game.currentLevel.level);
+      removeScores();
+
+      for (Score score : scores) {
+          leaderboard.getChildren().add(new Text(score.toString()));
+      }
+
+  }
+
+    private void removeScores() {
+        while(leaderboard.getChildren().size() > 0) {
+            leaderboard.getChildren().remove(0);
+        }
+    }
+
   @FXML
   public void setText(String input) {
-    text.setText(input);
+    endgameMessage.setText(input);
   }
 
   /**
