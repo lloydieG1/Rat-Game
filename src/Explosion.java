@@ -43,13 +43,7 @@ public class Explosion extends Element  {
     for (Element element : level.getElements(x, y)) {
     	if (element.getType().equals(ElementType.Rat)) {
       	  Rat rat = (Rat) element;
-      	  if(rat.getIsPregnant()) {
-      		  level.removeElement(element);
-      	      Game.score = Game.score + 20;
-      	  } else {
-  	        level.removeElement(element);
-  	        Game.score = Game.score + 10;
-      	  }
+      	  killRat(rat);
         }
     if (!element.getType().equals(ElementType.Explosion))
         level.removeElement(element);
@@ -61,6 +55,7 @@ public class Explosion extends Element  {
     }
     
   }
+
 
   private void logic() {
     health--;

@@ -390,6 +390,16 @@ public abstract class Element {
   protected String extraInfo() {
     return "";
   }
+
+  protected void killRat(Rat rat) {
+      if(rat.getIsPregnant()) {
+          level.removeElement(rat);
+          Game.score = Game.score + 10 + 10*rat.getPregnantTime();
+      } else {
+          level.removeElement(rat);
+          Game.score = Game.score + 10;
+      }
+  }
   
   /**
    * Description.

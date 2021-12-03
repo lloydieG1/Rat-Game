@@ -66,6 +66,10 @@ public class Rat extends Element {
       this.timeLeftPregnant = pregnantTime;
   }
 
+  public int getPregnantTime() {
+      return timeLeftPregnant;
+  }
+
   protected void tick() {
       if (isFinishedMating()) {
           if (!getIsChild()) {
