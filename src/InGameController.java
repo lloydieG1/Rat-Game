@@ -353,7 +353,7 @@ public class InGameController implements Initializable {
 
         if (type.equals(ElementType.Bomb)) {
          Game.currentLevel.addElement(new Bomb(ElementType.Bomb,  Game.currentLevel,
-        		 (int) x, (int) y, 4));
+        		 (int) x, (int) y, Bomb.BLAST_TIME));
 
         } else if (type.equals(ElementType.DeathRat)) {
          Game.currentLevel.addElement(new DeathRat(ElementType.DeathRat, Game.currentLevel,

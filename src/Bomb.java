@@ -18,7 +18,7 @@ public class Bomb extends Element  {
   private boolean damage;
   private Image image;
   private Image blast;
-  private final int BLAST_TIME =4;
+  public static final int BLAST_TIME =4;
   
   /**
    * Description.
