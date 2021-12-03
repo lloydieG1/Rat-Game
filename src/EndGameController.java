@@ -1,5 +1,6 @@
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -16,6 +17,9 @@ import java.util.ResourceBundle;
 public class EndGameController implements Initializable {
 
     private int sortBy = 0;
+
+    @FXML
+    private Button sortByButton;
 
 
   @FXML
@@ -66,6 +70,13 @@ public class EndGameController implements Initializable {
       }
       updateLeaderboard();
 
+      if (sortBy == 0) {
+          sortByButton.setText("order by time");
+      }
+
+        if (sortBy == 1) {
+            sortByButton.setText("order by score");
+        }
     }
 
   @FXML
