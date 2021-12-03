@@ -133,6 +133,21 @@ public class PlayerProfileManager {
           updateProfileData(ProfileData.MaxLevel, nextLevel, username);
       }
   }
+
+  public static int getMaxLevel(String username) {
+      try {
+          Scanner in = openProfileFile(username);
+
+          in.findInLine(FIRST_LINE); //Skips past "USER: "
+          String user = in.nextLine();
+          in.findInLine(SECOND_LINE); //Skips past "MAX LEVEL: "
+          int maxLevel = in.nextInt();
+          return maxLevel;
+      } catch (Exception e) {
+          System.out.println("Failed to parse profile " + username);
+          return 0;
+      }
+  }
 	
   /**
    * Description.

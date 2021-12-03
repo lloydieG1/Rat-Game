@@ -43,47 +43,54 @@ public class LevelsMenuController implements Initializable {
     File[] levels = directory.listFiles();
     int fileCount = directory.list().length;
 
+
     for (int i = 0; i < fileCount; i++) {
       if (!(levels[i].getName().replace(".txt", "").equals(levels[i].getName()))) {
         String buttonText = levels[i].getName().replace(".txt", "");
         Button levelButton = new Button(buttonText);
         levelButton.setFont(new Font(25));
 
-        levelButton.setOnAction(new EventHandler() {
-          @Override
-          public void handle(Event event) {
-            File savesDirectory = new File("res\\maps\\save");
-            File[] saves = savesDirectory.listFiles();
-            int fileCount = savesDirectory.list().length;
-            String saveFileName = "";
-            boolean found = false;
-            
-            for (int i = 0; i < fileCount; i++) {
-              String saveText = saves[i].getName().replace(".txt", "");
-                saveText = saveText.replace(Game.currentProfile.getUsername(), "");
-              if (saveText.equals(buttonText)) {
-                saveFileName = saveText;
-                found = true;
-                System.out.println(saveText);
-              }
-            }
+        if (PlayerProfileManager.getMaxLevel(Game.currentProfile.getUsername()) >= Integer.parseInt(buttonText)) {
+            System.out.println(PlayerProfileManager.getMaxLevel(Game.currentProfile.getUsername()));
 
-            if (found) {
-              Alert saveConfirmation = new Alert(Alert.AlertType.CONFIRMATION);
-              saveConfirmation.setTitle("resume / overwrite");
-              saveConfirmation.setHeaderText("there is a save file for this level.");
-              saveConfirmation.setContentText("clicking ok resumes this save, cancel overwrites it.");
-              Optional<ButtonType> resume = saveConfirmation.showAndWait();
-              if (resume.get().equals(ButtonType.OK)) {
-                Game.openGameScene("save\\" +Game.currentProfile.getUsername() + saveFileName);
-              } else if (resume.get().equals(ButtonType.CANCEL)) {
-                Game.openGameScene(buttonText);
-              }
-              } else {
-                Game.openGameScene(buttonText);
-              }
-            }
-          });
+            levelButton.setOnAction(new EventHandler() {
+                @Override
+                public void handle(Event event) {
+                    File savesDirectory = new File("res\\maps\\save");
+                    File[] saves = savesDirectory.listFiles();
+                    int fileCount = savesDirectory.list().length;
+                    String saveFileName = "";
+                    boolean found = false;
+
+                    for (int i = 0; i < fileCount; i++) {
+                        String saveText = saves[i].getName().replace(".txt", "");
+                        saveText = saveText.replace(Game.currentProfile.getUsername(), "");
+                        if (saveText.equals(buttonText)) {
+                            saveFileName = saveText;
+                            found = true;
+                            System.out.println(saveText);
+                        }
+                    }
+
+                    if (found) {
+                        Alert saveConfirmation = new Alert(Alert.AlertType.CONFIRMATION);
+                        saveConfirmation.setTitle("resume / overwrite");
+                        saveConfirmation.setHeaderText("there is a save file for this level.");
+                        saveConfirmation.setContentText("clicking ok resumes this save, cancel overwrites it.");
+                        Optional<ButtonType> resume = saveConfirmation.showAndWait();
+                        if (resume.get().equals(ButtonType.OK)) {
+                            Game.openGameScene("save\\" + Game.currentProfile.getUsername() + saveFileName);
+                        } else if (resume.get().equals(ButtonType.CANCEL)) {
+                            Game.openGameScene(buttonText);
+                        }
+                    } else {
+                        Game.openGameScene(buttonText);
+                    }
+                }
+            });
+        } else {
+            levelButton.setStyle("-fx-text-fill: grey; -fx-background-color: #555555;");
+        }
         levelPane.getChildren().add(levelButton);
       }
     }
@@ -111,7 +118,7 @@ public class LevelsMenuController implements Initializable {
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
       Game.levelMenuController = this;
-    addLevelButtons();
+  //  addLevelButtons();
   }
 }
 
