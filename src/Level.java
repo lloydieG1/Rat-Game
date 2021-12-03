@@ -159,6 +159,7 @@ public class Level {
     if (rats > maxRats) {
       Game.endGame("You lost with a score of " + Game.score);
     } else if (rats == 0) {
+        PlayerProfileManager.setMaxLevel(Game.currentProfile.getUsername(), level);
       Game.endGame("You won with a score of " + bonusScore());
     }
     if (timer > timeLimit) {

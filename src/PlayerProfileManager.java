@@ -125,10 +125,13 @@ public class PlayerProfileManager {
 	}
   }
   
-  public static void incrementMaxLevel(String username) {
+  public static void setMaxLevel(String username, String levelString) {
+      int newLevel = Integer.parseInt(levelString);
 	  int currentLevel = getProfile(username).getMaxLevel();
-	  String nextLevel = Integer.toString(currentLevel + 1);
-	  updateProfileData(ProfileData.MaxLevel, nextLevel, username);
+      if (newLevel > currentLevel) {
+          String nextLevel = Integer.toString(currentLevel + newLevel);
+          updateProfileData(ProfileData.MaxLevel, nextLevel, username);
+      }
   }
 	
   /**
