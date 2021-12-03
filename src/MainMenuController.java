@@ -82,7 +82,7 @@ public class MainMenuController implements Initializable {
 
     public void refreshDailyMessage() {
         text1Pos = 0;
-        text2Pos = motdCanvas.getWidth();
+        text2Pos = motdCanvas.getHeight();
         oldMotd = motd;
         try {
             String newMessage = DailyMessage.getMessage(null);
@@ -102,13 +102,13 @@ public class MainMenuController implements Initializable {
     }
 
     private void renderMessage(GraphicsContext g) {
-        double moveWidth = motdCanvas.getWidth()/Game.FPS;
+        double moveHeight = motdCanvas.getHeight()/Game.FPS;
 
 
         g.setFill(Color.color(0.6,0.6,0.6));
         g.fillRect(0,0, motdCanvas.getWidth(), motdCanvas.getHeight());
-        text1Pos-= moveWidth;
-        text2Pos-= moveWidth;
+        text1Pos-= moveHeight;
+        text2Pos-= moveHeight;
         g.setFill(Color.color(1,0.8,0));
         g.setFont(new Font("monospaced",fontSize));
         renderMotd(motdLines(oldMotd), text1Pos, g);
@@ -117,7 +117,7 @@ public class MainMenuController implements Initializable {
 
     private void renderMotd(ArrayList<String> lines, double position, GraphicsContext g) {
         for (int i = 0; i < lines.size(); i++) {
-            g.fillText(lines.get(i), position,fontSize+i*fontSize);
+            g.fillText(lines.get(i), 0,fontSize+i*fontSize - position);
         }
     }
 
