@@ -34,9 +34,9 @@
                   </Button>
                </children>
             </VBox>
-            <Text fx:id="userName" layoutX="32.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+            <Text fx:id="userName" layoutX="32.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
                <font>
-                  <Font name="System Bold" size="20.0" />
+                  <Font size="20.0" />
                </font>
             </Text>
             <Text fx:id="score" fill="#1acd37" layoutX="32.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
@@ -45,9 +45,14 @@
                </font></Text>
             <Canvas fx:id="minimap" height="300.0" layoutX="99.0" layoutY="32.0" onMouseClicked="#minimapClick" width="300.0" />
             <Canvas fx:id="ratLives" height="598.0" layoutX="419.0" layoutY="227.0" width="60.0" />
-            <Text fx:id="levelName" layoutX="32.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+            <Text fx:id="levelName" layoutX="419.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" AnchorPane.rightAnchor="23.10546875">
                <font>
                   <Font size="20.0" />
+               </font>
+            </Text>
+            <Text layoutX="32.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score:">
+               <font>
+                  <Font name="System Bold" size="20.0" />
                </font>
             </Text>
          </children>

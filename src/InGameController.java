@@ -79,12 +79,12 @@ public class InGameController implements Initializable {
     }
 
     public void setUserNameText(String name) {
-        userName.setText(name);
+        userName.setText("username: " + name);
 
     }
 
     public void setLevelNameText(String name) {
-        levelName.setText(name);
+        levelName.setText("level: " + name);
 
     }
 
