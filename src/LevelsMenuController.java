@@ -53,7 +53,7 @@ public class LevelsMenuController implements Initializable {
       if (!(levels[i].getName().replace(".txt", "").equals(levels[i].getName()))) {
         String buttonText = levels[i].getName().replace(".txt", "");
         Button levelButton = new Button(buttonText);
-        levelButton.setFont(new Font(25));
+        levelButton.setFont(Font.font("monospace", 35));
 
         if (PlayerProfileManager.getMaxLevel(Game.currentProfile.getUsername()) >= Integer.parseInt(buttonText)) {
             System.out.println(PlayerProfileManager.getMaxLevel(Game.currentProfile.getUsername()));
@@ -109,6 +109,7 @@ public class LevelsMenuController implements Initializable {
           }
         Tooltip leaderboard = new Tooltip();
           leaderboard.setText(text);
+          leaderboard.setFont(Font.font("monospace", 20));
 
         levelButton.setTooltip(leaderboard);
         levelPane.getChildren().add(levelButton);
