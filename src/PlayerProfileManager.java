@@ -76,7 +76,6 @@ public class PlayerProfileManager {
       getProfile(username).setUsername(data); //update profile object
     } else if (whichData == ProfileData.MaxLevel) {
       in.nextLine(); //ignore first line (username)
-      in.nextLine(); //ignore second line (highscore)
       oldLine = in.nextLine(); //old max level
       newLine = SECOND_LINE + data; //new max level
       getProfile(username).setMaxLevel(Integer.parseInt(data)); //update profile object
@@ -128,8 +127,8 @@ public class PlayerProfileManager {
   public static void setMaxLevel(String username, String levelString) {
       int newLevel = Integer.parseInt(levelString);
 	  int currentLevel = getProfile(username).getMaxLevel();
-      if (newLevel > currentLevel) {
-          String nextLevel = Integer.toString(currentLevel + newLevel);
+      if (newLevel > currentLevel-1) {
+          String nextLevel = Integer.toString(newLevel+1);
           updateProfileData(ProfileData.MaxLevel, nextLevel, username);
       }
   }
