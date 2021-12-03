@@ -12,6 +12,7 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
@@ -24,6 +25,10 @@ public class MainMenuController implements Initializable {
 
     String oldMotd = "";
 	String motd = ""; //text on screen for message of the day
+
+
+    private int textWrap = 70;
+    private int fontSize = 35;
 
     @FXML
     Canvas motdCanvas;
@@ -39,6 +44,17 @@ public class MainMenuController implements Initializable {
 	public void setProfileText() {
 		currentUser.setText("Current User: " + Game.currentProfile.getUsername());
 	}
+
+    private boolean differentEnough(String s1, String s2) {
+        if (s1.equals(s2)) {
+            return false;
+        }
+
+
+
+
+        return true;
+    }
 	
 	/**	
 	 * Switches to level menu when level button is clicked.
@@ -66,21 +82,19 @@ public class MainMenuController implements Initializable {
 
     public void refreshDailyMessage() {
         text1Pos = 0;
-        text2Pos = (int)motdCanvas.getWidth();
+        text2Pos = motdCanvas.getWidth();
         oldMotd = motd;
         try {
             String newMessage = DailyMessage.getMessage(null);
 
-            if (!(newMessage.equals(motd))) {
+            if (differentEnough(newMessage, motd)) {
                 motd = newMessage;
+                swap.play();
             }
         } catch (IOException ex) {
             ex.printStackTrace();
         }
 
-        if (!oldMotd.equals(motd)) {
-            swap.play();
-        }
 
 
 
@@ -96,9 +110,30 @@ public class MainMenuController implements Initializable {
         text1Pos-= moveWidth;
         text2Pos-= moveWidth;
         g.setFill(Color.color(1,0.8,0));
-        g.setFont(new Font(20));
-        g.fillText(oldMotd, text1Pos,20);
-        g.fillText(motd, text2Pos,20);
+        g.setFont(new Font("monospaced",fontSize));
+        renderMotd(motdLines(oldMotd), text1Pos, g);
+        renderMotd(motdLines(motd), text2Pos, g);
+    }
+
+    private void renderMotd(ArrayList<String> lines, double position, GraphicsContext g) {
+        for (int i = 0; i < lines.size(); i++) {
+            g.fillText(lines.get(i), position,fontSize+i*fontSize);
+        }
+    }
+
+    private ArrayList<String> motdLines(String motd) {
+        motd = motd + " ";
+        ArrayList<String> lines = new ArrayList<>();
+        while(motd.length()>textWrap) {
+            int pos = textWrap;
+            while (!(motd.charAt(pos) == ' ')) {
+                pos++;
+            }
+            lines.add(motd.substring(0,pos));
+            motd = motd.substring(pos);
+        }
+        lines.add(motd);
+        return lines;
     }
 
 
@@ -117,6 +152,7 @@ public class MainMenuController implements Initializable {
         swap.setCycleCount(Game.FPS);
 
         Game.mainMenuController = this;
+        refreshDailyMessage();
 
 	}
 }

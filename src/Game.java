@@ -334,7 +334,6 @@ public class Game extends Application {
      *changes the menu to the main Menu
      */
     public static void openMainMenu() {
-        mainMenuController.refreshDailyMessage();
         dailyMessageLoop.play();
         mainMenuController.setProfileText();
         primaryStage.setScene(mainMenu);
