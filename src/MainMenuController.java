@@ -48,6 +48,22 @@ public class MainMenuController implements Initializable {
 		Game.quit();
 	}
 
+    public void refreshDailyMessage() {
+
+
+        try {
+            String newMessage = DailyMessage.getMessage(null);
+
+            if (!(newMessage.equals(motd.getText()))) {
+                motd.setText(newMessage);
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+
+    }
+
 
 	/**
 	 * Code run on initalization, displays updated message of the day.
