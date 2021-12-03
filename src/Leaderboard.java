@@ -64,6 +64,18 @@ public class Leaderboard {
         return scores;
     }
 
+    public static Score getHighScore(String userName, String level, int type) {
+
+        ArrayList<Score> scores =getScores(level, type);
+
+        for (Score score : scores) {
+            if (score.getUsername().equals(userName)) {
+                return score;
+            }
+        }
+        return new Score(userName, 0, 0);
+    }
+
 
 
 

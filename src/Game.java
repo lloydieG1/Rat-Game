@@ -355,6 +355,7 @@ public class Game extends Application {
      *changes the menu to the level Menu
      */
     public static void openLevelMenu() {
+        levelMenuController.updateCurrentUser();
         dailyMessageLoop.stop();
         levelMenuController.refreshButtons();
         primaryStage.setScene(levelMenu);

@@ -15,24 +15,31 @@
    <center>
       <TilePane alignment="TOP_CENTER" prefHeight="728.0" prefWidth="1330.0" tileAlignment="TOP_CENTER" BorderPane.alignment="TOP_CENTER">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Levels" TilePane.alignment="TOP_CENTER">
-               <font>
-                  <Font size="35.0" />
-               </font>
-            </Text>
               <TilePane fx:id="levelPane" alignment="TOP_CENTER" hgap="25.0" prefHeight="169.0" prefWidth="876.0" vgap="25.0" TilePane.alignment="TOP_CENTER" />
          </children>
       </TilePane>
    </center>
    <top>
-      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <HBox prefHeight="100.0" prefWidth="200.0" spacing="100.0" BorderPane.alignment="CENTER">
          <children>
               <Button mnemonicParsing="false" onAction="#backClick" text="Back">
                   <font>
-                      <Font size="24.0" />
+                      <Font name="Monospaced Regular" size="35.0" />
                   </font>
               </Button>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Levels:">
+               <font>
+                  <Font name="Monospaced Bold" size="84.0" />
+               </font>
+            </Text>
          </children>
       </HBox>
    </top>
+   <bottom>
+      <Text fx:id="currentUser" strokeType="OUTSIDE" strokeWidth="0.0" text="current user" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="Monospaced Regular" size="35.0" />
+         </font>
+      </Text>
+   </bottom>
 </BorderPane>

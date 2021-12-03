@@ -33,14 +33,14 @@
          </children>
       </VBox>
    </center>
-   <bottom>
-      <Text fx:id="currentUser" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="1078.13671875" BorderPane.alignment="CENTER">
-         <font>
-            <Font name="Monospaced Regular" size="40.0" />
-         </font>
-      </Text>
-   </bottom>
    <top>
       <Canvas fx:id="motdCanvas" height="200.0" width="1349.0" BorderPane.alignment="CENTER" />
    </top>
+   <bottom>
+      <Text fx:id="currentUser" strokeType="OUTSIDE" strokeWidth="0.0" text="current User" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="Monospaced Regular" size="35.0" />
+         </font>
+      </Text>
+   </bottom>
 </BorderPane>
