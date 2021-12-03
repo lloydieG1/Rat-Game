@@ -37,7 +37,7 @@
          </padding></VBox>
    </left>
    <bottom>
-      <Button fx:id="sortByButton" mnemonicParsing="false" onAction="#sortBy" prefHeight="24.0" prefWidth="188.0" text="order by time" BorderPane.alignment="TOP_LEFT">
+      <Button fx:id="sortByButton" mnemonicParsing="false" onAction="#sortBy" prefHeight="24.0" prefWidth="281.0" text="order by time" BorderPane.alignment="TOP_LEFT">
          <font>
             <Font name="Monospaced Regular" size="13.0" />
          </font>
