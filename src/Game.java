@@ -251,13 +251,12 @@ public class Game extends Application {
         VISIBLE_TILES = (gameGraphics.getCanvas().getWidth()/gameSize);
         clampMapZoom();
 
-        if (!(zoomBefore == (int)gameSize)) {
+
             int mapWidth = currentLevel.getMapBounds()[0];
             int mapHeight = currentLevel.getMapBounds()[1];
             gameY = minMax(gameY, -gameSize * (mapHeight - VISIBLE_TILES), 0);
             gameX = minMax(gameX, -gameSize * (mapWidth - VISIBLE_TILES), 0);
-            System.out.println("?");
-        }
+
 
     }
 
