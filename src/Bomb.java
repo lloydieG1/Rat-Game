@@ -1,10 +1,8 @@
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.effect.BoxBlur;
-import javafx.scene.effect.Effect;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
+
 
 
 /**
@@ -14,10 +12,7 @@ import javafx.scene.text.Text;
  *
  */
 public class Bomb extends Element  {
-  private final int RADIUS = 1;
-  private boolean damage;
   private Image image;
-  private Image blast;
   public static final int BLAST_TIME =4;
   
   /**
@@ -31,7 +26,6 @@ public class Bomb extends Element  {
    */
   public Bomb(ElementType type, Level level, int x, int y, int health) {
     super(type, level, x, y, Direction.North, health);
-    damage = false;
     image = ImageLoader.bomb;
   }
 
@@ -53,7 +47,6 @@ public class Bomb extends Element  {
       explode();
       level.removeElement(this);
     }
-    damage = false;
   }
 
   private void explode() {
@@ -123,9 +116,6 @@ public class Bomb extends Element  {
 
 
   protected void render(GraphicsContext g) {
-
-    double halfSize = size / 2;
-
     //get the current interpolated frame positions of rat.
     double x = renderX();
     double y = renderY();
