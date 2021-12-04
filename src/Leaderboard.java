@@ -13,12 +13,15 @@ import java.util.Scanner;
 public class Leaderboard {
     private static final String OPEN_FILE_ERROR = "Could not find ";
     private static final String LEADER_BOARD_PATH = "res/maps/highScores/";
+
+    private static final String timeBoard = "T";
+
     private static final String FIRST_LINE = "USER: ";
     private static final String SECOND_LINE = "MAX LEVEL: ";
 
     private static ArrayList<Score> scores = new ArrayList<>();
 
-
+    private static int DISPLAY_COUNT = 10;
 
 
     /**
@@ -26,16 +29,31 @@ public class Leaderboard {
      *
      * @param newScore
      * @param levelName
+     * @param type the type of sort (0= based on score, 1 =based on time)
      */
     public static void addScore(String levelName, Score newScore, int type) {
         createFileIfNotExists(levelName);
+        createFileIfNotExists(levelName + timeBoard);
 
-        String fileName = levelToPath(levelName);
+        String leaderboardFile = levelToPath(levelName);
+        String timeBoardFile = levelToPath(levelName+ timeBoard);
+
         ArrayList<Score> scores = getScores(levelName, type);
-        scores.add(newScore);
-        scores = sortScores(scores, type);
+
+        //check if the score is in the top 10 for score
+        scores = sortScores(scores);
+        boolean isTop10Scores = (scores.get(9).getScore() < newScore.getScore());
+
+        //check if the score is in the top 10 for time
+        scores = sortTimes(scores);
+        boolean isTop10Times = (scores.get(9).getTime() > newScore.getTime());
+
+        if (isTop10Scores) {
+            scores.add(newScore);
+            scores = sortScores(scores);
+
         try {
-            FileWriter writer = new FileWriter(fileName);
+            FileWriter writer = new FileWriter(leaderboardFile);
             for (Score score : scores) {
                 writer.append(score.toString() + "\n");
             }
@@ -44,7 +62,23 @@ public class Leaderboard {
             System.out.println("Cannot read file.");
             e.printStackTrace();
         }
+    }
 
+        if (isTop10Times ) {
+            scores.add(newScore);
+            scores = sortTimes(scores);
+
+            try {
+                FileWriter writer = new FileWriter(timeBoardFile);
+                for (Score score : scores) {
+                    writer.append(score.toString() + "\n");
+                }
+                writer.close();
+            } catch (IOException e) {
+                System.out.println("Cannot read file.");
+                e.printStackTrace();
+            }
+        }
 
     }
 
@@ -57,7 +91,7 @@ public class Leaderboard {
             String levelName = Integer.toString(i+1);
             ArrayList<Score> leaderboard = getScores(levelName, 0);
             leaderboard.removeIf(score -> score.getUsername().equals(username));
-            leaderboard = sortScores(leaderboard, 0);
+            leaderboard = sortScores(leaderboard);
             try {
                 FileWriter writer = new FileWriter(levelToPath(levelName));
                 for (Score score : leaderboard) {
@@ -73,21 +107,41 @@ public class Leaderboard {
 
 
 
-    private static ArrayList<Score> sortScores(ArrayList<Score> scores, int type) {
-        switch (type) {
-            case 0:
-                Collections.sort(scores);
-                break;
-            case 1:
-                Collections.sort(scores, Score.ScoreTimeComparator);
-                break;
-            default:
-                System.out.println("invalid sort type");
+    private static ArrayList<Score> sortScores(ArrayList<Score> scores) {
 
-        }
+        Collections.sort(scores);
+
+
+        scores = truncateScores(scores);
 
         return scores;
     }
+
+    private static ArrayList<Score> sortTimes(ArrayList<Score> scores) {
+
+        Collections.sort(scores, Score.ScoreTimeComparator);
+
+
+        scores = truncateScores(scores);
+
+        return scores;
+    }
+
+    private static ArrayList<Score> truncateScores(ArrayList<Score> scores) {
+        ArrayList<Score> truncateScores = new ArrayList<>();
+
+        int j = 0;
+        for (Score score : scores) {
+            j++;
+            if (j <= DISPLAY_COUNT) {
+                truncateScores.add(score);
+            }
+
+        }
+
+        return truncateScores;
+    }
+
 
     public static Score getHighScore(String userName, String level, int type) {
 
@@ -105,23 +159,44 @@ public class Leaderboard {
 
 
     public static ArrayList<Score> getScores(String levelName, int type) {
+
+
         ArrayList<Score> scores = new ArrayList<>();
         try {
-            Scanner in = openLeaderboard(levelName);
 
-            while(in.hasNextLine()) {
-                String username = in.next();
-                in.next();
-                int points = in.nextInt();
-                in.next();
-                in.next();
-                double time = in.nextDouble();
-                Score score = new Score(username, points, time);
-                scores.add(score);
-                in.nextLine();
+            if (type ==0) {
+                Scanner in = openLeaderboard(levelName);
+
+                while (in.hasNextLine()) {
+                    String username = in.next();
+                    in.next();
+                    int points = in.nextInt();
+                    in.next();
+                    in.next();
+                    double time = in.nextDouble();
+                    Score score = new Score(username, points, time);
+                    scores.add(score);
+                    in.nextLine();
+                }
+                in.close();
+            return sortScores(scores);
+        } else {
+                Scanner in = openLeaderboard(levelName + timeBoard);
+
+                while (in.hasNextLine()) {
+                    String username = in.next();
+                    in.next();
+                    int points = in.nextInt();
+                    in.next();
+                    in.next();
+                    double time = in.nextDouble();
+                    Score score = new Score(username, points, time);
+                    scores.add(score);
+                    in.nextLine();
+                }
+                in.close();
+                return sortTimes(scores);
             }
-            return sortScores(scores, type);
-
 
         } catch (Exception e) {
             e.printStackTrace();

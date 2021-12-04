@@ -106,25 +106,33 @@ public class LevelsMenuController implements Initializable {
             levelButton.setStyle("-fx-text-fill: grey; -fx-background-color: #555555;");
         }
 
-          ArrayList<Score> scores = Leaderboard.getScores(buttonText, 0);
-          String text = "leaderboard: \n";
 
-          int j = 0;
-          for (Score score : scores) {
-              j++;
-              if (j <= DISPLAY_COUNT) {
-                  text = text + "#" + j + " " +score + "\n";
-              }
-          }
-        Tooltip leaderboard = new Tooltip();
-          leaderboard.setText(text);
-          leaderboard.setFont(Font.font("monospace", 20));
-
+        Tooltip leaderboard = getLevelLeaderboardHover(buttonText);
         levelButton.setTooltip(leaderboard);
         levelPane.getChildren().add(levelButton);
       }
     }
     levelPane.setPrefColumns(3);
+  }
+
+  private Tooltip getLevelLeaderboardHover(String level) {
+      ArrayList<Score> scores = Leaderboard.getScores(level, 0);
+      String text = "leaderboard: \n";
+
+      //use for each instead of for because otherwise you might get out of bounds
+      int j = 0;
+      for (Score score : scores) {
+          j++;
+          if (j <= DISPLAY_COUNT) {
+              text = text + "#" + j + " " + score + "\n";
+          }
+
+      }
+      Tooltip leaderboard = new Tooltip();
+      leaderboard.setText(text);
+      leaderboard.setFont(Font.font("monospace", 20));
+
+      return leaderboard;
   }
 
   public void refreshButtons() {

@@ -1,2 +1,2 @@
 USER: test
-MAX LEVEL: 1
+MAX LEVEL: 2

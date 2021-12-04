@@ -11,6 +11,7 @@ import java.io.FileNotFoundException;
 public class ImageLoader {
 
     public static Image grass = getImage("grass.png", 64);
+    public static Image tunnel = getImage("tunnel.png", 64);
 
     public static Image ratChild = getImage("ratChild.png", 64);
     public static Image ratMale = getImage("ratMale.png", 64);

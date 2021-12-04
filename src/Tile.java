@@ -18,6 +18,11 @@ public class Tile {
   private final int iterations = 3;
   private final double opacityFactor = 0.6;
 
+    private final Color dark = Color.color(0.1, 0.2, 0,0.2);
+   private Color light =Color.color(0.5, 1, 0,0.2);
+
+    private double size = Game.gameSize;
+
   Image image;
 
 
@@ -33,7 +38,12 @@ public class Tile {
     this.type = type;
     this.x = x;
     this.y = y;
-      image = ImageLoader.grass;
+
+    if (type.equals(TileType.Grass)) {
+        image = ImageLoader.grass;
+    } else {
+        image = ImageLoader.tunnel;
+    }
 
   }
 
@@ -68,26 +78,22 @@ public class Tile {
       return edges;
   }
 
+
+
     /**
      * renders the side for a grass tile
      * @param g
      * @param edges
      */
-  private void renderSideGrass(GraphicsContext g, boolean[] edges) {
+  private void renderSideGrass(GraphicsContext g, boolean[] edges, int shadetype) {
       double factor = (int) Game.gameSize;
       double x = (int) (this.x * factor + Game.gameX);
       double y = (int) (this.y * factor + Game.gameY);
-      double size = Game.gameSize;
-      Color dark = Color.color(0.1, 0.2, 0,0.2);
-      Color light =Color.color(0.5, 1, 0,0.2);
-
-
-      double v = x + (size * (detailThickness - 1)) / detailThickness;
-
+      size = Game.gameSize;
       if (edges[0]) {
 
 
-          g.drawImage(image, v, y, size/ detailThickness, size);
+          g.drawImage(image, x + (size * (detailThickness - 1)) / detailThickness, y, size/ detailThickness, size);
       }
       if (edges[1]) {
 
@@ -96,11 +102,10 @@ public class Tile {
 
       }
 
-      double v1 = y + (size * (detailThickness - 1) / detailThickness);
       if (edges[2]) {
 
 
-          g.drawImage(image,x, v1, size, size/ detailThickness);
+          g.drawImage(image,x, y + (size * (detailThickness - 1) / detailThickness), size, size/ detailThickness);
       }
 
       if (edges[3]) {
@@ -110,31 +115,77 @@ public class Tile {
 
       }
 
-      if (edges[0]) {
 
+      shadeDown(g, edges, shadetype);
+
+
+  }
+
+
+  private void shadeDown(GraphicsContext g, boolean[] edges, int shadeType) {
+      double factor = (int) Game.gameSize;
+      double x = (int) (this.x * factor + Game.gameX);
+      double y = (int) (this.y * factor + Game.gameY);
+      size = Game.gameSize;
+      if (shadeType == 0) {
+          g.setFill(light);
+      } else {
           g.setFill(dark);
-          g.fillRect(v, y, size/ detailThickness, size);
       }
       if (edges[1]) {
 
-          g.setFill(light);
-          g.fillRect(x, y, size/ detailThickness, size);
+          renderLeftPanel(g, x, y);
 
       }
 
       if (edges[2]) {
 
-          g.setFill(light);
-          g.fillRect(x, v1, size, size/ detailThickness);
+          renderDownPanel(g, x, y);
       }
 
+      if (shadeType == 0) {
+          g.setFill(dark);
+      } else {
+          g.setFill(dark);
+      }
+
+      if (edges[0]) {
+
+          renderRightPanel(g, x, y);
+
+      }
       if (edges[3]) {
 
-          g.setFill(dark);
-          g.fillRect(x, y, size, size/ detailThickness);
+          renderUpPanel(g, x, y);
 
       }
   }
+
+
+
+    private void renderRightPanel(GraphicsContext g, double x, double y) {
+
+      g.fillRect(x + (size * (detailThickness - 1)) / detailThickness, y, size/ detailThickness, size);
+
+    }
+
+    private void renderLeftPanel(GraphicsContext g, double x, double y) {
+
+
+        g.fillRect(x, y, size/ detailThickness, size);
+    }
+
+    private void renderDownPanel(GraphicsContext g, double x, double y) {
+
+
+        g.fillRect(x, y + (size * (detailThickness - 1) / detailThickness), size, size/ detailThickness);
+    }
+
+    private void renderUpPanel(GraphicsContext g, double x, double y) {
+
+
+        g.fillRect(x, y, size, size/ detailThickness);
+    }
 
     private void renderSideTunnel(GraphicsContext g, boolean[] edges) {
         double currentDistance = detailThickness;
@@ -169,14 +220,14 @@ public class Tile {
 
         }
 
-        if (edges[2]) {
+        if (edges[2]) {//down
 
 
-            g.fillRect(x+size/dist, y+(size*(dist-1)/dist), size-size*2/dist, size/dist);
+           g.fillRect(x+size/dist, y+(size*(dist-1)/dist), size-size*2/dist, size/dist);
 
         }
 
-        if (edges[3]) {
+        if (edges[3]) {//up
 
             g.fillRect(x+size/dist, y, size-size*2/dist, size/dist);
 
@@ -216,10 +267,13 @@ public class Tile {
   public void renderDetails(GraphicsContext g) {
       g.setFill(Color.RED);
       if (type.equals(TileType.Path)) {
-          renderSideGrass(g, nextToType(TileType.Grass)); //draw sides meeting paths
+          renderSideGrass(g, nextToType(TileType.Grass), 0); //draw sides meeting paths
       } else if (type.equals(TileType.Tunnel)) {
+          renderSideGrass(g,nextToType(TileType.Path), 1);
           renderSideTunnel(g,nextToType(TileType.Path));
-          renderSideGrass(g, nextToType(TileType.Grass)); //draw sides meeting paths
+
+      } else if (type.equals(TileType.Grass)) {
+          renderSideGrass(g,nextToType(TileType.Tunnel), 0);
       }
   }
 
