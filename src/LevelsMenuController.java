@@ -88,10 +88,10 @@ public class LevelsMenuController implements Initializable {
                         ButtonType resumeButton = new ButtonType("resume", ButtonBar.ButtonData.OK_DONE);
                         ButtonType overwriteButton = new ButtonType("overwrite", ButtonBar.ButtonData.CANCEL_CLOSE);
 
-                        Alert saveConfirmation = new Alert(Alert.AlertType.CONFIRMATION, "test", resumeButton, overwriteButton);
+                        Alert saveConfirmation = new Alert(Alert.AlertType.CONFIRMATION, "", resumeButton, overwriteButton);
                         saveConfirmation.setTitle("resume / overwrite");
                         saveConfirmation.setHeaderText("there is a save file for this level.");
-                    
+
                         Optional<ButtonType> resume = saveConfirmation.showAndWait();
                         if (resume.get().equals(resumeButton)) {
                             Game.openGameScene("save\\" + Game.currentProfile.getUsername() + saveFileName);
