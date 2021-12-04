@@ -1,3 +1,4 @@
+Injata - 323 - in: 27.100 seconds
 Injata - 234 - in: 6.860 seconds
 Injata - 233 - in: 7.354 seconds
 Injata - 233 - in: 7.210 seconds
@@ -7,4 +8,5 @@ Injata - 194 - in: 6.860 seconds
 Injata - 194 - in: 6.840 seconds
 Injata - 194 - in: 6.840 seconds
 Injata - 194 - in: 6.860 seconds
+Injata - 194 - in: 6.840 seconds
 Injata - 193 - in: 7.940 seconds
