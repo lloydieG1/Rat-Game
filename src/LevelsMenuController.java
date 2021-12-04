@@ -112,7 +112,7 @@ public class LevelsMenuController implements Initializable {
           int j = 0;
           for (Score score : scores) {
               j++;
-              if (j < DISPLAY_COUNT) {
+              if (j <= DISPLAY_COUNT) {
                   text = text + "#" + j + " " +score + "\n";
               }
           }
