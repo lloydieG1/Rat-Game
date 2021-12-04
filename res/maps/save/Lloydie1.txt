@@ -1,0 +1,30 @@
+10,5
+/
+GGGGGGGGGG;
+GGGGGGGGGG;
+GPPPTTPPPG;
+GGGGGGGGGG;
+GGGGGGGGGG;
+
+/
+10
+/
+rat,3,8,6,2,west,true,false,0,0 rat,3,8,2,2,east,false,false,0,0 
+/
+180
+/
+5
+/
+bomb,5,43,4 gas,10,43,9 sterilize,6,43,3 maleGenderChange,12,43,9 femaleGenderChange,12,43,9 stopSign,10,43,9 deathRat,20,43,9 poison,12,43,9 
+/
+0
+/
+1,0,0,0,1,0,0,0,
+/
+180.0
+/
+0.0
+/
+0.0
+/
+5.019999999999937
