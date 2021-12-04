@@ -40,38 +40,43 @@ public class Leaderboard {
 
         ArrayList<Score> scores = getScores(levelName, type);
 
-        //check if the score is in the top 10 for score
-        scores = sortScores(scores);
-        boolean isTop10Scores = (scores.get(9).getScore() < newScore.getScore());
+        boolean max;
+
+        max = DISPLAY_COUNT > scores.size();
+
+        //now add to the two tables for time and score top 10:
+
+        //add score to the score leaderboard
+        addScore(max, newScore, leaderboardFile);
 
         //check if the score is in the top 10 for time
-        scores = sortTimes(scores);
-        boolean isTop10Times = (scores.get(9).getTime() > newScore.getTime());
+        addTime(max, newScore, timeBoardFile);
 
-        if (isTop10Scores) {
+
+    }
+
+    private static void addScore(boolean max, Score newScore, String leaderboardFile) {
+        //check if the score is in the top 10 for score
+        scores = sortScores(scores);
+
+        boolean isTop10;
+
+        if (max) {
+            isTop10 = true;
+        } else {
+            isTop10 = (scores.get(DISPLAY_COUNT-1).getScore() < newScore.getScore());
+        }
+
+
+        if (isTop10) {
             scores.add(newScore);
             scores = sortScores(scores);
 
-        try {
-            FileWriter writer = new FileWriter(leaderboardFile);
-            for (Score score : scores) {
-                writer.append(score.toString() + "\n");
-            }
-            writer.close();
-        } catch (IOException e) {
-            System.out.println("Cannot read file.");
-            e.printStackTrace();
-        }
-    }
-
-        if (isTop10Times ) {
-            scores.add(newScore);
-            scores = sortTimes(scores);
-
             try {
-                FileWriter writer = new FileWriter(timeBoardFile);
+                FileWriter writer = new FileWriter(leaderboardFile);
                 for (Score score : scores) {
                     writer.append(score.toString() + "\n");
+                    System.out.println("new time!");
                 }
                 writer.close();
             } catch (IOException e) {
@@ -79,7 +84,37 @@ public class Leaderboard {
                 e.printStackTrace();
             }
         }
+    }
 
+    private static void addTime(boolean max, Score newScore, String timeBoardFile) {
+        //check if the score is in the top 10 for time
+        scores = sortTimes(scores);
+
+        boolean isTop10;
+
+        if (max) {
+            isTop10 = true;
+        } else {
+            isTop10 = (scores.get(DISPLAY_COUNT-1).getTime() > newScore.getTime());
+        }
+
+
+        if (isTop10) {
+            scores.add(newScore);
+            scores = sortTimes(scores);
+
+            try {
+                FileWriter writer = new FileWriter(timeBoardFile);
+                for (Score score : scores) {
+                    writer.append(score.toString() + "\n");
+                    System.out.println("new time!");
+                }
+                writer.close();
+            } catch (IOException e) {
+                System.out.println("Cannot read file.");
+                e.printStackTrace();
+            }
+        }
     }
 
 

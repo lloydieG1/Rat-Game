@@ -19,7 +19,10 @@ public class Tile {
   private final double opacityFactor = 0.6;
 
     private final Color dark = Color.color(0.1, 0.2, 0,0.2);
-   private Color light =Color.color(0.5, 1, 0,0.2);
+   private final  Color light =Color.color(0.5, 1, 0,0.2);
+
+    private final Color extraDark = Color.color(0.0, 0.1, 0,0.2);
+    private final Color extraLight =Color.color(0.6, 1, 0,0.3);
 
     private double size = Game.gameSize;
 
@@ -85,7 +88,7 @@ public class Tile {
      * @param g
      * @param edges
      */
-  private void renderSideGrass(GraphicsContext g, boolean[] edges, int shadetype) {
+  private void renderSideGrass(GraphicsContext g, boolean[] edges, int shadetype,double width) {
       double factor = (int) Game.gameSize;
       double x = (int) (this.x * factor + Game.gameX);
       double y = (int) (this.y * factor + Game.gameY);
@@ -116,13 +119,17 @@ public class Tile {
       }
 
 
-      shadeDown(g, edges, shadetype);
+      if (!(shadetype ==3)) {
+
+
+          shadeDown(g, edges, shadetype, width);
+      }
 
 
   }
 
 
-  private void shadeDown(GraphicsContext g, boolean[] edges, int shadeType) {
+  private void shadeDown(GraphicsContext g, boolean[] edges, int shadeType, double width) {
       double factor = (int) Game.gameSize;
       double x = (int) (this.x * factor + Game.gameX);
       double y = (int) (this.y * factor + Game.gameY);
@@ -130,58 +137,58 @@ public class Tile {
       if (shadeType == 0) {
           g.setFill(light);
       } else {
-          g.setFill(dark);
+          g.setFill(extraDark);
       }
       if (edges[1]) {
 
-          renderLeftPanel(g, x, y);
+          renderLeftPanel(g, x, y, width);
 
       }
 
       if (edges[2]) {
 
-          renderDownPanel(g, x, y);
+          renderDownPanel(g, x, y, width);
       }
 
       if (shadeType == 0) {
           g.setFill(dark);
       } else {
-          g.setFill(dark);
+          g.setFill(extraDark);
       }
 
       if (edges[0]) {
 
-          renderRightPanel(g, x, y);
+          renderRightPanel(g, x, y, width);
 
       }
       if (edges[3]) {
 
-          renderUpPanel(g, x, y);
+          renderUpPanel(g, x, y, width);
 
       }
   }
 
 
 
-    private void renderRightPanel(GraphicsContext g, double x, double y) {
+    private void renderRightPanel(GraphicsContext g, double x, double y, double detailThickness) {
 
       g.fillRect(x + (size * (detailThickness - 1)) / detailThickness, y, size/ detailThickness, size);
 
     }
 
-    private void renderLeftPanel(GraphicsContext g, double x, double y) {
+    private void renderLeftPanel(GraphicsContext g, double x, double y, double detailThickness) {
 
 
         g.fillRect(x, y, size/ detailThickness, size);
     }
 
-    private void renderDownPanel(GraphicsContext g, double x, double y) {
+    private void renderDownPanel(GraphicsContext g, double x, double y, double detailThickness) {
 
 
         g.fillRect(x, y + (size * (detailThickness - 1) / detailThickness), size, size/ detailThickness);
     }
 
-    private void renderUpPanel(GraphicsContext g, double x, double y) {
+    private void renderUpPanel(GraphicsContext g, double x, double y, double detailThickness) {
 
 
         g.fillRect(x, y, size, size/ detailThickness);
@@ -267,13 +274,17 @@ public class Tile {
   public void renderDetails(GraphicsContext g) {
       g.setFill(Color.RED);
       if (type.equals(TileType.Path)) {
-          renderSideGrass(g, nextToType(TileType.Grass), 0); //draw sides meeting paths
+        
+          renderSideTunnel(g,nextToType(TileType.Tunnel));
+
+          renderSideGrass(g,nextToType(TileType.Grass), 3, detailThickness);
       } else if (type.equals(TileType.Tunnel)) {
-          renderSideGrass(g,nextToType(TileType.Path), 1);
-          renderSideTunnel(g,nextToType(TileType.Path));
+          renderSideGrass(g,nextToType(TileType.Path), 1, detailThickness);
+
+
 
       } else if (type.equals(TileType.Grass)) {
-          renderSideGrass(g,nextToType(TileType.Tunnel), 0);
+          renderSideGrass(g,nextToType(TileType.Tunnel), 0, detailThickness);
       }
   }
 
