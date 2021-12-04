@@ -36,6 +36,8 @@ public class MainMenuController implements Initializable {
 
     private final double LINE_FACTOR = 1.6666;
 
+    private final int scrollSpeed = 1500;
+
 
     @FXML
     Canvas motdCanvas;
@@ -105,7 +107,7 @@ public class MainMenuController implements Initializable {
     private void renderMessage(GraphicsContext g) {
 
 
-        double moveHeight = motdCanvas.getHeight()/Game.FPS;
+        double moveHeight = (motdCanvas.getHeight()/Game.FPS);
         text1Pos-= moveHeight;
         text2Pos-= moveHeight;
 
@@ -163,7 +165,7 @@ public class MainMenuController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
-        int fpstime = 1000/Game.FPS;
+        int fpstime = scrollSpeed/Game.FPS;
         swap = new Timeline(new KeyFrame(Duration.millis(fpstime), (ActionEvent event) -> {
             renderMessage(motdCanvas.getGraphicsContext2D());
         }));
