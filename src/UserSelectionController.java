@@ -30,23 +30,24 @@ public class UserSelectionController implements Initializable {
 	TilePane profileVbox;
 	
 	private void addProfileButtons() {
-		File directory = new File("res\\profiles");
-		File[] profiles = directory.listFiles();
-		int fileCount = directory.list().length;
 
-		for (int i = 0; i < fileCount; i++) {
-			String buttonText = profiles[i].getName().replace(".txt", "");
-		    Button profileButton = new Button(buttonText);
-		    profileButton.setFont(new Font(25));
-		    profileButton.setOnAction(new EventHandler() {
-		    	@Override
-		    	public void handle(Event event){
-		    		profileButtonClick(buttonText);//button text is the same as the username
-		    	}
-		    });
+        for (int i = 0; i < PlayerProfileManager.getSize(); i++) {
+            String buttonText = PlayerProfileManager.getProfileInt(i).getUsername();
+            Button profileButton = new Button(buttonText);
+            profileButton.setFont(new Font(25));
+            profileButton.setOnAction(new EventHandler() {
+                @Override
+                public void handle(Event event){
+                    profileButtonClick(buttonText);//button text is the same as the username
+                }
+            });
+            profileVbox.getChildren().add(profileButton);
+        }
 
-		    profileVbox.getChildren().add(profileButton); 
-		  }
+
+
+
+
 	}
 
 	

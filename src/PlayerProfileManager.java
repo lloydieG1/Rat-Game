@@ -55,6 +55,14 @@ public class PlayerProfileManager {
 		PlayerProfile newProfile = new PlayerProfile(username, 1);
 		profiles.add(newProfile);
 	}
+
+    public static int getSize() {
+        return profiles.size();
+    }
+
+    public static PlayerProfile getProfileInt(int i) {
+        return profiles.get(i);
+    }
 	
 	/**
 	 * Updates the string data stored in a profile file for either username or max level
@@ -93,7 +101,7 @@ public class PlayerProfileManager {
 	/**
 	 * Writes a string to file.
 	 *
-	 * @param filename name of file
+	 * @param fileName name of file
 	 * @param data string to be written
 	 */
 	private static void writeToFile(String fileName, String data) {
@@ -162,18 +170,12 @@ public class PlayerProfileManager {
 	}
 
 	public static int getMaxLevel(String username) {
-		try {
-			Scanner in = openProfileFile(username);
-
-			in.findInLine(FIRST_LINE); //Skips past "USER: "
-			String user = in.nextLine();
-			in.findInLine(SECOND_LINE); //Skips past "MAX LEVEL: "
-			int maxLevel = in.nextInt();
-			return maxLevel;
-		} catch (Exception e) {
-			System.out.println("Failed to parse profile " + username);
-			return 0;
-		}
+        for(PlayerProfile playerProfile : profiles) {
+            if (playerProfile.getUsername().equals(username)) {
+                return playerProfile.getMaxLevel();
+            }
+        }
+        return 0;
 	}
 	
 	/**
@@ -184,12 +186,18 @@ public class PlayerProfileManager {
 	public static void removeProfile(String username) {
 		String filePath = usernameToPath(username);
 		File fileToDelete = new File(filePath);
-		if (fileToDelete.delete()) { 
-			System.out.println("Deleted the user: " + username);;
-		} else {
-			System.out.println("Failed to delete the file.");
-		}
+		fileToDelete.delete();
+        System.out.println("file should now delete");
+
+        boolean gameProfileConflict = false;
+        if(Game.currentProfile.getUsername().equals(username)) {
+            gameProfileConflict = true;
+        }
+
 		profiles.remove(getProfile(username)); //remove profile from global profile array
+        if (gameProfileConflict) {
+            Game.currentProfile = profiles.get(0);
+        }
         removeSaves(username);
 	}
 

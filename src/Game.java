@@ -44,7 +44,7 @@ public class Game extends Application {
 
     public static Level currentLevel;
     
-    public static PlayerProfile currentProfile;
+    public static PlayerProfile currentProfile = new PlayerProfile("anon", 0);
 
     public static Random random = new Random();
 
