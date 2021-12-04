@@ -35,28 +35,24 @@ public class Leaderboard {
         createFileIfNotExists(levelName);
         createFileIfNotExists(levelName + timeBoard);
 
-        String leaderboardFile = levelToPath(levelName);
-        String timeBoardFile = levelToPath(levelName+ timeBoard);
-
-        ArrayList<Score> scores = getScores(levelName, type);
-
-        boolean max;
-
-        max = DISPLAY_COUNT > scores.size();
-
         //now add to the two tables for time and score top 10:
 
         //add score to the score leaderboard
-        addScore(max, newScore, leaderboardFile);
+        addScore(newScore, levelName);
 
         //check if the score is in the top 10 for time
-        addTime(max, newScore, timeBoardFile);
+        addTime(newScore, levelName);
 
 
     }
 
-    private static void addScore(boolean max, Score newScore, String leaderboardFile) {
-        ArrayList<Score> scores = new ArrayList<>();
+    private static void addScore(Score newScore, String levelName) {
+        String leaderboardFile = levelToPath(levelName);
+        ArrayList<Score> scores = getScores(levelName, 0);
+
+        boolean max;
+
+        max = DISPLAY_COUNT > scores.size();
         //check if the score is in the top 10 for score
         scores = sortScores(scores);
 
@@ -87,8 +83,12 @@ public class Leaderboard {
         }
     }
 
-    private static void addTime(boolean max, Score newScore, String timeBoardFile) {
-        ArrayList<Score> scores = new ArrayList<>();
+    private static void addTime(Score newScore, String levelName) {
+        String timeBoardFile = levelToPath(levelName+ timeBoard);
+        ArrayList<Score> scores = getScores(levelName, 1);
+        boolean max;
+
+        max = DISPLAY_COUNT > scores.size();
         //check if the score is in the top 10 for time
         scores = sortTimes(scores);
 
