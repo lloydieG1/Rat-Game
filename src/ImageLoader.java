@@ -29,6 +29,8 @@ public class ImageLoader {
     public static Image stopSign3 = getImage("stopSign3.png", 64);
     public static Image stopSign4 = getImage("stopSign4.png", 64);
 
+    public static Image icon = getImage("icon.png",64);
+
     /**
    * Description.
    *

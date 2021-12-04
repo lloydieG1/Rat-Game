@@ -2,8 +2,6 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
-import java.util.ArrayList;
-
 /**
  * A tile occupies an x,y position on the map and, depending on tile type,
  * can be occupied by a number of Elements.
@@ -16,8 +14,10 @@ public class Tile {
   private final int y; //y position of the tile
 
   private final TileType type;
-  private final int dist = 6;
-  private int dist2 = dist-1;
+  private final int detailThickness = 6;
+  private final int iterations = 3;
+  private final double opacityFactor = 0.6;
+
   Image image;
 
 
@@ -82,86 +82,103 @@ public class Tile {
       Color light =Color.color(0.5, 1, 0,0.2);
 
 
+      double v = x + (size * (detailThickness - 1)) / detailThickness;
 
       if (edges[0]) {
 
 
-          g.drawImage(image,x+(size*dist2)/dist, y, size/dist, size);
+          g.drawImage(image, v, y, size/ detailThickness, size);
       }
       if (edges[1]) {
 
 
-          g.drawImage(image,x, y, size/dist, size);
+          g.drawImage(image,x, y, size/ detailThickness, size);
 
       }
 
+      double v1 = y + (size * (detailThickness - 1) / detailThickness);
       if (edges[2]) {
 
 
-          g.drawImage(image,x, y+(size*dist2/dist), size, size/dist);
+          g.drawImage(image,x, v1, size, size/ detailThickness);
       }
 
       if (edges[3]) {
 
 
-          g.drawImage(image,x, y, size, size/dist);
+          g.drawImage(image,x, y, size, size/ detailThickness);
 
       }
 
       if (edges[0]) {
 
           g.setFill(dark);
-          g.fillRect(x+(size*dist2)/dist, y, size/dist, size);
+          g.fillRect(v, y, size/ detailThickness, size);
       }
       if (edges[1]) {
 
           g.setFill(light);
-          g.fillRect(x, y, size/dist, size);
+          g.fillRect(x, y, size/ detailThickness, size);
 
       }
 
       if (edges[2]) {
 
           g.setFill(light);
-          g.fillRect(x, y+(size*dist2/dist), size, size/dist);
+          g.fillRect(x, v1, size, size/ detailThickness);
       }
 
       if (edges[3]) {
 
           g.setFill(dark);
-          g.fillRect(x, y, size, size/dist);
+          g.fillRect(x, y, size, size/ detailThickness);
 
       }
   }
 
     private void renderSideTunnel(GraphicsContext g, boolean[] edges) {
+        double currentDistance = detailThickness;
+
+        for (int i = 0; i < iterations; i++) {
+            currentDistance = currentDistance*(1+1.0/iterations);
+            gradientTunnel(currentDistance, g, edges, opacityFactor/iterations);
+        }
+    }
+
+    /**
+     *
+     * @param dist thickness of the side of a tile
+
+     * @param g
+     */
+    private void gradientTunnel(double dist, GraphicsContext g, boolean[] edges, double opacity) {
         double factor = (int) Game.gameSize;
         double x = (int) (this.x * factor + Game.gameX);
         double y = (int) (this.y * factor + Game.gameY);
         double size = Game.gameSize;
-        Color dark = Color.color(0, 0, 0,0.3);
+        Color dark = Color.color(0, 0, 0,opacity);
         g.setFill(dark);
-         if (edges[0]) {
+        if (edges[0]) { //right
 
-            g.fillRect(x+(size*dist2)/dist, y+size/dist, size/dist, size-size*2/dist);
-             g.fillRect(x+(size*dist2)/dist, y, size/dist, size);
+            g.fillRect(x+(size*(dist-1))/dist, y+size/dist, size/dist, size-size*2/dist);
+
         }
-        if (edges[1]) {
+        if (edges[1]) { //left
 
             g.fillRect(x, y+size/dist, size/dist, size-size*2/dist);
-            g.fillRect(x, y, size/dist, size);
+
         }
 
         if (edges[2]) {
 
 
-            g.fillRect(x+size/dist, y+(size*dist2/dist), size-size*2/dist, size/dist);
-            g.fillRect(x, y+(size*dist2/dist), size, size/dist);
+            g.fillRect(x+size/dist, y+(size*(dist-1)/dist), size-size*2/dist, size/dist);
+
         }
 
         if (edges[3]) {
+
             g.fillRect(x+size/dist, y, size-size*2/dist, size/dist);
-            g.fillRect(x, y, size, size/dist);
 
         }
     }
@@ -202,6 +219,7 @@ public class Tile {
           renderSideGrass(g, nextToType(TileType.Grass)); //draw sides meeting paths
       } else if (type.equals(TileType.Tunnel)) {
           renderSideTunnel(g,nextToType(TileType.Path));
+          renderSideGrass(g, nextToType(TileType.Grass)); //draw sides meeting paths
       }
   }
 
