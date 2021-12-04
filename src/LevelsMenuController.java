@@ -56,9 +56,7 @@ public class LevelsMenuController implements Initializable {
     for (int i = 0; i < fileCount; i++) {
       if (!(levels[i].getName().replace(".txt", "").equals(levels[i].getName()))) {
         String buttonText = levels[i].getName().replace(".txt", "");
-        String highScore = "highscore: " + Leaderboard.getHighScore(Game.currentProfile.getUsername(), buttonText, 0).getScore();
-        String fastest =  "fastest: " + Leaderboard.getHighScore(Game.currentProfile.getUsername(), buttonText, 1).getTime();
-        Button levelButton = new Button("level: " + buttonText + "\n" +highScore + "\n" + fastest);
+        Button levelButton = new Button("level: " + buttonText);
         levelButton.setFont(Font.font("monospace", 35));
 
         if (PlayerProfileManager.getMaxLevel(Game.currentProfile.getUsername()) >= Integer.parseInt(buttonText)) {
