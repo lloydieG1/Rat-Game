@@ -3,10 +3,7 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Tooltip;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.TilePane;
 import javafx.scene.text.Font;
@@ -87,14 +84,18 @@ public class LevelsMenuController implements Initializable {
                     }
 
                     if (found) {
-                        Alert saveConfirmation = new Alert(Alert.AlertType.CONFIRMATION);
+
+                        ButtonType resumeButton = new ButtonType("resume", ButtonBar.ButtonData.OK_DONE);
+                        ButtonType overwriteButton = new ButtonType("overwrite", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+                        Alert saveConfirmation = new Alert(Alert.AlertType.CONFIRMATION, "test", resumeButton, overwriteButton);
                         saveConfirmation.setTitle("resume / overwrite");
                         saveConfirmation.setHeaderText("there is a save file for this level.");
-                        saveConfirmation.setContentText("clicking ok resumes this save, cancel overwrites it.");
+                    
                         Optional<ButtonType> resume = saveConfirmation.showAndWait();
-                        if (resume.get().equals(ButtonType.OK)) {
+                        if (resume.get().equals(resumeButton)) {
                             Game.openGameScene("save\\" + Game.currentProfile.getUsername() + saveFileName);
-                        } else if (resume.get().equals(ButtonType.CANCEL)) {
+                        } else {
                             Game.openGameScene(buttonText);
                         }
                     } else {

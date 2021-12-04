@@ -1,2 +1,4 @@
 Injata - 193 - in: 7.930 seconds
+Injata - 192 - in: 8.830 seconds
+Injata - 187 - in: 13.640 seconds
 Injata - 184 - in: 16.200 seconds
