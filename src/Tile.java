@@ -274,7 +274,7 @@ public class Tile {
   public void renderDetails(GraphicsContext g) {
       g.setFill(Color.RED);
       if (type.equals(TileType.Path)) {
-        
+
           renderSideTunnel(g,nextToType(TileType.Tunnel));
 
           renderSideGrass(g,nextToType(TileType.Grass), 3, detailThickness);

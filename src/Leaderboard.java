@@ -19,7 +19,7 @@ public class Leaderboard {
     private static final String FIRST_LINE = "USER: ";
     private static final String SECOND_LINE = "MAX LEVEL: ";
 
-    private static ArrayList<Score> scores = new ArrayList<>();
+
 
     private static int DISPLAY_COUNT = 10;
 
@@ -56,6 +56,7 @@ public class Leaderboard {
     }
 
     private static void addScore(boolean max, Score newScore, String leaderboardFile) {
+        ArrayList<Score> scores = new ArrayList<>();
         //check if the score is in the top 10 for score
         scores = sortScores(scores);
 
@@ -76,7 +77,7 @@ public class Leaderboard {
                 FileWriter writer = new FileWriter(leaderboardFile);
                 for (Score score : scores) {
                     writer.append(score.toString() + "\n");
-                    System.out.println("new time!");
+                    System.out.println("new score!");
                 }
                 writer.close();
             } catch (IOException e) {
@@ -87,6 +88,7 @@ public class Leaderboard {
     }
 
     private static void addTime(boolean max, Score newScore, String timeBoardFile) {
+        ArrayList<Score> scores = new ArrayList<>();
         //check if the score is in the top 10 for time
         scores = sortTimes(scores);
 
