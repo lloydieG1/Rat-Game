@@ -1,2 +1,0 @@
-USER: llol
-MAX LEVEL: 2

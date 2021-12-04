@@ -190,7 +190,26 @@ public class PlayerProfileManager {
 			System.out.println("Failed to delete the file.");
 		}
 		profiles.remove(getProfile(username)); //remove profile from global profile array
+        removeSaves(username);
 	}
+
+    private static void removeSaves(String username) {
+        File directory = new File("res\\maps\\save\\");
+
+        File[] saves = directory.listFiles();
+        int fileCount = directory.list().length;
+
+
+        for (int i = 0; i < fileCount; i++) {
+            //any non alphanumeric is an illegal character, so none would have '_' in their name and thus, this would not be a problem.
+            String saveUser = saves[i].getName().replace(username, "_delete_user_");
+            if (saveUser.contains("_delete_user_")) {
+                saves[i].delete();
+            }
+        }
+    }
+
+
 	
 	private static String readProfileFile(String username) {
 		Scanner in = openProfileFile(username);
