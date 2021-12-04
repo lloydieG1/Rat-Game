@@ -279,7 +279,7 @@ public class Tile {
 
           renderSideGrass(g,nextToType(TileType.Grass), 3, detailThickness);
       } else if (type.equals(TileType.Tunnel)) {
-          renderSideGrass(g,nextToType(TileType.Path), 1, detailThickness);
+          renderSideGrass(g,nextToType(TileType.Path), 0, detailThickness);
 
 
 

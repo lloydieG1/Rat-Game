@@ -186,7 +186,7 @@ public class Level {
   private void checkGameCondition() {
     int rats = ratCount();
     if (rats > maxRats) {
-      Game.endGame("You lost with a score of " + Game.score);
+        Game.endGame("You lost  with a score of: \n" + bonusScore() + "\nin:\n" + String.format("%.3f", time) + " seconds");
     } else if (rats == 0) {
         Leaderboard.addScore(level,new Score(Game.currentProfile.getUsername(), bonusScore(), time), 0);
 
@@ -196,7 +196,7 @@ public class Level {
 
     }
     if (timer > timeLimit) {
-      Game.endGame("You lost with a score of " + Game.score);
+        Game.endGame("You lost with a score of: \n" + bonusScore() + "\nin:\n" + String.format("%.3f", time) + " seconds");
     }
   }
 
