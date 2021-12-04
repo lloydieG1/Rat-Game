@@ -100,9 +100,6 @@ public class MainMenuController implements Initializable {
         }
 
 
-
-
-
     }
 
     private void renderMessage(GraphicsContext g) {

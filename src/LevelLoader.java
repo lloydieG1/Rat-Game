@@ -49,12 +49,9 @@ public class LevelLoader {
 
     level.setStart(Double.parseDouble(levelData[9]), Double.parseDouble(levelData[10]),Double.parseDouble(levelData[11]));
 
-    if (!save) {
 
-        level.setTime(Long.parseLong(levelData[12]));
-    } else {
-        level.setTime(System.nanoTime());
-    }
+    level.setTime(Double.parseDouble(levelData[12]));
+
 
     return level;
   }

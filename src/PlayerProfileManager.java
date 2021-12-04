@@ -199,6 +199,7 @@ public class PlayerProfileManager {
             Game.currentProfile = profiles.get(0);
         }
         removeSaves(username);
+        Leaderboard.removeScores(username);
 	}
 
     private static void removeSaves(String username) {

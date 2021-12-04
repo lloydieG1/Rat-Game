@@ -35,7 +35,7 @@ public class Level {
   private double startX;
   private double startY;
   private double startZoom;
-  private long time; //the time since the level was started
+  private double time = 0; //the time since the level was started
 
 
 
@@ -87,7 +87,7 @@ public class Level {
       return timer;
   }
 
-  public void setTime(long time) {
+  public void setTime(double time) {
       this.time = time;
   }
 
@@ -188,11 +188,8 @@ public class Level {
     if (rats > maxRats) {
       Game.endGame("You lost with a score of " + Game.score);
     } else if (rats == 0) {
-        double winTime = System.nanoTime();
-        double precision = 1000000000;
-
-        Leaderboard.addScore(level,new Score(Game.currentProfile.getUsername(), bonusScore(), (winTime-time)/precision), 0);
-        Game.endGame("You won with a score of: \n" + bonusScore() + "\nin:\n" + String.format("%.3f", (winTime-time)/precision) + " seconds");
+        Leaderboard.addScore(level,new Score(Game.currentProfile.getUsername(), bonusScore(), time), 0);
+        Game.endGame("You won with a score of: \n" + bonusScore() + "\nin:\n" + String.format("%.3f", time) + " seconds");
         PlayerProfileManager.setMaxLevel(Game.currentProfile.getUsername(), level);
 
 
@@ -270,6 +267,7 @@ public class Level {
    * buffered elements to the map.
    */
   public void tick() {
+      time = time + 1.0/Game.FPS;
     currentTick++;
     if (currentTick >= Game.FPS) {
       currentTick = 0;
@@ -501,10 +499,8 @@ public class Level {
       file = file + "\n" + lines;
       file = file +  Game.gameY;
       file = file + "\n" + lines;
-      BigDecimal preciseValue = new BigDecimal(time);
 
-      file = file +  preciseValue;
-      System.out.println(preciseValue);
+      file = file +  time;
     try {
       File levelFile = new File(saveFolder + Game.currentProfile.getUsername() + level + ".txt");
       if (levelFile.createNewFile()) {

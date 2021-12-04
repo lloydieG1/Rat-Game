@@ -48,6 +48,31 @@ public class Leaderboard {
 
     }
 
+
+    public static void removeScores(String username) {
+        File scoreDirectory = new File("res\\maps\\highScores\\");
+        int fileCount = scoreDirectory.list().length;
+
+        for (int i = 0; i < fileCount; i++) {
+            String levelName = Integer.toString(i+1);
+            ArrayList<Score> leaderboard = getScores(levelName, 0);
+            leaderboard.removeIf(score -> score.getUsername().equals(username));
+            leaderboard = sortScores(leaderboard, 0);
+            try {
+                FileWriter writer = new FileWriter(levelToPath(levelName));
+                for (Score score : leaderboard) {
+                    writer.append(score.toString() + "\n");
+                }
+                writer.close();
+            } catch (IOException e) {
+                System.out.println("Cannot read file.");
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+
     private static ArrayList<Score> sortScores(ArrayList<Score> scores, int type) {
         switch (type) {
             case 0:

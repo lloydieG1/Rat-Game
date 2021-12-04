@@ -1,2 +1,2 @@
-USER: lol
+USER: test2
 MAX LEVEL: 3
