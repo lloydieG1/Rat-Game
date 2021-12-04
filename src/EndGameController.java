@@ -22,8 +22,6 @@ public class EndGameController implements Initializable {
     private Button sortByButton;
 
 
-
-
   @FXML
   Text endgameMessage;
 
