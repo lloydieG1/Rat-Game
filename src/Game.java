@@ -107,6 +107,7 @@ public class Game extends Application {
       //  primaryStage.setResizable(false);
 
         openUserSelection();
+        primaryStage.setTitle("Rats - by team 19");
         primaryStage.show();
 
         int fpstime = 1000/FPS;

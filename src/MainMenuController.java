@@ -54,6 +54,8 @@ public class MainMenuController implements Initializable {
 		currentUser.setText("Current User: " + Game.currentProfile.getUsername());
 	}
 
+
+
     private boolean differentEnough(String s1, String s2) {
         if (s1.equals(s2)) {
             return false;
