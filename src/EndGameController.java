@@ -44,15 +44,11 @@ public class EndGameController implements Initializable {
       ArrayList<Score> scores = Leaderboard.getScores(Game.currentLevel.level, sortBy);
       removeScores();
 
-      Text header = new Text("leaderboard: ");
-      header.setFont(new Font(25));
-
-      leaderboard.getChildren().add(header);
       int i = 0;
       for (Score score : scores) {
           i++;
           Text scoreT = new Text("#" + i + " "  + score.toString());
-          scoreT.setFont(new Font(20));
+          scoreT.setFont(Font.font("monospace", 35));
 
           leaderboard.getChildren().add(scoreT);
       }

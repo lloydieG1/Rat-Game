@@ -1,10 +1,10 @@
 Injata - 234 - in: 6.860 seconds
+0000000000 - 194 - in: 6.890 seconds
+0000000000 - 194 - in: 6.910 seconds
+0000000000 - 194 - in: 6.920 seconds
+0000000000 - 194 - in: 6.970 seconds
+0000000000 - 193 - in: 7.030 seconds
 Injata - 233 - in: 7.150 seconds
 Injata - 233 - in: 7.190 seconds
 Injata - 233 - in: 7.210 seconds
-Injata - 233 - in: 7.230 seconds
-Injata - 233 - in: 7.354 seconds
-Injata - 231 - in: 9.310 seconds
-Injata - 231 - in: 9.770 seconds
-Injata - 210 - in: 22.050 seconds
-Injata - 323 - in: 27.100 seconds
+0000000000 - 233 - in: 7.220 seconds
