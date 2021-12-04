@@ -34,7 +34,7 @@ public class UserSelectionController implements Initializable {
         for (int i = 0; i < PlayerProfileManager.getSize(); i++) {
             String buttonText = PlayerProfileManager.getProfileInt(i).getUsername();
             Button profileButton = new Button(buttonText);
-            profileButton.setFont(new Font(25));
+            profileButton.setFont(Font.font("monospace", 25));
             profileButton.setOnAction(new EventHandler() {
                 @Override
                 public void handle(Event event){
