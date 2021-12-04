@@ -299,7 +299,7 @@ public class Tile {
         g.fillRect(x, y, sizeX, sizeY);
     } else if (type.equals(TileType.Tunnel)) {
 
-        g.setFill(Color.color(0.2, 0.4, 0));
+        g.setFill(Color.color(0.25, 0.5, 0));
 
         g.fillRect(x, y, sizeX, sizeY);
     }
