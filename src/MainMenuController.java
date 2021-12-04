@@ -34,7 +34,7 @@ public class MainMenuController implements Initializable {
 
     private final int GRID_OFFSET = 8;
 
-    private final double LINE_FACTOR = 1.6666;
+    private final double LINE_FACTOR = 5.0/3;
 
     private final int scrollSpeed = 1500;
 
