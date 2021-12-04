@@ -109,10 +109,10 @@ public class MainMenuController implements Initializable {
         text1Pos-= moveHeight;
         text2Pos-= moveHeight;
 
-        g.setFill(Color.color(0.6,0.6,0.6));
+        g.setFill(Color.color(0.2,0.2,0.2));
         g.fillRect(0,0, motdCanvas.getWidth(), motdCanvas.getHeight());
 
-        g.setStroke(Color.color(0,0,0, 0.1));
+        g.setStroke(Color.color(0.6,0.6,0.8, 0.2));
         for (int i = 0; i < MAX_WRAP; i++) {
             g.strokeRect(0,0, i*fontSize/LINE_FACTOR, motdCanvas.getHeight());
         }

@@ -1,2 +1,0 @@
-test2 - 188 - in: 12.246 seconds
-test2 - 182 - in: 18.892 seconds
