@@ -10,7 +10,7 @@ public abstract class Element {
   protected int x; //x position in the map
   protected int y; //y position in the map
   protected ElementType type; //the type of element
-  protected int tickSpeed = Game.FPS; //Logic only happens once this many ticks have passed
+  protected int tickSpeed = Game.FPS; //Logic only happens once this on ticks
   protected int currentTick = 0; //the current tick in the cycle (eg 3/(maxfps))
   protected Level level; //the level the element is in so it can use getElements
   protected int age = 0; //age of the element in ticks
@@ -37,7 +37,8 @@ public abstract class Element {
    * @param x X position
    * @param y Y position
    */
-  public Element(ElementType type, Level level, int x, int y, Direction dir, int health) {
+  public Element(ElementType type, Level level, int x, int y, Direction dir
+          , int health) {
     this.y = y;
     this.x = x;
     this.type = type;
@@ -318,12 +319,14 @@ public abstract class Element {
     } else if (x2 - x1 < -180) {
       x2 = x2 + 360;
     }
-    double currentTick = Game.minMax(this.currentTick, 0, tickSpeed / 2.0);
+    double currentTick = Game.minMax(this.currentTick, 0, tickSpeed
+            / 2.0);
     double tickSpeed = this.tickSpeed / 2.0;
     return cosineInterpolation(x1, x2, currentTick, tickSpeed);
   }
 
-  protected double cosineInterpolation(double x1, double x2, double min, double max) {
+  protected double cosineInterpolation(double x1, double x2, double min
+          , double max) {
     double m2 = (1 - Math.cos(min * Math.PI / max)) / 2;
     return x1 + (x2 - x1) * m2;
   }
