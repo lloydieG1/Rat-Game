@@ -54,7 +54,12 @@ public class Score implements Comparable {
     }
 
     public String toString() {
-        return username + " - " + score + " - in: "  + String.format("%.3f", time) + " seconds" ;
+        int lettersUnderLimit = 10-username.length();
+        String padding = "";
+        for (int i = 0; i < lettersUnderLimit; i++) {
+            padding = padding   + " ";
+        }
+        return username + padding + " - " + score + " - in: "  + String.format("%.3f", time) + " seconds" ;
     }
 
 
