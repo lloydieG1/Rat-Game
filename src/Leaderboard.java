@@ -109,7 +109,7 @@ public class Leaderboard {
                 FileWriter writer = new FileWriter(timeBoardFile);
                 for (Score score : scores) {
                     writer.append(score.toString() + "\n");
-                    System.out.println("new time!");
+
                 }
                 writer.close();
             } catch (IOException e) {
@@ -248,9 +248,9 @@ public class Leaderboard {
         try {
             File file = new File(levelToPath(level));
             if (file.createNewFile()) {
-                System.out.println("creating file " + file.getName());
+               // System.out.println("creating file " + file.getName());
             } else {
-                System.out.println("save already exists. now writing to it");
+              //  System.out.println("save already exists. now writing to it");
             }
         } catch (IOException e) {
             System.out.println("An error occurred.");
@@ -280,7 +280,7 @@ public class Leaderboard {
         //attempts to open file and returns exception if it is not found
         try {
             in = new Scanner(inputFile);
-            System.out.println(inputFile);
+           // System.out.println(inputFile);
         } catch (FileNotFoundException e) {
             System.out.println(OPEN_FILE_ERROR + level);
             System.exit(0);

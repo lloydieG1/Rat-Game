@@ -374,11 +374,25 @@ public class Game extends Application {
 
     }
 
+    public static void resetArrowKeys() {
+        rightArrow = false;
+        leftArrow = false;
+        upArrow = false;
+        downArrow = false;
+        levelController.rightArrow = false;
+        levelController.leftArrow = false;
+        levelController.upArrow = false;
+        levelController.downArrow = false;
+
+        levelController.wrongScreen = false;
+    }
+
     /**
      *changes the menu to the level Menu
      */
     public static void openGameScene(String levelName) {
-        levelController.wrongScreen = false;
+
+        resetArrowKeys();
 
         currentZoomMin = ZOOM_MIN;
         levelController.resetItems();
