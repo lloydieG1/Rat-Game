@@ -2,9 +2,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -17,6 +20,11 @@ import java.util.ResourceBundle;
 public class EndGameController implements Initializable {
 
     private int sortBy = 0;
+    
+	private final double AUDIO_VOLUME = 0.2;
+    private final String AUDIO_FILE_PATH = "res/audio/FOOLISHLITTLERATS.mp3";
+	private Media audio = new Media(new File(AUDIO_FILE_PATH).toURI().toString());
+	private MediaPlayer mediaPlayer = new MediaPlayer(audio);// initialise music player
 
     @FXML
     private Button sortByButton;
@@ -37,7 +45,13 @@ public class EndGameController implements Initializable {
     Game.openMainMenu();
     Game.currentLevel.deleteSave();
   }
-
+  
+  /*
+   * Play audio at stored at AUDIO_FILE_PATH
+   */
+  public void playAudio() {
+  	mediaPlayer.play();
+  }
 
   /**
    * Update the leader board.

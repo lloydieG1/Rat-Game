@@ -375,6 +375,7 @@ public class Game extends Application {
      */
     public static void openEndGame() {
         levelController.stopMusic(); //stops playing level music when level ends
+        endGameController.playAudio(); //plays audio clip stored in EndGameController
         endGameController.updateLeaderboard();
         primaryStage.setScene(endGame);
     }
