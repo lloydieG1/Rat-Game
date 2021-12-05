@@ -20,7 +20,6 @@ public class Leaderboard {
     private static final String SECOND_LINE = "MAX LEVEL: ";
 
 
-
     private static int DISPLAY_COUNT = 10;
 
 
@@ -29,7 +28,7 @@ public class Leaderboard {
      *
      * @param newScore
      * @param levelName
-     * @param type the type of sort (0= based on score, 1 =based on time)
+     * @param type      the type of sort (0= based on score, 1 =based on time)
      */
     public static void addScore(String levelName, Score newScore, int type) {
         createFileIfNotExists(levelName);
@@ -143,7 +142,6 @@ public class Leaderboard {
     }
 
 
-
     private static ArrayList<Score> sortScores(ArrayList<Score> scores) {
 
         Collections.sort(scores);
@@ -193,15 +191,13 @@ public class Leaderboard {
     }
 
 
-
-
     public static ArrayList<Score> getScores(String levelName, int type) {
 
 
         ArrayList<Score> scores = new ArrayList<>();
         try {
 
-            if (type ==0) {
+            if (type == 0) {
                 Scanner in = openLeaderboard(levelName);
 
                 while (in.hasNextLine()) {
@@ -216,8 +212,8 @@ public class Leaderboard {
                     in.nextLine();
                 }
                 in.close();
-            return sortScores(scores);
-        } else {
+                return sortScores(scores);
+            } else {
                 Scanner in = openLeaderboard(levelName + timeBoard);
 
                 while (in.hasNextLine()) {
@@ -248,16 +244,15 @@ public class Leaderboard {
         try {
             File file = new File(levelToPath(level));
             if (file.createNewFile()) {
-               // System.out.println("creating file " + file.getName());
+                // System.out.println("creating file " + file.getName());
             } else {
-              //  System.out.println("save already exists. now writing to it");
+                //  System.out.println("save already exists. now writing to it");
             }
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
     }
-
 
 
     private static String readLeaderboard(String levelName) {
@@ -280,7 +275,7 @@ public class Leaderboard {
         //attempts to open file and returns exception if it is not found
         try {
             in = new Scanner(inputFile);
-           // System.out.println(inputFile);
+            // System.out.println(inputFile);
         } catch (FileNotFoundException e) {
             System.out.println(OPEN_FILE_ERROR + level);
             System.exit(0);
@@ -289,7 +284,7 @@ public class Leaderboard {
     }
 
 
-    private static String levelToPath(String  level) {
+    private static String levelToPath(String level) {
         String filePath = LEADER_BOARD_PATH + level + ".txt";
         return filePath;
     }
