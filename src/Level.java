@@ -9,8 +9,10 @@ import java.util.ArrayList;
 
 /**
  * Scene manager contains and manages all of the tiles and elements in a level.
- *
- * @author William Randle, Lloyd Garret, Adrian Zabiza, Yazan Adi
+ * @author William Randle, Lloyd Garret
+ * @author Adrian Zabica
+ * @author Yazan Adi
+ * @author Lloyd Garret
  */
 
 public class Level {
@@ -39,10 +41,9 @@ public class Level {
 
 
     /**
-     * Constructs a Level.
-     *
-     * @param x width of map
-     * @param y height of map
+     * Constructs a level.
+     * @param x Width of map.
+     * @param y Height of map.
      */
     public Level(int x, int y, int maxRats, String level, int timeLimit, int timer) {
         tiles = new Tile[x][y];

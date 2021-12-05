@@ -4,6 +4,7 @@ import javafx.scene.image.Image;
 /**
  * This class constructs Poison item and implements all its features.
  * @author William Randle
+ * @author Tafon Taffe
  */
 public class Poison extends Element {
 

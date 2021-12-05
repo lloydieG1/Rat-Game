@@ -4,9 +4,8 @@ import javafx.scene.paint.Color;
 
 
 /**
- * Description.
- *
- * @author william randle
+ * This class implements the explosion the Bomb item.
+ * @author William randle
  */
 public class Explosion extends Element {
 

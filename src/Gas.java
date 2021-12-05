@@ -6,7 +6,8 @@ import javafx.scene.paint.Color;
 /**
  * Class used for construction and behaviours of the Gas element.
  *
- * @author Yazan, William Randle
+ * @author Yazan Adi
+ * @author William Randle
  */
 public class Gas extends Element {
     private boolean damage;
@@ -15,7 +16,6 @@ public class Gas extends Element {
 
     /**
      * Gas constructor.
-     *
      * @param type
      * @param level
      * @param x
@@ -79,8 +79,7 @@ public class Gas extends Element {
 
     /**
      * Checks if the tile at parsed position is a eligable tile to go onto.
-     *
-     * @return boolean if tile is safe
+     * @return boolean If tile is safe.
      */
     protected boolean isSpreadable(int x, int y) {
         int boardSize = level.getLength();
@@ -109,7 +108,6 @@ public class Gas extends Element {
 
     /**
      * Get Directions.
-     *
      * @return Directions
      */
     public Direction getDirection() {
