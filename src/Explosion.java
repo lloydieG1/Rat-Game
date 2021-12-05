@@ -6,7 +6,7 @@ import javafx.scene.paint.Color;
 /**
  * Description.
  *
- * @author 
+ * @author william randle
  *
  */
 public class Explosion extends Element  {
