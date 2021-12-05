@@ -60,6 +60,38 @@ public abstract class Element {
     }
 
     /**
+     * gives the
+     * @return
+     */
+    public String typeAsString() {
+        if (type == null) {
+            return "-";
+        }
+        if (type.equals(ElementType.Rat)) {
+            return "rat";
+        }
+        if (type.equals(ElementType.Bomb)) {
+            return "bomb";
+        } else if (type.equals(ElementType.Gas)) {
+            return "gas";
+        } else if (type.equals(ElementType.Sterilise)) {
+            return "sterilise";
+        } else if (type.equals(ElementType.Poison)) {
+            return "poison";
+        } else if (type.equals(ElementType.FemaleGenderChange)) {
+            return "femaleGenderChange";
+        } else if (type.equals(ElementType.MaleGenderChange)) {
+            return "maleGenderChange";
+        } else if (type.equals(ElementType.StopSign)) {
+            return "stopSign";
+        } else if (type.equals(ElementType.DeathRat)) {
+            return "deathRat";
+        } else {
+            return "-";
+        }
+    }
+
+    /**
      * sets the age of the element to parsed int
      * @param age int age of the element
      */
@@ -369,33 +401,5 @@ public abstract class Element {
     }
     return "0";
   }
-
-    private String typeAsString() {
-        if (type == null) {
-            return "-";
-        }
-        if (type.equals(ElementType.Rat)) {
-            return "rat";
-        }
-        if (type.equals(ElementType.Bomb)) {
-            return "bomb";
-        } else if (type.equals(ElementType.Gas)) {
-            return "gas";
-        } else if (type.equals(ElementType.Sterilise)) {
-            return "sterilise";
-        } else if (type.equals(ElementType.Poison)) {
-            return "poison";
-        } else if (type.equals(ElementType.FemaleGenderChange)) {
-            return "femaleGenderChange";
-        } else if (type.equals(ElementType.MaleGenderChange)) {
-            return "maleGenderChange";
-        } else if (type.equals(ElementType.StopSign)) {
-            return "stopSign";
-        } else if (type.equals(ElementType.DeathRat)) {
-            return "deathRat";
-        } else {
-            return "-";
-        }
-    }
 
 }
