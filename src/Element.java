@@ -1,7 +1,8 @@
 import javafx.scene.canvas.GraphicsContext;
 
 /**
- * Elements are objects on the map which can be changed, such as rats or items.
+ * Elements are objects on the map that need to interact directly with
+ * the level, such as rats or items.
  *
  * @author William Randle
  */
@@ -43,10 +44,9 @@ public abstract class Element {
     this.level = level;
     this.dir = dir;
 
-    this.nextX = x;
-    this.nextY = y;
     this.health = health;
-    this.age = age;
+    alignPosition();
+
   }
 
   protected void alignPosition() {
@@ -392,7 +392,7 @@ public abstract class Element {
   }
   
   
-  protected String dirAsString() {
+  protected String dirAsString(Direction dir) {
     if (dir == Direction.North) {
       return ("north");
     } else if (dir == Direction.East) {
@@ -411,7 +411,7 @@ public abstract class Element {
    * @return A String with all needed element properties
    */
   public String asString() {
-    return typeAsString() + "," + health + "," + age + "," + x + ","
-                          + y + "," + dirAsString() + extraInfo();
+    return typeAsString() + "," + health + "," + age + "," + nextX + ","
+                          + nextY + "," + dirAsString(dir) + extraInfo();
   }
 }
