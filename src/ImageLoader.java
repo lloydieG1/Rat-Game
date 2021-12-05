@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 
 /**
  * This class allows access to images.
- *
  * @author William Randle
  */
 public class ImageLoader {
@@ -23,7 +22,6 @@ public class ImageLoader {
 
     public static Image sterilizeAura = getImage("steriliseAura.png", 64);
 
-
     public static Image stopSign = getImage("stopSign.png", 64);
     public static Image stopSign1 = getImage("stopSign1.png", 64);
     public static Image stopSign2 = getImage("stopSign2.png", 64);
@@ -34,10 +32,9 @@ public class ImageLoader {
 
     /**
      * Description.
-     *
-     * @param fileName
-     * @param size
-     * @return
+     * @param fileName File name.
+     * @param size Size of image.
+     * @return The image.
      */
     public static Image getImage(String fileName, int size) {
         Image image;
