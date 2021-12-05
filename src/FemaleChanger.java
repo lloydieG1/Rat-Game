@@ -5,7 +5,7 @@ import javafx.scene.image.Image;
 /**
  * Description.
  *
- * @author
+ * @author adrian
  */
 public class FemaleChanger extends Element {
     private Image image;

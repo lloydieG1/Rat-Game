@@ -6,6 +6,7 @@ import javafx.scene.text.Font;
 /**
  * This class constructs bomb item and implements all its features.
  * @author Jack
+ * @author William Randle
  * @version 2.0
  */
 public class Bomb extends Element {

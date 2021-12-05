@@ -19,7 +19,8 @@ import java.util.ResourceBundle;
 /**
  * This class handles interactions with the main menu.
  *
- * @author William Randle, Jack Lennard
+ * @author William Randle
+ * @author Jack Lennard
  */
 public class MainMenuController implements Initializable {
 

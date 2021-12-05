@@ -7,7 +7,10 @@ import java.util.Scanner;
  * Level loader takes in text input and constructs a level with info
  * from said text file.
  *
- * @author William Randle, Lloyd, Adrian, Yazan
+ * @author William Randle
+ * @author Lloyd
+ * @author Adrian
+ * @author Yazan
  */
 public class LevelLoader {
     private static final String OPEN_FILE_ERROR = "Could not find ";

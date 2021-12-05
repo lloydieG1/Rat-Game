@@ -1,7 +1,8 @@
 /**
  * Description.
  *
- * @author Lloyd, William Randle
+ * @author Lloyd
+ * @author William Randle
  */
 public class MenuItem {
     private ElementType itemType;

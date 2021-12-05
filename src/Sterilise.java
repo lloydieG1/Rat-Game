@@ -6,7 +6,8 @@ import javafx.scene.image.Image;
 /**
  * Class used for construction and behaviours of Steriliser elements.
  *
- * @author William Randle, Jack Lennard,
+ * @author William Randle
+ * @author Jack Lennard,
  */
 public class Sterilise extends Element {
 

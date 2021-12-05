@@ -1,7 +1,7 @@
 /**
  * Description.
  *
- * @author
+ * @author lloyd
  */
 public enum ProfileData {
     Username,

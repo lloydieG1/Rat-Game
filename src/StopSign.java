@@ -6,7 +6,8 @@ import javafx.scene.paint.Color;
 /**
  * Class used for construction and behaviours of StopSign elements.
  *
- * @author William Randle, Jack Lennard
+ * @author William Randle
+ * @author Jack Lennard
  */
 public class StopSign extends Element {
 

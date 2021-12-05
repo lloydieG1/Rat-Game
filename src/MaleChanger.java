@@ -6,7 +6,7 @@ import javafx.scene.image.Image;
 /**
  * Description.
  *
- * @author
+ * @author adrian
  */
 public class MaleChanger extends Element {
 

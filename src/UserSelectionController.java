@@ -19,7 +19,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 /**
- * @author lloyd, William Randle
+ * @author lloyd
+ * @author William Randle
  */
 public class UserSelectionController implements Initializable {
     @FXML
