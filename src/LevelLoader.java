@@ -207,7 +207,7 @@ public class LevelLoader {
             int xPos = Integer.parseInt(element[3]);
             int yPos = Integer.parseInt(element[4]);
             Direction initialDirection = getDirection(element[5]);
-            //TODO change to switch statement
+
             switch (element[0]) {
                 case "rat":
                     boolean isMale = Boolean.parseBoolean(element[6]);
@@ -276,7 +276,7 @@ public class LevelLoader {
                     level.addElement(explosion);
                     break;
                 default:
-                    throw new IllegalArgumentException(element[0] + " is not a valid element");
+                    System.out.println("element was being deleted when saved");
             }
         }
     }

@@ -1,3 +1,4 @@
+Adrian     - 231 - in: 9.540 seconds
 Injata     - 193 - in: 7.930 seconds
 Injata     - 192 - in: 8.830 seconds
 Injata     - 187 - in: 13.640 seconds

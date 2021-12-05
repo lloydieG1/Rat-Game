@@ -85,9 +85,8 @@ public abstract class Element {
             return "stopSign";
         } else if (type.equals(ElementType.DeathRat)) {
             return "deathRat";
-        } else {
-            return "-";
         }
+        return "-";
     }
 
     /**
