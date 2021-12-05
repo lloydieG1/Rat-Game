@@ -1,7 +1,7 @@
 /**
  * Description.
  *
- * @author 
+ * @author William Randle
  *
  */
 public enum TileType {
