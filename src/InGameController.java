@@ -16,6 +16,7 @@ import java.util.ResourceBundle;
 
 /**
  * this class handles interactions with the level menu
+ *
  * @author William Randle
  * @version 1
  */
@@ -25,14 +26,14 @@ public class InGameController implements Initializable {
     public double mouseY;
 
     public boolean rightArrow = false;
-    public boolean leftArrow= false;
-    public boolean upArrow= false;
-    public boolean downArrow= false;
-    
-	private final double MUSIC_VOLUME = 0.2;
+    public boolean leftArrow = false;
+    public boolean upArrow = false;
+    public boolean downArrow = false;
+
+    private final double MUSIC_VOLUME = 0.2;
     private final String MUSIC_FILE_PATH = "res/audio/LevelMusic.mp3";
-	private Media music = new Media(new File(MUSIC_FILE_PATH).toURI().toString());
-	private MediaPlayer mediaPlayer = new MediaPlayer(music);// initialise music player
+    private Media music = new Media(new File(MUSIC_FILE_PATH).toURI().toString());
+    private MediaPlayer mediaPlayer = new MediaPlayer(music);// initialise music player
 
 
     @FXML
@@ -52,16 +53,16 @@ public class InGameController implements Initializable {
 
     @FXML
     private TilePane stopSignPane;
-    
+
     @FXML
     private TilePane poisonPane;
-    
+
     @FXML
     private TilePane sterilisePane;
-    
+
     @FXML
     private TilePane maleGenderChangePane;
-    
+
     @FXML
     private TilePane femaleGenderChangePane;
 
@@ -80,7 +81,7 @@ public class InGameController implements Initializable {
     private Text levelName;
 
     public boolean wrongScreen = false;
-    
+
     @FXML
     private void buttonsVisible(MouseEvent event) {
         mouseX = event.getX();
@@ -100,6 +101,7 @@ public class InGameController implements Initializable {
 
 
     private static ElementType lastItem;
+
     /**
      * switches back to the menu
      */
@@ -126,11 +128,11 @@ public class InGameController implements Initializable {
             upArrow = true;
         }
 
-        if (mouseX > Game.MAP_WIDTH-buttonSize) {
-           rightArrow = true;
+        if (mouseX > Game.MAP_WIDTH - buttonSize) {
+            rightArrow = true;
         }
 
-        if (mouseY > Game.MAP_HEIGHT-buttonSize) {
+        if (mouseY > Game.MAP_HEIGHT - buttonSize) {
             downArrow = true;
         }
 
@@ -149,7 +151,6 @@ public class InGameController implements Initializable {
     }
 
 
-
     public String sideBarAsString() {
         String sideBar = bombPane.getChildren().size() + ",";
         sideBar = sideBar + deathRatPane.getChildren().size() + ",";
@@ -162,7 +163,7 @@ public class InGameController implements Initializable {
         return sideBar;
     }
 
-    private Image  getImage(String fileName) {
+    private Image getImage(String fileName) {
         Image image = ImageLoader.getImage(fileName, 64);
         return image;
     }
@@ -191,14 +192,14 @@ public class InGameController implements Initializable {
 
         double tilewidth = minimap.getWidth() / width;
         double tileheight = minimap.getHeight() / width;
-        double clickX = event.getX( ) / tilewidth;
+        double clickX = event.getX() / tilewidth;
         double clickY = event.getY() / tileheight;
 
         //adjust so centered:
-        clickX = clickX-Game.VISIBLE_TILES / 2.0;
-        clickY = clickY-Game.VISIBLE_TILES / 2.0;
-        Game.gameX =- (int)(clickX * Game.gameSize);
-        Game.gameY =- (int)(clickY * Game.gameSize);
+        clickX = clickX - Game.VISIBLE_TILES / 2.0;
+        clickY = clickY - Game.VISIBLE_TILES / 2.0;
+        Game.gameX = -(int) (clickX * Game.gameSize);
+        Game.gameY = -(int) (clickY * Game.gameSize);
 
     }
 
@@ -212,13 +213,13 @@ public class InGameController implements Initializable {
         } else if (type.equals(ElementType.StopSign)) {
             return "stopSign";
         } else if (type.equals(ElementType.Poison)) {
-        	return "poison";
+            return "poison";
         } else if (type.equals(ElementType.Sterilise)) {
-        	return "sterilise";
+            return "sterilise";
         } else if (type.equals(ElementType.MaleGenderChange)) {
-        	return "maleGenderChange";
+            return "maleGenderChange";
         } else if (type.equals(ElementType.FemaleGenderChange)) {
-        	return "femaleGenderChange";
+            return "femaleGenderChange";
         }
         return "invalid type";
     }
@@ -229,21 +230,21 @@ public class InGameController implements Initializable {
         item.setCache(true);
         item.setOnDragDetected(new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
-                    // Mark the drag as started.
-                    // We do not use the transfer mode (this can be used to indicate different forms
-                    // of drags operations, for example, moving files or copying files).
-                    Dragboard db = item.startDragAndDrop(TransferMode.ANY);
-                    db.setDragView(item.getImage());
+                // Mark the drag as started.
+                // We do not use the transfer mode (this can be used to indicate different forms
+                // of drags operations, for example, moving files or copying files).
+                Dragboard db = item.startDragAndDrop(TransferMode.ANY);
+                db.setDragView(item.getImage());
 
-                    // We have to put some content in the clipboard of the drag event.
-                    // We do not use this, but we could use it to store extra data if we wished.
-                    ClipboardContent content = new ClipboardContent();
-                    content.putString(typeToString(type));
-                    db.setContent(content);
+                // We have to put some content in the clipboard of the drag event.
+                // We do not use this, but we could use it to store extra data if we wished.
+                ClipboardContent content = new ClipboardContent();
+                content.putString(typeToString(type));
+                db.setContent(content);
 
-                    lastItem = type;
-                    // Consume the event. This means we mark it as dealt with.
-                    event.consume();
+                lastItem = type;
+                // Consume the event. This means we mark it as dealt with.
+                event.consume();
             }
         });
 
@@ -266,21 +267,21 @@ public class InGameController implements Initializable {
         while (stopSignPane.getChildren().size() > 0) {
             stopSignPane.getChildren().remove(0);
         }
-        
+
         while (poisonPane.getChildren().size() > 0) {
-        	poisonPane.getChildren().remove(0);
+            poisonPane.getChildren().remove(0);
         }
-        
+
         while (sterilisePane.getChildren().size() > 0) {
-        	sterilisePane.getChildren().remove(0);
+            sterilisePane.getChildren().remove(0);
         }
-        
+
         while (maleGenderChangePane.getChildren().size() > 0) {
-        	maleGenderChangePane.getChildren().remove(0);
+            maleGenderChangePane.getChildren().remove(0);
         }
-        
+
         while (femaleGenderChangePane.getChildren().size() > 0) {
-        	femaleGenderChangePane.getChildren().remove(0);
+            femaleGenderChangePane.getChildren().remove(0);
         }
     }
 
@@ -296,38 +297,38 @@ public class InGameController implements Initializable {
             System.out.println("null item type");
         } else {
             if (itemType.equals(ElementType.Bomb)) {
-                if(bombPane.getChildren().size() < maxItems) {
+                if (bombPane.getChildren().size() < maxItems) {
                     bombPane.getChildren().add(getItem(ElementType.Bomb));
                 }
             } else if (itemType.equals(ElementType.DeathRat)) {
-                if(deathRatPane.getChildren().size() < maxItems) {
+                if (deathRatPane.getChildren().size() < maxItems) {
                     deathRatPane.getChildren().add(getItem(ElementType.DeathRat));
                 }
             } else if (itemType.equals(ElementType.Gas)) {
-                if(gasPane.getChildren().size() < maxItems) {
+                if (gasPane.getChildren().size() < maxItems) {
                     gasPane.getChildren().add(getItem(ElementType.Gas));
                 }
             } else if (itemType.equals(ElementType.StopSign)) {
-                if(stopSignPane.getChildren().size() < maxItems) {
+                if (stopSignPane.getChildren().size() < maxItems) {
                     stopSignPane.getChildren().add(getItem(ElementType.StopSign));
                 }
             } else if (itemType.equals(ElementType.Poison)) {
-            	if(poisonPane.getChildren().size() < maxItems) {
-            		poisonPane.getChildren().add(getItem(ElementType.Poison));
-            	}
+                if (poisonPane.getChildren().size() < maxItems) {
+                    poisonPane.getChildren().add(getItem(ElementType.Poison));
+                }
             } else if (itemType.equals(ElementType.Sterilise)) {
-            	if (sterilisePane.getChildren().size() < maxItems) {
-            		sterilisePane.getChildren().add(getItem(ElementType.Sterilise));
-            	}
-        	} else if (itemType.equals(ElementType.MaleGenderChange)) {
-        		if (maleGenderChangePane.getChildren().size() < maxItems) {
-        			maleGenderChangePane.getChildren().add(getItem(ElementType.MaleGenderChange));
-        		}
-        	} else if (itemType.equals(ElementType.FemaleGenderChange)) {
-        		if (femaleGenderChangePane.getChildren().size() < maxItems) {
-        			femaleGenderChangePane.getChildren().add(getItem(ElementType.FemaleGenderChange));
-        		}
-        	} else {
+                if (sterilisePane.getChildren().size() < maxItems) {
+                    sterilisePane.getChildren().add(getItem(ElementType.Sterilise));
+                }
+            } else if (itemType.equals(ElementType.MaleGenderChange)) {
+                if (maleGenderChangePane.getChildren().size() < maxItems) {
+                    maleGenderChangePane.getChildren().add(getItem(ElementType.MaleGenderChange));
+                }
+            } else if (itemType.equals(ElementType.FemaleGenderChange)) {
+                if (femaleGenderChangePane.getChildren().size() < maxItems) {
+                    femaleGenderChangePane.getChildren().add(getItem(ElementType.FemaleGenderChange));
+                }
+            } else {
                 System.out.println("invalid item type");
 
             }
@@ -336,6 +337,7 @@ public class InGameController implements Initializable {
 
     /**
      * React when an object is dragged onto the canvas.
+     *
      * @param event The drag event itself which contains data about the drag that occurred.
      */
     public void canvasDragDroppedOccured(DragEvent event) {
@@ -349,7 +351,7 @@ public class InGameController implements Initializable {
         x = (x / Game.gameSize);
         y = (y / Game.gameSize);
 
-        if (Game.currentLevel.canAddItem((int)x, (int)y)) {
+        if (Game.currentLevel.canAddItem((int) x, (int) y)) {
             placeItem((int) x, (int) y, lastItem);
             if (lastItem.equals(ElementType.Bomb)) {
                 bombPane.getChildren().remove(0);
@@ -373,76 +375,77 @@ public class InGameController implements Initializable {
 
     /**
      * place an item into the level
+     *
      * @param x
      * @param y
      */
     public static void placeItem(double x, double y, ElementType type) {
 
         if (type.equals(ElementType.Bomb)) {
-         Game.currentLevel.addElement(new Bomb(ElementType.Bomb,  Game.currentLevel,
-        		 (int) x, (int) y, Bomb.BLAST_TIME));
+            Game.currentLevel.addElement(new Bomb(ElementType.Bomb, Game.currentLevel,
+                    (int) x, (int) y, Bomb.BLAST_TIME));
 
         } else if (type.equals(ElementType.DeathRat)) {
-         Game.currentLevel.addElement(new DeathRat(ElementType.DeathRat, Game.currentLevel,
-        		 (int) x, (int) y, DeathRat.MAX_HEALTH, Direction.North));
+            Game.currentLevel.addElement(new DeathRat(ElementType.DeathRat, Game.currentLevel,
+                    (int) x, (int) y, DeathRat.MAX_HEALTH, Direction.North));
 
         } else if (type.equals(ElementType.Gas)) {
             Game.currentLevel.addElement(new Gas(ElementType.Gas, Game.currentLevel,
-            		(int) x, (int) y, Gas.MAX_HEALTH));
+                    (int) x, (int) y, Gas.MAX_HEALTH));
 
         } else if (type.equals(ElementType.StopSign)) {
             Game.currentLevel.addElement(new StopSign(ElementType.StopSign, Game.currentLevel,
-            		(int) x, (int) y, 0));
+                    (int) x, (int) y, 0));
 
-        } else if(type.equals(ElementType.Poison)) {
-        	Game.currentLevel.addElement(new Poison(ElementType.Poison, Game.currentLevel,
-        			(int) x, (int) y, Poison.MAX_HEALTH));
+        } else if (type.equals(ElementType.Poison)) {
+            Game.currentLevel.addElement(new Poison(ElementType.Poison, Game.currentLevel,
+                    (int) x, (int) y, Poison.MAX_HEALTH));
 
-    	} else if(type.equals(ElementType.Sterilise)) {
-    		Game.currentLevel.addElement(new Sterilise(ElementType.Sterilise, Game.currentLevel,
-    				(int) x, (int) y, Sterilise.MAX_HEALTH));
+        } else if (type.equals(ElementType.Sterilise)) {
+            Game.currentLevel.addElement(new Sterilise(ElementType.Sterilise, Game.currentLevel,
+                    (int) x, (int) y, Sterilise.MAX_HEALTH));
 
-    	} else if(type.equals(ElementType.MaleGenderChange)) {
-    		Game.currentLevel.addElement(new MaleChanger(ElementType.MaleGenderChange,
-    				Game.currentLevel, (int) x, (int) y, 1));
+        } else if (type.equals(ElementType.MaleGenderChange)) {
+            Game.currentLevel.addElement(new MaleChanger(ElementType.MaleGenderChange,
+                    Game.currentLevel, (int) x, (int) y, 1));
 
-    	} else if(type.equals(ElementType.FemaleGenderChange)) {
-    		Game.currentLevel.addElement(new FemaleChanger(ElementType.FemaleGenderChange,
-    				Game.currentLevel, (int) x, (int) y, 1));
+        } else if (type.equals(ElementType.FemaleGenderChange)) {
+            Game.currentLevel.addElement(new FemaleChanger(ElementType.FemaleGenderChange,
+                    Game.currentLevel, (int) x, (int) y, 1));
 
-    	} else {
+        } else {
             System.out.println("invalid item type");
         }
     }
-    
+
     /*
      * Play music at stored at MUSIC_FILE_PATH
-     * 
+     *
      */
     public void playMusic() {
-    	mediaPlayer.play();
-    	mediaPlayer.setAutoPlay(true);
-    	mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+        mediaPlayer.play();
+        mediaPlayer.setAutoPlay(true);
+        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
     }
-    
+
     /*
      * stops level music
      */
     public void stopMusic() {
-    	mediaPlayer.stop();
+        mediaPlayer.stop();
     }
 
     /**
-     * code run on initalization of level, 
+     * code run on initalization of level,
      * allows graphics context to be referenced.
-     * 
+     *
      * @param url
      * @param resourceBundle
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-    	mediaPlayer.setVolume(MUSIC_VOLUME); // set volume of music
-    	
+        mediaPlayer.setVolume(MUSIC_VOLUME); // set volume of music
+
         Game.loadRatLives(ratLives.getGraphicsContext2D());
         Game.levelController = this;
         Game.setMiniMap(minimap.getGraphicsContext2D());
@@ -453,12 +456,12 @@ public class InGameController implements Initializable {
         gameCanvas.setOnDragOver(new EventHandler<DragEvent>() {
             public void handle(DragEvent event) {
 
-                    // Mark the drag as acceptable if the source was the draggable image.
-                    // (for example, we don't want to allow the user to drag things or files into our application)
-                    // Mark the drag event as acceptable by the canvas.
-                    event.acceptTransferModes(TransferMode.ANY);
-                    // Consume the event. This means we mark it as dealt with.
-                    event.consume();
+                // Mark the drag as acceptable if the source was the draggable image.
+                // (for example, we don't want to allow the user to drag things or files into our application)
+                // Mark the drag event as acceptable by the canvas.
+                event.acceptTransferModes(TransferMode.ANY);
+                // Consume the event. This means we mark it as dealt with.
+                event.consume();
 
             }
         });
@@ -468,10 +471,10 @@ public class InGameController implements Initializable {
 
             public void handle(DragEvent event) {
 
-                    // We call this method which is where the bulk of the behaviour takes place.
-                    canvasDragDroppedOccured(event);
-                    // Consume the event. This means we mark it as dealt with.
-                    event.consume();
+                // We call this method which is where the bulk of the behaviour takes place.
+                canvasDragDroppedOccured(event);
+                // Consume the event. This means we mark it as dealt with.
+                event.consume();
 
             }
         });

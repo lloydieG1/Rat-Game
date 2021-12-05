@@ -19,17 +19,16 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 /**
- *
  * @author lloyd, William Randle
  */
 public class UserSelectionController implements Initializable {
-	@FXML
-	TextField usernameInput;
-	
-	@FXML
-	TilePane profileVbox;
-	
-	private void addProfileButtons() {
+    @FXML
+    TextField usernameInput;
+
+    @FXML
+    TilePane profileVbox;
+
+    private void addProfileButtons() {
 
         for (int i = 0; i < PlayerProfileManager.getSize(); i++) {
             String buttonText = PlayerProfileManager.getProfileInt(i).getUsername();
@@ -37,7 +36,7 @@ public class UserSelectionController implements Initializable {
             profileButton.setFont(Font.font("monospace", 25));
             profileButton.setOnAction(new EventHandler() {
                 @Override
-                public void handle(Event event){
+                public void handle(Event event) {
                     profileButtonClick(buttonText);//button text is the same as the username
                 }
             });
@@ -45,19 +44,16 @@ public class UserSelectionController implements Initializable {
         }
 
 
+    }
 
 
+    private void profileButtonClick(String username) {
+        Game.currentProfile = PlayerProfileManager.getProfile(username);
+        Game.openMainMenu();
+    }
 
-	}
-
-	
-	private void profileButtonClick(String username) {
-		Game.currentProfile = PlayerProfileManager.getProfile(username);
-		Game.openMainMenu();
-	}
-	
-	@FXML
-	private void createUserClick() {
+    @FXML
+    private void createUserClick() {
         String userName = usernameInput.getText();
 
         //check the validity of the name
@@ -96,11 +92,11 @@ public class UserSelectionController implements Initializable {
     }
 
     private boolean illegalChar(char letter) {
-        if ((int)letter <= 90 && (int)letter >= 65) {
+        if ((int) letter <= 90 && (int) letter >= 65) {
             return false;
-        } else if ((int)letter <= 122 && (int)letter >= 97) {
+        } else if ((int) letter <= 122 && (int) letter >= 97) {
             return false;
-        } else if (((int)letter <= 57 && (int)letter >= 48)) {
+        } else if (((int) letter <= 57 && (int) letter >= 48)) {
             return false;
         } else {
             return true;
@@ -108,7 +104,7 @@ public class UserSelectionController implements Initializable {
     }
 
     private void removeProfiles() {
-        while(profileVbox.getChildren().size() > 0) {
+        while (profileVbox.getChildren().size() > 0) {
             profileVbox.getChildren().remove(0);
         }
     }
@@ -127,9 +123,9 @@ public class UserSelectionController implements Initializable {
             profileButtonClick(userName);
         }
     }
-	
-	@FXML
-	private void removeUserClick() {
+
+    @FXML
+    private void removeUserClick() {
 
         String userName = usernameInput.getText();
 
@@ -143,7 +139,7 @@ public class UserSelectionController implements Initializable {
             Optional<ButtonType> resume = invalidDataAlert.showAndWait();
 
 
-    } else {
+        } else {
             Alert removePlayerConfirm = new Alert(Alert.AlertType.CONFIRMATION);
             removePlayerConfirm.setTitle("Remove player profile");
             removePlayerConfirm.setHeaderText("are you sure you want to remove " + usernameInput.getText() + "?");
@@ -179,17 +175,17 @@ public class UserSelectionController implements Initializable {
         return error;
     }
 
-	
-	/**
-	 * Quits the game.
-	 */
-	@FXML
-	private void quit() {
-	  Game.quit();
-	}
-	  
-	@Override
-	public void initialize(URL url, ResourceBundle resourceBundle) {
-		addProfileButtons();
-	}
+
+    /**
+     * Quits the game.
+     */
+    @FXML
+    private void quit() {
+        Game.quit();
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        addProfileButtons();
+    }
 }

@@ -22,10 +22,10 @@ import java.util.ResourceBundle;
  * @author William Randle, Jack Lennard
  */
 public class MainMenuController implements Initializable {
-			
+
 
     String oldMotd = "";
-	String motd = ""; //text on screen for message of the day
+    String motd = ""; //text on screen for message of the day
 
     private int fontSize = 30;
 
@@ -41,19 +41,18 @@ public class MainMenuController implements Initializable {
 
     @FXML
     Canvas motdCanvas;
-	
-	@FXML
-	Text currentUser; //user that is logged in
+
+    @FXML
+    Text currentUser; //user that is logged in
 
     private Timeline swap;
 
     private double text1Pos; //daily new message position on the screen
     private double text2Pos; //daily old message position on the screen
 
-	public void setProfileText() {
-		currentUser.setText("Current User: " + Game.currentProfile.getUsername());
-	}
-
+    public void setProfileText() {
+        currentUser.setText("Current User: " + Game.currentProfile.getUsername());
+    }
 
 
     private boolean differentEnough(String s1, String s2) {
@@ -63,30 +62,30 @@ public class MainMenuController implements Initializable {
 
         return true;
     }
-	
-	/**	
-	 * Switches to level menu when level button is clicked.
-	 */
-	@FXML
-	private void levelsClick() {
-		Game.openLevelMenu();
-	}
-	
-	/**
-	 * Goes back to user select.
-	 */
-	@FXML
-	private void backClick() {
-		Game.openUserSelection();
-	}
-	
-	/**
-	 * Quits the game.
-	 */
-	@FXML
-	private void quit() {
-		Game.quit();
-	}
+
+    /**
+     * Switches to level menu when level button is clicked.
+     */
+    @FXML
+    private void levelsClick() {
+        Game.openLevelMenu();
+    }
+
+    /**
+     * Goes back to user select.
+     */
+    @FXML
+    private void backClick() {
+        Game.openUserSelection();
+    }
+
+    /**
+     * Quits the game.
+     */
+    @FXML
+    private void quit() {
+        Game.quit();
+    }
 
     public void refreshDailyMessage() {
         System.out.println(motd);
@@ -121,7 +120,7 @@ public class MainMenuController implements Initializable {
             g.strokeRect(0, 0, i * fontSize / LINE_FACTOR, motdCanvas.getHeight());
         }
         for (int i = 0; i < MAX_WRAP; i++) {
-            g.strokeRect(0, 0, motdCanvas.getWidth(), i * fontSize+GRID_OFFSET - text1Pos - motdCanvas.getHeight());
+            g.strokeRect(0, 0, motdCanvas.getWidth(), i * fontSize + GRID_OFFSET - text1Pos - motdCanvas.getHeight());
         }
 
 
@@ -146,7 +145,7 @@ public class MainMenuController implements Initializable {
     private ArrayList<String> motdLines(String motd) {
         motd = motd + " ";
         ArrayList<String> lines = new ArrayList<>();
-        while(motd.length() > TEXT_WRAP) {
+        while (motd.length() > TEXT_WRAP) {
             int pos = TEXT_WRAP;
             while (!(motd.charAt(pos) == ' ' || motd.charAt(pos) == '(' || pos >= MAX_WRAP)) {
                 pos++;
@@ -159,14 +158,14 @@ public class MainMenuController implements Initializable {
     }
 
 
-	/**
-	 * Code run on initalization, displays updated message of the day.
-	 *
-	 * @param url
-	 * @param resourceBundle
-	 */
-	@Override
-	public void initialize(URL url, ResourceBundle resourceBundle) {
+    /**
+     * Code run on initalization, displays updated message of the day.
+     *
+     * @param url
+     * @param resourceBundle
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         int fpstime = scrollSpeed / Game.FPS;
         swap = new Timeline(new KeyFrame(Duration.millis(fpstime), (ActionEvent event) -> {
             renderMessage(motdCanvas.getGraphicsContext2D());
@@ -176,7 +175,7 @@ public class MainMenuController implements Initializable {
         Game.mainMenuController = this;
         refreshDailyMessage();
 
-	}
+    }
 }
 
 
