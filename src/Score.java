@@ -1,8 +1,9 @@
-import java.math.MathContext;
 import java.util.Comparator;
 
 /**
- * Description.
+ * A score holds the number of points someone achieved and the time they did
+ * it in. it allows the use of comparisons for the time and the points so
+ * they can be sorted in the right order.
  *
  * @author William Randle
  */
@@ -13,66 +14,81 @@ public class Score implements Comparable {
 
     private String username;
     private double time;
-    private int score;
+    private int points;
 
 
     /**
-     * Description.
+     * constructs a score
      *
-     * @param username
-     * @param score
+     * @param username String parsed username for the profile which got the time
+     * @param points   int number of points achieved
      */
-    public Score(String username, int score, double time) {
+    public Score(String username, int points, double time) {
         this.username = username;
-        this.score = score;
+        this.points = points;
         this.time = time;
     }
 
-    public int getScore() {
-        return score;
+    /**
+     * @return int the number of points achieved for the score
+     */
+    public int getPoints() {
+        return points;
     }
 
-    public void setScore(int maxLevel) {
-        this.score = score;
-    }
-
+    /**
+     * @return double the time the score took to complete
+     */
     public double getTime() {
         return time;
     }
 
-    public void setTime(int time) {
-        this.time = time;
-    }
 
-
+    /**
+     * gives the username of the profile who completed the score
+     *
+     * @return string profile username of the player who got this score
+     */
     public String getUsername() {
         return username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
+    /**
+     * @return string the data for a score formatted in a presentable way
+     */
     public String toString() {
         int lettersUnderLimit = 10 - username.length();
         String padding = "";
         for (int i = 0; i < lettersUnderLimit; i++) {
             padding = padding + " ";
         }
-        return username + padding + " - " + score + " - in: " + String.format("%.3f", time) + " seconds";
+        return username + padding + " - " + points + " - in: " + String.format("%.3f", time) + " seconds";
     }
 
 
+    /**
+     * @param score the score comparing against
+     * @return the comparison result points, sorting in ascending order of points
+     */
     @Override
-    public int compareTo(Object o) {
-        Score score1 = (Score) o;
-        return score1.getScore() - this.score;
+    public int compareTo(Object score) {
+        Score score1 = (Score) score;
+        return score1.getPoints() - this.points;
     }
 
+    /**
+     * allows comparison for times in descending order
+     */
     public static Comparator<Score> ScoreTimeComparator
 
             = new Comparator<Score>() {
 
+        /**
+         * compares two times together and gives comparison in descending order
+         * @param score1 first score to compare against
+         * @param score2 second score to compare agianst
+         * @return the comparison result time sorting in descending order
+         */
         public int compare(Score score1, Score score2) {
 
 

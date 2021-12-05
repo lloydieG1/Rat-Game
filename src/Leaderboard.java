@@ -4,7 +4,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Scanner;
 
 /**
@@ -60,7 +59,7 @@ public class Leaderboard {
         if (max) {
             isTop10 = true;
         } else {
-            isTop10 = (scores.get(DISPLAY_COUNT - 1).getScore() < newScore.getScore());
+            isTop10 = (scores.get(DISPLAY_COUNT - 1).getPoints() < newScore.getPoints());
         }
 
 
