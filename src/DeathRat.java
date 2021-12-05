@@ -3,28 +3,28 @@ import javafx.scene.image.Image;
 
 
 /**
- * Description.
- * 
- * @author 
+ * This class construct a death rat item and implement all its features.
+ *
+ * @author Adrian
  *
  */
 public class DeathRat extends Element {
-
+	
+  public static final int MAX_HEALTH = 5;
+  private static final int KILLING_AGE = 5;
   private int ratsKilled;
   private Image image;
-  public static final int MAX_HEALTH = 5;
-
-  private final int KILLING_AGE = 5;
+  
   
   /**
    * Description.
    *
-   * @param type
-   * @param level
-   * @param x
-   * @param y
-   * @param health
-   * @param dir
+   * @param type Element type
+   * @param level Level number
+   * @param x X position
+   * @param y Y position
+   * @param health Remaining health
+   * @param dir Initial direction of movement
    */
   public DeathRat(ElementType type, Level level, int x, int y, int health, Direction dir) {
     super(type, level, x, y, Direction.North, health);
@@ -36,7 +36,7 @@ public class DeathRat extends Element {
 
   private void logic() {
     age++;
-    if (age > KILLING_AGE ) {
+    if (age > KILLING_AGE) {
       movement();
       checkRat();
     }      
@@ -66,7 +66,7 @@ public class DeathRat extends Element {
       if(rat.getIsPregnant()) {
           level.removeElement(rat);
           health = health - 1 - rat.getPregnantTime();;
-          Game.score = Game.score + 10 + 10*rat.getPregnantTime();
+          Game.score = Game.score + 10 + 10 * rat.getPregnantTime();
       } else {
           level.removeElement(rat);
           health--;
@@ -84,7 +84,7 @@ public class DeathRat extends Element {
       currentTick = 0;
       logic();
     }
-    if (age > KILLING_AGE ) {
+    if (age > KILLING_AGE) {
       checkRat();
     }
   }

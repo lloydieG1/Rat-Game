@@ -31,10 +31,10 @@ public abstract class Element {
   /**
    * Constructs an element with x,y, level it is in and type.
    *
-   * @param type
-   * @param level
-   * @param x
-   * @param y
+   * @param type Element type
+   * @param level Level number
+   * @param x X position
+   * @param y Y position
    */
   public Element(ElementType type, Level level, int x, int y, Direction dir, int health) {
     this.y = y;
@@ -69,7 +69,7 @@ public abstract class Element {
   }
 
   /**
-   * Get int X position.
+   * Get integer X position.
    *
    * @return X position in the map
    */
@@ -78,7 +78,7 @@ public abstract class Element {
   }
 
   /**
-   * Get int Y position.
+   * Get integer Y position.
    *
    * @return Y position in the map
    */
@@ -94,7 +94,7 @@ public abstract class Element {
   /**
    * Draws the element on the canvas.
    *
-   * @param g
+   * @param g The Graphics
    */
   protected abstract void render(GraphicsContext g);
 
@@ -111,7 +111,7 @@ public abstract class Element {
    * Handles the movement of the rat.
    */
   protected void movement() {
-      hitStopSign = false;
+    hitStopSign = false;
     lastDir = dir;
     x = nextX;
     y = nextY;
@@ -124,15 +124,14 @@ public abstract class Element {
 
     // changes direction until nolonger stuck
     for (int i = 0; i < 4; i++)  {
-        if (isStuck()) {
-            dir = rightDir(dir);
-        }
+      if (isStuck()) {
+        dir = rightDir(dir);
+      }
     }
-    if(isStuck()) {
+    if (isStuck()) {
         checkX = x;
         checkY = y;
     } else {
-
         if (randomNum == 0) {
             checkX = x;
             checkY = y + 1;
@@ -173,11 +172,8 @@ public abstract class Element {
             dir = Direction.West;
         }
     }
-
           this.nextX = checkX;
           this.nextY = checkY;
-
-
   }
 
   /**
@@ -264,24 +260,13 @@ public abstract class Element {
     }
   }
 
-  /**
-   * Smoothly interpolates number frames.
-   *
-   * @param x1
-   * @param x2
-   * @return
-   */
+  
   protected double interpolate(double x1, double x2) {
     return x1 + ((x2 - x1) / tickSpeed) * currentTick;
   }
 
 
-  /**
-   * Smoothly interpolates rotations.
-   * @param x1
-   * @param x2
-   * @return
-   */
+ 
   protected double interpolateDir(double x1, double x2) {
     //makes sure the rat never rotates more than 180 for a turn:
     if (x2 - x1 > 180) {
@@ -302,10 +287,10 @@ public abstract class Element {
   /**
    * Prevents a value being above or below parsed ints.
    *
-   * @param var
-   * @param min
-   * @param max
-   * @return
+   * @param var Value to check
+   * @param min Allowed minimum
+   * @param max Allowed maximum
+   * @return The allowed number within range
    */
   public int minMax(int var, int min, int max) {
     if (var >= max) {
@@ -318,10 +303,10 @@ public abstract class Element {
   }
 
   /**
-   * Gives a number instead of a Direction value.
+   * Change to a number instead of a Direction value.
    *
-   * @param dir
-   * @return
+   * @param dir Direction of element
+   * @return A number equivalent to the direction
    */
   protected double dirAsNum(Direction dir) {
     if (dir == Direction.North) {
@@ -340,22 +325,22 @@ public abstract class Element {
     /**
      * Gets the rendered version of x.
      *
-     * @return
+     * @return The rendered version of X
      */
     protected double renderX() {
-        double x = (int)(this.x * factor + Game.gameX);
-        double nextX = (int)(this.nextX * factor + Game.gameX);
+        double x = (int) (this.x * factor + Game.gameX);
+        double nextX = (int) (this.nextX * factor + Game.gameX);
         return interpolate(x, nextX);
     }
 
-    /**
+   /**
    * Gets the rendered version of y.
    *
-   * @return
+   * @return The rendered version of Y
    */
   protected double renderY() {
-    double y = (int)(this.y * factor + Game.gameY);
-    double nextY = (int)(this.nextY * factor + Game.gameY);
+    double y = (int) (this.y * factor + Game.gameY);
+    double nextY = (int) (this.nextY * factor + Game.gameY);
     return interpolate(y, nextY);
 
   }
@@ -391,17 +376,13 @@ public abstract class Element {
     }
   }
 
-  /**
-   * Description.
-   *
-   * @return
-   */
+ 
   protected String extraInfo() {
     return "";
   }
 
   protected void killRat(Rat rat) {
-      if(rat.getIsPregnant()) {
+      if (rat.getIsPregnant()) {
           level.removeElement(rat);
           Game.score = Game.score + 10 + 10*rat.getPregnantTime();
       } else {
@@ -410,11 +391,7 @@ public abstract class Element {
       }
   }
   
-  /**
-   * Description.
-   *
-   * @return
-   */
+  
   protected String dirAsString() {
     if (dir == Direction.North) {
       return ("north");
@@ -429,11 +406,12 @@ public abstract class Element {
   }
 
   /**
-   * Description.
+   * Organise element properties into 1 string.
    *
-   * @return
+   * @return A String with all needed element properties
    */
   public String asString() {
-    return typeAsString() + "," + health + "," + age + "," + x + "," + y + "," + dirAsString() + extraInfo();
+    return typeAsString() + "," + health + "," + age + "," + x + ","
+                          + y + "," + dirAsString() + extraInfo();
   }
 }

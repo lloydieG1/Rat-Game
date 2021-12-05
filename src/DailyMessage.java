@@ -75,7 +75,7 @@ public class DailyMessage {
 
 
 	/**
-	 * returns the message of the day as a string
+	 * returns the message of the day as a string.
 	 * 
 	 * @param args
 	 * @return String message of the day

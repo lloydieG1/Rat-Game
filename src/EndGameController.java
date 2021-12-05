@@ -39,6 +39,9 @@ public class EndGameController implements Initializable {
   }
 
 
+  /**
+   * Update the leader board.
+   */
   public void updateLeaderboard() {
 
       ArrayList<Score> scores = Leaderboard.getScores(Game.currentLevel.level, sortBy);
@@ -52,7 +55,6 @@ public class EndGameController implements Initializable {
 
           leaderboard.getChildren().add(scoreT);
       }
-
   }
 
     private void removeScores() {
@@ -72,10 +74,9 @@ public class EndGameController implements Initializable {
       if (sortBy == 0) {
           sortByButton.setText("order by time");
       }
-
-        if (sortBy == 1) {
-            sortByButton.setText("order by score");
-        }
+      if (sortBy == 1) {
+          sortByButton.setText("order by score");
+      }
     }
 
   @FXML
