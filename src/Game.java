@@ -80,7 +80,7 @@ public class Game extends Application {
 
 
     /**
-     * open the main menu and loads the other menus.
+     * load the menus for navigation, and launch the user selection menu
      *
      * @param primaryStage stage javafx shows things on
      */
@@ -92,78 +92,94 @@ public class Game extends Application {
         PlayerProfileManager.initializeProfileArray();
 
         //daily message refreshing
-        dailyMessageLoop = new Timeline(new KeyFrame(Duration.millis(30000), (ActionEvent event) -> {
-            mainMenuController.refreshDailyMessage();
-        }));
-        dailyMessageLoop.setCycleCount(Timeline.INDEFINITE);
+        loadDailyMessage();
 
-        userSelection = loadScene("userSelection.fxml");
-        mainMenu = loadScene("mainMenu.fxml");
-        levelMenu = loadScene("levelMenu.fxml");
-        levelLayout = loadScene("levelLayout.fxml");
-        endGame = loadScene("EndGameScreen.fxml");
-
-        //  primaryStage.setResizable(false);
+        loadMenus();
 
         openUserSelection();
         primaryStage.setTitle("Rats - by team 19");
         primaryStage.getIcons().add(ImageLoader.icon);
         primaryStage.show();
 
-        int fpstime = 1000 / FPS;
+        loadGameLoop();
 
-        //game loop:
+
+    }
+
+    /**
+     * loads the game loop which handles all the logic and rendering of the game
+     */
+    private void loadGameLoop() {
+        int fpstime = 1000 / FPS;
         gameLoop = new Timeline(new KeyFrame(Duration.millis(fpstime), (ActionEvent event) -> {
             tick();
         }));
         gameLoop.setCycleCount(Timeline.INDEFINITE);
+    }
+
+    /**
+     * loads the daily message loop which allows scrolling of new daily messages
+     */
+    private void loadDailyMessage() {
+        dailyMessageLoop = new Timeline(new KeyFrame(Duration.millis(30000), (ActionEvent event) -> {
+            mainMenuController.refreshDailyMessage();
+        }));
+        dailyMessageLoop.setCycleCount(Timeline.INDEFINITE);
+    }
+
+    /**
+     * load the menus in the menu system
+     */
+    private void loadMenus() {
+        userSelection = loadScene("userSelection.fxml");
+        mainMenu = loadScene("mainMenu.fxml");
+        levelMenu = loadScene("levelMenu.fxml");
+        levelLayout = loadScene("levelLayout.fxml");
+        endGame = loadScene("EndGameScreen.fxml");
 
         levelLayout.addEventFilter(KeyEvent.KEY_PRESSED, event -> keyDown(event));
         levelLayout.addEventFilter(KeyEvent.KEY_RELEASED, event -> keyUp(event));
         levelLayout.addEventFilter(ScrollEvent.SCROLL, event -> scrollKeyEvent(event));
-
     }
 
 
     /**
-     * scrolls the map with arrow keys
+     * navigates the map with arrow keys
      *
-     * @param event
+     * @param event KeyEvent key press which could be arrow keys
      */
     public void keyDown(KeyEvent event) {
 
-        // We change the behaviour depending on the actual key that was pressed.
-
         switch (event.getCode()) {
             case RIGHT:
-                // Right key was pressed. So move the player right by one cell.
+
                 rightArrow = true;
                 break;
             case LEFT:
-                // Right key was pressed. So move the player right by one cell.
+
                 leftArrow = true;
                 break;
             case UP:
-                // Right key was pressed. So move the player right by one cell.
+
                 upArrow = true;
                 break;
             case DOWN:
-                // Right key was pressed. So move the player right by one cell.
+
                 downArrow = true;
                 break;
             default:
                 // Do nothing for all other keys.
                 break;
         }
-        // Consume the event. This means we mark it as dealt with. This stops other GUI nodes (buttons etc) responding to it.
+
         event.consume();
     }
 
 
     /**
-     * scrolls the map with arrow keys
+     * stops navigating when the arrow key is released
      *
-     * @param event
+     * @param event KeyEvent key press which could be arrow keys
      */
     public void keyUp(KeyEvent event) {
 
@@ -195,6 +211,9 @@ public class Game extends Application {
         event.consume();
     }
 
+    /**
+     * navigates the map based on which arrow keys are currently pressed
+     */
     private static void moveMap() {
         double scroll = (Game.gameSize * 5) / FPS;
         if (rightArrow || levelController.rightArrow) {
@@ -212,9 +231,9 @@ public class Game extends Application {
     }
 
     /**
-     * scrolls the size of the map on the screen
+     * allows zooming in and out of the map
      *
-     * @param event
+     * @param event ScrollEvent the scroll the user did
      */
     public void scrollKeyEvent(ScrollEvent event) {
         // We change the behaviour depending on the actual key that was pressed.
@@ -254,12 +273,17 @@ public class Game extends Application {
         event.consume();
     }
 
+    /**
+     * updates the score text in the level
+     */
     public static void updateScore() {
         levelController.score.setText(Integer.toString(score));
     }
 
+    /**
+     * prevents the user navigating outside the map
+     */
     private static void clampMap() {
-        int zoomBefore = (int) gameSize;
 
         gameSize = minMax(gameSize, currentZoomMin, ZOOM_MAX);
         visibleTiles = (gameGraphics.getCanvas().getWidth() / gameSize);
@@ -274,6 +298,9 @@ public class Game extends Application {
 
     }
 
+    /**
+     * prevents the user from zooming far enough to see further than intented
+     */
     private static void clampMapZoom() {
         double fractionVisible = 0.5;
         //prevent the map extending too far
@@ -289,13 +316,17 @@ public class Game extends Application {
     }
 
 
+    /**
+     * gives the sidebar as a string so it can be saved for replay later
+     * @return String the number of each item in the side bar
+     */
     public static String sidebarAsString() {
         return levelController.sideBarAsString();
     }
 
 
     /**
-     * runs the logic of the game
+     * runs the logic of the game and renders the game
      */
     private static void tick() {
         moveMap();
@@ -311,6 +342,10 @@ public class Game extends Application {
         clampMap();
     }
 
+    /**
+     * draws the buttons which the user can use to navigate the map
+     * @param g GraphicsContext the graphics of the game
+     */
     private static void drawButtons(GraphicsContext g) {
 
         int buttonsize = levelController.buttonSize;
@@ -321,6 +356,14 @@ public class Game extends Application {
 
     }
 
+    /**
+     * draws a button the user could use to navigate the map
+     * @param g GraphicsContext the graphics of the game
+     * @param x int x position of hte upper left corner
+     * @param y int y position of the upper left corner
+     * @param width int width of the button
+     * @param height int height of the button
+     */
     private static void drawButton(GraphicsContext g, int x, int y, int width, int height) {
         if (intersect((int) levelController.mouseX, (int) levelController.mouseY, x, y, width, height)) {
             g.setFill(Color.color(0.2, 0.2, 0.2, 0.1));
@@ -349,9 +392,20 @@ public class Game extends Application {
 
     }
 
-    private static boolean intersect(int i, int j, int x, int y, int x2, int y2) {
-        if (i > x && i < x2) {
-            if (j > y && j < y2) {
+    /**
+     * returns true if a point (i, j) intersects the parsed dimensions
+     * of a rectangle
+     * @param x int x position of the point
+     * @param y int y position of the point
+     * @param x1 int x position of the rectangle
+     * @param y1 int y position of the rectangle
+     * @param width int width of the rectangle
+     * @param height int width of the rectangle
+     * @return boolean if the parsed point intersects with the rectangle
+     */
+    private static boolean intersect(int x, int y, int x1, int y1, int width, int height) {
+        if (x > x1 && x < width) {
+            if (y > y1 && y < height) {
                 return true;
             }
         }
@@ -381,6 +435,9 @@ public class Game extends Application {
         primaryStage.setScene(endGame);
     }
 
+    /**
+     * stops all the arrow keys from being active
+     */
     public static void resetArrowKeys() {
         rightArrow = false;
         leftArrow = false;

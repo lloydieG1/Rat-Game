@@ -34,22 +34,22 @@ GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG;
 /
 35
 /
-rat,1,33,25,8,east,true,false,0,0 rat,1,29,23,10,west,false,false,0,3 rat,1,33,14,15,east,true,false,0,0 rat,1,33,13,1,east,true,false,2,0 rat,1,33,18,5,south,false,false,0,0 rat,1,30,13,1,west,false,false,0,0 rat,1,33,25,12,south,true,false,0,0 rat,1,33,28,2,east,false,false,0,0 rat,1,33,27,4,south,true,false,0,0 rat,3,25,24,26,east,true,false,0,0 rat,3,20,23,24,south,false,false,0,0 rat,3,21,23,26,north,false,false,0,0 rat,3,19,27,3,east,true,false,0,0 rat,3,17,13,1,west,false,false,1,4 rat,3,15,6,5,west,false,false,0,0 rat,3,14,25,22,south,true,false,0,0 rat,3,12,25,24,south,true,false,0,0 rat,3,10,24,26,west,true,false,0,0 rat,3,2,25,9,north,true,false,0,0 
+rat,1,4,23,27,north,true,false,0,0 rat,1,4,23,27,north,false,false,0,0 rat,1,4,7,27,north,true,false,0,0 rat,1,4,13,13,east,true,false,0,0 rat,1,4,9,9,north,false,false,0,0 rat,1,4,10,6,east,false,false,0,0 rat,1,4,12,4,south,true,false,0,0 rat,1,4,4,3,east,false,false,0,0 rat,1,4,4,6,west,true,false,0,0 
 /
 180
 /
-29
+2
 /
-bomb,15,45,12 gas,20,45,17 sterilize,30,45,27 maleGenderChange,45,45,12 femaleGenderChange,45,45,12 stopSign,15,45,12 deathRat,90,45,57 poison,45,45,12 
+bomb,15,18,4 gas,20,18,4 sterilize,30,18,4 maleGenderChange,45,18,4 femaleGenderChange,45,18,4 stopSign,15,18,4 deathRat,90,18,4 poison,45,18,4 
 /
 0
 /
-3,0,2,3,1,1,1,1,
+0,0,0,0,0,0,0,0,
 /
-100.0
+59.0
 /
--1435.0
+0.0
 /
--180.0
+0.0
 /
-29.890000000001873
+2.2199999999999966
