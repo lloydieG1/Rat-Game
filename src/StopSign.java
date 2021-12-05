@@ -55,9 +55,8 @@ public class StopSign extends Element {
   }
 
   public void blocksUp() {
-
     health++;
-      changeSkin();
+    changeSkin();
   }
 
   private void changeSkin() {
@@ -67,11 +66,11 @@ public class StopSign extends Element {
           image = ImageLoader.stopSign1;
       } else if (health == 2) {
         image = ImageLoader.stopSign2;
-    } else if (health == 3) {
+      } else if (health == 3) {
         image = ImageLoader.stopSign3;
-    } else if (health == 4) {
+      } else if (health == 4) {
         image = ImageLoader.stopSign4;
-    }
+      }
   }
               
 

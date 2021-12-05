@@ -29,14 +29,14 @@ public class MainMenuController implements Initializable {
 
     private int fontSize = 30;
 
-    private final int MAX_WRAP = 75;
-    private final int TEXT_WRAP = 65;
+    private static final int MAX_WRAP = 75;
+    private static final int TEXT_WRAP = 65;
 
-    private final int GRID_OFFSET = 8;
+    private static final int GRID_OFFSET = 8;
 
-    private final double LINE_FACTOR = 5.0/3;
+    private static final double LINE_FACTOR = 5.0 / 3;
 
-    private final int scrollSpeed = 1500;
+    private static final int scrollSpeed = 1500;
 
 
     @FXML
@@ -109,24 +109,24 @@ public class MainMenuController implements Initializable {
     private void renderMessage(GraphicsContext g) {
 
 
-        double moveHeight = (motdCanvas.getHeight()/Game.FPS);
-        text1Pos-= moveHeight;
-        text2Pos-= moveHeight;
+        double moveHeight = (motdCanvas.getHeight() / Game.FPS);
+        text1Pos -= moveHeight;
+        text2Pos -= moveHeight;
 
-        g.setFill(Color.color(0.2,0.2,0.2));
-        g.fillRect(0,0, motdCanvas.getWidth(), motdCanvas.getHeight());
+        g.setFill(Color.color(0.2, 0.2, 0.2));
+        g.fillRect(0, 0, motdCanvas.getWidth(), motdCanvas.getHeight());
 
-        g.setStroke(Color.color(0.6,0.6,0.8, 0.2));
+        g.setStroke(Color.color(0.6, 0.6, 0.8, 0.2));
         for (int i = 0; i < MAX_WRAP; i++) {
-            g.strokeRect(0,0, i*fontSize/LINE_FACTOR, motdCanvas.getHeight());
+            g.strokeRect(0, 0, i * fontSize / LINE_FACTOR, motdCanvas.getHeight());
         }
         for (int i = 0; i < MAX_WRAP; i++) {
-            g.strokeRect(0,0, motdCanvas.getWidth(), i*fontSize+GRID_OFFSET-text1Pos - motdCanvas.getHeight());
+            g.strokeRect(0, 0, motdCanvas.getWidth(), i * fontSize+GRID_OFFSET - text1Pos - motdCanvas.getHeight());
         }
 
 
-        g.setFill(Color.color(1,0.8,0));
-        g.setFont(Font.font("monospace", FontWeight.NORMAL,fontSize));
+        g.setFill(Color.color(1, 0.8, 0));
+        g.setFont(Font.font("monospace", FontWeight.NORMAL, fontSize));
         renderMotd(motdLines(oldMotd), text1Pos, g);
         renderMotd(motdLines(motd), text2Pos, g);
     }
@@ -139,19 +139,19 @@ public class MainMenuController implements Initializable {
 
     private void renderMotd(ArrayList<String> lines, double position, GraphicsContext g) {
         for (int i = 0; i < lines.size(); i++) {
-            g.fillText(lines.get(i), 0,fontSize+i*fontSize - position);
+            g.fillText(lines.get(i), 0, fontSize + i * fontSize - position);
         }
     }
 
     private ArrayList<String> motdLines(String motd) {
         motd = motd + " ";
         ArrayList<String> lines = new ArrayList<>();
-        while(motd.length()> TEXT_WRAP) {
+        while(motd.length() > TEXT_WRAP) {
             int pos = TEXT_WRAP;
             while (!(motd.charAt(pos) == ' ' || motd.charAt(pos) == '(' || pos >= MAX_WRAP)) {
                 pos++;
             }
-            lines.add(motd.substring(0,pos));
+            lines.add(motd.substring(0, pos));
             motd = motd.substring(pos);
         }
         lines.add(motd);
@@ -167,7 +167,7 @@ public class MainMenuController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
-        int fpstime = scrollSpeed/Game.FPS;
+        int fpstime = scrollSpeed / Game.FPS;
         swap = new Timeline(new KeyFrame(Duration.millis(fpstime), (ActionEvent event) -> {
             renderMessage(motdCanvas.getGraphicsContext2D());
         }));

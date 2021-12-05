@@ -186,17 +186,20 @@ public class Level {
   private void checkGameCondition() {
     int rats = ratCount();
     if (rats > maxRats) {
-        Game.endGame("You lost  with a score of: \n" + bonusScore() + "\nin:\n" + String.format("%.3f", time) + " seconds");
+        Game.endGame("You lost  with a score of: \n" + bonusScore() + "\nin:\n"
+                     + String.format("%.3f", time) + " seconds");
     } else if (rats == 0) {
-        Leaderboard.addScore(level,new Score(Game.currentProfile.getUsername(), bonusScore(), time), 0);
+        Leaderboard.addScore(level, new Score(Game.currentProfile.getUsername(),
+        		             bonusScore(), time), 0);
 
-        Game.endGame("You won with a score of: \n" + bonusScore() + "\nin:\n" + String.format("%.3f", time) + " seconds");
+        Game.endGame("You won with a score of: \n" + bonusScore() + "\nin:\n"
+                     + String.format("%.3f", time) + " seconds");
         PlayerProfileManager.setMaxLevel(Game.currentProfile.getUsername(), level);
-
 
     }
     if (timer > timeLimit) {
-        Game.endGame("You lost with a score of: \n" + bonusScore() + "\nin:\n" + String.format("%.3f", time) + " seconds");
+        Game.endGame("You lost with a score of: \n" + bonusScore() + "\nin:\n"
+                     + String.format("%.3f", time) + " seconds");
     }
   }
 
@@ -210,7 +213,7 @@ public class Level {
   }
 
   public boolean canAddItem(int x, int y) {
-      if (getTile(x,y).getType().equals(TileType.Path)) {
+      if (getTile(x, y).getType().equals(TileType.Path)) {
 
           return true;
       }
@@ -236,7 +239,7 @@ public class Level {
    */
   public void addMenuItem(MenuItem menuItem) {
     menuItems.add(menuItem);
-    }
+  }
     
   /**
    * Description.
@@ -268,7 +271,7 @@ public class Level {
    * buffered elements to the map.
    */
   public void tick() {
-      time = time + 1.0/Game.FPS;
+    time = time + 1.0 / Game.FPS;
     currentTick++;
     if (currentTick >= Game.FPS) {
       currentTick = 0;
@@ -279,7 +282,7 @@ public class Level {
       element.size = Game.gameSize;
       element.tick();
     }
-      elements.addAll(nextElements);
+    elements.addAll(nextElements);
     nextElements = new ArrayList<>();
     tickMenuItems();
     checkGameCondition();
@@ -304,20 +307,19 @@ public class Level {
       Game.addItem(ElementType.StopSign);
     }
 
-      for (int i = 0; i < sideBar[4]; i++) {
-          Game.addItem(ElementType.Sterilise);
-      }
-      for (int i = 0; i < sideBar[5]; i++) {
-          Game.addItem(ElementType.MaleGenderChange);
-      }
+    for (int i = 0; i < sideBar[4]; i++) {
+      Game.addItem(ElementType.Sterilise);
+    }
+    for (int i = 0; i < sideBar[5]; i++) {
+      Game.addItem(ElementType.MaleGenderChange);
+    }
 
-      for (int i = 0; i < sideBar[6]; i++) {
-          Game.addItem(ElementType.FemaleGenderChange);
-      }
-
-      for (int i = 0; i < sideBar[7]; i++) {
-          Game.addItem(ElementType.Poison);
-      }
+    for (int i = 0; i < sideBar[6]; i++) {
+      Game.addItem(ElementType.FemaleGenderChange);
+    }
+    for (int i = 0; i < sideBar[7]; i++) {
+      Game.addItem(ElementType.Poison);
+    }
   }
 
 
@@ -361,9 +363,7 @@ public class Level {
   public void renderDetails(GraphicsContext g) {
       for (int i = 0; i < tiles.length; i++) {
           for (int j = 0; j < tiles[i].length; j++) {
-
                   tiles[i][j].renderDetails(g);
-
           }
       }
   }
@@ -427,10 +427,10 @@ public class Level {
    * Description.
    */
   public void deleteSave() {
-    File f = new File(saveFolder +Game.currentProfile.getUsername() +level + ".txt");
+    File f = new File(saveFolder + Game.currentProfile.getUsername() + level + ".txt");
     if (f.exists()) {
       try {
-        Files.delete(Paths.get(saveFolder + Game.currentProfile.getUsername() +level + ".txt"));
+        Files.delete(Paths.get(saveFolder + Game.currentProfile.getUsername() + level + ".txt"));
         System.out.println("deleting save");
       } catch (IOException e) {
         e.printStackTrace();
@@ -495,13 +495,13 @@ public class Level {
     file = file + Game.sidebarAsString();
     file = file + "\n" + lines;
     file = file +  Game.gameSize;
-      file = file + "\n" + lines;
-      file = file +  Game.gameX;
-      file = file + "\n" + lines;
-      file = file +  Game.gameY;
-      file = file + "\n" + lines;
+    file = file + "\n" + lines;
+    file = file +  Game.gameX;
+    file = file + "\n" + lines;
+    file = file +  Game.gameY;
+    file = file + "\n" + lines;
 
-      file = file +  time;
+    file = file +  time;
     try {
       File levelFile = new File(saveFolder + Game.currentProfile.getUsername() + level + ".txt");
       if (levelFile.createNewFile()) {
@@ -514,7 +514,8 @@ public class Level {
       e.printStackTrace();
     }
     try {
-      FileWriter myWriter = new FileWriter(saveFolder + Game.currentProfile.getUsername() + level + ".txt");
+      FileWriter myWriter = new FileWriter(saveFolder + Game.currentProfile.getUsername()
+                                           + level + ".txt");
       myWriter.write(file);
       myWriter.close();
       System.out.println("Successfully saved");

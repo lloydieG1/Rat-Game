@@ -22,7 +22,7 @@ import java.util.ResourceBundle;
  */
 public class LevelsMenuController implements Initializable {
 
-    private static int DISPLAY_COUNT = 10;
+  private static final int DISPLAY_COUNT = 10;
 
   @FXML
   TilePane levelPane;
