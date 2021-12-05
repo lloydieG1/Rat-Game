@@ -333,10 +333,10 @@ public abstract class Element {
 
 
   /**
-   * Change to a number instead of a Direction value.
+   * gives a number of degrees from parsed Direction.
    *
    * @param dir Direction of element
-   * @return A number equivalent to the direction
+   * @return A number of degrees equivalent to the direction
    */
   protected double dirAsNum(Direction dir) {
     if (dir == Direction.North) {
@@ -353,7 +353,7 @@ public abstract class Element {
 
 
     /**
-     * Gets the rendered version of x.
+     * gives the x position for where the element should be rendered on screen
      *
      * @return The rendered version of X
      */
@@ -364,7 +364,7 @@ public abstract class Element {
     }
 
    /**
-   * Gets the rendered version of y.
+   * gives the y position for where the element should be rendered on screen
    *
    * @return The rendered version of Y
    */
@@ -376,11 +376,19 @@ public abstract class Element {
   }
 
 
- 
+    /**
+     * returns any extra information for an element. by default gives nothing,
+     * and should be overridden when an element requires extra info when saving.
+     * @return extra information for a given element
+     */
   protected String extraInfo() {
     return "";
   }
 
+    /**
+     * kills a parsed rat, increasing the score by the correct amount
+     * @param rat
+     */
   protected void killRat(Rat rat) {
       if (rat.getIsPregnant()) {
           level.removeElement(rat);
@@ -390,8 +398,13 @@ public abstract class Element {
           Game.score = Game.score + 10;
       }
   }
-  
-  
+
+
+    /**
+     * gives the String version of a Direction type.
+     * @param dir Direction to get the string of
+     * @return direction as a string
+     */
   protected String dirAsString(Direction dir) {
     if (dir == Direction.North) {
       return ("north");
