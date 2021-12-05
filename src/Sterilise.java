@@ -5,7 +5,6 @@ import javafx.scene.image.Image;
 
 /**
  * Class used for construction and behaviours of Steriliser elements.
- *
  * @author William Randle
  * @author Jack Lennard,
  */
@@ -21,11 +20,11 @@ public class Sterilise extends Element {
     /**
      * Description.
      *
-     * @param type
-     * @param level
-     * @param x
-     * @param y
-     * @param health
+     * @param type   Element type.
+     * @param level  Level number.
+     * @param x      The x coordinate position.
+     * @param y      The y coordinate position.
+     * @param health Remaining health.
      */
     public Sterilise(ElementType type, Level level, int x, int y, int health) {
         super(type, level, x, y, Direction.North, health);
@@ -58,13 +57,15 @@ public class Sterilise extends Element {
      */
     private void logic() {
 
-
         if (health <= 0) {
             level.removeElement(this);
         }
         health--;
     }
 
+    /**
+     * Sterilises any rats within a square extending 1 tile out.
+     */
     public void sterilise() {
         int radius = 1;
         for (int x = this.x - radius; x <= this.x + radius; x++) {
@@ -86,7 +87,7 @@ public class Sterilise extends Element {
     /**
      * Renders a Sterilise sign.
      *
-     * @param g graphics context
+     * @param g GraphicsContext.
      */
     protected void render(GraphicsContext g) {
         double x = renderX();

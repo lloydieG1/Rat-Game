@@ -55,7 +55,7 @@ public class FemaleChanger extends Element {
     }
 
     /**
-     * Change the sex of a rat if Female Gender Item shares a tile with a male rat. 
+     * Change rat to female if rat was male.
      */
     private void changeSex() {
         for (Element element : level.getElements(x, y)) {
@@ -72,7 +72,7 @@ public class FemaleChanger extends Element {
 
     /**
      * Renders a Male Changer sign.
-     * @param g graphics context
+     * @param g GraphicsContext.
      */
     @Override
     protected void render(GraphicsContext g) {

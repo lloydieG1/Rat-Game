@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
+ * This class is responsible managing storage and operations on the Profiles held in a static 
+ * PlayerProfile array as well as each profiles corresponding player profile file. 
+ * 
  * @author Lloyd
  */
 public class PlayerProfileManager {
@@ -177,9 +180,9 @@ public class PlayerProfileManager {
     }
 
     /**
-     * Description.
+     * Removes a profile with from stored files and profile array
      *
-     * @param username
+     * @param username username of profile
      */
     public static void removeProfile(String username) {
         String filePath = usernameToPath(username);
@@ -200,6 +203,11 @@ public class PlayerProfileManager {
         Leaderboard.removeScores(username);
     }
 
+    /*
+     * removes all stored save files that are linked to a given profile
+     * 
+     * @param username username of profile
+     */
     private static void removeSaves(String username) {
         File directory = new File("res\\maps\\save\\");
 
@@ -216,7 +224,12 @@ public class PlayerProfileManager {
         }
     }
 
-
+    /*
+     * reads all lines from profile file as they are in the file (includes newlines)
+     * 
+     * @param username username of profile
+     * @return parsed string from a profile file
+     */
     private static String readProfileFile(String username) {
         Scanner in = openProfileFile(username);
         String fileText = "";
@@ -227,6 +240,12 @@ public class PlayerProfileManager {
         return fileText;
     }
 
+    /*
+     * opens a scanner on a profile file named 'username' 
+     * 
+     * @param username username of profile
+     * @return scanner pointing to profile file
+     */
     private static Scanner openProfileFile(String username) {
         File inputFile = new File(usernameToPath(username));
         Scanner in = null;
@@ -240,6 +259,12 @@ public class PlayerProfileManager {
         return in;
     }
 
+    /*
+     * Returns a profile object with 'username' if it exitst
+     * 
+     * @param username username of profile
+     * @return profile with name username if it exists, else null
+     */
     public static PlayerProfile getProfile(String username) {
         try {
             PlayerProfile profile = null;
@@ -256,11 +281,23 @@ public class PlayerProfileManager {
         }
     }
 
+    /*
+     * takes a username and returns the path that profile will be stored at
+     * 
+     * @param username username of profile
+     * @return path of profile file
+     */
     private static String usernameToPath(String username) {
         String filePath = PROFILE_FILE_PATH + username + FILE_EXTENSION;
         return filePath;
     }
 
+    /*
+     * checks if a profile with a given username exists
+     * 
+     * @param username username of profile
+     * @return true if profile with user exists
+     */
     public static boolean userExists(String username) {
         File user = new File(usernameToPath(username));
         return user.exists();
