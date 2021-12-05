@@ -6,7 +6,7 @@ import javafx.scene.paint.Color;
 /**
  * Class used for construction and behaviours of the Gas element.
  *
- * @author Yazan
+ * @author Yazan, William Randle
  */
 public class Gas extends Element {
   private boolean damage;
