@@ -201,7 +201,7 @@ public class Game extends Application {
                 downArrow = false;
                 break;
             default:
-          
+
                 break;
         }
 
