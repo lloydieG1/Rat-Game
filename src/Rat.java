@@ -54,25 +54,36 @@ public class Rat extends Element {
     }
 
     /**
-     * 
-     * @return Sterility.
+     * Check Sterility.
+     * @return Boolean for Sterility.
      */
     public boolean isSterile() {
         return isSterile;
     }
-
+    /**
+     * Set mating time.
+     * @param timeLeftInMating Remaining Time.
+     */
     public void setMatingTime(int timeLeftInMating) {
         this.timeLeftInMating = timeLeftInMating;
     }
-
+    /**
+     * 
+     * @param pregnantTime
+     */
     public void setPregnantTime(int pregnantTime) {
         this.timeLeftPregnant = pregnantTime;
     }
-
+    /**
+     * 
+     * @return
+     */
     public int getPregnantTime() {
         return timeLeftPregnant;
     }
-
+    /**
+     * 
+     */
     protected void tick() {
         if (isFinishedMating()) {
             if (!getIsChild()) {
@@ -136,7 +147,6 @@ public class Rat extends Element {
 
     /**
      * Keep track how much time elapsed on mating.
-     *
      * @return Whether mating time is finished
      */
     public boolean isFinishedMating() {
@@ -157,31 +167,50 @@ public class Rat extends Element {
             }
         }
     }
-
+    /**
+     * 
+     * @return
+     */
     public boolean getIsMale() {
         return isMale;
     }
-
+    /**
+     * 
+     * @param isMale
+     */
     public void setIsMale(boolean isMale) {
         this.isMale = isMale;
     }
-
+    /**
+     * 
+     * @return
+     */
     public Direction getDirection() {
         return dir;
     }
-
+    /**
+     * 
+     * @return
+     */
     public boolean getIsPregnant() {
         return isPregnant();
     }
-
+    /**
+     * 
+     */
     public void makeSterile() {
         this.isSterile = true;
     }
-
+    /**
+     * 
+     * @return
+     */
     private boolean isPregnant() {
         return timeLeftPregnant > 0;
     }
-
+    /**
+     * 
+     */
     private void pregnant() {
         timeLeftPregnant--;
         if (timeLeftPregnant < 0) {
@@ -197,7 +226,10 @@ public class Rat extends Element {
             level.addElementLive(rat);
         }
     }
-
+    /**
+     * 
+     * @return
+     */
     public boolean canBreed() {
         if (isMale) {
             if (!getIsChild()) {
@@ -210,7 +242,9 @@ public class Rat extends Element {
         }
         return false;
     }
-
+    /**
+     * 
+     */
     private void breed() {
         if (!isPregnant()) {
             for (Element element : level.getElements(x, y)) {
@@ -231,8 +265,7 @@ public class Rat extends Element {
     }
 
     /**
-     * renders a rat.
-     *
+     * Renders a rat.
      * @param g graphics context
      */
     protected void render(GraphicsContext g) {
