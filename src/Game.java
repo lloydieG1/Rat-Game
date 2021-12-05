@@ -444,11 +444,8 @@ public class Game extends Application {
         upArrow = false;
         downArrow = false;
 
-        levelController.rightArrow = false;
-        levelController.leftArrow = false;
-        levelController.upArrow = false;
-        levelController.downArrow = false;
-        levelController.wrongScreen = false;
+        levelController.resetArrowKeys();
+
     }
 
     /**
@@ -474,13 +471,14 @@ public class Game extends Application {
      * pauses the gameLoop
      */
     public static void pauseGame() {
+
         gameLoop.pause();
     }
 
     /**
-     * loads the canvas to be drawn to in levels
+     * loads the graphics
      *
-     * @param graphics game graphics
+     * @param graphics GraphicsContext game graphics
      */
     public static void loadCanvas(GraphicsContext graphics) {
         gameGraphics = graphics;
@@ -488,9 +486,9 @@ public class Game extends Application {
     }
 
     /**
-     * loads the canvas to be drawn to in levels
+     * loads the graphics for the ratlives indicator
      *
-     * @param graphics game graphics
+     * @param graphics GraphicsContext ratlives graphics
      */
     public static void loadRatLives(GraphicsContext graphics) {
         ratLives = graphics;
@@ -536,15 +534,27 @@ public class Game extends Application {
     }
 
 
+    /**
+     * adds an item to the sidebar in the level controller
+     * @param itemType ElementType the type of item which is being added
+     */
     public static void addItem(ElementType itemType) {
         levelController.addItem(itemType);
     }
 
+    /**
+     * laods the graphics for the minimap canvas
+     * @param g GraphicsContext the graphics for the minimap
+     */
     public static void setMiniMap(GraphicsContext g) {
         minimap = g;
     }
 
 
+    /**
+     * ends the game with a parsed message for the user.
+     * @param message String message for the user
+     */
     public static void endGame(String message) {
         levelController.wrongScreen = true;
         pauseGame();
@@ -561,6 +571,10 @@ public class Game extends Application {
     }
 
 
+    /**
+     * launches the application
+     * @param args
+     */
     public static void main(String[] args) {
         launch(args);
     }

@@ -82,6 +82,18 @@ public class InGameController implements Initializable {
 
     public boolean wrongScreen = false;
 
+    private static ElementType lastItem;
+
+    /**
+     * stops all the arrow keys from being active
+     */
+    public void resetArrowKeys() {
+        rightArrow = false;
+        leftArrow = false;
+        upArrow = false;
+        downArrow = false;
+    }
+
     @FXML
     private void buttonsVisible(MouseEvent event) {
         mouseX = event.getX();
@@ -100,7 +112,6 @@ public class InGameController implements Initializable {
     }
 
 
-    private static ElementType lastItem;
 
     /**
      * switches back to the menu

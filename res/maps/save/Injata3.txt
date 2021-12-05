@@ -34,22 +34,22 @@ GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG;
 /
 35
 /
-rat,1,33,25,8,east,true,false,0,0 rat,1,29,23,10,west,false,false,0,3 rat,1,33,14,15,east,true,false,0,0 rat,1,33,13,1,east,true,false,2,0 rat,1,33,18,5,south,false,false,0,0 rat,1,30,13,1,west,false,false,0,0 rat,1,33,25,12,south,true,false,0,0 rat,1,33,28,2,east,false,false,0,0 rat,1,33,27,4,south,true,false,0,0 rat,3,25,24,26,east,true,false,0,0 rat,3,20,23,24,south,false,false,0,0 rat,3,21,23,26,north,false,false,0,0 rat,3,19,27,3,east,true,false,0,0 rat,3,17,13,1,west,false,false,1,4 rat,3,15,6,5,west,false,false,0,0 rat,3,14,25,22,south,true,false,0,0 rat,3,12,25,24,south,true,false,0,0 rat,3,10,24,26,west,true,false,0,0 rat,3,2,25,9,north,true,false,0,0 
+rat,1,34,21,21,west,true,false,0,0 rat,1,31,25,26,east,false,false,0,0 rat,1,34,16,24,north,true,false,3,0 rat,1,34,11,19,west,true,false,0,0 rat,1,31,8,5,west,false,false,0,0 rat,1,34,15,15,north,false,false,0,0 rat,1,34,16,6,west,true,false,0,0 rat,1,34,20,3,east,false,false,0,0 rat,1,34,17,1,east,true,false,0,0 rat,3,26,21,12,east,false,false,0,0 rat,3,24,23,26,south,false,false,0,1 rat,3,21,25,19,north,false,false,0,0 rat,3,21,15,17,east,false,false,0,0 rat,3,22,24,26,west,false,false,0,0 rat,3,22,7,25,south,true,false,0,0 rat,3,16,15,19,west,false,false,0,0 rat,3,14,17,19,west,false,false,0,0 rat,3,13,16,24,south,false,false,3,4 rat,3,12,20,17,north,false,false,0,0 rat,3,11,11,17,west,false,false,0,0 rat,3,9,16,15,east,true,false,0,0 rat,3,8,20,18,north,false,false,0,0 rat,3,4,21,21,west,false,false,0,0 rat,3,0,23,24,north,true,false,0,0 
 /
 180
 /
-29
+30
 /
-bomb,15,45,12 gas,20,45,17 sterilize,30,45,27 maleGenderChange,45,45,12 femaleGenderChange,45,45,12 stopSign,15,45,12 deathRat,90,45,57 poison,45,45,12 
+bomb,15,14,0 gas,20,14,0 sterilize,30,14,0 maleGenderChange,45,14,15 femaleGenderChange,45,14,15 stopSign,15,14,0 deathRat,90,14,60 poison,45,14,15 
 /
 0
 /
-3,0,2,3,1,1,1,1,
+4,0,3,4,2,1,1,1,
 /
 100.0
 /
--1435.0
+-545.0
 /
--180.0
+-1025.0
 /
-29.890000000001873
+30.740000000002006
