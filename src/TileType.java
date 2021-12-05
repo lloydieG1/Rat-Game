@@ -2,7 +2,6 @@
  * Description.
  *
  * @author William Randle
- *
  */
 public enum TileType {
 

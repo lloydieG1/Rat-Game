@@ -16,5 +16,5 @@ public enum ElementType {
     FemaleGenderChange(),
     MaleGenderChange(),
     Explosion();
-    
+
 }

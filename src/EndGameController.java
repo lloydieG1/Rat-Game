@@ -21,93 +21,93 @@ import java.util.ResourceBundle;
 public class EndGameController implements Initializable {
 
     private int sortBy = 0;
-    
-	private final double AUDIO_VOLUME = 0.2;
+
+    private final double AUDIO_VOLUME = 0.2;
     private final String AUDIO_FILE_PATH = "res/audio/FOOLISHLITTLERATS.mp3";
-	private Media audio = new Media(new File(AUDIO_FILE_PATH).toURI().toString());
-	private MediaPlayer mediaPlayer = new MediaPlayer(audio);// initialise music player
+    private Media audio = new Media(new File(AUDIO_FILE_PATH).toURI().toString());
+    private MediaPlayer mediaPlayer = new MediaPlayer(audio);// initialise music player
 
     @FXML
     private Button sortByButton;
 
 
-  @FXML
-  Text endgameMessage;
+    @FXML
+    Text endgameMessage;
 
-  @FXML
-  private VBox leaderboard;
+    @FXML
+    private VBox leaderboard;
 
-  /**
-   * Switches back to the menu.
-   */
-  @FXML
-  private void backClick() {
-    Game.openLevelMenu();
-    Game.currentLevel.deleteSave();
-  }
-  
-  /*
-   * Play audio at stored at AUDIO_FILE_PATH
-   */
-  public void playAudio() {
-  	mediaPlayer.play();
-  	mediaPlayer.seek(Duration.ZERO); //restarts sound for next time it is played
-  }
+    /**
+     * Switches back to the menu.
+     */
+    @FXML
+    private void backClick() {
+        Game.openLevelMenu();
+        Game.currentLevel.deleteSave();
+    }
 
-  /**
-   * Update the leader board.
-   */
-  public void updateLeaderboard() {
+    /*
+     * Play audio at stored at AUDIO_FILE_PATH
+     */
+    public void playAudio() {
+        mediaPlayer.play();
+        mediaPlayer.seek(Duration.ZERO); //restarts sound for next time it is played
+    }
 
-      ArrayList<Score> scores = Leaderboard.getScores(Game.currentLevel.level, sortBy);
-      removeScores();
+    /**
+     * Update the leader board.
+     */
+    public void updateLeaderboard() {
 
-      int i = 0;
-      for (Score score : scores) {
-          i++;
-          Text scoreT = new Text("#" + i + " "  + score.toString());
-          scoreT.setFont(Font.font("monospace", 35));
+        ArrayList<Score> scores = Leaderboard.getScores(Game.currentLevel.level, sortBy);
+        removeScores();
 
-          leaderboard.getChildren().add(scoreT);
-      }
-  }
+        int i = 0;
+        for (Score score : scores) {
+            i++;
+            Text scoreT = new Text("#" + i + " " + score.toString());
+            scoreT.setFont(Font.font("monospace", 35));
+
+            leaderboard.getChildren().add(scoreT);
+        }
+    }
 
     private void removeScores() {
-        while(leaderboard.getChildren().size() > 0) {
+        while (leaderboard.getChildren().size() > 0) {
             leaderboard.getChildren().remove(0);
         }
     }
 
     @FXML
     private void sortBy() {
-      sortBy++;
-      if (sortBy > 1) {
-          sortBy = 0;
-      }
-      updateLeaderboard();
+        sortBy++;
+        if (sortBy > 1) {
+            sortBy = 0;
+        }
+        updateLeaderboard();
 
-      if (sortBy == 0) {
-          sortByButton.setText("order by time");
-      }
-      if (sortBy == 1) {
-          sortByButton.setText("order by score");
-      }
+        if (sortBy == 0) {
+            sortByButton.setText("order by time");
+        }
+        if (sortBy == 1) {
+            sortByButton.setText("order by score");
+        }
     }
 
-  @FXML
-  public void setText(String input) {
-    endgameMessage.setText(input);
-  }
+    @FXML
+    public void setText(String input) {
+        endgameMessage.setText(input);
+    }
 
-  /**
-   * Give game access to this class.
-   *
-   * @param url
-   * @param resourceBundle
-   */
-  @Override
-  public void initialize(URL url, ResourceBundle resourceBundle) {
-    Game.endGameController = this;
-  }
+    /**
+     * Give game access to this class.
+     *
+     * @param url
+     * @param resourceBundle
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        Game.endGameController = this;
+    }
 }
 
