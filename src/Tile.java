@@ -58,6 +58,94 @@ public class Tile {
         return type;
     }
 
+
+
+
+
+    /**
+     * Draws a Tile on the Map.
+     *
+     * @param g Graphics Context
+     */
+    public void render(GraphicsContext g) {
+        double factor = (int) Game.gameSize;
+        double x = (int) (this.x * factor + Game.gameX);
+        double y = (int) (this.y * factor + Game.gameY);
+        double size = Game.gameSize;
+        g.setFill(Color.RED);
+
+        if (type.equals(TileType.Grass)) {
+            g.drawImage(image, x, y, size, size);
+
+        } else if (type.equals(TileType.Path)) {
+            g.setFill(Color.color(0.5, 0.5, 0.5));
+            g.fillRect(x, y, size, size);
+        } else if (type.equals(TileType.Tunnel)) {
+            g.drawImage(image, x, y, size, size);
+        }
+    }
+
+    public void renderDetails(GraphicsContext g) {
+        g.setFill(Color.RED);
+        if (type.equals(TileType.Path)) {
+            renderSideTunnel(g, nextToType(TileType.Tunnel));
+            renderSideGrass(g, nextToType(TileType.Grass), 3, detailThickness);
+
+        } else if (type.equals(TileType.Tunnel)) {
+            renderSideGrass(g, nextToType(TileType.Path), 0, detailThickness);
+        } else if (type.equals(TileType.Grass)) {
+            renderSideGrass(g, nextToType(TileType.Tunnel), 0, detailThickness);
+        }
+    }
+
+    /**
+     * Description.
+     *
+     * @param g
+     * @param width
+     */
+    public void minirender(GraphicsContext g, double width) {
+        //check if this tile is visible for the 4 directions
+
+        double sizeX = g.getCanvas().getWidth() / width;
+        double sizeY = g.getCanvas().getHeight() / width;
+        double x = this.x * sizeX;
+        double y = this.y * sizeY;
+        g.setFill(Color.RED);
+        if (type.equals(TileType.Grass)) {
+            g.setFill(Color.color(0.3, 0.6, 0));
+            g.fillRect(x, y, sizeX, sizeY);
+        } else if (type.equals(TileType.Path)) {
+            g.setFill(Color.color(0.5, 0.5, 0.5));
+            g.fillRect(x, y, sizeX, sizeY);
+        } else if (type.equals(TileType.Tunnel)) {
+            g.setFill(Color.color(0.25, 0.5, 0));
+            g.fillRect(x, y, sizeX, sizeY);
+        }
+    }
+
+    /**
+     * Description.
+     *
+     * @return
+     */
+    public String tileType() {
+        if (type.equals(TileType.Grass)) {
+            return "G";
+        } else if (type.equals(TileType.Path)) {
+            return "P";
+        } else if (type.equals(TileType.Tunnel)) {
+            return "T";
+        } else {
+            return "-";
+        }
+    }
+
+    public String asString() {
+        return tileType();
+    }
+
+
     private boolean isNotOnEdge() {
         return (x > 0 && y > 0 && x < Game.currentLevel.getMapBounds()[0] - 1 && y
                 < Game.currentLevel.getMapBounds()[1] - 1);
@@ -80,7 +168,6 @@ public class Tile {
         }
         return edges;
     }
-
 
     /**
      * renders the side for a grass tile
@@ -198,88 +285,5 @@ public class Tile {
         if (edges[3]) {//up
             g.fillRect(x + size / dist, y, size - size * 2 / dist, size / dist);
         }
-    }
-
-    /**
-     * Draws a Tile on the Map.
-     *
-     * @param g Graphics Context
-     */
-    public void render(GraphicsContext g) {
-        double factor = (int) Game.gameSize;
-        double x = (int) (this.x * factor + Game.gameX);
-        double y = (int) (this.y * factor + Game.gameY);
-        double size = Game.gameSize;
-        g.setFill(Color.RED);
-
-        if (type.equals(TileType.Grass)) {
-            g.drawImage(image, x, y, size, size);
-
-        } else if (type.equals(TileType.Path)) {
-            g.setFill(Color.color(0.5, 0.5, 0.5));
-            g.fillRect(x, y, size, size);
-        } else if (type.equals(TileType.Tunnel)) {
-            g.drawImage(image, x, y, size, size);
-        }
-    }
-
-    public void renderDetails(GraphicsContext g) {
-        g.setFill(Color.RED);
-        if (type.equals(TileType.Path)) {
-            renderSideTunnel(g, nextToType(TileType.Tunnel));
-            renderSideGrass(g, nextToType(TileType.Grass), 3, detailThickness);
-
-        } else if (type.equals(TileType.Tunnel)) {
-            renderSideGrass(g, nextToType(TileType.Path), 0, detailThickness);
-        } else if (type.equals(TileType.Grass)) {
-            renderSideGrass(g, nextToType(TileType.Tunnel), 0, detailThickness);
-        }
-    }
-
-    /**
-     * Description.
-     *
-     * @param g
-     * @param width
-     */
-    public void minirender(GraphicsContext g, double width) {
-        //check if this tile is visible for the 4 directions
-
-        double sizeX = g.getCanvas().getWidth() / width;
-        double sizeY = g.getCanvas().getHeight() / width;
-        double x = this.x * sizeX;
-        double y = this.y * sizeY;
-        g.setFill(Color.RED);
-        if (type.equals(TileType.Grass)) {
-            g.setFill(Color.color(0.3, 0.6, 0));
-            g.fillRect(x, y, sizeX, sizeY);
-        } else if (type.equals(TileType.Path)) {
-            g.setFill(Color.color(0.5, 0.5, 0.5));
-            g.fillRect(x, y, sizeX, sizeY);
-        } else if (type.equals(TileType.Tunnel)) {
-            g.setFill(Color.color(0.25, 0.5, 0));
-            g.fillRect(x, y, sizeX, sizeY);
-        }
-    }
-
-    /**
-     * Description.
-     *
-     * @return
-     */
-    public String tileType() {
-        if (type.equals(TileType.Grass)) {
-            return "G";
-        } else if (type.equals(TileType.Path)) {
-            return "P";
-        } else if (type.equals(TileType.Tunnel)) {
-            return "T";
-        } else {
-            return "-";
-        }
-    }
-
-    public String asString() {
-        return tileType();
     }
 }
