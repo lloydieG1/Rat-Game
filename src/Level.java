@@ -187,7 +187,7 @@ public class Level {
                     + String.format("%.3f", time) + " seconds");
         } else if (rats == 0) {
             Leaderboard.addScore(level, new Score(Game.currentProfile.getUsername(),
-                    bonusScore(), time), 0);
+                    bonusScore(), time));
 
             Game.endGame("You won with a score of: \n" + bonusScore() + "\nin:\n"
                     + String.format("%.3f", time) + " seconds");

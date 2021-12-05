@@ -13,30 +13,26 @@ public class Leaderboard {
     private static final String OPEN_FILE_ERROR = "Could not find ";
     private static final String LEADER_BOARD_PATH = "res/maps/highScores/";
 
-    private static final String timeBoard = "T";
+    private static final String TIMES_LEADERBOARD_NAME = "T";
 
-    private static final String FIRST_LINE = "USER: ";
-    private static final String SECOND_LINE = "MAX LEVEL: ";
-
-
-    private static int DISPLAY_COUNT = 10;
+    private static final int DISPLAY_COUNT = 10;
 
 
     /**
-     * Description.
+     * if the score is in the top 10 of the leaderboard for times or points,
+     * add it to that leaderboard.
      *
-     * @param newScore
-     * @param levelName
-     * @param type      the type of sort (0= based on score, 1 =based on time)
+     * @param newScore Score to add to the leaderboard/s
+     * @param levelName the level the score was achieved on
      */
-    public static void addScore(String levelName, Score newScore, int type) {
+    public static void addScore(String levelName, Score newScore) {
         createFileIfNotExists(levelName);
-        createFileIfNotExists(levelName + timeBoard);
+        createFileIfNotExists(levelName + TIMES_LEADERBOARD_NAME);
 
         //now add to the two tables for time and score top 10:
 
         //add score to the score leaderboard
-        addScore(newScore, levelName);
+        addPoints(newScore, levelName);
 
         //check if the score is in the top 10 for time
         addTime(newScore, levelName);
@@ -44,7 +40,13 @@ public class Leaderboard {
 
     }
 
-    private static void addScore(Score newScore, String levelName) {
+    /**
+     * adds a score to the top 10 leaderboard of points
+     * (if they are in the top 10)
+     * @param newScore Score to add to the leaderboard
+     * @param levelName level the score was achieved on
+     */
+    private static void addPoints(Score newScore, String levelName) {
         String leaderboardFile = levelToPath(levelName);
         ArrayList<Score> scores = getScores(levelName, 0);
 
@@ -67,22 +69,18 @@ public class Leaderboard {
             scores.add(newScore);
             scores = sortScores(scores);
 
-            try {
-                FileWriter writer = new FileWriter(leaderboardFile);
-                for (Score score : scores) {
-                    writer.append(score.toString() + "\n");
-                    System.out.println("new score!");
-                }
-                writer.close();
-            } catch (IOException e) {
-                System.out.println("Cannot read file.");
-                e.printStackTrace();
-            }
+            updateTable(leaderboardFile, scores);
         }
     }
 
+    /**
+     * adds a score to the top 10 leaderboard of times
+     * (if they are in the top 10)
+     * @param newScore Score to add to the leaderboard
+     * @param levelName level the score was achieved on
+     */
     private static void addTime(Score newScore, String levelName) {
-        String timeBoardFile = levelToPath(levelName + timeBoard);
+        String timeBoardFile = levelToPath(levelName + TIMES_LEADERBOARD_NAME);
         ArrayList<Score> scores = getScores(levelName, 1);
         boolean max;
 
@@ -103,21 +101,34 @@ public class Leaderboard {
             scores.add(newScore);
             scores = sortTimes(scores);
 
-            try {
-                FileWriter writer = new FileWriter(timeBoardFile);
-                for (Score score : scores) {
-                    writer.append(score.toString() + "\n");
+           updateTable(timeBoardFile, scores);
+        }
+    }
 
-                }
-                writer.close();
-            } catch (IOException e) {
-                System.out.println("Cannot read file.");
-                e.printStackTrace();
+    /**
+     * updates the table to show the current scores for that table.
+     * @param tableName String the file path for the table to update
+     * @param scores Arraylist of scores to set the table to
+     */
+    private static void updateTable(String tableName, ArrayList<Score> scores) {
+        try {
+            FileWriter writer = new FileWriter(tableName);
+            for (Score score : scores) {
+                writer.append(score.toString() + "\n");
+
             }
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("Cannot read table.");
+            e.printStackTrace();
         }
     }
 
 
+    /**
+     * removes the scores achieved by a user parsed username
+     * @param username String
+     */
     public static void removeScores(String username) {
         File scoreDirectory = new File("res\\maps\\highScores\\");
         int fileCount = scoreDirectory.list().length;
@@ -213,7 +224,7 @@ public class Leaderboard {
                 in.close();
                 return sortScores(scores);
             } else {
-                Scanner in = openLeaderboard(levelName + timeBoard);
+                Scanner in = openLeaderboard(levelName + TIMES_LEADERBOARD_NAME);
 
                 while (in.hasNextLine()) {
                     String username = in.next();
