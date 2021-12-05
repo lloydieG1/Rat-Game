@@ -65,8 +65,7 @@ public class PlayerProfileManager {
     }
 
     /**
-     * Updates the string data stored in a profile file for either username or max level
-     *
+     * Updates the string data stored in a profile file for either username or max level.
      * @param whichData
      * @param data
      * @param username
