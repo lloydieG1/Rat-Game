@@ -1,4 +1,6 @@
 Lloydie    - 639 - in: 61.590 seconds
+Injata     - 432 - in: 48.240 seconds
+Injata     - 424 - in: 56.260 seconds
 Injata     - 350 - in: 30.860 seconds
 Injata     - 323 - in: 27.100 seconds
 0000000000 - 290 - in: 20.330 seconds
@@ -6,5 +8,3 @@ Injata     - 323 - in: 27.100 seconds
 0000000000 - 267 - in: 33.440 seconds
 0000000000 - 258 - in: 42.670 seconds
 Injata     - 234 - in: 6.860 seconds
-Injata     - 234 - in: 6.700 seconds
-Injata     - 233 - in: 7.150 seconds
