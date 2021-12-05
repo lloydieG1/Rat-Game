@@ -1,15 +1,14 @@
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
 import java.io.*;
-import java.math.BigDecimal;
 import java.nio.file.*;
 import java.util.ArrayList;
 
 /**
  * Scene manager contains and manages all of the tiles and elements in a level.
- * @author William Randle, Lloyd Garret
+ * @author William Randle
+ * @author Lloyd Garret
  * @author Adrian Zabica
  * @author Yazan Adi
  * @author Lloyd Garret
@@ -401,10 +400,10 @@ public class Level {
 
         g.setFill(Color.color(0, 0, 0, 0.2));
         double mapFactorY = (Game.MAP_HEIGHT / g.getCanvas().getHeight())
-                * (width * 1.0 / Game.VISIBLE_TILES);
+                * (width * 1.0 / Game.visibleTiles);
 
         double mapFactorX = (Game.MAP_WIDTH / g.getCanvas().getWidth())
-                * (width * 1.0 / Game.VISIBLE_TILES);
+                * (width * 1.0 / Game.visibleTiles);
 
         g.fillRect(0, 0, g.getCanvas().getWidth(), -Game.gameY / mapFactorY);
         g.fillRect(0, 0, -Game.gameX / mapFactorX, g.getCanvas().getHeight());
@@ -412,9 +411,9 @@ public class Level {
         double tilewidth = g.getCanvas().getWidth() / width;
         double tileheight = g.getCanvas().getHeight() / width;
 
-        g.fillRect(0, -Game.gameY / mapFactorY + (Game.VISIBLE_TILES) * tileheight,
+        g.fillRect(0, -Game.gameY / mapFactorY + (Game.visibleTiles) * tileheight,
                 g.getCanvas().getWidth(), g.getCanvas().getHeight());
-        g.fillRect(-Game.gameX / mapFactorX + (Game.VISIBLE_TILES) * tilewidth,
+        g.fillRect(-Game.gameX / mapFactorX + (Game.visibleTiles) * tilewidth,
                 0, g.getCanvas().getWidth(), g.getCanvas().getHeight());
     }
 

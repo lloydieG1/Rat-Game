@@ -4,7 +4,7 @@ Injata     - 424 - in: 56.260 seconds
 Injata     - 350 - in: 30.860 seconds
 Injata     - 323 - in: 27.100 seconds
 Injata     - 234 - in: 6.860 seconds
+CIA        - 234 - in: 6.830 seconds
 CIA        - 233 - in: 7.060 seconds
 CIA        - 232 - in: 8.270 seconds
 CIA        - 232 - in: 8.890 seconds
-CIA        - 194 - in: 6.930 seconds

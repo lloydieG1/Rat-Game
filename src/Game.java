@@ -17,13 +17,14 @@ import java.util.Random;
 /**
  * launching application which runs the game
  *
- * @author William Randle, Jack Lennard
+ * @author William Randle
+ * @author Jack Lennard
  */
 public class Game extends Application {
 
-    private static final int WIDTH = 1350; //width of the window
-    private static final int HEIGHT = 900; //height of the window
-    public static final int FPS = 100; //the fps of the game
+    private static final int WIDTH = 1350;
+    private static final int HEIGHT = 900;
+    public static final int FPS = 100;
 
     private static Stage primaryStage; //the stage everything is shown on
 
@@ -45,7 +46,7 @@ public class Game extends Application {
 
     public static Level currentLevel;
 
-    public static PlayerProfile currentProfile = new PlayerProfile("anon", 0);
+    public static PlayerProfile currentProfile;
 
     public static Random random = new Random();
 
@@ -64,12 +65,9 @@ public class Game extends Application {
     public static double gameX = 0;
     public static double gameY = 0;
 
-    public static double scrollX;
-
-
     public static int score;
 
-    public static double VISIBLE_TILES = 14;
+    public static double visibleTiles = 14;
 
     private static final int ZOOM_MIN = 50;
     private static final int ZOOM_MAX = 200;
@@ -87,6 +85,7 @@ public class Game extends Application {
      * @param primaryStage stage javafx shows things on
      */
     public void start(Stage primaryStage) {
+        currentProfile = new PlayerProfile("anon", 0);
 
         Game.primaryStage = primaryStage;
 
@@ -219,9 +218,9 @@ public class Game extends Application {
      */
     public void scrollKeyEvent(ScrollEvent event) {
         // We change the behaviour depending on the actual key that was pressed.
-        double centerX = gameX + (VISIBLE_TILES / 2 * gameSize);
+        double centerX = gameX + (visibleTiles / 2 * gameSize);
 
-        double centerY = gameY + (VISIBLE_TILES / 2 * gameSize);
+        double centerY = gameY + (visibleTiles / 2 * gameSize);
 
         switch (event.getTextDeltaYUnits()) {
             case LINES:
@@ -235,8 +234,8 @@ public class Game extends Application {
 
                 //make the scroll happen from the center instead of the top corner
                 if (minMax(gameSize, currentZoomMin, ZOOM_MAX) == gameSize) {
-                    gameX = centerX - (VISIBLE_TILES / 2 * gameSize);
-                    gameY = centerY - (VISIBLE_TILES / 2 * gameSize);
+                    gameX = centerX - (visibleTiles / 2 * gameSize);
+                    gameY = centerY - (visibleTiles / 2 * gameSize);
                 }
 
                 break;
@@ -263,14 +262,14 @@ public class Game extends Application {
         int zoomBefore = (int) gameSize;
 
         gameSize = minMax(gameSize, currentZoomMin, ZOOM_MAX);
-        VISIBLE_TILES = (gameGraphics.getCanvas().getWidth() / gameSize);
+        visibleTiles = (gameGraphics.getCanvas().getWidth() / gameSize);
         clampMapZoom();
 
 
         int mapWidth = currentLevel.getMapBounds()[0];
         int mapHeight = currentLevel.getMapBounds()[1];
-        gameY = minMax(gameY, -gameSize * (mapHeight - VISIBLE_TILES), 0);
-        gameX = minMax(gameX, -gameSize * (mapWidth - VISIBLE_TILES), 0);
+        gameY = minMax(gameY, -gameSize * (mapHeight - visibleTiles), 0);
+        gameX = minMax(gameX, -gameSize * (mapWidth - visibleTiles), 0);
 
 
     }
@@ -278,11 +277,11 @@ public class Game extends Application {
     private static void clampMapZoom() {
         double fractionVisible = 0.5;
         //prevent the map extending too far
-        if (VISIBLE_TILES > currentLevel.getMapBounds()[0] * fractionVisible) {
-            while (VISIBLE_TILES > currentLevel.getMapBounds()[0] * fractionVisible) {
+        if (visibleTiles > currentLevel.getMapBounds()[0] * fractionVisible) {
+            while (visibleTiles > currentLevel.getMapBounds()[0] * fractionVisible) {
                 gameSize++;
                 gameSize = minMax(gameSize, currentZoomMin, ZOOM_MAX);
-                VISIBLE_TILES = (gameGraphics.getCanvas().getWidth() / gameSize);
+                visibleTiles = (gameGraphics.getCanvas().getWidth() / gameSize);
                 currentZoomMin = (int) gameSize;
             }
             currentZoomMin = (int) gameSize;
@@ -387,11 +386,11 @@ public class Game extends Application {
         leftArrow = false;
         upArrow = false;
         downArrow = false;
+
         levelController.rightArrow = false;
         levelController.leftArrow = false;
         levelController.upArrow = false;
         levelController.downArrow = false;
-
         levelController.wrongScreen = false;
     }
 

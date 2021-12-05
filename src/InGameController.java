@@ -196,8 +196,8 @@ public class InGameController implements Initializable {
         double clickY = event.getY() / tileheight;
 
         //adjust so centered:
-        clickX = clickX - Game.VISIBLE_TILES / 2.0;
-        clickY = clickY - Game.VISIBLE_TILES / 2.0;
+        clickX = clickX - Game.visibleTiles / 2.0;
+        clickY = clickY - Game.visibleTiles / 2.0;
         Game.gameX = -(int) (clickX * Game.gameSize);
         Game.gameY = -(int) (clickY * Game.gameSize);
 

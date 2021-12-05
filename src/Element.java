@@ -9,15 +9,14 @@ import java.util.ArrayList;
  * @author William Randle
  */
 public abstract class Element {
-    protected int x; //x position in the map
-    protected int y; //y position in the map
-    protected ElementType type; //the type of element
-    protected int tickSpeed = Game.FPS; //Logic only happens once this on ticks
-    protected int currentTick = 0; //the current tick in the cycle (eg 3/(maxfps))
-    protected Level level; //the level the element is in so it can use getElements
-    protected int age = 0; //age of the element in ticks
-    protected Direction dir; // the current direction of the element
-
+    protected int x;
+    protected int y;
+    protected ElementType type;
+    protected int tickSpeed = Game.FPS;
+    protected int currentTick = 0;
+    protected Level level;
+    protected int age = 0;
+    protected Direction dir;
 
     protected boolean flagRemoval = false; //if the element should be removed
 
