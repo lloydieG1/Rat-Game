@@ -6,6 +6,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 
 import java.io.File;
 import java.net.URL;
@@ -41,8 +42,7 @@ public class EndGameController implements Initializable {
    */
   @FXML
   private void backClick() {
-
-    Game.openMainMenu();
+    Game.openLevelMenu();
     Game.currentLevel.deleteSave();
   }
   
@@ -51,6 +51,7 @@ public class EndGameController implements Initializable {
    */
   public void playAudio() {
   	mediaPlayer.play();
+  	mediaPlayer.seek(Duration.ZERO); //restarts sound for next time it is played
   }
 
   /**
