@@ -16,6 +16,7 @@ import java.util.Random;
 
 /**
  * launching application which runs the game
+ *
  * @author William Randle, Jack Lennard
  */
 public class Game extends Application {
@@ -23,7 +24,7 @@ public class Game extends Application {
     private static final int WIDTH = 1350; //width of the window
     private static final int HEIGHT = 900; //height of the window
     public static final int FPS = 100; //the fps of the game
-    
+
     private static Stage primaryStage; //the stage everything is shown on
 
     private static Scene userSelection; //the main menu
@@ -43,7 +44,7 @@ public class Game extends Application {
     private static Timeline dailyMessageLoop; //the loop for the daily message updating
 
     public static Level currentLevel;
-    
+
     public static PlayerProfile currentProfile = new PlayerProfile("anon", 0);
 
     public static Random random = new Random();
@@ -60,7 +61,7 @@ public class Game extends Application {
 
     public static final int MAP_WIDTH = 900;
     public static final int MAP_HEIGHT = 900;
-    public static double gameX =0;
+    public static double gameX = 0;
     public static double gameY = 0;
 
     public static double scrollX;
@@ -80,8 +81,6 @@ public class Game extends Application {
     public static boolean downArrow;
 
 
-
-
     /**
      * open the main menu and loads the other menus.
      *
@@ -98,21 +97,21 @@ public class Game extends Application {
             mainMenuController.refreshDailyMessage();
         }));
         dailyMessageLoop.setCycleCount(Timeline.INDEFINITE);
-        
+
         userSelection = loadScene("userSelection.fxml");
         mainMenu = loadScene("mainMenu.fxml");
         levelMenu = loadScene("levelMenu.fxml");
         levelLayout = loadScene("levelLayout.fxml");
         endGame = loadScene("EndGameScreen.fxml");
 
-      //  primaryStage.setResizable(false);
+        //  primaryStage.setResizable(false);
 
         openUserSelection();
         primaryStage.setTitle("Rats - by team 19");
         primaryStage.getIcons().add(ImageLoader.icon);
         primaryStage.show();
 
-        int fpstime = 1000/FPS;
+        int fpstime = 1000 / FPS;
 
         //game loop:
         gameLoop = new Timeline(new KeyFrame(Duration.millis(fpstime), (ActionEvent event) -> {
@@ -127,9 +126,9 @@ public class Game extends Application {
     }
 
 
-
     /**
      * scrolls the map with arrow keys
+     *
      * @param event
      */
     public void keyDown(KeyEvent event) {
@@ -157,13 +156,14 @@ public class Game extends Application {
                 // Do nothing for all other keys.
                 break;
         }
-                // Consume the event. This means we mark it as dealt with. This stops other GUI nodes (buttons etc) responding to it.
+        // Consume the event. This means we mark it as dealt with. This stops other GUI nodes (buttons etc) responding to it.
         event.consume();
     }
 
 
     /**
      * scrolls the map with arrow keys
+     *
      * @param event
      */
     public void keyUp(KeyEvent event) {
@@ -214,6 +214,7 @@ public class Game extends Application {
 
     /**
      * scrolls the size of the map on the screen
+     *
      * @param event
      */
     public void scrollKeyEvent(ScrollEvent event) {
@@ -222,7 +223,7 @@ public class Game extends Application {
 
         double centerY = gameY + (VISIBLE_TILES / 2 * gameSize);
 
-        switch(event.getTextDeltaYUnits()) {
+        switch (event.getTextDeltaYUnits()) {
             case LINES:
                 // scroll about event.getTextDeltaY() lines
 
@@ -246,29 +247,30 @@ public class Game extends Application {
                 // scroll about event.getDeltaY() pixels
                 break;
             default:
-            	//Do nothing
-            	break;
+                //Do nothing
+                break;
         }
 
         // Consume the event. This means we mark it as dealt with. This stops other GUI nodes (buttons etc) responding to it.
         event.consume();
     }
+
     public static void updateScore() {
         levelController.score.setText(Integer.toString(score));
     }
 
     private static void clampMap() {
-        int zoomBefore = (int)gameSize;
+        int zoomBefore = (int) gameSize;
 
         gameSize = minMax(gameSize, currentZoomMin, ZOOM_MAX);
         VISIBLE_TILES = (gameGraphics.getCanvas().getWidth() / gameSize);
         clampMapZoom();
 
 
-            int mapWidth = currentLevel.getMapBounds()[0];
-            int mapHeight = currentLevel.getMapBounds()[1];
-            gameY = minMax(gameY, -gameSize * (mapHeight - VISIBLE_TILES), 0);
-            gameX = minMax(gameX, -gameSize * (mapWidth - VISIBLE_TILES), 0);
+        int mapWidth = currentLevel.getMapBounds()[0];
+        int mapHeight = currentLevel.getMapBounds()[1];
+        gameY = minMax(gameY, -gameSize * (mapHeight - VISIBLE_TILES), 0);
+        gameX = minMax(gameX, -gameSize * (mapWidth - VISIBLE_TILES), 0);
 
 
     }
@@ -313,15 +315,15 @@ public class Game extends Application {
     private static void drawButtons(GraphicsContext g) {
 
         int buttonsize = levelController.buttonSize;
-        drawButton(g, 0,  0,  MAP_WIDTH, buttonsize);
-        drawButton(g, 0,  0,  buttonsize, MAP_HEIGHT);
-        drawButton(g, MAP_WIDTH-buttonsize,  0,  MAP_WIDTH, MAP_HEIGHT);
-        drawButton(g, 0,  MAP_HEIGHT-buttonsize,  MAP_WIDTH, MAP_HEIGHT);
+        drawButton(g, 0, 0, MAP_WIDTH, buttonsize);
+        drawButton(g, 0, 0, buttonsize, MAP_HEIGHT);
+        drawButton(g, MAP_WIDTH - buttonsize, 0, MAP_WIDTH, MAP_HEIGHT);
+        drawButton(g, 0, MAP_HEIGHT - buttonsize, MAP_WIDTH, MAP_HEIGHT);
 
     }
 
     private static void drawButton(GraphicsContext g, int x, int y, int width, int height) {
-        if(intersect((int)levelController.mouseX, (int)levelController.mouseY, x, y, width, height)) {
+        if (intersect((int) levelController.mouseX, (int) levelController.mouseY, x, y, width, height)) {
             g.setFill(Color.color(0.2, 0.2, 0.2, 0.1));
         } else {
             g.setFill(Color.color(0.2, 0.2, 0.2, 0.7));
@@ -330,16 +332,16 @@ public class Game extends Application {
     }
 
     /**
-     *sets the scene to the user menu
+     * sets the scene to the user menu
      */
     public static void openUserSelection() {
 
         primaryStage.setScene(userSelection);
         dailyMessageLoop.stop();
     }
-    
+
     /**
-     *changes the menu to the main Menu
+     * changes the menu to the main Menu
      */
     public static void openMainMenu() {
         dailyMessageLoop.play();
@@ -349,7 +351,7 @@ public class Game extends Application {
     }
 
     private static boolean intersect(int i, int j, int x, int y, int x2, int y2) {
-        if (i > x && i < x2 ) {
+        if (i > x && i < x2) {
             if (j > y && j < y2) {
                 return true;
             }
@@ -358,7 +360,7 @@ public class Game extends Application {
     }
 
     /**
-     *changes the menu to the level Menu
+     * changes the menu to the level Menu
      */
     public static void openLevelMenu() {
         levelController.stopMusic(); //stops playing level music saving & exiting
@@ -371,7 +373,7 @@ public class Game extends Application {
 
 
     /**
-     *changes the menu to the end game scene
+     * changes the menu to the end game scene
      */
     public static void openEndGame() {
         levelController.stopMusic(); //stops playing level music when level ends
@@ -394,7 +396,7 @@ public class Game extends Application {
     }
 
     /**
-     *changes the menu to the level Menu
+     * changes the menu to the level Menu
      */
     public static void openGameScene(String levelName) {
 
@@ -421,6 +423,7 @@ public class Game extends Application {
 
     /**
      * loads the canvas to be drawn to in levels
+     *
      * @param graphics game graphics
      */
     public static void loadCanvas(GraphicsContext graphics) {
@@ -430,6 +433,7 @@ public class Game extends Application {
 
     /**
      * loads the canvas to be drawn to in levels
+     *
      * @param graphics game graphics
      */
     public static void loadRatLives(GraphicsContext graphics) {
@@ -440,14 +444,15 @@ public class Game extends Application {
 
     /**
      * loads an fxml file from parsed filename string
+     *
      * @param fxmlFile string the name of the file to be loaded
      * @return a complete scene which can be shown
      */
-    private Scene loadScene (String fxmlFile) {
+    private Scene loadScene(String fxmlFile) {
         try {
             BorderPane pane = FXMLLoader.load(getClass().getResource(fxmlFile));
-            return new Scene(pane,WIDTH,HEIGHT);
-        } catch(Exception e) {
+            return new Scene(pane, WIDTH, HEIGHT);
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -464,12 +469,12 @@ public class Game extends Application {
      * @return The allowed number within range
      */
     public static double minMax(double var, double min, double max) {
-        if(var >= max) {
-        	return max;
+        if (var >= max) {
+            return max;
         } else if (var <= min) {
-        	return min;
+            return min;
         } else {
-        	return var;
+            return var;
         }
 
     }
@@ -484,9 +489,8 @@ public class Game extends Application {
     }
 
 
-
     public static void endGame(String message) {
-        levelController.wrongScreen =true;
+        levelController.wrongScreen = true;
         pauseGame();
         endGameController.setText(message);
         openEndGame();
@@ -504,7 +508,6 @@ public class Game extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-
 
 
 }

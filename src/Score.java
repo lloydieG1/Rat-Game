@@ -7,8 +7,8 @@ import java.util.Comparator;
  * @author William Randle
  */
 public class Score implements Comparable {
-	public static final int PRECISION = 1000;
-	
+    public static final int PRECISION = 1000;
+
     private static final String PROFILE_FILE_PATH = "res/maps/highScores";
 
     private String username;
@@ -25,7 +25,7 @@ public class Score implements Comparable {
     public Score(String username, int score, double time) {
         this.username = username;
         this.score = score;
-        this.time =  time;
+        this.time = time;
     }
 
     public int getScore() {
@@ -54,20 +54,19 @@ public class Score implements Comparable {
     }
 
     public String toString() {
-        int lettersUnderLimit = 10-username.length();
+        int lettersUnderLimit = 10 - username.length();
         String padding = "";
         for (int i = 0; i < lettersUnderLimit; i++) {
-            padding = padding   + " ";
+            padding = padding + " ";
         }
-        return username + padding + " - " + score + " - in: "  + String.format("%.3f", time) + " seconds" ;
+        return username + padding + " - " + score + " - in: " + String.format("%.3f", time) + " seconds";
     }
-
 
 
     @Override
     public int compareTo(Object o) {
         Score score1 = (Score) o;
-        return score1.getScore()- this.score;
+        return score1.getScore() - this.score;
     }
 
     public static Comparator<Score> ScoreTimeComparator
