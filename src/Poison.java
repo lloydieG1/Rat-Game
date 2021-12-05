@@ -36,15 +36,16 @@ public class Poison extends Element {
    * Description.
    */
   public void checkRat() {
+      boolean alreadyPoisoned = false;
     for (Element element : level.getElements(x, y)) {
-      if (element.getType().equals(ElementType.Rat)) {
+      if (element.getType().equals(ElementType.Rat) && !alreadyPoisoned) {
     	  Rat rat = (Rat) element;
     	  killRat(rat);
-      }
-    }
-      if (health <= 0) {
+          alreadyPoisoned = true;
           level.removeElement(this);
       }
+    }
+
   }
 
     @Override
@@ -53,11 +54,13 @@ public class Poison extends Element {
             level.removeElement(rat);
             health = health - 1 - rat.getPregnantTime();;
             Game.score = Game.score + 10 + 10 * rat.getPregnantTime();
+
         } else {
             level.removeElement(rat);
             health--;
             Game.score = Game.score + 10;
         }
+
     }
 
 
