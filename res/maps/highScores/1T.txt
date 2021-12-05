@@ -1,9 +1,10 @@
-Injata     - 234 - in: 6.700 seconds
-Injata     - 234 - in: 6.750 seconds
-Injata     - 234 - in: 6.750 seconds
 Injata     - 194 - in: 6.650 seconds
+Injata     - 234 - in: 6.700 seconds
 Injata     - 194 - in: 6.730 seconds
+Injata     - 234 - in: 6.750 seconds
+Injata     - 234 - in: 6.750 seconds
 Injata     - 194 - in: 6.750 seconds
 Injata     - 194 - in: 6.760 seconds
 Injata     - 194 - in: 6.780 seconds
 Injata     - 194 - in: 6.800 seconds
+CIA        - 194 - in: 6.930 seconds

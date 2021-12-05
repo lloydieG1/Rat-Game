@@ -22,7 +22,7 @@ public class Leaderboard {
      * if the score is in the top 10 of the leaderboard for times or points,
      * add it to that leaderboard.
      *
-     * @param newScore Score to add to the leaderboard/s
+     * @param newScore  Score to add to the leaderboard/s
      * @param levelName the level the score was achieved on
      */
     public static void addScore(String levelName, Score newScore) {
@@ -43,7 +43,8 @@ public class Leaderboard {
     /**
      * adds a score to the top 10 leaderboard of points
      * (if they are in the top 10)
-     * @param newScore Score to add to the leaderboard
+     *
+     * @param newScore  Score to add to the leaderboard
      * @param levelName level the score was achieved on
      */
     private static void addPoints(Score newScore, String levelName) {
@@ -76,7 +77,8 @@ public class Leaderboard {
     /**
      * adds a score to the top 10 leaderboard of times
      * (if they are in the top 10)
-     * @param newScore Score to add to the leaderboard
+     *
+     * @param newScore  Score to add to the leaderboard
      * @param levelName level the score was achieved on
      */
     private static void addTime(Score newScore, String levelName) {
@@ -101,14 +103,15 @@ public class Leaderboard {
             scores.add(newScore);
             scores = sortTimes(scores);
 
-           updateTable(timeBoardFile, scores);
+            updateTable(timeBoardFile, scores);
         }
     }
 
     /**
      * updates the table to show the current scores for that table.
+     *
      * @param tableName String the file path for the table to update
-     * @param scores Arraylist of scores to set the table to
+     * @param scores    Arraylist of scores to set the table to
      */
     private static void updateTable(String tableName, ArrayList<Score> scores) {
         try {
@@ -127,7 +130,8 @@ public class Leaderboard {
 
     /**
      * removes the scores achieved by a user parsed username
-     * @param username String username of the user who's scores are being removed
+     *
+     * @param username String username of the user being removed
      */
     public static void removeScores(String username) {
         File scoreDirectory = new File("res\\maps\\highScores\\");
@@ -135,17 +139,25 @@ public class Leaderboard {
 
         //remove from
         for (File file : scoreDirectory.listFiles()) {
-            String levelName = file.getName().replace(".txt", "");
+            String levelName = file.getName().replace(".txt"
+                    , "");
 
-            if(levelName.contains("T")) {
+            if (levelName.contains("T")) {
+                levelName = levelName.replace("T", "");
 
-                ArrayList<Score> leaderboard = getScores(levelName.replace("T", ""), 1);
-                leaderboard.removeIf(score -> score.getUsername().equals(username));
+                ArrayList<Score> leaderboard = getScores(levelName, 1);
+                leaderboard.removeIf(score
+                        -> score.getUsername().equals(username));
+
                 leaderboard = sortPoints(leaderboard);
                 updateTable(levelToPath(levelName), leaderboard);
+
+
             } else {
                 ArrayList<Score> leaderboard = getScores(levelName, 0);
-                leaderboard.removeIf(score -> score.getUsername().equals(username));
+                leaderboard.removeIf(score
+                        -> score.getUsername().equals(username));
+
                 leaderboard = sortPoints(leaderboard);
                 updateTable(levelToPath(levelName), leaderboard);
 
@@ -155,6 +167,13 @@ public class Leaderboard {
     }
 
 
+    /**
+     * returns an arraylist of scores sorted in ascending order of points
+     * should only return the top 10
+     *
+     * @param scores Arraylist of scores to be sorted
+     * @return Arraylist of sorted scores
+     */
     private static ArrayList<Score> sortPoints(ArrayList<Score> scores) {
 
         Collections.sort(scores);
@@ -165,6 +184,13 @@ public class Leaderboard {
         return scores;
     }
 
+    /**
+     * returns an arraylist of scores sorted in descending order of time
+     * should only return the top 10
+     *
+     * @param scores Arraylist of scores to be sorted
+     * @return Arraylist of sorted scores
+     */
     private static ArrayList<Score> sortTimes(ArrayList<Score> scores) {
 
         Collections.sort(scores, Score.ScoreTimeComparator);
@@ -175,6 +201,11 @@ public class Leaderboard {
         return scores;
     }
 
+    /**
+     * removes all but the first 10 scores in an arraylist of scores
+     * @param scores Arraylist of scores to truncate
+     * @return Arraylist of first 10 scores
+     */
     private static ArrayList<Score> truncateScores(ArrayList<Score> scores) {
         ArrayList<Score> truncateScores = new ArrayList<>();
 
@@ -191,56 +222,40 @@ public class Leaderboard {
     }
 
 
-    public static Score getHighScore(String userName, String level, int type) {
-
-        ArrayList<Score> scores = getScores(level, type);
-
-        for (Score score : scores) {
-            if (score.getUsername().equals(userName)) {
-                return score;
-            }
-        }
-        return new Score(userName, 0, 0);
-    }
-
-
-    public static ArrayList<Score> getScores(String levelName, int type) {
+    /**
+     * gets the scores from the given table based on the parsed type.
+     * @param levelName String name of the level for the scores
+     * @param table int the table we are getting (0=points, 1 = times)
+     * @return Arraylist of scores in the top 10 of the specified table
+     */
+    public static ArrayList<Score> getScores(String levelName, int table) {
 
 
         ArrayList<Score> scores = new ArrayList<>();
         try {
+            Scanner in;
+            if (table == 0) {
+                in = openLeaderboard(levelName);
+            } else {
+                in = openLeaderboard(levelName + TIMES_LEADERBOARD_NAME);
+            }
 
-            if (type == 0) {
-                Scanner in = openLeaderboard(levelName);
+            while (in.hasNextLine()) {
+                String username = in.next();
+                in.next();
+                int points = in.nextInt();
+                in.next();
+                in.next();
+                double time = in.nextDouble();
+                Score score = new Score(username, points, time);
+                scores.add(score);
+                in.nextLine();
+            }
+            in.close();
 
-                while (in.hasNextLine()) {
-                    String username = in.next();
-                    in.next();
-                    int points = in.nextInt();
-                    in.next();
-                    in.next();
-                    double time = in.nextDouble();
-                    Score score = new Score(username, points, time);
-                    scores.add(score);
-                    in.nextLine();
-                }
-                in.close();
+            if (table == 0) {
                 return sortPoints(scores);
             } else {
-                Scanner in = openLeaderboard(levelName + TIMES_LEADERBOARD_NAME);
-
-                while (in.hasNextLine()) {
-                    String username = in.next();
-                    in.next();
-                    int points = in.nextInt();
-                    in.next();
-                    in.next();
-                    double time = in.nextDouble();
-                    Score score = new Score(username, points, time);
-                    scores.add(score);
-                    in.nextLine();
-                }
-                in.close();
                 return sortTimes(scores);
             }
 
@@ -268,15 +283,6 @@ public class Leaderboard {
     }
 
 
-    private static String readLeaderboard(String levelName) {
-        Scanner in = openLeaderboard(levelName);
-        String fileText = "";
-        while (in.hasNext()) {
-            fileText = fileText + in.nextLine() + "\n";
-        }
-        in.close();
-        return fileText;
-    }
 
     private static Scanner openLeaderboard(String level) {
         File inputFile = new File(levelToPath(level));
@@ -302,8 +308,4 @@ public class Leaderboard {
         return filePath;
     }
 
-    public static boolean leaderboardExists(String username) {
-        File user = new File(levelToPath(username));
-        return user.exists();
-    }
 }
