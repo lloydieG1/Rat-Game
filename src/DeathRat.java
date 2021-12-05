@@ -1,11 +1,10 @@
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-
 /**
- * This class construct a death rat item and implement all its features.
- *
+ * This class constructs a death rat item and implements all its features.
  * @author Adrian
+ * @version 1.0
  */
 public class DeathRat extends Element {
 
@@ -16,19 +15,17 @@ public class DeathRat extends Element {
 
 
     /**
-     * Description.
-     *
-     * @param type   Element type
-     * @param level  Level number
-     * @param x      X position
-     * @param y      Y position
-     * @param health Remaining health
-     * @param dir    Initial direction of movement
+     * Create the death rat element.
+     * @param type   Element type.
+     * @param level  Level number.
+     * @param x      The x coordinate position.
+     * @param y      The y coordinate position.
+     * @param health Remaining health.
+     * @param dir    Initial direction of movement.
      */
     public DeathRat(ElementType type, Level level, int x, int y, int health, Direction dir) {
         super(type, level, x, y, Direction.North, health);
         this.dir = dir;
-        // TODO Auto-generated constructor stub
         ratsKilled = 0;
         image = ImageLoader.getImage("deathRat.png", 64);
     }
@@ -42,7 +39,8 @@ public class DeathRat extends Element {
     }
 
     /**
-     * Description.
+     * If death rat shares a tile with a rat, kill that rat and 
+     * remove this death rat from the level.
      */
     public void checkRat() {
         for (Element element : level.getElements(x, y)) {
@@ -88,6 +86,10 @@ public class DeathRat extends Element {
         }
     }
 
+    /**
+     * Get the direction.
+     * @return Initial direction of movement.
+     */
     public Direction getDirection() {
         return dir;
     }
@@ -97,7 +99,7 @@ public class DeathRat extends Element {
         double x = renderX();
         double y = renderY();
 
-        //calculating the position the rat should be in this frame
+        //Calculating the position the rat should be in this frame.
         g.save();
         g.translate(x + Game.gameSize / 2.0, y + Game.gameSize / 2.0);
         g.rotate(interpolateDir(dirAsNum(lastDir), dirAsNum(dir)));

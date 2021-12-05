@@ -10,7 +10,7 @@ import java.util.ArrayList;
 /**
  * Scene manager contains and manages all of the tiles and elements in a level.
  *
- * @author William Randle, Lloyd, Adrian, Yazan
+ * @author William Randle, Lloyd Garret, Adrian Zabiza, Yazan Adi
  */
 
 public class Level {

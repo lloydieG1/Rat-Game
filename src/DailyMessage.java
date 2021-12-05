@@ -6,18 +6,16 @@ import java.io.*;
  * This Class is designed to send an HTML request to a site, retrieve a string
  * and use an algorithm to translate it into a key which when sent as an HTML
  * request will return the Message of the day, which is then displayed in-game.
- *
  * @author Jack Lennard, William Randle
+ * @version 1.0
  */
-
 public class DailyMessage {
     private static final String WEBSITE_URL = "http://cswebcat.swansea.ac.uk/puzzle";
 
     /**
-     * gets the unsolved code used to retrieve the MOTD.
-     *
-     * @param args
-     * @return String of unsolved cipher
+     * Gets the unsolved code used to retrieve the Message Of The Day.
+     * @param args Array of arguments.
+     * @return String of unsolved cipher.
      * @throws IOException
      */
     private static String getURLstring(String args[]) throws IOException, UnknownHostException {
@@ -37,11 +35,10 @@ public class DailyMessage {
     }
 
     /**
-     * solves the code from parsed unsolved code, which is then used to get the
+     * Solves the code from parsed unsolved code, which is then used to get the
      * message of the day.
-     *
-     * @param args
-     * @return String solved cipher to get MOTD
+     * @param args Array of arguments.
+     * @return String solved cipher to get Message Of The Day. 
      * @throws IOException
      */
     private static String translateURLstring(String args[]) throws IOException {
@@ -72,10 +69,9 @@ public class DailyMessage {
     }
 
     /**
-     * returns the message of the day as a string.
-     *
-     * @param args
-     * @return String message of the day
+     * Returns the message of the day as a string.
+     * @param args Array of arguments.
+     * @return String message of the day.
      * @throws IOException
      */
     public static String getMessage(String args[]) throws IOException, UnknownHostException {

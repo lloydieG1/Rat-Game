@@ -7,7 +7,6 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
-
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;

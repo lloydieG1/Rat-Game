@@ -2,37 +2,35 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 /**
- * Description.
- *
- * @author
+ * This class constructs Poison item and implements all its features.
+ * @author William Randle
  */
 public class Poison extends Element {
 
     private Image image;
     public static final int MAX_HEALTH = 1;
 
-
     /**
-     * Description.
-     *
-     * @param type
-     * @param level
-     * @param x
-     * @param y
-     * @param health
+     * Create the poison element.
+     * @param type	 Element type.
+     * @param level  Level number.
+     * @param x      The x coordinate position.
+     * @param y      The y coordinate position.
+     * @param health Remaining health.
      */
     public Poison(ElementType type, Level level, int x, int y, int health) {
         super(type, level, x, y, Direction.North, health);
-
+        
         image = ImageLoader.getImage("poison.png", 64);
     }
 
     private void logic() {
-//unused
+    	
     }
 
     /**
-     * Description.
+     * If poison shares a tile with a rat, kill that rat and remove 
+     * this poison from the level.
      */
     public void checkRat() {
         boolean alreadyPoisoned = false;
@@ -44,7 +42,6 @@ public class Poison extends Element {
                 level.removeElement(this);
             }
         }
-
     }
 
     @Override

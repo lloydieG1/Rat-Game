@@ -4,22 +4,21 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 /**
- * This class is to construct bombs and hold all its features.
- * 
+ * This class constructs bomb item and implements all its features.
  * @author Jack
+ * @version 2.0
  */
 public class Bomb extends Element {
 	private Image image;
 	public static final int BLAST_TIME = 4;
 
 	/**
-	 * Construct a bomb element.
-	 * 
-	 * @param type   Element type
-	 * @param level  Level number
-	 * @param x      X position
-	 * @param y      Y position
-	 * @param health Remaining health till explosion
+	 * Construct the Bomb element.
+	 * @param type   Element type.
+	 * @param level  Level number.
+	 * @param x      The x coordinate position.
+	 * @param y      The y coordinate position.
+	 * @param health Remaining health till explosion.
 	 */
 	public Bomb(ElementType type, Level level, int x, int y, int health) {
 		super(type, level, x, y, Direction.North, health);
