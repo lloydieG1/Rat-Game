@@ -4,9 +4,10 @@ import javafx.scene.image.Image;
 
 
 /**
- * Description.
+ * This class constructs Male Sex Change item and implements all its features.
  *
- * @author adrian
+ * @author Adrian.
+ * @version 1.0
  */
 public class MaleChanger extends Element {
 
@@ -14,21 +15,19 @@ public class MaleChanger extends Element {
     private int maleChangeCount;
 
     /**
-     * Description.
-     *
-     * @param type
-     * @param level
-     * @param x
-     * @param y
-     * @param health
+     * Create Male Sex Changer item.
+     * @param type   Element type.
+     * @param level  Level number.
+     * @param x      The x coordinate position.
+     * @param y      The y coordinate position.
+     * @param health Remaining health.
      */
     public MaleChanger(ElementType type, Level level, int x, int y, int health) {
         super(type, level, x, y, Direction.North, health);
-        // TODO Auto-generated constructor stub
+        
         maleChangeCount = 0;
         image = ImageLoader.getImage("maleGenderChange.png", 64);
     }
-
 
     /**
      * Runs Tick() behaviours, allowing them to run logics automatically
@@ -57,6 +56,9 @@ public class MaleChanger extends Element {
         }
     }
 
+    /**
+     * Change rat to male if rat was female.
+     */
     private void changeSex() {
         for (Element element : level.getElements(x, y)) {
             if (element.getType().equals(ElementType.Rat)) {
@@ -71,8 +73,7 @@ public class MaleChanger extends Element {
 
     /**
      * Renders a Male Changer sign.
-     *
-     * @param g graphics context
+     * @param g GraphicsContext.
      */
     @Override
     protected void render(GraphicsContext g) {

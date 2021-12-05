@@ -2,12 +2,11 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
-
 /**
- * Class used for construction and behaviours of StopSign elements.
- *
+ * This class constructs the stop sign item and implements all its features.
  * @author William Randle
  * @author Jack Lennard
+ * @version 2.0
  */
 public class StopSign extends Element {
 
@@ -15,13 +14,12 @@ public class StopSign extends Element {
     public static final int MAX_HEALTH = 5;
 
     /**
-     * Description.
-     *
-     * @param type
-     * @param level
-     * @param x
-     * @param y
-     * @param health
+     * Create stop sign.
+     * @param type   Element type.
+     * @param level  Level number.
+     * @param x      The x coordinate position.
+     * @param y      The y coordinate position.
+     * @param health Remaining health.
      */
     public StopSign(ElementType type, Level level, int x, int y, int health) {
         super(type, level, x, y, Direction.North, health);
@@ -55,11 +53,17 @@ public class StopSign extends Element {
         }
     }
 
+    /**
+     * Take damage from rat which try to access the location.
+     */
     public void blocksUp() {
         health++;
         changeSkin();
     }
 
+    /**
+     * Change skin to reflect current health.
+     */
     private void changeSkin() {
         if (health == 0) {
             image = ImageLoader.stopSign;
@@ -74,10 +78,8 @@ public class StopSign extends Element {
         }
     }
 
-
     /**
      * Renders a Stop Sign.
-     *
      * @param g graphics context
      */
     protected void render(GraphicsContext g) {
@@ -87,3 +89,4 @@ public class StopSign extends Element {
         g.drawImage(image, x, y, size, size);
     }
 }
+

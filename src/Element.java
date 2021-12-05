@@ -31,7 +31,6 @@ public abstract class Element {
 
     /**
      * Constructs an element with x,y, level it is in and type.
-     *
      * @param type  Element type.
      * @param level Level number.
      * @param x     The x coordinate position.
@@ -61,7 +60,6 @@ public abstract class Element {
 
     /**
      * Gives the element type as a string.
-     *
      * @return Element type in string form.
      */
     public String typeAsString() {
@@ -94,7 +92,6 @@ public abstract class Element {
 
     /**
      * Sets the age of the element to parsed int.
-     *
      * @param age int age of the element.
      */
     public void setAge(int age) {
@@ -295,7 +292,7 @@ public abstract class Element {
     }
 
     /**
-     * gives a direction to the left of the parsed direction
+     * Gives a direction to the left of the parsed direction.
      * @param dir Direction we want the left of.
      * @return Direction to the left of the parsed one.
      */
@@ -379,8 +376,8 @@ public abstract class Element {
 
     /**
      * Gives a Direction from parsed number of degrees.
-     * @param degrees int form of direction
-     * @return A Direction equivalent to the parsed int degrees
+     * @param degrees int form of direction.
+     * @return A Direction equivalent to the parsed int degrees.
      */
     protected Direction numAsDir(int degrees) {
         if (degrees == 0) {
@@ -397,9 +394,8 @@ public abstract class Element {
 
 
     /**
-     * gives the x position for where the element should be rendered on screen
-     *
-     * @return The rendered version of X
+     * Gives the x position for where the element should be rendered on screen.
+     * @return The rendered version of X.
      */
     protected double renderX() {
         double x = (int) (this.x * Game.gameSize + Game.gameX);
@@ -408,9 +404,8 @@ public abstract class Element {
     }
 
     /**
-     * gives the y position for where the element should be rendered on screen
-     *
-     * @return The rendered version of Y
+     * Gives the y position for where the element should be rendered on screen.
+     * @return The rendered version of Y.
      */
     protected double renderY() {
         double y = (int) (this.y * Game.gameSize + Game.gameY);
@@ -421,19 +416,17 @@ public abstract class Element {
 
 
     /**
-     * returns any extra information for an element. by default gives nothing,
+     * Returns any extra information for an element. by default gives nothing,
      * and should be overridden when an element requires extra info when saving.
-     *
-     * @return extra information for a given element
+     * @return extra information for a given element.
      */
     protected String extraInfo() {
         return "";
     }
 
     /**
-     * kills a parsed rat, increasing the score by the correct amount
-     *
-     * @param rat
+     * Kills a parsed rat, increasing the score by the correct amount.
+     * @param rat 
      */
     protected void killRat(Rat rat) {
         if (rat.getIsPregnant()) {
@@ -447,10 +440,9 @@ public abstract class Element {
 
 
     /**
-     * gives the String version of a Direction type.
-     *
-     * @param dir Direction to get the string of
-     * @return direction as a string
+     * Gives the String version of a Direction type.
+     * @param dir Direction to get the string of.
+     * @return Direction as a string.
      */
     protected String dirAsString(Direction dir) {
         if (dir == Direction.North) {
@@ -467,7 +459,7 @@ public abstract class Element {
 
     /**
      * Changes direction until not stuck.
-     * If there is no direction to move, it should stay in the same Direction
+     * If there is no direction to move, it should stay in the same Direction.
      */
     private void changeDirectionIfStuck() {
 
