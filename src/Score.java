@@ -10,8 +10,6 @@ import java.util.Comparator;
 public class Score implements Comparable {
     public static final int PRECISION = 1000;
 
-    private static final String PROFILE_FILE_PATH = "res/maps/highScores";
-
     private String username;
     private double time;
     private int points;
@@ -62,13 +60,14 @@ public class Score implements Comparable {
         for (int i = 0; i < lettersUnderLimit; i++) {
             padding = padding + " ";
         }
-        return username + padding + " - " + points + " - in: " + String.format("%.3f", time) + " seconds";
+        return username + padding + " - " + points + " - in: "
+                + String.format("%.3f", time) + " seconds";
     }
 
 
     /**
      * @param score the score comparing against
-     * @return the comparison result points, sorting in ascending order of points
+     * @return int result points, sorting in ascending order of points
      */
     @Override
     public int compareTo(Object score) {
@@ -87,12 +86,13 @@ public class Score implements Comparable {
          * compares two times together and gives comparison in descending order
          * @param score1 first score to compare against
          * @param score2 second score to compare agianst
-         * @return the comparison result time sorting in descending order
+         * @return intcomparison result time sorting in descending order
          */
         public int compare(Score score1, Score score2) {
 
 
-            return (int) (score1.getTime() * Score.PRECISION - score2.getTime() * Score.PRECISION);
+            return (int) (score1.getTime() * Score.PRECISION - score2.getTime()
+                    * Score.PRECISION);
 
         }
 

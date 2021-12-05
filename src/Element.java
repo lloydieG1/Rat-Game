@@ -16,20 +16,19 @@ public abstract class Element {
     protected int currentTick = 0; //the current tick in the cycle (eg 3/(maxfps))
     protected Level level; //the level the element is in so it can use getElements
     protected int age = 0; //age of the element in ticks
-    protected Direction dir;
+    protected Direction dir; // the current direction of the element
 
-    protected boolean flagRemoval = false;
-    //determines if level should remove this element at the end of the tick
 
-    protected double size = Game.gameSize;
-    protected double factor = Game.gameSize;
+    protected boolean flagRemoval = false; //if the element should be removed
 
-    protected int nextX;
-    protected int nextY;
-    protected Direction lastDir = Direction.North;
-    protected int health;
+    protected double size = Game.gameSize; // the size when rendered
 
-    protected boolean hitStopSign = false;
+    protected int nextX; //the next x position of the element
+    protected int nextY; //the next y position of the element
+    protected Direction lastDir = Direction.North; //the last direction
+    protected int health; //the health of the element. if 0, it dies
+
+    protected boolean hitStopSign = false; //if it hit a stopsign this tick
 
     /**
      * Constructs an element with x,y, level it is in and type.
@@ -418,8 +417,8 @@ public abstract class Element {
      * @return The rendered version of X
      */
     protected double renderX() {
-        double x = (int) (this.x * factor + Game.gameX);
-        double nextX = (int) (this.nextX * factor + Game.gameX);
+        double x = (int) (this.x * Game.gameSize + Game.gameX);
+        double nextX = (int) (this.nextX * Game.gameSize + Game.gameX);
         return interpolate(x, nextX);
     }
 
@@ -429,8 +428,8 @@ public abstract class Element {
      * @return The rendered version of Y
      */
     protected double renderY() {
-        double y = (int) (this.y * factor + Game.gameY);
-        double nextY = (int) (this.nextY * factor + Game.gameY);
+        double y = (int) (this.y * Game.gameSize + Game.gameY);
+        double nextY = (int) (this.nextY * Game.gameSize + Game.gameY);
         return interpolate(y, nextY);
 
     }
