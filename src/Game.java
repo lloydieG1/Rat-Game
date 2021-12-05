@@ -453,11 +453,12 @@ public class Game extends Application {
 
 
     /**
-     * prevents a value being above or below parsed ints
-     * @param var
-     * @param min
-     * @param max
-     * @return
+     * Prevents a value being above or below parsed doubles.
+     *
+     * @param var Value to check
+     * @param min Allowed minimum
+     * @param max Allowed maximum
+     * @return The allowed number within range
      */
     public static double minMax(double var, double min, double max) {
         if(var >= max) {

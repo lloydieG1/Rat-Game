@@ -49,15 +49,24 @@ public abstract class Element {
 
   }
 
-  protected void alignPosition() {
-      nextY = y;
-      nextX = x;
-      lastDir =dir;
-  }
+    /**
+     * Organise element properties into 1 string.
+     *
+     * @return A String with all needed element properties
+     */
+    public String asString() {
+        return typeAsString() + "," + health + "," + age + "," + nextX + ","
+                + nextY + "," + dirAsString(dir) + extraInfo();
+    }
 
-  public void setAge(int age) {
-      this.age = age;
-  }
+    /**
+     * sets the age of the element to parsed int
+     * @param age int age of the element
+     */
+    public void setAge(int age) {
+        this.age = age;
+    }
+
 
   /**
    * Get type of an Element.
@@ -86,7 +95,18 @@ public abstract class Element {
     return y;
   }
 
-  /**
+
+    /**
+     * realigns the elements position and direction, making it still for 1 tick
+     */
+    protected void alignPosition() {
+        nextY = y;
+        nextX = x;
+        lastDir =dir;
+    }
+
+
+    /**
    * Executes element logics to allow time-based interactions.
    */
   protected abstract void tick();
@@ -98,14 +118,6 @@ public abstract class Element {
    */
   protected abstract void render(GraphicsContext g);
 
-  /**
-   * Check if the element needs to be removed from the level at the end of the tick.
-   *
-   * @return If a flag should be removed.
-   */
-  public boolean isFlagRemoval() {
-    return isFlagRemoval();
-  }
 
   /**
    * Handles the movement of the rat.
@@ -274,7 +286,7 @@ public abstract class Element {
     } else if (x2 - x1 < -180) {
       x2 = x2 + 360;
     }
-    double currentTick = minMax(this.currentTick, 0, tickSpeed / 2);
+    double currentTick = Game.minMax(this.currentTick, 0, tickSpeed / 2.0);
     double tickSpeed = this.tickSpeed / 2.0;
     return cosineInterpolation(x1, x2, currentTick, tickSpeed);
   }
@@ -284,23 +296,6 @@ public abstract class Element {
     return x1 + (x2 - x1) * m2;
   }
 
-  /**
-   * Prevents a value being above or below parsed ints.
-   *
-   * @param var Value to check
-   * @param min Allowed minimum
-   * @param max Allowed maximum
-   * @return The allowed number within range
-   */
-  public int minMax(int var, int min, int max) {
-    if (var >= max) {
-      return max;
-    } else if (var <= min) {
-      return min;
-    } else {
-      return var;
-    }
-  }
 
   /**
    * Change to a number instead of a Direction value.
@@ -346,36 +341,6 @@ public abstract class Element {
   }
 
 
-
-
-    private String typeAsString() {
-    if (type == null) {
-      return "-";
-    }
-    if (type.equals(ElementType.Rat)) {
-      return "rat";
-    }
-    if (type.equals(ElementType.Bomb)) {
-      return "bomb";
-    } else if (type.equals(ElementType.Gas)) {
-      return "gas";
-    } else if (type.equals(ElementType.Sterilise)) {
-      return "sterilise";
-    } else if (type.equals(ElementType.Poison)) {
-      return "poison";
-    } else if (type.equals(ElementType.FemaleGenderChange)) {
-      return "femaleGenderChange";
-    } else if (type.equals(ElementType.MaleGenderChange)) {
-      return "maleGenderChange";
-    } else if (type.equals(ElementType.StopSign)) {
-      return "stopSign";
-    } else if (type.equals(ElementType.DeathRat)) {
-      return "deathRat";
-    } else {
-      return "-";
-    }
-  }
-
  
   protected String extraInfo() {
     return "";
@@ -405,13 +370,32 @@ public abstract class Element {
     return "0";
   }
 
-  /**
-   * Organise element properties into 1 string.
-   *
-   * @return A String with all needed element properties
-   */
-  public String asString() {
-    return typeAsString() + "," + health + "," + age + "," + nextX + ","
-                          + nextY + "," + dirAsString(dir) + extraInfo();
-  }
+    private String typeAsString() {
+        if (type == null) {
+            return "-";
+        }
+        if (type.equals(ElementType.Rat)) {
+            return "rat";
+        }
+        if (type.equals(ElementType.Bomb)) {
+            return "bomb";
+        } else if (type.equals(ElementType.Gas)) {
+            return "gas";
+        } else if (type.equals(ElementType.Sterilise)) {
+            return "sterilise";
+        } else if (type.equals(ElementType.Poison)) {
+            return "poison";
+        } else if (type.equals(ElementType.FemaleGenderChange)) {
+            return "femaleGenderChange";
+        } else if (type.equals(ElementType.MaleGenderChange)) {
+            return "maleGenderChange";
+        } else if (type.equals(ElementType.StopSign)) {
+            return "stopSign";
+        } else if (type.equals(ElementType.DeathRat)) {
+            return "deathRat";
+        } else {
+            return "-";
+        }
+    }
+
 }
