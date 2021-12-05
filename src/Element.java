@@ -61,7 +61,7 @@ public abstract class Element {
     }
 
     /**
-     * gives the
+     * gives the element type as
      * @return
      */
     public String typeAsString() {

@@ -29,10 +29,7 @@ public class Poison extends Element {
   }
   
   private void logic() {
-    checkRat();
-    if (health <= 0) {
-      level.removeElement(this);
-    }
+//unused
   }
   
   /**
@@ -45,6 +42,9 @@ public class Poison extends Element {
     	  killRat(rat);
       }
     }
+      if (health <= 0) {
+          level.removeElement(this);
+      }
   }
 
     @Override
@@ -67,6 +67,7 @@ public class Poison extends Element {
       level.removeElement(this);
       System.out.println("deleting poison");
     }
+      checkRat();
     currentTick++;
     if (currentTick > tickSpeed) {
       currentTick = 0;
