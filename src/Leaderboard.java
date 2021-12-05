@@ -7,6 +7,10 @@ import java.util.Collections;
 import java.util.Scanner;
 
 /**
+ * this class allows access to and updating of the top 10 leaderboards
+ * for points and for time of completion for each level.
+ *
+ *
  * @author William Randle
  */
 public class Leaderboard {
@@ -203,6 +207,7 @@ public class Leaderboard {
 
     /**
      * removes all but the first 10 scores in an arraylist of scores
+     *
      * @param scores Arraylist of scores to truncate
      * @return Arraylist of first 10 scores
      */
@@ -224,8 +229,9 @@ public class Leaderboard {
 
     /**
      * gets the scores from the given table based on the parsed type.
+     *
      * @param levelName String name of the level for the scores
-     * @param table int the table we are getting (0=points, 1 = times)
+     * @param table     int the table we are getting (0=points, 1 = times)
      * @return Arraylist of scores in the top 10 of the specified table
      */
     public static ArrayList<Score> getScores(String levelName, int table) {
@@ -267,6 +273,12 @@ public class Leaderboard {
 
     }
 
+    /**
+     * creates a file if one doesnt already exist, so there will always be
+     * highscore tables for every level
+     *
+     * @param level String the level for which a table needs to be made
+     */
     private static void createFileIfNotExists(String level) {
 
         try {
@@ -283,7 +295,12 @@ public class Leaderboard {
     }
 
 
-
+    /**
+     * gets the scanner for the table required, so it can be read from.
+     *
+     * @param level String name of the levels highscores we are reading
+     * @return
+     */
     private static Scanner openLeaderboard(String level) {
         File inputFile = new File(levelToPath(level));
 
@@ -291,10 +308,9 @@ public class Leaderboard {
         createFileIfNotExists(level);
 
         Scanner in = null;
-        //attempts to open file and returns exception if it is not found
         try {
             in = new Scanner(inputFile);
-            // System.out.println(inputFile);
+
         } catch (FileNotFoundException e) {
             System.out.println(OPEN_FILE_ERROR + level);
             System.exit(0);
@@ -303,6 +319,12 @@ public class Leaderboard {
     }
 
 
+    /**
+     * gives the level path for a parsed level
+     *
+     * @param level String name of the level we want
+     * @return String the full path to the File.
+     */
     private static String levelToPath(String level) {
         String filePath = LEADER_BOARD_PATH + level + ".txt";
         return filePath;
