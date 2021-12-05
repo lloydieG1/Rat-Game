@@ -183,31 +183,28 @@ public class Game extends Application {
      */
     public void keyUp(KeyEvent event) {
 
-        // We change the behaviour depending on the actual key that was pressed.
-
-
         switch (event.getCode()) {
             case RIGHT:
-                // Right key was pressed. So move the player right by one cell.
+
                 rightArrow = false;
                 break;
             case LEFT:
-                // Right key was pressed. So move the player right by one cell.
+
                 leftArrow = false;
                 break;
             case UP:
-                // Right key was pressed. So move the player right by one cell.
+
                 upArrow = false;
                 break;
             case DOWN:
-                // Right key was pressed. So move the player right by one cell.
+
                 downArrow = false;
                 break;
             default:
-                // Do nothing for all other keys.
+          
                 break;
         }
-        // Consume the event. This means we mark it as dealt with. This stops other GUI nodes (buttons etc) responding to it.
+
         event.consume();
     }
 
@@ -236,40 +233,24 @@ public class Game extends Application {
      * @param event ScrollEvent the scroll the user did
      */
     public void scrollKeyEvent(ScrollEvent event) {
-        // We change the behaviour depending on the actual key that was pressed.
-        double centerX = gameX + (visibleTiles / 2 * gameSize);
 
+        double centerX = gameX + (visibleTiles / 2 * gameSize);
         double centerY = gameY + (visibleTiles / 2 * gameSize);
 
-        switch (event.getTextDeltaYUnits()) {
-            case LINES:
-                // scroll about event.getTextDeltaY() lines
+        if (event.getTextDeltaYUnits() == ScrollEvent.VerticalTextScrollUnits.LINES) {
 
-                double scroll = event.getTextDeltaY() * (Math.log((gameSize)) / Math.log(10));
+            double scroll = event.getTextDeltaY() * (Math.log((gameSize)) / Math.log(10));
 
+            gameSize = gameSize + scroll;
 
-                gameSize = gameSize + scroll;
-
-
-                //make the scroll happen from the center instead of the top corner
-                if (minMax(gameSize, currentZoomMin, ZOOM_MAX) == gameSize) {
-                    gameX = centerX - (visibleTiles / 2 * gameSize);
-                    gameY = centerY - (visibleTiles / 2 * gameSize);
-                }
-
-                break;
-            case PAGES:
-                // scroll about event.getTextDeltaY() pages
-                break;
-            case NONE:
-                // scroll about event.getDeltaY() pixels
-                break;
-            default:
-                //Do nothing
-                break;
+            //make the scroll happen from the center instead of the top corner
+            if (minMax(gameSize, currentZoomMin, ZOOM_MAX) == gameSize) {
+                gameX = centerX - (visibleTiles / 2 * gameSize);
+                gameY = centerY - (visibleTiles / 2 * gameSize);
+            }
         }
 
-        // Consume the event. This means we mark it as dealt with. This stops other GUI nodes (buttons etc) responding to it.
+
         event.consume();
     }
 
@@ -292,8 +273,10 @@ public class Game extends Application {
 
         int mapWidth = currentLevel.getMapBounds()[0];
         int mapHeight = currentLevel.getMapBounds()[1];
-        gameY = minMax(gameY, -gameSize * (mapHeight - visibleTiles), 0);
-        gameX = minMax(gameX, -gameSize * (mapWidth - visibleTiles), 0);
+        gameY = minMax(gameY, -gameSize * (mapHeight - visibleTiles)
+                , 0);
+        gameX = minMax(gameX, -gameSize * (mapWidth - visibleTiles)
+                , 0);
 
 
     }
@@ -305,7 +288,8 @@ public class Game extends Application {
         double fractionVisible = 0.5;
         //prevent the map extending too far
         if (visibleTiles > currentLevel.getMapBounds()[0] * fractionVisible) {
-            while (visibleTiles > currentLevel.getMapBounds()[0] * fractionVisible) {
+            while (visibleTiles > currentLevel.getMapBounds()[0]
+                    * fractionVisible) {
                 gameSize++;
                 gameSize = minMax(gameSize, currentZoomMin, ZOOM_MAX);
                 visibleTiles = (gameGraphics.getCanvas().getWidth() / gameSize);
@@ -333,7 +317,8 @@ public class Game extends Application {
         clampMap();
         currentLevel.tick();
         gameGraphics.setFill(Color.color(0.3, 0.6, 0));
-        gameGraphics.fillRect(0, 0, gameGraphics.getCanvas().getWidth(), gameGraphics.getCanvas().getHeight());
+        gameGraphics.fillRect(0, 0, gameGraphics.getCanvas().getWidth()
+                , gameGraphics.getCanvas().getHeight());
         currentLevel.render(gameGraphics);
         updateScore();
         drawButtons(gameGraphics);
@@ -364,8 +349,10 @@ public class Game extends Application {
      * @param width int width of the button
      * @param height int height of the button
      */
-    private static void drawButton(GraphicsContext g, int x, int y, int width, int height) {
-        if (intersect((int) levelController.mouseX, (int) levelController.mouseY, x, y, width, height)) {
+    private static void drawButton(GraphicsContext g, int x, int y, int width
+            , int height) {
+        if (intersect((int) levelController.mouseX, (int) levelController.mouseY
+                , x, y, width, height)) {
             g.setFill(Color.color(0.2, 0.2, 0.2, 0.1));
         } else {
             g.setFill(Color.color(0.2, 0.2, 0.2, 0.7));
@@ -403,7 +390,8 @@ public class Game extends Application {
      * @param height int width of the rectangle
      * @return boolean if the parsed point intersects with the rectangle
      */
-    private static boolean intersect(int x, int y, int x1, int y1, int width, int height) {
+    private static boolean intersect(int x, int y, int x1, int y1, int width
+            , int height) {
         if (x > x1 && x < width) {
             if (y > y1 && y < height) {
                 return true;
@@ -416,7 +404,7 @@ public class Game extends Application {
      * changes the menu to the level Menu
      */
     public static void openLevelMenu() {
-        levelController.stopMusic(); //stops playing level music saving & exiting
+        levelController.stopMusic();
         levelMenuController.updateCurrentUser();
         dailyMessageLoop.stop();
         levelMenuController.refreshButtons();
@@ -429,8 +417,8 @@ public class Game extends Application {
      * changes the menu to the end game scene
      */
     public static void openEndGame() {
-        levelController.stopMusic(); //stops playing level music when level ends
-        endGameController.playAudio(); //plays audio clip stored in EndGameController
+        levelController.stopMusic();
+        endGameController.playAudio();
         endGameController.updateLeaderboard();
         primaryStage.setScene(endGame);
     }
