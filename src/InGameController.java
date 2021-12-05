@@ -116,15 +116,15 @@ public class InGameController implements Initializable {
         }
 
         if (mouseY < buttonSize) {
-            upArrow =true;
+            upArrow = true;
         }
 
         if (mouseX > Game.MAP_WIDTH-buttonSize) {
            rightArrow = true;
         }
 
-        if (mouseY> Game.MAP_HEIGHT-buttonSize) {
-            downArrow =true;
+        if (mouseY > Game.MAP_HEIGHT-buttonSize) {
+            downArrow = true;
         }
 
 
@@ -134,8 +134,8 @@ public class InGameController implements Initializable {
     @FXML
     private void mapRelease(MouseEvent event) {
 
-        upArrow =false;
-        downArrow =false;
+        upArrow = false;
+        downArrow = false;
         rightArrow = false;
         leftArrow = false;
 
@@ -164,8 +164,8 @@ public class InGameController implements Initializable {
     private void canvasMouseLeave() {
         mouseX = gameCanvas.getWidth() / 2;
         mouseY = gameCanvas.getHeight() / 2;
-        upArrow =false;
-        downArrow =false;
+        upArrow = false;
+        downArrow = false;
         rightArrow = false;
         leftArrow = false;
 
@@ -184,7 +184,7 @@ public class InGameController implements Initializable {
 
         double tilewidth = minimap.getWidth() / width;
         double tileheight = minimap.getHeight() / width;
-        double clickX = event.getX( )/ tilewidth;
+        double clickX = event.getX( ) / tilewidth;
         double clickY = event.getY() / tileheight;
 
         //adjust so centered:
@@ -226,7 +226,7 @@ public class InGameController implements Initializable {
                     // We do not use the transfer mode (this can be used to indicate different forms
                     // of drags operations, for example, moving files or copying files).
                     Dragboard db = item.startDragAndDrop(TransferMode.ANY);
-                     db.setDragView(item.getImage());
+                    db.setDragView(item.getImage());
 
                     // We have to put some content in the clipboard of the drag event.
                     // We do not use this, but we could use it to store extra data if we wished.
@@ -245,22 +245,22 @@ public class InGameController implements Initializable {
 
     public void resetItems() {
 
-        while (bombPane.getChildren().size() >0) {
+        while (bombPane.getChildren().size() > 0) {
             bombPane.getChildren().remove(0);
         }
-        while (deathRatPane.getChildren().size() >0) {
+        while (deathRatPane.getChildren().size() > 0) {
             deathRatPane.getChildren().remove(0);
         }
 
-        while (gasPane.getChildren().size() >0) {
+        while (gasPane.getChildren().size() > 0) {
             gasPane.getChildren().remove(0);
         }
 
-        while (stopSignPane.getChildren().size() >0) {
+        while (stopSignPane.getChildren().size() > 0) {
             stopSignPane.getChildren().remove(0);
         }
         
-        while (poisonPane.getChildren().size() >0) {
+        while (poisonPane.getChildren().size() > 0) {
         	poisonPane.getChildren().remove(0);
         }
         
@@ -297,15 +297,15 @@ public class InGameController implements Initializable {
                     deathRatPane.getChildren().add(getItem(ElementType.DeathRat));
                 }
             } else if (itemType.equals(ElementType.Gas)) {
-                if(gasPane.getChildren().size() <maxItems) {
+                if(gasPane.getChildren().size() < maxItems) {
                     gasPane.getChildren().add(getItem(ElementType.Gas));
                 }
             } else if (itemType.equals(ElementType.StopSign)) {
-                if(stopSignPane.getChildren().size() <maxItems) {
+                if(stopSignPane.getChildren().size() < maxItems) {
                     stopSignPane.getChildren().add(getItem(ElementType.StopSign));
                 }
             } else if (itemType.equals(ElementType.Poison)) {
-            	if(poisonPane.getChildren().size() <maxItems) {
+            	if(poisonPane.getChildren().size() < maxItems) {
             		poisonPane.getChildren().add(getItem(ElementType.Poison));
             	}
             } else if (itemType.equals(ElementType.Sterilise)) {
@@ -338,7 +338,7 @@ public class InGameController implements Initializable {
         // Print a string showing the location.
 
         x = x - Game.gameX;
-        y= y - Game.gameY;
+        y = y - Game.gameY;
         x = (x / Game.gameSize);
         y = (y / Game.gameSize);
 

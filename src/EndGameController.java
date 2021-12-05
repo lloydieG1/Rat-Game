@@ -67,7 +67,7 @@ public class EndGameController implements Initializable {
     private void sortBy() {
       sortBy++;
       if (sortBy > 1) {
-          sortBy=0;
+          sortBy = 0;
       }
       updateLeaderboard();
 
