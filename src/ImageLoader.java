@@ -31,7 +31,7 @@ public class ImageLoader {
     public static Image icon = getImage("icon.png", 64);
 
     /**
-     * Description.
+     * Create an input stream to read images.
      * @param fileName File name.
      * @param size Size of image.
      * @return The image.

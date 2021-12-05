@@ -5,8 +5,8 @@ import java.util.ArrayList;
 /**
  * Elements are objects on the map that need to interact directly with
  * the level, such as rats or items.
- *
  * @author William Randle
+ * @version 1.0
  */
 public abstract class Element {
     protected int x;
@@ -32,10 +32,10 @@ public abstract class Element {
     /**
      * Constructs an element with x,y, level it is in and type.
      *
-     * @param type  Element type
-     * @param level Level number
-     * @param x     X position
-     * @param y     Y position
+     * @param type  Element type.
+     * @param level Level number.
+     * @param x     The x coordinate position.
+     * @param y     The y coordinate position.
      */
     public Element(ElementType type, Level level, int x, int y, Direction dir
             , int health) {
@@ -52,8 +52,7 @@ public abstract class Element {
 
     /**
      * Organise element properties into 1 string.
-     *
-     * @return A String with all needed element properties
+     * @return A String with all needed element properties.
      */
     public String asString() {
         return typeAsString() + "," + health + "," + age + "," + nextX + ","
@@ -61,9 +60,9 @@ public abstract class Element {
     }
 
     /**
-     * gives the element type as a string
+     * Gives the element type as a string.
      *
-     * @return element type in string form
+     * @return Element type in string form.
      */
     public String typeAsString() {
         if (type == null) {
@@ -94,9 +93,9 @@ public abstract class Element {
     }
 
     /**
-     * sets the age of the element to parsed int
+     * Sets the age of the element to parsed int.
      *
-     * @param age int age of the element
+     * @param age int age of the element.
      */
     public void setAge(int age) {
         this.age = age;
@@ -105,7 +104,6 @@ public abstract class Element {
 
     /**
      * Get type of an Element.
-     *
      * @return type of Element
      */
     public ElementType getType() {
@@ -114,7 +112,6 @@ public abstract class Element {
 
     /**
      * Get integer X position.
-     *
      * @return X position in the map
      */
     public int getX() {
@@ -123,7 +120,6 @@ public abstract class Element {
 
     /**
      * Get integer Y position.
-     *
      * @return Y position in the map
      */
     public int getY() {
@@ -132,7 +128,7 @@ public abstract class Element {
 
 
     /**
-     * realigns the elements position and direction, making it still for 1 tick
+     * Realigns the elements position and direction, making it still for 1 tick.
      */
     protected void alignPosition() {
         nextY = y;
@@ -148,8 +144,7 @@ public abstract class Element {
 
     /**
      * Draws the element on the canvas.
-     *
-     * @param g The Graphics
+     * @param g The Graphics.
      */
     protected abstract void render(GraphicsContext g);
 
@@ -170,7 +165,7 @@ public abstract class Element {
     }
 
     /**
-     * moves in a random available direction, if there is one. otherwise it
+     * Moves in a random available direction, if there is one. Otherwise it
      * stays still.
      */
     private void moveRandom() {
@@ -187,8 +182,8 @@ public abstract class Element {
     }
 
     /**
-     * moves an element in the parsed direction
-     * @param randomDirection direction the element moves in
+     * Moves an element in the parsed direction.
+     * @param randomDirection The direction which the element moves in.
      */
     private void move(Direction randomDirection) {
         if (randomDirection.equals(Direction.South)) {
@@ -213,8 +208,7 @@ public abstract class Element {
 
     /**
      * Checks if the tile at parsed position is a eligable tile to go onto.
-     *
-     * @return If tile is safe to walk on
+     * @return If tile is safe to walk on.
      */
     protected boolean isTile(int x, int y) {
         int boardSize = level.getLength();
@@ -257,8 +251,7 @@ public abstract class Element {
 
     /**
      * Check if the rat cannot move to a nearby tile.
-     *
-     * @return If rat is stuck between tiles
+     * @return If rat is stuck between tiles.
      */
     protected boolean isStuck() {
         int checkX = x;
@@ -285,10 +278,9 @@ public abstract class Element {
     }
 
     /**
-     * gives a direction to the right of the parsed direction
-     *
-     * @param dir direction we want the right of
-     * @return direction to the right of the parsed one
+     * Gives a direction to the right of the parsed direction.
+     * @param dir Direction we want the right of.
+     * @return Direction to the right of the parsed one.
      */
     protected Direction rightDir(Direction dir) {
         if (dir.equals(Direction.North)) {
@@ -304,9 +296,8 @@ public abstract class Element {
 
     /**
      * gives a direction to the left of the parsed direction
-     *
-     * @param dir direction we want the left of
-     * @return direction to the left of the parsed one
+     * @param dir Direction we want the left of.
+     * @return Direction to the left of the parsed one.
      */
     protected Direction leftDir(Direction dir) {
         if (dir.equals(Direction.North)) {
@@ -322,11 +313,10 @@ public abstract class Element {
 
 
     /**
-     * interpolate between two values
-     *
-     * @param x1 double floor value
-     * @param x2 double ceiling value
-     * @return double a value between the two parsed values
+     * Interpolate between two values.
+     * @param x1 Double floor value.
+     * @param x2 Double ceiling value.
+     * @return Double a value between the two parsed values.
      */
     protected double interpolate(double x1, double x2) {
         return x1 + ((x2 - x1) / tickSpeed) * currentTick;
@@ -334,12 +324,11 @@ public abstract class Element {
 
 
     /**
-     * gives a interpolated value for the direction of an element for smooth
+     * Gives a interpolated value for the direction of an element for smooth
      * animation.
-     *
-     * @param x1 double the first direction
-     * @param x2 double the second direction
-     * @return double a direction between the two parsed directions
+     * @param x1 Double the first direction.
+     * @param x2 Double the second direction.
+     * @return Double a direction between the two parsed directions.
      */
     protected double interpolateDir(double x1, double x2) {
         //makes sure the rat never rotates more than 180 for a turn:
@@ -355,14 +344,13 @@ public abstract class Element {
     }
 
     /**
-     * gives a cosine interpolated interpolation between two values for
-     * smoother animation
-     *
-     * @param x1  int the current sample
-     * @param x2  int the max sample
-     * @param min double the minimum interpolated value
-     * @param max double the max interpolated value
-     * @return double a direction between the two parsed directions
+     * Gives a cosine interpolated interpolation between two values for
+     * smoother animation.
+     * @param x1  int the current sample.
+     * @param x2  int the max sample.
+     * @param min Double the minimum interpolated value.
+     * @param max Double the max interpolated value.
+     * @return Double a direction between the two parsed directions.
      */
     protected double cosineInterpolation(double x1, double x2, double min
             , double max) {
@@ -372,10 +360,9 @@ public abstract class Element {
 
 
     /**
-     * gives a number of degrees from parsed Direction.
-     *
-     * @param dir Direction of element
-     * @return A number of degrees equivalent to the direction
+     * Gives a number of degrees from parsed Direction.
+     * @param dir Direction of element.
+     * @return A number of degrees equivalent to the direction.
      */
     protected double dirAsNum(Direction dir) {
         if (dir == Direction.North) {
@@ -391,8 +378,7 @@ public abstract class Element {
     }
 
     /**
-     * gives a Direction from parsed number of degrees
-     *
+     * Gives a Direction from parsed number of degrees.
      * @param degrees int form of direction
      * @return A Direction equivalent to the parsed int degrees
      */
@@ -480,8 +466,8 @@ public abstract class Element {
     }
 
     /**
-     * changes direction until not stuck.
-     * if there is no direction to move, it should stay in the same Direction
+     * Changes direction until not stuck.
+     * If there is no direction to move, it should stay in the same Direction
      */
     private void changeDirectionIfStuck() {
 
@@ -503,11 +489,10 @@ public abstract class Element {
     }
 
     /**
-     * gives a valid direction to head in.
+     * Gives a valid direction to head in.
      * should not be run if there are no valid directions, as will cause
      * infinite loop.
-     *
-     * @return Direction a direction which is accesable.
+     * @return Direction a direction which is accessible.
      */
     private Direction getValidDirection() {
         int randomDirection = Game.random.nextInt(4);

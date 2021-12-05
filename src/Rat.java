@@ -5,10 +5,8 @@ import javafx.scene.paint.Color;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-
 /**
  * Class used for construction and behaviours of Rat elements.
- *
  * @author William Randle
  * @author Mosaed
  */
@@ -26,15 +24,15 @@ public class Rat extends Element {
     private static final int CHILD_LIKELIHOOD = 4;
 
     /**
-     * Rat.
+     * Create Rat.
      *
-     * @param type
-     * @param level
-     * @param x
-     * @param y
-     * @param isMale
-     * @param dir
-     * @param health
+     * @param type   Element Type.
+     * @param level  Level number.
+     * @param x      The x coordinate position.
+     * @param y      The x coordinate position.
+     * @param isMale Boolean for gender check.
+     * @param dir    Direction taken.
+     * @param health Remaining Health.
      */
     public Rat(ElementType type, Level level, int x, int y, boolean isMale,
                Direction dir, int health, boolean sterile) {
@@ -55,6 +53,10 @@ public class Rat extends Element {
         develop();
     }
 
+    /**
+     * 
+     * @return Sterility.
+     */
     public boolean isSterile() {
         return isSterile;
     }

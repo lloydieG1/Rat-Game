@@ -14,7 +14,6 @@ import java.util.ResourceBundle;
 
 /**
  * This class handles interactions with the end game screen.
- *
  * @author William Randle
  */
 public class EndGameController implements Initializable {
@@ -46,7 +45,7 @@ public class EndGameController implements Initializable {
     }
 
     /*
-     * Play audio at stored at AUDIO_FILE_PATH
+     * Play audio at stored at AUDIO_FILE_PATH.
      */
     public void playAudio() {
         mediaPlayer.play();
@@ -71,6 +70,9 @@ public class EndGameController implements Initializable {
         }
     }
 
+    /**
+     * Remove all text from a leaderboard.
+     */
     private void removeScores() {
         while (leaderboard.getChildren().size() > 0) {
             leaderboard.getChildren().remove(0);
@@ -100,7 +102,6 @@ public class EndGameController implements Initializable {
 
     /**
      * Give game access to this class.
-     *
      * @param url
      * @param resourceBundle
      */

@@ -60,7 +60,6 @@ public class Level {
         this.timer = timer;
     }
 
-    
     public void setStart(double zoom, double x, double y) {
         this.startY = y;
         this.startX = x;
@@ -92,21 +91,19 @@ public class Level {
 
     /**
      * Get Tile type.
-     *
-     * @param x horizontal map coordinate
-     * @param y Vertical map coordinate
-     * @return tile at parsed position
+     * @param x Horizontal map coordinate.
+     * @param y Vertical map coordinate.
+     * @return Tile at parsed position.
      */
     public Tile getTile(int x, int y) {
         return tiles[x][y];
     }
 
     /**
-     * Adds a tile of the select Type to the map at coordinates x,y.
-     *
-     * @param x
-     * @param y
-     * @param tile
+     * Adds a tile of the select Type to the map at coordinates (x,y).
+     * @param x    The x coordinate.
+     * @param y    The x coordinate.
+     * @param tile Add selected type of tile.
      */
     public void addTile(int x, int y, Tile tile) {
         tiles[x][y] = tile;
@@ -114,8 +111,7 @@ public class Level {
 
     /**
      * Get length of map.
-     *
-     * @return the total amount of tiles on the map
+     * @return The total amount of tiles on the map.
      */
     public int getLength() {
         return tiles.length;

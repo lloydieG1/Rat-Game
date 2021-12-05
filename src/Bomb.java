@@ -26,6 +26,9 @@ public class Bomb extends Element {
 		image = ImageLoader.bomb;
 	}
 
+	/**
+	 * Once exploded remove rat.
+	 */
 	protected void tick() {
 		if (level.getTile(x, y).getType().equals(TileType.Grass)) {
 			level.removeElement(this);
@@ -37,7 +40,10 @@ public class Bomb extends Element {
 			logic();
 		}
 	}
-
+    
+	/**
+	 * Run logic of bomb.
+	 */
 	private void logic() {
 		health--;
 		if (health <= 0) {
@@ -46,6 +52,9 @@ public class Bomb extends Element {
 		}
 	}
 
+	/**
+	 * Expand the explosion of a bomb in all directions until it hits grass.
+	 */
 	private void explode() {
 		level.addElementLive(new Explosion(ElementType.Explosion, level, (x), y, BLAST_TIME));
 
@@ -84,8 +93,7 @@ public class Bomb extends Element {
 	}
 
 	/**
-	 * checks if the tile at parsed position is a eligible tile to go onto.
-	 *
+	 * Checks if the tile at parsed position is a eligible tile to go onto.
 	 * @return boolean if tile is safe
 	 */
 	protected boolean isSpreadable(int x, int y) {
@@ -106,6 +114,9 @@ public class Bomb extends Element {
 		return true;
 	}
 
+	/**
+	 * Renders a bomb on the canvas.
+	 */
 	protected void render(GraphicsContext g) {
 		// get the current interpolated frame positions of rat.
 		double x = renderX();

@@ -30,6 +30,9 @@ public class DeathRat extends Element {
         image = ImageLoader.getImage("deathRat.png", 64);
     }
 
+    /**
+     * Run the logic of a death rat.
+     */
     private void logic() {
         age++;
         if (age > KILLING_AGE) {

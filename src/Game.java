@@ -80,9 +80,9 @@ public class Game extends Application {
 
 
     /**
-     * load the menus for navigation, and launch the user selection menu
+     * Load the menus for navigation, and launch the user selection menu.
      *
-     * @param primaryStage stage javafx shows things on
+     * @param primaryStage Stage javafx shows things on.
      */
     public void start(Stage primaryStage) {
         currentProfile = new PlayerProfile("anon", 0);
@@ -107,7 +107,7 @@ public class Game extends Application {
     }
 
     /**
-     * loads the game loop which handles all the logic and rendering of the game
+     * Loads the game loop which handles all the logic and rendering of the game.
      */
     private void loadGameLoop() {
         int fpstime = 1000 / FPS;
@@ -118,7 +118,7 @@ public class Game extends Application {
     }
 
     /**
-     * loads the daily message loop which allows scrolling of new daily messages
+     * Loads the daily message loop which allows scrolling of new daily messages.
      */
     private void loadDailyMessage() {
         dailyMessageLoop = new Timeline(new KeyFrame(Duration.millis(30000), (ActionEvent event) -> {
@@ -128,7 +128,7 @@ public class Game extends Application {
     }
 
     /**
-     * load the menus in the menu system
+     * Load the menus in the menu system.
      */
     private void loadMenus() {
         userSelection = loadScene("userSelection.fxml");
@@ -144,9 +144,8 @@ public class Game extends Application {
 
 
     /**
-     * navigates the map with arrow keys
-     *
-     * @param event KeyEvent key press which could be arrow keys
+     * Navigates the map with arrow keys.
+     * @param event KeyEvent key press which could be arrow keys.
      */
     public void keyDown(KeyEvent event) {
 
@@ -177,8 +176,7 @@ public class Game extends Application {
 
 
     /**
-     * stops navigating when the arrow key is released
-     *
+     * Stops navigating when the arrow key is released.
      * @param event KeyEvent key press which could be arrow keys
      */
     public void keyUp(KeyEvent event) {
@@ -209,7 +207,7 @@ public class Game extends Application {
     }
 
     /**
-     * navigates the map based on which arrow keys are currently pressed
+     * Navigates the map based on which arrow keys are currently pressed.
      */
     private static void moveMap() {
         double scroll = (Game.gameSize * 5) / FPS;
@@ -228,9 +226,9 @@ public class Game extends Application {
     }
 
     /**
-     * allows zooming in and out of the map
+     * Allows zooming in and out of the map.
      *
-     * @param event ScrollEvent the scroll the user did
+     * @param event ScrollEvent the scroll the user did.
      */
     public void scrollKeyEvent(ScrollEvent event) {
 
@@ -255,14 +253,14 @@ public class Game extends Application {
     }
 
     /**
-     * updates the score text in the level
+     * Updates the score text in the level.
      */
     public static void updateScore() {
         levelController.score.setText(Integer.toString(score));
     }
 
     /**
-     * prevents the user navigating outside the map
+     * Prevents the user navigating outside the map.
      */
     private static void clampMap() {
 
@@ -282,7 +280,7 @@ public class Game extends Application {
     }
 
     /**
-     * prevents the user from zooming far enough to see further than intented
+     * Prevents the user from zooming far enough to see further than intended.
      */
     private static void clampMapZoom() {
         double fractionVisible = 0.5;
@@ -301,7 +299,7 @@ public class Game extends Application {
 
 
     /**
-     * gives the sidebar as a string so it can be saved for replay later
+     * Gives the sidebar as a string so it can be saved for replay later.
      * @return String the number of each item in the side bar
      */
     public static String sidebarAsString() {
@@ -310,7 +308,7 @@ public class Game extends Application {
 
 
     /**
-     * runs the logic of the game and renders the game
+     * Runs the logic of the game and renders the game.
      */
     private static void tick() {
         moveMap();
@@ -328,8 +326,8 @@ public class Game extends Application {
     }
 
     /**
-     * draws the buttons which the user can use to navigate the map
-     * @param g GraphicsContext the graphics of the game
+     * Draws the buttons which the user can use to navigate the map.
+     * @param g GraphicsContext the graphics of the game.
      */
     private static void drawButtons(GraphicsContext g) {
 
@@ -342,12 +340,12 @@ public class Game extends Application {
     }
 
     /**
-     * draws a button the user could use to navigate the map
-     * @param g GraphicsContext the graphics of the game
-     * @param x int x position of hte upper left corner
-     * @param y int y position of the upper left corner
-     * @param width int width of the button
-     * @param height int height of the button
+     * Draws a button the user could use to navigate the map
+     * @param g GraphicsContext the graphics of the game.
+     * @param x int x position of hte upper left corner.
+     * @param y int y position of the upper left corner.
+     * @param width int width of the button.
+     * @param height int height of the button.
      */
     private static void drawButton(GraphicsContext g, int x, int y, int width
             , int height) {
@@ -361,7 +359,7 @@ public class Game extends Application {
     }
 
     /**
-     * sets the scene to the user menu
+     * Sets the scene to the user menu.
      */
     public static void openUserSelection() {
 
@@ -370,7 +368,7 @@ public class Game extends Application {
     }
 
     /**
-     * changes the menu to the main Menu
+     * Changes the menu to the main Menu
      */
     public static void openMainMenu() {
         dailyMessageLoop.play();
@@ -380,15 +378,15 @@ public class Game extends Application {
     }
 
     /**
-     * returns true if a point (i, j) intersects the parsed dimensions
-     * of a rectangle
-     * @param x int x position of the point
-     * @param y int y position of the point
-     * @param x1 int x position of the rectangle
-     * @param y1 int y position of the rectangle
-     * @param width int width of the rectangle
-     * @param height int width of the rectangle
-     * @return boolean if the parsed point intersects with the rectangle
+     * Returns true if a point (i, j) intersects the parsed dimensions
+     * of a rectangle.
+     * @param x int x position of the point.
+     * @param y int y position of the point.
+     * @param x1 int x position of the rectangle.
+     * @param y1 int y position of the rectangle.
+     * @param width int width of the rectangle.
+     * @param height int width of the rectangle.
+     * @return Boolean if the parsed point intersects with the rectangle.
      */
     private static boolean intersect(int x, int y, int x1, int y1, int width
             , int height) {
@@ -401,7 +399,7 @@ public class Game extends Application {
     }
 
     /**
-     * changes the menu to the level Menu
+     * Changes the menu to the level Menu.
      */
     public static void openLevelMenu() {
         levelController.stopMusic();
@@ -414,7 +412,7 @@ public class Game extends Application {
 
 
     /**
-     * changes the menu to the end game scene
+     * Changes the menu to the end game scene.
      */
     public static void openEndGame() {
         levelController.stopMusic();
@@ -424,7 +422,7 @@ public class Game extends Application {
     }
 
     /**
-     * stops all the arrow keys from being active
+     * Stops all the arrow keys from being active.
      */
     public static void resetArrowKeys() {
         rightArrow = false;
@@ -437,7 +435,7 @@ public class Game extends Application {
     }
 
     /**
-     * changes the menu to the level Menu
+     * Changes the menu to the level Menu.
      */
     public static void openGameScene(String levelName) {
 
@@ -456,7 +454,7 @@ public class Game extends Application {
     }
 
     /**
-     * pauses the gameLoop
+     * Pauses the gameLoop.
      */
     public static void pauseGame() {
 
@@ -464,9 +462,8 @@ public class Game extends Application {
     }
 
     /**
-     * loads the graphics
-     *
-     * @param graphics GraphicsContext game graphics
+     * Loads the graphics.
+     * @param graphics GraphicsContext game graphics.
      */
     public static void loadCanvas(GraphicsContext graphics) {
         gameGraphics = graphics;
@@ -474,9 +471,8 @@ public class Game extends Application {
     }
 
     /**
-     * loads the graphics for the ratlives indicator
-     *
-     * @param graphics GraphicsContext ratlives graphics
+     * Loads the graphics for the ratlives indicator.
+     * @param graphics GraphicsContext ratlives graphics.
      */
     public static void loadRatLives(GraphicsContext graphics) {
         ratLives = graphics;
@@ -485,10 +481,10 @@ public class Game extends Application {
 
 
     /**
-     * loads an fxml file from parsed filename string
+     * Loads an fxml file from parsed filename string.
      *
-     * @param fxmlFile string the name of the file to be loaded
-     * @return a complete scene which can be shown
+     * @param fxmlFile String the name of the file to be loaded.
+     * @return A complete scene which can be shown.
      */
     private Scene loadScene(String fxmlFile) {
         try {
@@ -504,11 +500,10 @@ public class Game extends Application {
 
     /**
      * Prevents a value being above or below parsed doubles.
-     *
-     * @param var Value to check
-     * @param min Allowed minimum
-     * @param max Allowed maximum
-     * @return The allowed number within range
+     * @param var Value to check.
+     * @param min Allowed minimum.
+     * @param max Allowed maximum.
+     * @return The allowed number within range.
      */
     public static double minMax(double var, double min, double max) {
         if (var >= max) {
@@ -523,16 +518,16 @@ public class Game extends Application {
 
 
     /**
-     * adds an item to the sidebar in the level controller
-     * @param itemType ElementType the type of item which is being added
+     * Adds an item to the sidebar in the level controller.
+     * @param itemType ElementType the type of item which is being added.
      */
     public static void addItem(ElementType itemType) {
         levelController.addItem(itemType);
     }
 
     /**
-     * laods the graphics for the minimap canvas
-     * @param g GraphicsContext the graphics for the minimap
+     * Loads the graphics for the minimap canvas.
+     * @param g GraphicsContext the graphics for the minimap.
      */
     public static void setMiniMap(GraphicsContext g) {
         minimap = g;
@@ -540,8 +535,8 @@ public class Game extends Application {
 
 
     /**
-     * ends the game with a parsed message for the user.
-     * @param message String message for the user
+     * Ends the game with a parsed message for the user.
+     * @param message String message for the user.
      */
     public static void endGame(String message) {
         levelController.wrongScreen = true;
@@ -552,7 +547,7 @@ public class Game extends Application {
 
 
     /**
-     * closes the javafx window.
+     * Closes the javafx window.
      */
     public static void quit() {
         primaryStage.close();
@@ -560,7 +555,7 @@ public class Game extends Application {
 
 
     /**
-     * launches the application
+     * Launches the application.
      * @param args
      */
     public static void main(String[] args) {

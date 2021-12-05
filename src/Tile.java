@@ -31,10 +31,9 @@ public class Tile {
 
     /**
      * Tile Constructor.
-     *
-     * @param type the variant of tile
-     * @param y    the y position of the tile
-     * @param x    the x position of the tile
+     * @param type The variant of tile.
+     * @param y    The y position of the tile.
+     * @param x    The x position of the tile.
      */
     public Tile(TileType type, int y, int x) {
         this.type = type;
@@ -50,9 +49,8 @@ public class Tile {
     }
 
     /**
-     * get if tile is next to grass
-     *
-     * @return boolean if the tile is next to grass
+     * Get if tile is next to grass.
+     * @return Boolean if the tile is next to grass.
      */
     public TileType getType() {
         return type;
@@ -83,8 +81,7 @@ public class Tile {
 
 
     /**
-     * renders the side for a grass tile
-     *
+     * Renders the side for a grass tile.
      * @param g
      * @param edges
      */

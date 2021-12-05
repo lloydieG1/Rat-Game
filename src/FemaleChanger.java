@@ -3,22 +3,22 @@ import javafx.scene.paint.Color;
 import javafx.scene.image.Image;
 
 /**
- * Description.
+ * This class constructs Female Sex Change item and implements all its features.
  *
- * @author adrian
+ * @author Adrian
+ * @version 2.0
  */
 public class FemaleChanger extends Element {
     private Image image;
     private int femaleChangeCount;
 
     /**
-     * Description.
-     *
-     * @param type
-     * @param level
-     * @param x
-     * @param y
-     * @param health
+     * Create Female Sex Changer.
+     * @param type   Element type.
+     * @param level  Level number.
+     * @param x      The x coordinate position.
+     * @param y      The y coordinate position.
+     * @param health Remaining health.
      */
     public FemaleChanger(ElementType type, Level level, int x, int y, int health) {
         super(type, level, x, y, Direction.North, health);
@@ -54,6 +54,9 @@ public class FemaleChanger extends Element {
         }
     }
 
+    /**
+     * Change the sex of a rat if Female Gender Item shares a tile with a male rat. 
+     */
     private void changeSex() {
         for (Element element : level.getElements(x, y)) {
             if (element.getType().equals(ElementType.Rat)) {
@@ -69,7 +72,6 @@ public class FemaleChanger extends Element {
 
     /**
      * Renders a Male Changer sign.
-     *
      * @param g graphics context
      */
     @Override

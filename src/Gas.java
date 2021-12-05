@@ -116,7 +116,6 @@ public class Gas extends Element {
 
     /**
      * Get Age.
-     *
      * @return Age
      */
     public int getAge() {
@@ -125,8 +124,7 @@ public class Gas extends Element {
 
 
     /**
-     * Renders a rat.
-     *
+     * Renders gas.
      * @param g graphics context
      */
     protected void render(GraphicsContext g) {

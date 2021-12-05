@@ -15,13 +15,12 @@ public class Explosion extends Element {
 
 
     /**
-     * Create 
-     *
-     * @param type
-     * @param level
-     * @param x
-     * @param y
-     * @param health
+     * Create the explosion of bomb item.
+     * @param type   Element type.
+     * @param level  Level number.
+     * @param x      The x coordinate position.
+     * @param y      The y coordinate position.
+     * @param health Remaining health.
      */
     public Explosion(ElementType type, Level level, int x, int y, int health) {
         super(type, level, x, y, Direction.North, health);
@@ -61,7 +60,9 @@ public class Explosion extends Element {
         }
     }
 
-
+    /**
+     * Render the explosion.
+     */
     protected void render(GraphicsContext g) {
         double size = Game.gameSize;
 
