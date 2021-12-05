@@ -54,7 +54,7 @@ public class Leaderboard {
 
         max = DISPLAY_COUNT > scores.size();
         //check if the score is in the top 10 for score
-        scores = sortScores(scores);
+        scores = sortPoints(scores);
 
         boolean isTop10;
 
@@ -67,7 +67,7 @@ public class Leaderboard {
 
         if (isTop10) {
             scores.add(newScore);
-            scores = sortScores(scores);
+            scores = sortPoints(scores);
 
             updateTable(leaderboardFile, scores);
         }
@@ -127,32 +127,35 @@ public class Leaderboard {
 
     /**
      * removes the scores achieved by a user parsed username
-     * @param username String
+     * @param username String username of the user who's scores are being removed
      */
     public static void removeScores(String username) {
         File scoreDirectory = new File("res\\maps\\highScores\\");
-        int fileCount = scoreDirectory.list().length;
 
-        for (int i = 0; i < fileCount; i++) {
-            String levelName = Integer.toString(i + 1);
-            ArrayList<Score> leaderboard = getScores(levelName, 0);
-            leaderboard.removeIf(score -> score.getUsername().equals(username));
-            leaderboard = sortScores(leaderboard);
-            try {
-                FileWriter writer = new FileWriter(levelToPath(levelName));
-                for (Score score : leaderboard) {
-                    writer.append(score.toString() + "\n");
-                }
-                writer.close();
-            } catch (IOException e) {
-                System.out.println("Cannot read file.");
-                e.printStackTrace();
+
+        //remove from
+        for (File file : scoreDirectory.listFiles()) {
+            String levelName = file.getName().replace(".txt", "");
+
+            if(levelName.contains("T")) {
+
+                ArrayList<Score> leaderboard = getScores(levelName.replace("T", ""), 1);
+                leaderboard.removeIf(score -> score.getUsername().equals(username));
+                leaderboard = sortPoints(leaderboard);
+                updateTable(levelToPath(levelName), leaderboard);
+            } else {
+                ArrayList<Score> leaderboard = getScores(levelName, 0);
+                leaderboard.removeIf(score -> score.getUsername().equals(username));
+                leaderboard = sortPoints(leaderboard);
+                updateTable(levelToPath(levelName), leaderboard);
+
             }
+
         }
     }
 
 
-    private static ArrayList<Score> sortScores(ArrayList<Score> scores) {
+    private static ArrayList<Score> sortPoints(ArrayList<Score> scores) {
 
         Collections.sort(scores);
 
@@ -222,7 +225,7 @@ public class Leaderboard {
                     in.nextLine();
                 }
                 in.close();
-                return sortScores(scores);
+                return sortPoints(scores);
             } else {
                 Scanner in = openLeaderboard(levelName + TIMES_LEADERBOARD_NAME);
 
