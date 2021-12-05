@@ -357,6 +357,7 @@ public class Game extends Application {
      *changes the menu to the level Menu
      */
     public static void openLevelMenu() {
+        levelController.stopMusic(); //stops playing level music saving & exiting
         levelMenuController.updateCurrentUser();
         dailyMessageLoop.stop();
         levelMenuController.refreshButtons();
@@ -369,9 +370,9 @@ public class Game extends Application {
      *changes the menu to the end game scene
      */
     public static void openEndGame() {
+        levelController.stopMusic(); //stops playing level music when level ends
         endGameController.updateLeaderboard();
         primaryStage.setScene(endGame);
-
     }
 
     public static void resetArrowKeys() {
@@ -401,6 +402,7 @@ public class Game extends Application {
         primaryStage.setScene(levelLayout);
         levelController.setUserNameText(currentProfile.getUsername());
         levelController.setLevelNameText(currentLevel.level);
+        levelController.playMusic();
         gameLoop.play();
 
     }

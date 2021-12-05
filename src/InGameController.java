@@ -6,8 +6,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.TilePane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -25,6 +28,12 @@ public class InGameController implements Initializable {
     public boolean leftArrow= false;
     public boolean upArrow= false;
     public boolean downArrow= false;
+    
+	private final double MUSIC_VOLUME = 0.2;
+    private final String MUSIC_FILE_PATH = "res/audio/LevelMusic.mp3";
+	private Media music = new Media(new File(MUSIC_FILE_PATH).toURI().toString());
+	private MediaPlayer mediaPlayer = new MediaPlayer(music);// initialise music player
+
 
     @FXML
     Canvas gameCanvas; //canvas the game is shown on
@@ -70,10 +79,8 @@ public class InGameController implements Initializable {
     @FXML
     private Text levelName;
 
-
     public boolean wrongScreen = false;
-
-
+    
     @FXML
     private void buttonsVisible(MouseEvent event) {
         mouseX = event.getX();
@@ -100,7 +107,7 @@ public class InGameController implements Initializable {
     private void backClick() {
         wrongScreen = true;
         Game.currentLevel.saveFile();
-        Game.openMainMenu();
+        Game.openLevelMenu();
         Game.pauseGame();
 
     }
@@ -407,8 +414,23 @@ public class InGameController implements Initializable {
             System.out.println("invalid item type");
         }
     }
-
-
+    
+    /*
+     * Play music at stored at MUSIC_FILE_PATH
+     * 
+     */
+    public void playMusic() {
+    	mediaPlayer.play();
+    	mediaPlayer.setAutoPlay(true);
+    	mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+    }
+    
+    /*
+     * stops level music
+     */
+    public void stopMusic() {
+    	mediaPlayer.stop();
+    }
 
     /**
      * code run on initalization of level, 
@@ -419,6 +441,8 @@ public class InGameController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+    	mediaPlayer.setVolume(MUSIC_VOLUME); // set volume of music
+    	
         Game.loadRatLives(ratLives.getGraphicsContext2D());
         Game.levelController = this;
         Game.setMiniMap(minimap.getGraphicsContext2D());
