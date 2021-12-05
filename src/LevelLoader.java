@@ -47,7 +47,8 @@ public class LevelLoader {
 
     level.loadSideBar(parseSideBar(levelData[8]));
 
-    level.setStart(Double.parseDouble(levelData[9]), Double.parseDouble(levelData[10]),Double.parseDouble(levelData[11]));
+    level.setStart(Double.parseDouble(levelData[9]), Double.parseDouble(levelData[10]),
+    		       Double.parseDouble(levelData[11]));
 
 
     level.setTime(Double.parseDouble(levelData[12]));

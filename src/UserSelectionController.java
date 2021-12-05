@@ -69,7 +69,7 @@ public class UserSelectionController implements Initializable {
         valid.add(!playerExists(userName));
 
         if (valid.contains(false)) {
-            Alert invalidDataAlert= new Alert(Alert.AlertType.ERROR);
+            Alert invalidDataAlert = new Alert(Alert.AlertType.ERROR);
             invalidDataAlert.setTitle("incorrect input:");
             invalidDataAlert.setHeaderText(getErrorDetail(userName));
             Optional<ButtonType> resume = invalidDataAlert.showAndWait();
@@ -96,11 +96,11 @@ public class UserSelectionController implements Initializable {
     }
 
     private boolean illegalChar(char letter) {
-        if ((int)letter <=90 && (int)letter >= 65) {
+        if ((int)letter <= 90 && (int)letter >= 65) {
             return false;
-        } else if ((int)letter <=122 && (int)letter >= 97) {
+        } else if ((int)letter <= 122 && (int)letter >= 97) {
             return false;
-        } else if (((int)letter <=57 && (int)letter >= 48)) {
+        } else if (((int)letter <= 57 && (int)letter >= 48)) {
             return false;
         } else {
             return true;
@@ -120,7 +120,7 @@ public class UserSelectionController implements Initializable {
         valid.add(playerExists(userName));
 
         if (valid.contains(false)) {
-            Alert invalidDataAlert= new Alert(Alert.AlertType.ERROR);
+            Alert invalidDataAlert = new Alert(Alert.AlertType.ERROR);
             invalidDataAlert.setHeaderText("this user doesn't exist");
             Optional<ButtonType> resume = invalidDataAlert.showAndWait();
         } else {
@@ -138,7 +138,7 @@ public class UserSelectionController implements Initializable {
         valid.add(playerExists(userName));
 
         if (valid.contains(false)) {
-            Alert invalidDataAlert= new Alert(Alert.AlertType.ERROR);
+            Alert invalidDataAlert = new Alert(Alert.AlertType.ERROR);
             invalidDataAlert.setHeaderText("this user doesn't exist");
             Optional<ButtonType> resume = invalidDataAlert.showAndWait();
 

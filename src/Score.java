@@ -7,13 +7,13 @@ import java.util.Comparator;
  * @author William Randle
  */
 public class Score implements Comparable {
+	public static final int PRECISION = 1000;
+	
     private static final String PROFILE_FILE_PATH = "res/maps/highScores";
 
     private String username;
     private double time;
     private int score;
-
-    public static final int PRECISION = 1000;
 
 
     /**
@@ -54,7 +54,7 @@ public class Score implements Comparable {
     }
 
     public String toString() {
-        return username + " - " + score + " - in: "  +String.format("%.3f", time) + " seconds" ;
+        return username + " - " + score + " - in: "  + String.format("%.3f", time) + " seconds" ;
     }
 
 
@@ -62,7 +62,7 @@ public class Score implements Comparable {
     @Override
     public int compareTo(Object o) {
         Score score1 = (Score) o;
-        return score1.getScore()-this.score;
+        return score1.getScore()- this.score;
     }
 
     public static Comparator<Score> ScoreTimeComparator
@@ -72,7 +72,7 @@ public class Score implements Comparable {
         public int compare(Score score1, Score score2) {
 
 
-            return (int)(score1.getTime()*Score.PRECISION - score2.getTime()*Score.PRECISION);
+            return (int) (score1.getTime() * Score.PRECISION - score2.getTime() * Score.PRECISION);
 
         }
 

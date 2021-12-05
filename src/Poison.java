@@ -49,10 +49,10 @@ public class Poison extends Element {
 
     @Override
     protected void killRat(Rat rat) {
-        if(rat.getIsPregnant()) {
+        if (rat.getIsPregnant()) {
             level.removeElement(rat);
             health = health - 1 - rat.getPregnantTime();;
-            Game.score = Game.score + 10 + 10*rat.getPregnantTime();
+            Game.score = Game.score + 10 + 10 * rat.getPregnantTime();
         } else {
             level.removeElement(rat);
             health--;

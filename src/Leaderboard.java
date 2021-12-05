@@ -61,7 +61,7 @@ public class Leaderboard {
         if (max) {
             isTop10 = true;
         } else {
-            isTop10 = (scores.get(DISPLAY_COUNT-1).getScore() < newScore.getScore());
+            isTop10 = (scores.get(DISPLAY_COUNT - 1).getScore() < newScore.getScore());
         }
 
 
@@ -84,7 +84,7 @@ public class Leaderboard {
     }
 
     private static void addTime(Score newScore, String levelName) {
-        String timeBoardFile = levelToPath(levelName+ timeBoard);
+        String timeBoardFile = levelToPath(levelName + timeBoard);
         ArrayList<Score> scores = getScores(levelName, 1);
         boolean max;
 
@@ -97,7 +97,7 @@ public class Leaderboard {
         if (max) {
             isTop10 = true;
         } else {
-            isTop10 = (scores.get(DISPLAY_COUNT-1).getTime() > newScore.getTime());
+            isTop10 = (scores.get(DISPLAY_COUNT - 1).getTime() > newScore.getTime());
         }
 
 
@@ -125,7 +125,7 @@ public class Leaderboard {
         int fileCount = scoreDirectory.list().length;
 
         for (int i = 0; i < fileCount; i++) {
-            String levelName = Integer.toString(i+1);
+            String levelName = Integer.toString(i + 1);
             ArrayList<Score> leaderboard = getScores(levelName, 0);
             leaderboard.removeIf(score -> score.getUsername().equals(username));
             leaderboard = sortScores(leaderboard);
@@ -182,7 +182,7 @@ public class Leaderboard {
 
     public static Score getHighScore(String userName, String level, int type) {
 
-        ArrayList<Score> scores =getScores(level, type);
+        ArrayList<Score> scores = getScores(level, type);
 
         for (Score score : scores) {
             if (score.getUsername().equals(userName)) {

@@ -22,8 +22,8 @@ public class Rat extends Element {
   private int timeLeftPregnant = 0;
   private Image image;
   private static final int PREGNANT_TIME = 4;
-  private final int MAX_HEALTH = 3;
-  private final int CHILD_LIKELIHOOD =4;
+  private static final int MAX_HEALTH = 3;
+  private static final int CHILD_LIKELIHOOD = 4;
 
   /**
    * Rat.
@@ -42,14 +42,14 @@ public class Rat extends Element {
     this.isSterile = sterile;
 
       if (getIsChild()) {
-          tickSpeed = Game.FPS/2;
+          tickSpeed = Game.FPS / 2;
           image = ImageLoader.ratChild;
       }
       develop();
   }
 
   @Override
-  public void setAge(int age){
+  public void setAge(int age) {
       this.age = age;
       develop();
   }
@@ -112,12 +112,12 @@ public class Rat extends Element {
           timeLeftInMating = 0;
       }
     age++;
-      develop();
+    develop();
 
     //Can move only if mating time is finished
     if (isFinishedMating()) {
         pregnant();
-      movement();
+        movement();
     }
         
     for (Element element : level.getElements(x, y)) {
@@ -137,15 +137,12 @@ public class Rat extends Element {
    * @return Whether mating time is finished
    */
   public boolean isFinishedMating() {
-
-
       return timeLeftInMating <= 0;
-
   }
 
-    public boolean getIsChild() {
-        return age < ADULT_AGE;
-    }
+  public boolean getIsChild() {
+      return age < ADULT_AGE;
+  }
 
   private void develop() {
       if (!getIsChild()) {
@@ -179,7 +176,7 @@ public class Rat extends Element {
   }
 
   private boolean isPregnant() {
-      return timeLeftPregnant >0;
+      return timeLeftPregnant > 0;
   }
 
   private void pregnant() {
@@ -189,8 +186,7 @@ public class Rat extends Element {
       }
       if (isPregnant()) {
 
-
-              tickSpeed = Game.FPS*2;
+              tickSpeed = Game.FPS * 2;
               Rat rat = new Rat(ElementType.Rat, level, x, y,
                       Game.random.nextBoolean(), Direction.North, MAX_HEALTH, false);
               rat.setAge(0);

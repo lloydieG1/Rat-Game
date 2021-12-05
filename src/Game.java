@@ -83,7 +83,8 @@ public class Game extends Application {
 
 
     /**
-     * open the main menu and loads the other menus
+     * open the main menu and loads the other menus.
+     *
      * @param primaryStage stage javafx shows things on
      */
     public void start(Stage primaryStage) {
@@ -196,18 +197,18 @@ public class Game extends Application {
     }
 
     private static void moveMap() {
-        double scroll = (Game.gameSize*5)/FPS;
+        double scroll = (Game.gameSize * 5) / FPS;
         if (rightArrow || levelController.rightArrow) {
-            Game.gameX-=scroll;
+            Game.gameX -= scroll;
         }
         if (leftArrow || levelController.leftArrow) {
-            Game.gameX+=scroll;
+            Game.gameX += scroll;
         }
         if (upArrow || levelController.upArrow) {
-            Game.gameY+=scroll;
+            Game.gameY += scroll;
         }
         if (downArrow || levelController.downArrow) {
-            Game.gameY-=scroll;
+            Game.gameY -= scroll;
         }
     }
 
@@ -217,15 +218,15 @@ public class Game extends Application {
      */
     public void scrollKeyEvent(ScrollEvent event) {
         // We change the behaviour depending on the actual key that was pressed.
-        double centerX = gameX + (VISIBLE_TILES/2*gameSize);
+        double centerX = gameX + (VISIBLE_TILES / 2 * gameSize);
 
-        double centerY = gameY + (VISIBLE_TILES/2*gameSize);
+        double centerY = gameY + (VISIBLE_TILES / 2 * gameSize);
 
         switch(event.getTextDeltaYUnits()) {
             case LINES:
                 // scroll about event.getTextDeltaY() lines
 
-                double scroll = event.getTextDeltaY()*(Math.log((gameSize))/Math.log(10));
+                double scroll = event.getTextDeltaY() * (Math.log((gameSize)) / Math.log(10));
 
 
                 gameSize = gameSize + scroll;
@@ -233,8 +234,8 @@ public class Game extends Application {
 
                 //make the scroll happen from the center instead of the top corner
                 if (minMax(gameSize, currentZoomMin, ZOOM_MAX) == gameSize) {
-                    gameX = centerX-(VISIBLE_TILES/2*gameSize);
-                    gameY = centerY - (VISIBLE_TILES/2*gameSize);
+                    gameX = centerX - (VISIBLE_TILES / 2 * gameSize);
+                    gameY = centerY - (VISIBLE_TILES / 2 * gameSize);
                 }
 
                 break;
@@ -244,6 +245,9 @@ public class Game extends Application {
             case NONE:
                 // scroll about event.getDeltaY() pixels
                 break;
+            default:
+            	//Do nothing
+            	break;
         }
 
         // Consume the event. This means we mark it as dealt with. This stops other GUI nodes (buttons etc) responding to it.
@@ -257,7 +261,7 @@ public class Game extends Application {
         int zoomBefore = (int)gameSize;
 
         gameSize = minMax(gameSize, currentZoomMin, ZOOM_MAX);
-        VISIBLE_TILES = (gameGraphics.getCanvas().getWidth()/gameSize);
+        VISIBLE_TILES = (gameGraphics.getCanvas().getWidth() / gameSize);
         clampMapZoom();
 
 
@@ -272,7 +276,7 @@ public class Game extends Application {
     private static void clampMapZoom() {
         double fractionVisible = 0.5;
         //prevent the map extending too far
-        if (VISIBLE_TILES > currentLevel.getMapBounds()[0]*fractionVisible) {
+        if (VISIBLE_TILES > currentLevel.getMapBounds()[0] * fractionVisible) {
             while (VISIBLE_TILES > currentLevel.getMapBounds()[0] * fractionVisible) {
                 gameSize++;
                 gameSize = minMax(gameSize, currentZoomMin, ZOOM_MAX);
@@ -296,8 +300,8 @@ public class Game extends Application {
         moveMap();
         clampMap();
         currentLevel.tick();
-        gameGraphics.setFill(Color.color(0.3,0.6,0));
-        gameGraphics.fillRect(0,0,gameGraphics.getCanvas().getWidth(), gameGraphics.getCanvas().getHeight());
+        gameGraphics.setFill(Color.color(0.3, 0.6, 0));
+        gameGraphics.fillRect(0, 0, gameGraphics.getCanvas().getWidth(), gameGraphics.getCanvas().getHeight());
         currentLevel.render(gameGraphics);
         updateScore();
         drawButtons(gameGraphics);
@@ -451,19 +455,21 @@ public class Game extends Application {
 
 
     /**
-     * prevents a value being above or below parsed ints
-     * @param var
-     * @param min
-     * @param max
-     * @return
+     * Prevents a value being above or below parsed doubles.
+     *
+     * @param var Value to check
+     * @param min Allowed minimum
+     * @param max Allowed maximum
+     * @return The allowed number within range
      */
     public static double minMax(double var, double min, double max) {
-        if(var >= max)
-            return max;
-        else if (var <=min)
-            return min;
-        else
-            return var;
+        if(var >= max) {
+        	return max;
+        } else if (var <= min) {
+        	return min;
+        } else {
+        	return var;
+        }
 
     }
 

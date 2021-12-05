@@ -18,13 +18,13 @@ public class Tile {
   private final int iterations = 3;
   private final double opacityFactor = 0.6;
 
-    private final Color dark = Color.color(0.1, 0.2, 0,0.2);
-   private final  Color light =Color.color(0.5, 1, 0,0.2);
+  private final Color dark = Color.color(0.1, 0.2, 0, 0.2);
+  private final  Color light = Color.color(0.5, 1, 0, 0.2);
 
-    private final Color extraDark = Color.color(0.0, 0.1, 0,0.2);
-    private final Color extraLight =Color.color(0.6, 1, 0,0.3);
+  private final Color extraDark = Color.color(0.0, 0.1, 0, 0.2);
+  private final Color extraLight = Color.color(0.6, 1, 0, 0.3);
 
-    private double size = Game.gameSize;
+  private double size = Game.gameSize;
 
   Image image;
 
@@ -60,23 +60,24 @@ public class Tile {
   }
 
   private boolean isNotOnEdge() {
-      return (x > 0 && y > 0 && x < Game.currentLevel.getMapBounds()[0]-1 && y < Game.currentLevel.getMapBounds()[1]-1);
+      return (x > 0 && y > 0 && x < Game.currentLevel.getMapBounds()[0] - 1 && y
+    		  < Game.currentLevel.getMapBounds()[1] - 1);
   }
 
   private boolean[] nextToType(TileType type) {
 
       boolean[] edges = new boolean[4];
+      
       if (isNotOnEdge()) {
-          edges[0]=(Game.currentLevel.getTile(x + 1, y).getType().equals(type));
+          edges[0] = (Game.currentLevel.getTile(x + 1, y).getType().equals(type));
           edges[1] = (Game.currentLevel.getTile(x - 1, y).getType().equals(type));
           edges[2] = (Game.currentLevel.getTile(x, y + 1).getType().equals(type));
           edges[3] = (Game.currentLevel.getTile(x, y - 1).getType().equals(type));
-
       } else {
-          edges[0]=false;
-          edges[1]=false;
-          edges[2]=false;
-          edges[3]=false;
+          edges[0] = false;
+          edges[1] = false;
+          edges[2] = false;
+          edges[3] = false;
       }
       return edges;
   }
@@ -88,7 +89,7 @@ public class Tile {
      * @param g
      * @param edges
      */
-  private void renderSideGrass(GraphicsContext g, boolean[] edges, int shadetype,double width) {
+  private void renderSideGrass(GraphicsContext g, boolean[] edges, int shadetype, double width) {
       double factor = (int) Game.gameSize;
       double x = (int) (this.x * factor + Game.gameX);
       double y = (int) (this.y * factor + Game.gameY);
@@ -96,32 +97,20 @@ public class Tile {
       if (edges[0]) {
 
 
-          g.drawImage(image, x + (size * (detailThickness - 1)) / detailThickness, y, size/ detailThickness, size);
+          g.drawImage(image, x + (size * (detailThickness - 1)) / detailThickness,
+        		      y, size / detailThickness, size);
       }
       if (edges[1]) {
-
-
-          g.drawImage(image,x, y, size/ detailThickness, size);
-
+          g.drawImage(image, x, y, size / detailThickness, size);
       }
-
       if (edges[2]) {
-
-
-          g.drawImage(image,x, y + (size * (detailThickness - 1) / detailThickness), size, size/ detailThickness);
+          g.drawImage(image, x, y + (size * (detailThickness - 1) / detailThickness),
+        		  size, size / detailThickness);
       }
-
       if (edges[3]) {
-
-
-          g.drawImage(image,x, y, size, size/ detailThickness);
-
+          g.drawImage(image, x, y, size, size / detailThickness);
       }
-
-
       if (!(shadetype ==3)) {
-
-
           shadeDown(g, edges, shadetype, width);
       }
 
@@ -140,66 +129,48 @@ public class Tile {
           g.setFill(extraDark);
       }
       if (edges[1]) {
-
           renderLeftPanel(g, x, y, width);
-
       }
-
       if (edges[2]) {
-
           renderDownPanel(g, x, y, width);
       }
-
       if (shadeType == 0) {
           g.setFill(dark);
       } else {
           g.setFill(extraDark);
       }
-
       if (edges[0]) {
-
           renderRightPanel(g, x, y, width);
-
       }
       if (edges[3]) {
-
           renderUpPanel(g, x, y, width);
-
       }
   }
 
 
 
     private void renderRightPanel(GraphicsContext g, double x, double y, double detailThickness) {
-
-      g.fillRect(x + (size * (detailThickness - 1)) / detailThickness, y, size/ detailThickness, size);
-
+      g.fillRect(x + (size * (detailThickness - 1)) / detailThickness, y,
+    		     size / detailThickness, size);
     }
 
     private void renderLeftPanel(GraphicsContext g, double x, double y, double detailThickness) {
-
-
-        g.fillRect(x, y, size/ detailThickness, size);
+        g.fillRect(x, y, size / detailThickness, size);
     }
-
+    
     private void renderDownPanel(GraphicsContext g, double x, double y, double detailThickness) {
-
-
-        g.fillRect(x, y + (size * (detailThickness - 1) / detailThickness), size, size/ detailThickness);
+        g.fillRect(x, y + (size * (detailThickness - 1) / detailThickness), size, size / detailThickness);
     }
-
+    
     private void renderUpPanel(GraphicsContext g, double x, double y, double detailThickness) {
-
-
-        g.fillRect(x, y, size, size/ detailThickness);
+        g.fillRect(x, y, size, size / detailThickness);
     }
 
     private void renderSideTunnel(GraphicsContext g, boolean[] edges) {
         double currentDistance = detailThickness;
-
         for (int i = 0; i < iterations; i++) {
-            currentDistance = currentDistance*(1+1.0/iterations);
-            gradientTunnel(currentDistance, g, edges, opacityFactor/iterations);
+            currentDistance = currentDistance * (1 + 1.0 / iterations);
+            gradientTunnel(currentDistance, g, edges, opacityFactor / iterations);
         }
     }
 
@@ -214,30 +185,22 @@ public class Tile {
         double x = (int) (this.x * factor + Game.gameX);
         double y = (int) (this.y * factor + Game.gameY);
         double size = Game.gameSize;
-        Color dark = Color.color(0, 0, 0,opacity);
+        Color dark = Color.color(0, 0, 0, opacity);
         g.setFill(dark);
+        
         if (edges[0]) { //right
-
-            g.fillRect(x+(size*(dist-1))/dist, y+size/dist, size/dist, size-size*2/dist);
-
+            g.fillRect(x + (size * (dist - 1)) / dist, y + size / dist,
+            		   size / dist, size - size * 2 / dist);
         }
         if (edges[1]) { //left
-
-            g.fillRect(x, y+size/dist, size/dist, size-size*2/dist);
-
+            g.fillRect(x, y + size / dist, size / dist, size - size * 2 / dist);
         }
-
         if (edges[2]) {//down
-
-
-           g.fillRect(x+size/dist, y+(size*(dist-1)/dist), size-size*2/dist, size/dist);
-
+           g.fillRect(x + size / dist, y + (size * (dist - 1) / dist),
+        		      size - size * 2 / dist, size / dist);
         }
-
         if (edges[3]) {//up
-
-            g.fillRect(x+size/dist, y, size-size*2/dist, size/dist);
-
+            g.fillRect(x + size / dist, y, size - size * 2 / dist, size / dist);
         }
     }
 
@@ -254,19 +217,12 @@ public class Tile {
     g.setFill(Color.RED);
 
     if (type.equals(TileType.Grass)) {
-
-
         g.drawImage(image, x, y, size, size);
-
-
-
 
     } else if (type.equals(TileType.Path)) {
       g.setFill(Color.color(0.5, 0.5, 0.5));
       g.fillRect(x, y, size, size);
     } else if (type.equals(TileType.Tunnel)) {
-
-
         g.drawImage(image, x, y, size, size);
     }
   }
@@ -274,17 +230,13 @@ public class Tile {
   public void renderDetails(GraphicsContext g) {
       g.setFill(Color.RED);
       if (type.equals(TileType.Path)) {
-
-          renderSideTunnel(g,nextToType(TileType.Tunnel));
-
-          renderSideGrass(g,nextToType(TileType.Grass), 3, detailThickness);
+          renderSideTunnel(g, nextToType(TileType.Tunnel));
+          renderSideGrass(g, nextToType(TileType.Grass), 3, detailThickness);
+          
       } else if (type.equals(TileType.Tunnel)) {
-          renderSideGrass(g,nextToType(TileType.Path), 0, detailThickness);
-
-
-
+          renderSideGrass(g, nextToType(TileType.Path), 0, detailThickness);
       } else if (type.equals(TileType.Grass)) {
-          renderSideGrass(g,nextToType(TileType.Tunnel), 0, detailThickness);
+          renderSideGrass(g, nextToType(TileType.Tunnel), 0, detailThickness);
       }
   }
 
@@ -309,9 +261,7 @@ public class Tile {
         g.setFill(Color.color(0.5, 0.5, 0.5));
         g.fillRect(x, y, sizeX, sizeY);
     } else if (type.equals(TileType.Tunnel)) {
-
         g.setFill(Color.color(0.25, 0.5, 0));
-
         g.fillRect(x, y, sizeX, sizeY);
     }
   }
