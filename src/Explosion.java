@@ -15,7 +15,7 @@ public class Explosion extends Element {
 
 
     /**
-     * Description.
+     * Create 
      *
      * @param type
      * @param level

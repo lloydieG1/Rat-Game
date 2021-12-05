@@ -6,7 +6,8 @@ import java.io.*;
  * This Class is designed to send an HTML request to a site, retrieve a string
  * and use an algorithm to translate it into a key which when sent as an HTML
  * request will return the Message of the day, which is then displayed in-game.
- * @author Jack Lennard, William Randle
+ * @author Jack Lennard
+ * @author William Randle
  * @version 1.0
  */
 public class DailyMessage {

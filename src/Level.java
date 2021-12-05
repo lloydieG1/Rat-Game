@@ -60,6 +60,7 @@ public class Level {
         this.timer = timer;
     }
 
+    
     public void setStart(double zoom, double x, double y) {
         this.startY = y;
         this.startX = x;

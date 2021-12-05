@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 Lloydie    - 639 - in: 61.590 seconds
 Injata     - 432 - in: 48.240 seconds
 Injata     - 424 - in: 56.260 seconds
@@ -8,3 +9,14 @@ CIA        - 234 - in: 6.830 seconds
 CIA        - 233 - in: 7.060 seconds
 CIA        - 232 - in: 8.270 seconds
 CIA        - 232 - in: 8.890 seconds
+=======
+Injata     - 234 - in: 6.700 seconds
+Injata     - 234 - in: 6.750 seconds
+Injata     - 234 - in: 6.750 seconds
+Injata     - 194 - in: 6.650 seconds
+Injata     - 194 - in: 6.730 seconds
+Injata     - 194 - in: 6.750 seconds
+Injata     - 194 - in: 6.760 seconds
+Injata     - 194 - in: 6.780 seconds
+Injata     - 194 - in: 6.800 seconds
+>>>>>>> Stashed changes
