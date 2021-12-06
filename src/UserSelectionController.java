@@ -48,11 +48,20 @@ public class UserSelectionController implements Initializable {
     }
 
 
+    /**
+     * sets the profile to parsed username
+     * @param username String username of the profile for whom we want's profile
+     */
     private void profileButtonClick(String username) {
         Game.currentProfile = PlayerProfileManager.getProfile(username);
         Game.openMainMenu();
     }
 
+
+    /**
+     * creates a user with username the text of the usernameInput
+     * if it is a valid username.
+     */
     @FXML
     private void createUserClick() {
         String userName = usernameInput.getText();
@@ -78,10 +87,21 @@ public class UserSelectionController implements Initializable {
         }
     }
 
+    /**
+     * checks if a player exists
+     * @param username String for the profile we want to checks existance
+     * @return boolean if the player exists
+     */
     private boolean playerExists(String username) {
         return PlayerProfileManager.userExists(username);
     }
 
+
+    /**
+     *check if the username if a valid string for an account
+     * @param username String the username we want to check
+     * @return boolean if the parsed username is valid
+     */
     private boolean illegalString(String username) {
         for (int i = 0; i < username.length(); i++) {
             if (illegalChar(username.charAt(i))) {
@@ -92,6 +112,12 @@ public class UserSelectionController implements Initializable {
         return false;
     }
 
+
+    /**
+     * checks if a letter is illegal
+     * @param letter char the letter we are checking
+     * @return boolean if the character is illegal
+     */
     private boolean illegalChar(char letter) {
         if ((int) letter <= 90 && (int) letter >= 65) {
             return false;
@@ -104,12 +130,18 @@ public class UserSelectionController implements Initializable {
         }
     }
 
+    /**
+     * removes the profiles buttons on display
+     */
     private void removeProfiles() {
         while (profileVbox.getChildren().size() > 0) {
             profileVbox.getChildren().remove(0);
         }
     }
 
+    /**
+     * logs into the username in the usernameInput if it is valid
+     */
     @FXML
     private void select() {
         String userName = usernameInput.getText();
@@ -125,6 +157,9 @@ public class UserSelectionController implements Initializable {
         }
     }
 
+    /**
+     * removes a users profile and saves and highscores
+     */
     @FXML
     private void removeUserClick() {
 
@@ -155,6 +190,11 @@ public class UserSelectionController implements Initializable {
 
     }
 
+    /**
+     * gets the errors to be given to the user when the data they input is wrong
+     * @param userName String username we want to find the errors for
+     * @return String the errors formatted line by line
+     */
     private String getErrorDetail(String userName) {
         String error = "";
 
