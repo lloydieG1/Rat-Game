@@ -112,8 +112,7 @@ public class Leaderboard {
     }
 
     /**
-     * updates the table to show the current scores for that table.
-     *
+     * Updates the table to show the current scores for that table.
      * @param tableName String the file path for the table to update
      * @param scores    Arraylist of scores to set the table to
      */
