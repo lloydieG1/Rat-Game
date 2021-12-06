@@ -261,9 +261,9 @@ public class InGameController implements Initializable {
     }
 
     /**
-     * 
-     * @param type
-     * @return
+     * gives the type of item in the sidebar as a string
+     * @param type ElementType type of the sidebar item
+     * @return String type in the form of a string
      */
     private String typeToString(ElementType type) {
         if (type.equals(ElementType.Bomb)) {
@@ -286,6 +286,11 @@ public class InGameController implements Initializable {
         return "invalid type";
     }
 
+    /**
+     * gives an imageView to be added to the scene from parsed element type
+     * @param type ElementType the type of element we get as an image
+     * @return ImageView the image to be added to the scene
+     */
     private ImageView getItem(ElementType type) {
         ImageView item = new ImageView();
         item.setImage(getImage(typeToString(type) + ".png"));
@@ -313,6 +318,9 @@ public class InGameController implements Initializable {
         return item;
     }
 
+    /**
+     * resets the items in the sidebar
+     */
     public void resetItems() {
 
         while (bombPane.getChildren().size() > 0) {
@@ -350,7 +358,7 @@ public class InGameController implements Initializable {
 
     /**
      * Adds item to the side bar.
-     * @param itemType
+     * @param itemType ItemType the type of item to be added to the sidebar
      */
     public void addItem(ElementType itemType) {
         int maxItems = 4;
@@ -437,8 +445,8 @@ public class InGameController implements Initializable {
     /**
      * place an item into the level
      *
-     * @param x
-     * @param y
+     * @param x int x position on the canvas where it is placed
+     * @param y int y position on the canvas where it is placed
      */
     public static void placeItem(double x, double y, ElementType type) {
 
@@ -479,7 +487,7 @@ public class InGameController implements Initializable {
         }
     }
 
-    /*
+    /**
      * Play music at stored at MUSIC_FILE_PATH
      *
      */
@@ -489,7 +497,7 @@ public class InGameController implements Initializable {
         mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
     }
 
-    /*
+    /**
      * stops level music
      */
     public void stopMusic() {
