@@ -86,7 +86,7 @@ public class InGameController implements Initializable {
     private static ElementType lastItem;
 
     /**
-     * stops all the arrow keys from being active
+     * Stops all the arrow keys from being active.
      */
     public void resetArrowKeys() {
         rightArrow = false;
@@ -115,7 +115,7 @@ public class InGameController implements Initializable {
 
 
     /**
-     * switches back to the menu
+     * Switches back to the menu
      */
     @FXML
     private void backClick() {
@@ -162,7 +162,10 @@ public class InGameController implements Initializable {
 
     }
 
-
+    /**
+     * Produce in text form.
+     * @return Side Bar in a parsable form.
+     */
     public String sideBarAsString() {
         String sideBar = bombPane.getChildren().size() + ",";
         sideBar = sideBar + deathRatPane.getChildren().size() + ",";
@@ -207,7 +210,7 @@ public class InGameController implements Initializable {
         double clickX = event.getX() / tilewidth;
         double clickY = event.getY() / tileheight;
 
-        //adjust so centered:
+        //Adjust so centered:
         clickX = clickX - Game.visibleTiles / 2.0;
         clickY = clickY - Game.visibleTiles / 2.0;
         Game.gameX = -(int) (clickX * Game.gameSize);
@@ -299,8 +302,7 @@ public class InGameController implements Initializable {
 
 
     /**
-     * Description.
-     *
+     * Adds item to the side bar.
      * @param itemType
      */
     public void addItem(ElementType itemType) {
