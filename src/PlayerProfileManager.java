@@ -8,7 +8,6 @@ import java.util.Scanner;
 /**
  * This class is responsible managing storage and operations on the Profiles held in a static 
  * PlayerProfile array as well as each profiles corresponding player profile file. 
- * 
  * @author Lloyd
  */
 public class PlayerProfileManager {
@@ -27,8 +26,7 @@ public class PlayerProfileManager {
     /**
      * Creates a new profile file initialised with max level equal to 1
      * and adds the new profile as a profile object in the profiles array.
-     *
-     * @param username
+     * @param username Specify username.
      */
     public static void addNewProfile(String username) {
         String fileName = usernameToPath(username);
@@ -38,10 +36,7 @@ public class PlayerProfileManager {
             if (profileFile.createNewFile()) {
                 System.out.println("File created: " + profileFile.getName());
                 /*
-                 * if the file does exist open it and write the username to file on line 1
-                 * will look like this:
-                 * USER: *username*
-                 * MAX LEVEL: 1
+                 * If the file does exist open it and write the username to file on line 1.
                  */
                 FileWriter writer = new FileWriter(fileName);
                 writer.write(FIRST_LINE + username + NEWLINE);
@@ -54,7 +49,7 @@ public class PlayerProfileManager {
             System.out.println(OPEN_FILE_ERROR + fileName);
             e.printStackTrace();
         }
-        //new player profile is initalised to start at level 1 and is added to static array of profiles.
+        //New player profile is initalised to start at level 1 and is added to static array of profiles.
         PlayerProfile newProfile = new PlayerProfile(username, 1);
         profiles.add(newProfile);
     }
@@ -102,9 +97,8 @@ public class PlayerProfileManager {
 
     /**
      * Writes a string to file.
-     *
-     * @param fileName name of file
-     * @param data     string to be written
+     * @param fileName Name of file.
+     * @param data     String to be written.
      */
     private static void writeToFile(String fileName, String data) {
         try {
@@ -118,10 +112,9 @@ public class PlayerProfileManager {
     }
 
     /**
-     * reads a profile file and returns that file as a PlayerProfile object
-     *
-     * @param username username that the profile file is named after
-     * @return PlayerProfile with data from file
+     * Reads a profile file and returns that file as a PlayerProfile object.
+     * @param username Username that the profile file is named after.
+     * @return PlayerProfile with data from file.
      */
     public static PlayerProfile parseProfileFile(String username) {
         try {
@@ -156,8 +149,7 @@ public class PlayerProfileManager {
     }
 
     /**
-     * Increases the maximum level of a profile by 1
-     *
+     * Increases the maximum level of a profile by 1.
      * @param username username that the profile file is named after
      * @return PlayerProfile with data from file
      */
@@ -180,9 +172,8 @@ public class PlayerProfileManager {
     }
 
     /**
-     * Removes a profile with from stored files and profile array
-     *
-     * @param username username of profile
+     * Removes a profile with from stored files and profile array.
+     * @param username Username of profile.
      */
     public static void removeProfile(String username) {
         String filePath = usernameToPath(username);
@@ -204,9 +195,8 @@ public class PlayerProfileManager {
     }
 
     /*
-     * removes all stored save files that are linked to a given profile
-     * 
-     * @param username username of profile
+     * Removes all stored save files that are linked to a given profile.
+     * @param username Username of profile.
      */
     private static void removeSaves(String username) {
         File directory = new File("res\\maps\\save\\");
@@ -227,8 +217,8 @@ public class PlayerProfileManager {
     /*
      * reads all lines from profile file as they are in the file (includes newlines)
      * 
-     * @param username username of profile
-     * @return parsed string from a profile file
+     * @param username Username of profile
+     * @return Parsed string from a profile file.
      */
     private static String readProfileFile(String username) {
         Scanner in = openProfileFile(username);
@@ -241,10 +231,9 @@ public class PlayerProfileManager {
     }
 
     /*
-     * opens a scanner on a profile file named 'username' 
-     * 
-     * @param username username of profile
-     * @return scanner pointing to profile file
+     * Opens a scanner on a profile file named 'username'.
+     * @param username Username of profile.
+     * @return Scanner pointing to profile file.
      */
     private static Scanner openProfileFile(String username) {
         File inputFile = new File(usernameToPath(username));
@@ -260,10 +249,9 @@ public class PlayerProfileManager {
     }
 
     /*
-     * Returns a profile object with 'username' if it exitst
-     * 
-     * @param username username of profile
-     * @return profile with name username if it exists, else null
+     * Returns a profile object with 'username' if it exits.
+     * @param username Username of profile.
+     * @return Profile with name username if it exists, else null.
      */
     public static PlayerProfile getProfile(String username) {
         try {
@@ -282,10 +270,9 @@ public class PlayerProfileManager {
     }
 
     /*
-     * takes a username and returns the path that profile will be stored at
-     * 
-     * @param username username of profile
-     * @return path of profile file
+     * Takes a username and returns the path that profile will be stored at.
+     * @param username Username of profile
+     * @return Path of profile file.
      */
     private static String usernameToPath(String username) {
         String filePath = PROFILE_FILE_PATH + username + FILE_EXTENSION;
@@ -293,10 +280,9 @@ public class PlayerProfileManager {
     }
 
     /*
-     * checks if a profile with a given username exists
-     * 
-     * @param username username of profile
-     * @return true if profile with user exists
+     * Checks if a profile with a given username exists.
+     * @param username Username of profile.
+     * @return True if profile with user exists.
      */
     public static boolean userExists(String username) {
         File user = new File(usernameToPath(username));

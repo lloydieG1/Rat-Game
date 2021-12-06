@@ -60,7 +60,6 @@ public class Tile {
 
     /**
      * Draws a Tile on the Map.
-     *
      * @param g Graphics Context
      */
     public void render(GraphicsContext g) {
@@ -96,7 +95,6 @@ public class Tile {
 
     /**
      * Description.
-     *
      * @param g
      * @param width
      */
@@ -122,7 +120,6 @@ public class Tile {
 
     /**
      * Description.
-     *
      * @return
      */
     public String tileType() {
