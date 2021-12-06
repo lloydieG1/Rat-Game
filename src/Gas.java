@@ -16,10 +16,10 @@ public class Gas extends Element {
 
     /**
      * Gas constructor.
-     * @param type
-     * @param level
-     * @param x
-     * @param y
+     * @param type ElementType the type of element this is
+     * @param level Level the level the gas is in
+     * @param x int x the x position of the gas
+     * @param y int y the y position of the gas
      */
     public Gas(ElementType type, Level level, int x, int y, int health) {
         super(type, level, x, y, Direction.North, health);
