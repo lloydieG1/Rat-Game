@@ -68,22 +68,27 @@ public class Rat extends Element {
     public void setMatingTime(int timeLeftInMating) {
         this.timeLeftInMating = timeLeftInMating;
     }
+
     /**
-     * 
-     * @param pregnantTime
+     * sets the time left for the rats pregnancy
+     * @param pregnantTime int time for pregnancy
      */
     public void setPregnantTime(int pregnantTime) {
         this.timeLeftPregnant = pregnantTime;
     }
+
     /**
-     * 
-     * @return
+     * gives the time left for pregnancy
+     * @return int time for pregnancy
      */
     public int getPregnantTime() {
+
         return timeLeftPregnant;
     }
+
+
     /**
-     * 
+     * ticks the rat
      */
     protected void tick() {
         if (isFinishedMating()) {
@@ -154,10 +159,18 @@ public class Rat extends Element {
         return timeLeftInMating <= 0;
     }
 
+
+    /**
+     * returns if the rat is a child
+     * @return boolean if the rat is a child
+     */
     public boolean getIsChild() {
         return age < ADULT_AGE;
     }
 
+    /**
+     * changes the image and speed for rat if it is now an adult
+     */
     private void develop() {
         if (!getIsChild()) {
             tickSpeed = Game.FPS;
@@ -168,49 +181,51 @@ public class Rat extends Element {
             }
         }
     }
+
     /**
      * 
-     * @return
+     * @return boolean if the rat is male
      */
     public boolean getIsMale() {
         return isMale;
     }
+
+
     /**
-     * 
-     * @param isMale
+     * sets the gender of the rat
+     * @param isMale the gender of hte rat
      */
     public void setIsMale(boolean isMale) {
         this.isMale = isMale;
     }
+
+
     /**
-     * 
-     * @return
-     */
-    public Direction getDirection() {
-        return dir;
-    }
-    /**
-     * 
-     * @return
+     * @return boolean if the rat is pregnant
      */
     public boolean getIsPregnant() {
         return isPregnant();
     }
+
+
     /**
-     * 
+     *makes the rat sterile
      */
     public void makeSterile() {
         this.isSterile = true;
     }
+
     /**
      * 
-     * @return
+     * @return boolean if the rat is pregnant
      */
     private boolean isPregnant() {
         return timeLeftPregnant > 0;
     }
+
+
     /**
-     * 
+     * runs the logic for when a rat is pregnant
      */
     private void pregnant() {
         timeLeftPregnant--;
@@ -227,9 +242,11 @@ public class Rat extends Element {
             level.addElementLive(rat);
         }
     }
+
+
     /**
-     * 
-     * @return
+     *
+     * @return boolean if the rat can breed
      */
     public boolean canBreed() {
         if (isMale) {
@@ -244,7 +261,7 @@ public class Rat extends Element {
         return false;
     }
     /**
-     * 
+     * breeds with another rat
      */
     private void breed() {
         if (!isPregnant()) {

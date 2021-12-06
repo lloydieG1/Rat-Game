@@ -44,7 +44,7 @@ public class EndGameController implements Initializable {
         Game.currentLevel.deleteSave();
     }
 
-    /*
+    /**
      * Play audio at stored at AUDIO_FILE_PATH.
      */
     public void playAudio() {
