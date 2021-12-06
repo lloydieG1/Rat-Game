@@ -18,6 +18,7 @@ import java.util.ResourceBundle;
  * this class handles interactions with the level menu
  *
  * @author William Randle
+ * @author Adrian Zabica
  * @version 1
  */
 public class InGameController implements Initializable {
