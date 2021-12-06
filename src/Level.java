@@ -459,6 +459,13 @@ public class Level {
         g.getCanvas().getWidth(), g.getCanvas().getHeight());
         g.fillRect(-Game.gameX / mapFactorX + (Game.visibleTiles) * tilewidth,
                 0, g.getCanvas().getWidth(), g.getCanvas().getHeight());
+
+        for (Element element : elements ) {
+            if (element.getType().equals(ElementType.Rat)) {
+                Rat rat = (Rat) element;
+                rat.minirender(g, width);
+            }
+        }
     }
 
     /**

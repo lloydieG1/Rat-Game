@@ -299,6 +299,32 @@ public class Rat extends Element {
 
     }
 
+    /**
+     * renders a rat in the minimap
+     *
+     * @param g Graphics context
+     * @param width int width of the canvas
+     */
+    public void minirender(GraphicsContext g, double width) {
+        //check if this tile is visible for the 4 directions
+
+        double sizeX = g.getCanvas().getWidth() / width;
+        double sizeY = g.getCanvas().getHeight() / width;
+        double x = this.x * sizeX;
+        double y = this.y * sizeY;
+
+        if (isMale) {
+            g.setFill(Color.color(0.3, 0.3, 0.4));
+        } else {
+            g.setFill(Color.color(0.7, 0.2, 0.3));
+        }
+        if (getIsChild()) {
+            g.setFill(Color.color(0.4, 0.5, 0.8));
+        }
+        g.fillRect(x, y, sizeX, sizeY);
+
+    }
+
     @Override
     protected String extraInfo() {
         return "," + isMale + "," + isSterile + "," + timeLeftInMating + "," + timeLeftPregnant;
