@@ -17,7 +17,6 @@ public class DailyMessage {
      * Gets the unsolved code used to retrieve the Message Of The Day.
      * @param args Array of arguments.
      * @return String of unsolved cipher.
-     * @throws IOException
      */
     private static String getURLstring(String args[]) throws IOException, UnknownHostException {
         URL puzzle = new URL(WEBSITE_URL);
@@ -39,8 +38,7 @@ public class DailyMessage {
      * Solves the code from parsed unsolved code, which is then used to get the
      * message of the day.
      * @param args Array of arguments.
-     * @return String solved cipher to get Message Of The Day. 
-     * @throws IOException
+     * @return String solved cipher to get Message Of The Day.
      */
     private static String translateURLstring(String args[]) throws IOException {
         char[] cipher = getURLstring(null).toCharArray();
@@ -73,7 +71,6 @@ public class DailyMessage {
      * Returns the message of the day as a string.
      * @param args Array of arguments.
      * @return String message of the day.
-     * @throws IOException
      */
     public static String getMessage(String args[]) throws IOException, UnknownHostException {
         String message = "http://cswebcat.swansea.ac.uk/message?solution=".concat(translateURLstring(args));
