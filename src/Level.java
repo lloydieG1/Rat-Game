@@ -6,7 +6,7 @@ import java.nio.file.*;
 import java.util.ArrayList;
 
 /**
- * Scene manager contains and manages all of the tiles and elements in a level.
+ * Contains and manages all of the tiles and elements in a level.
  * @author William Randle
  * @author Lloyd Garret
  * @author Adrian Zabica
@@ -15,7 +15,7 @@ import java.util.ArrayList;
  */
 
 public class Level {
-    public int timer = 0;
+    public int timer;
     public String level;
 
     private Tile[][] tiles; // 2d array of all the tiles and what they contain
@@ -60,30 +60,55 @@ public class Level {
         this.timer = timer;
     }
 
+    /**
+     * sets the start position iof the map
+     * @param zoom
+     * @param x
+     * @param y
+     */
     public void setStart(double zoom, double x, double y) {
         this.startY = y;
         this.startX = x;
         this.startZoom = zoom;
     }
 
+    /**
+     * applies the levels saved map position and zoom information
+     */
     public void applyStartPosition() {
         Game.gameY = startY;
         Game.gameX = startX;
         Game.gameSize = startZoom;
     }
 
+    /**
+     * sets the score for the game
+     * @param score int score for the level
+     */
     public void setScore(int score) {
         Game.score = score;
     }
 
+    /**
+     * calculates the score accounting for the time not used in the allowed time
+     * @return int bonus score
+     */
     public int bonusScore() {
         return timeLimit - timer + Game.score;
     }
 
+    /**
+     *
+     * @return int timer of the level
+     */
     public int getTimer() {
         return timer;
     }
 
+    /**
+     * sets the time for the level (more accurate time to allow speedrunners)
+     * @param time double time the level
+     */
     public void setTime(double time) {
         this.time = time;
     }
@@ -118,10 +143,10 @@ public class Level {
     }
 
     /**
-     * Description.
+     * gives an arraylist of elements that share a tile with the parsed x and y
      *
-     * @param x
-     * @param y
+     * @param x int x value that shares the tile
+     * @param y int y value that shares the tile
      * @return an arraylist of elements that are contained in the tile that has coordinates x,y
      */
     public ArrayList<Element> getElements(int x, int y) {
@@ -137,7 +162,7 @@ public class Level {
     /**
      * Gives the bounds of the map.
      *
-     * @return
+     * @return int[] bounds of the map
      */
     public int[] getMapBounds() {
         int[] bounds = new int[2];
@@ -148,9 +173,9 @@ public class Level {
 
 
     /**
-     * Description.
+     * gives the number of rats currently in the map
      *
-     * @return
+     * @return int number of rats in the map
      */
     public int ratCount() {
         int rats = 0;
@@ -162,6 +187,10 @@ public class Level {
         return rats;
     }
 
+    /**
+     * gives the number of male rats currently in the map
+     * @return int number of male rats in the map
+     */
     private int maleRatCount() {
         int rats = 0;
         for (Element element : elements) {
@@ -177,6 +206,10 @@ public class Level {
     }
 
 
+    /**
+     * check if the player has won or lost.
+     * if neither, should do nothing.
+     */
     private void checkGameCondition() {
         int rats = ratCount();
         if (rats > maxRats) {
@@ -198,14 +231,20 @@ public class Level {
     }
 
     /**
-     * Description.
+     * adds an element while the level is ticking
      *
-     * @param element An object that interacts with others on the map
+     * @param element an element to add to the level
      */
     public void addElementLive(Element element) {
         nextElements.add(element);
     }
 
+    /**
+     * returns true if the tile at x,y is a path tile.
+     * @param x int x value for the tile we are checking
+     * @param y int y value for the tile we are checking
+     * @return boolean if this tile is valid to place an item on
+     */
     public boolean canAddItem(int x, int y) {
         if (getTile(x, y).getType().equals(TileType.Path)) {
 
@@ -216,27 +255,28 @@ public class Level {
 
 
     /**
-     * Description.
+     * add an element to the level. shouldnt be used while the level is
+     * currently ticking.
      *
-     * @param element
+     * @param element Element we want to add to the level
      */
     public void addElement(Element element) {
         elements.add(element);
     }
 
     /**
-     * Description.
+     * adds a menu item to the level
      *
-     * @param menuItem
+     * @param menuItem MenuItem the menu item we are adding to the level
      */
     public void addMenuItem(MenuItem menuItem) {
         menuItems.add(menuItem);
     }
 
     /**
-     * Description.
+     * flags an element for removal at the end of the tick
      *
-     * @param element
+     * @param element Element to be removed
      */
     public void removeElement(Element element) {
         element.flagRemoval = true;
@@ -280,9 +320,9 @@ public class Level {
     }
 
     /**
-     * Description.
+     * loads the sidebar given saved values in an int array
      *
-     * @param sideBar
+     * @param sideBar int[] the items to add to the sidebar
      */
     public void loadSideBar(int[] sideBar) {
         for (int i = 0; i < sideBar[0]; i++) {
@@ -314,6 +354,9 @@ public class Level {
     }
 
 
+    /**
+     * ticks the menu items, meaning they can add themselves to the sidebar
+     */
     private void tickMenuItems() {
         for (MenuItem menuItem : menuItems) {
             menuItem.tick();
@@ -339,7 +382,7 @@ public class Level {
     /**
      * Draws tiles on the map.
      *
-     * @param g
+     * @param g Graphics context
      */
     public void renderTiles(GraphicsContext g) {
         for (int i = 0; i < tiles.length; i++) {
@@ -351,6 +394,10 @@ public class Level {
         }
     }
 
+    /**
+     * renders the details for tiles in the map
+     * @param g Graphics context
+     */
     public void renderDetails(GraphicsContext g) {
         for (int i = 0; i < tiles.length; i++) {
             for (int j = 0; j < tiles[i].length; j++) {
@@ -360,9 +407,10 @@ public class Level {
     }
 
     /**
-     * Description.
+     * renders the grass and tunnel tiles seperately so they can appear above
+     * the elements.
      *
-     * @param g
+     * @param g Graphics context
      */
     public void renderGrass(GraphicsContext g) {
         for (int i = 0; i < tiles.length; i++) {
@@ -376,9 +424,9 @@ public class Level {
     }
 
     /**
-     * Description.
+     * renders the minimap for the level
      *
-     * @param g
+     * @param g Graphics context
      */
     public void renderMiniMap(GraphicsContext g) {
         g.setFill(Color.color(0.3, 0.6, 0));
@@ -415,7 +463,7 @@ public class Level {
     }
 
     /**
-     * Description.
+     * deletes the save for this level
      */
     public void deleteSave() {
         File f = new File(saveFolder + Game.currentProfile.getUsername() + level + ".txt");
