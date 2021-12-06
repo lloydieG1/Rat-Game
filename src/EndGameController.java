@@ -79,6 +79,10 @@ public class EndGameController implements Initializable {
         }
     }
 
+    /**
+     * when the button is clicked, switch between showing the leaderboard for
+     * times and for points.
+     */
     @FXML
     private void sortBy() {
         sortBy++;
@@ -95,16 +99,17 @@ public class EndGameController implements Initializable {
         }
     }
 
+    /**
+     * sets the text for the endgame message
+     * @param input
+     */
     @FXML
     public void setText(String input) {
+
         endgameMessage.setText(input);
     }
 
-    /**
-     * Give game access to this class.
-     * @param url
-     * @param resourceBundle
-     */
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Game.endGameController = this;
