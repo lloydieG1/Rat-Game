@@ -44,7 +44,8 @@ public class Level {
      * @param x Width of map.
      * @param y Height of map.
      */
-    public Level(int x, int y, int maxRats, String level, int timeLimit, int timer) {
+    public Level(int x, int y, int maxRats, String level, int timeLimit
+            , int timer) {
         tiles = new Tile[x][y];
         elements = new ArrayList<>();
         this.xSize = x;
@@ -139,15 +140,15 @@ public class Level {
      * @return The total amount of tiles on the map.
      */
     public int getLength() {
+
         return tiles.length;
     }
 
     /**
      * gives an arraylist of elements that share a tile with the parsed x and y
-     *
      * @param x int x value that shares the tile
      * @param y int y value that shares the tile
-     * @return an arraylist of elements that are contained in the tile that has coordinates x,y
+     * @return Arraylist elements contained in the tile that has coordinates x,y
      */
     public ArrayList<Element> getElements(int x, int y) {
         ArrayList<Element> stack = new ArrayList<>(); //returning elements at x,y
@@ -161,7 +162,6 @@ public class Level {
 
     /**
      * Gives the bounds of the map.
-     *
      * @return int[] bounds of the map
      */
     public int[] getMapBounds() {
@@ -174,7 +174,6 @@ public class Level {
 
     /**
      * gives the number of rats currently in the map
-     *
      * @return int number of rats in the map
      */
     public int ratCount() {
@@ -213,26 +212,29 @@ public class Level {
     private void checkGameCondition() {
         int rats = ratCount();
         if (rats > maxRats) {
-            Game.endGame("You lost  with a score of: \n" + bonusScore() + "\nin:\n"
-                    + String.format("%.3f", time) + " seconds");
+            Game.endGame("You lost  with a score of: \n" + bonusScore()
+                    + "\nin:\n"+ String.format("%.3f", time) + " seconds");
         } else if (rats == 0) {
-            Leaderboard.addScore(level, new Score(Game.currentProfile.getUsername(),
+            Leaderboard.addScore(level
+                    , new Score(Game.currentProfile.getUsername(),
                     bonusScore(), time));
 
-            Game.endGame("You won with a score of: \n" + bonusScore() + "\nin:\n"
+            Game.endGame("You won with a score of: \n" + bonusScore()
+                    + "\nin:\n"
                     + String.format("%.3f", time) + " seconds");
-            PlayerProfileManager.setMaxLevel(Game.currentProfile.getUsername(), level);
+            PlayerProfileManager.setMaxLevel(Game.currentProfile.getUsername()
+                    , level);
 
         }
         if (timer > timeLimit) {
-            Game.endGame("You lost with a score of: \n" + bonusScore() + "\nin:\n"
+            Game.endGame("You lost with a score of: \n"
+                    + bonusScore() + "\nin:\n"
                     + String.format("%.3f", time) + " seconds");
         }
     }
 
     /**
      * adds an element while the level is ticking
-     *
      * @param element an element to add to the level
      */
     public void addElementLive(Element element) {
@@ -257,7 +259,6 @@ public class Level {
     /**
      * add an element to the level. shouldnt be used while the level is
      * currently ticking.
-     *
      * @param element Element we want to add to the level
      */
     public void addElement(Element element) {
@@ -266,7 +267,6 @@ public class Level {
 
     /**
      * adds a menu item to the level
-     *
      * @param menuItem MenuItem the menu item we are adding to the level
      */
     public void addMenuItem(MenuItem menuItem) {
@@ -275,7 +275,6 @@ public class Level {
 
     /**
      * flags an element for removal at the end of the tick
-     *
      * @param element Element to be removed
      */
     public void removeElement(Element element) {
@@ -321,7 +320,6 @@ public class Level {
 
     /**
      * loads the sidebar given saved values in an int array
-     *
      * @param sideBar int[] the items to add to the sidebar
      */
     public void loadSideBar(int[] sideBar) {
@@ -366,7 +364,6 @@ public class Level {
 
     /**
      * Calls to draw elements and tiles on the map.
-     *
      * @param g Graphics Context
      */
     public void render(GraphicsContext g) {
@@ -381,7 +378,6 @@ public class Level {
 
     /**
      * Draws tiles on the map.
-     *
      * @param g Graphics context
      */
     public void renderTiles(GraphicsContext g) {
@@ -409,14 +405,14 @@ public class Level {
     /**
      * renders the grass and tunnel tiles seperately so they can appear above
      * the elements.
-     *
      * @param g Graphics context
      */
     public void renderGrass(GraphicsContext g) {
         for (int i = 0; i < tiles.length; i++) {
             for (int j = 0; j < tiles[i].length; j++) {
                 TileType type = tiles[i][j].getType();
-                if (type.equals(TileType.Tunnel) || type.equals(TileType.Grass)) {
+                if (type.equals(TileType.Tunnel)
+                        || type.equals(TileType.Grass)) {
                     tiles[i][j].render(g);
                 }
             }
@@ -425,12 +421,12 @@ public class Level {
 
     /**
      * renders the minimap for the level
-     *
      * @param g Graphics context
      */
     public void renderMiniMap(GraphicsContext g) {
         g.setFill(Color.color(0.3, 0.6, 0));
-        g.fillRect(0, 0, g.getCanvas().getWidth(), g.getCanvas().getHeight());
+        g.fillRect(0, 0, g.getCanvas().getWidth()
+                , g.getCanvas().getHeight());
         double widthX = Game.currentLevel.getMapBounds()[0];
         double widthY = Game.currentLevel.getMapBounds()[1];
         double width = widthX;
@@ -450,14 +446,17 @@ public class Level {
         double mapFactorX = (Game.MAP_WIDTH / g.getCanvas().getWidth())
                 * (width * 1.0 / Game.visibleTiles);
 
-        g.fillRect(0, 0, g.getCanvas().getWidth(), -Game.gameY / mapFactorY);
-        g.fillRect(0, 0, -Game.gameX / mapFactorX, g.getCanvas().getHeight());
+        g.fillRect(0, 0, g.getCanvas().getWidth(), -Game.gameY
+                / mapFactorY);
+        g.fillRect(0, 0, -Game.gameX / mapFactorX
+                , g.getCanvas().getHeight());
 
         double tilewidth = g.getCanvas().getWidth() / width;
         double tileheight = g.getCanvas().getHeight() / width;
 
-        g.fillRect(0, -Game.gameY / mapFactorY + (Game.visibleTiles) * tileheight,
-                g.getCanvas().getWidth(), g.getCanvas().getHeight());
+        g.fillRect(0, -Game.gameY / mapFactorY + (Game.visibleTiles)
+                        * tileheight,
+        g.getCanvas().getWidth(), g.getCanvas().getHeight());
         g.fillRect(-Game.gameX / mapFactorX + (Game.visibleTiles) * tilewidth,
                 0, g.getCanvas().getWidth(), g.getCanvas().getHeight());
     }
@@ -466,10 +465,12 @@ public class Level {
      * deletes the save for this level
      */
     public void deleteSave() {
-        File f = new File(saveFolder + Game.currentProfile.getUsername() + level + ".txt");
+        File f = new File(saveFolder
+                + Game.currentProfile.getUsername() + level + ".txt");
         if (f.exists()) {
             try {
-                Files.delete(Paths.get(saveFolder + Game.currentProfile.getUsername() + level + ".txt"));
+                Files.delete(Paths.get(saveFolder
+                        + Game.currentProfile.getUsername() + level + ".txt"));
                 System.out.println("deleting save");
             } catch (IOException e) {
                 e.printStackTrace();
@@ -478,24 +479,29 @@ public class Level {
     }
 
     /**
-     * Description.
-     *
-     * @param g
+     * renders the rat lives
+     * @param g Graphics context
      */
     public void renderRatLives(GraphicsContext g) {
         double sizeFactor = g.getCanvas().getHeight() / maxRats;
         g.setFill(Color.color(0, 0, 0));
-        g.fillRect(0, 0, g.getCanvas().getWidth(), g.getCanvas().getHeight());
+        g.fillRect(0, 0, g.getCanvas().getWidth()
+                , g.getCanvas().getHeight());
         g.setFill(Color.color(0, 0.3, 1));
-        g.fillRect(0, g.getCanvas().getHeight() - maleRatCount() * sizeFactor,
-                g.getCanvas().getWidth(), maleRatCount() * sizeFactor);
+
+        g.fillRect(0, g.getCanvas().getHeight() - maleRatCount()
+                        * sizeFactor, g.getCanvas().getWidth()
+                , maleRatCount() * sizeFactor);
+
         g.setFill(Color.color(1, 0.3, 1));
+
         g.fillRect(0, g.getCanvas().getHeight() - ratCount() * sizeFactor,
-                g.getCanvas().getWidth(), (ratCount() - maleRatCount()) * sizeFactor);
+                g.getCanvas().getWidth(), (ratCount() - maleRatCount())
+                        * sizeFactor);
     }
 
     /**
-     * Description.
+     * saves this file to a text file in the saves folder
      */
     public void saveFile() {
         String lines = "/\n";
@@ -542,7 +548,9 @@ public class Level {
 
         file = file + time;
         try {
-            File levelFile = new File(saveFolder + Game.currentProfile.getUsername() + level + ".txt");
+            File levelFile = new File(saveFolder
+                    + Game.currentProfile.getUsername() + level + ".txt");
+
             if (levelFile.createNewFile()) {
                 System.out.println("save: " + levelFile.getName());
             } else {
@@ -553,8 +561,10 @@ public class Level {
             e.printStackTrace();
         }
         try {
-            FileWriter myWriter = new FileWriter(saveFolder + Game.currentProfile.getUsername()
+            FileWriter myWriter = new FileWriter(saveFolder
+                    + Game.currentProfile.getUsername()
                     + level + ".txt");
+            
             myWriter.write(file);
             myWriter.close();
             System.out.println("Successfully saved");
