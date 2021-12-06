@@ -112,6 +112,7 @@ public class EndGameController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        mediaPlayer.setVolume(AUDIO_VOLUME); // set volume of audio clip
         Game.endGameController = this;
     }
 }
