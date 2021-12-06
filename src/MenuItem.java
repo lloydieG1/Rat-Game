@@ -12,16 +12,14 @@ public class MenuItem {
     private int tickSpeed = Game.FPS / 2; //means logic only happens once this many ticks have passed
 
     /**
-     * Description.
+     * constructs a menu item
      *
-     * @param itemType
-     * @param replenishTimer
-     * @param age
-     * @param currentTick
+     * @param itemType Type of item in the sidebar
+     * @param replenishTimer int the time it takes to add to the side bar
+     * @param age int the current age of this menuitem
      */
-    public MenuItem(String itemType, int replenishTimer, int age, int currentTick) {
+    public MenuItem(String itemType, int replenishTimer, int age) {
         this.itemType = itemStringToItemType(itemType);
-        this.replenishTimer = replenishTimer;
         this.age = age;
         this.replenishTimer = replenishTimer;
     }
@@ -65,9 +63,9 @@ public class MenuItem {
     }
 
     /**
-     * Description.
+     * gives a string version of the type
      *
-     * @return
+     * @return String the itemtype as a string
      */
     public String typeAsString() {
         if (itemType == null) {
@@ -95,6 +93,9 @@ public class MenuItem {
     }
 
 
+    /**
+     * the logic for a menu item
+     */
     protected void tick() {
         currentTick++;
         if (currentTick > tickSpeed) {
@@ -103,6 +104,9 @@ public class MenuItem {
         }
     }
 
+    /**
+     * adds item to the sidebar if enough time has passed
+     */
     private void logic() {
         age++;
         if (getReplenishTimer() <= age) {
@@ -111,14 +115,26 @@ public class MenuItem {
         }
     }
 
+    /**
+     *
+     * @return ElementType type of the element
+     */
     public ElementType getItemType() {
         return itemType;
     }
 
+    /**
+     *
+     * @return int the time to replenish the item
+     */
     public int getReplenishTimer() {
         return replenishTimer;
     }
 
+    /**
+     *
+     * @return String the side menu item in string form so it can be parsed
+     */
     public String asString() {
         return typeAsString() + "," + replenishTimer + "," + currentTick + "," + age;
     }

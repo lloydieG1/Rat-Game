@@ -312,7 +312,7 @@ public class LevelLoader {
             int replenishTimer = Integer.parseInt(individualItem[1]);
             int currentTick = Integer.parseInt(individualItem[2]);
             int age = Integer.parseInt(individualItem[3]);
-            MenuItem menuItem = new MenuItem(itemType, replenishTimer, age, currentTick);
+            MenuItem menuItem = new MenuItem(itemType, replenishTimer, age);
             level.addMenuItem(menuItem);
         }
         return menuItems;

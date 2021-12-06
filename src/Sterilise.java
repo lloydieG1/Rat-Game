@@ -18,7 +18,7 @@ public class Sterilise extends Element {
     public static final int MAX_HEALTH = 4;
 
     /**
-     * Description.
+     * constructs a steriliser.
      *
      * @param type   Element type.
      * @param level  Level number.
@@ -28,7 +28,6 @@ public class Sterilise extends Element {
      */
     public Sterilise(ElementType type, Level level, int x, int y, int health) {
         super(type, level, x, y, Direction.North, health);
-        // TODO Auto-generated constructor stub
         image = ImageLoader.sterilize;
 
         aura = ImageLoader.sterilizeAura;

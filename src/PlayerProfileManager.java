@@ -54,19 +54,29 @@ public class PlayerProfileManager {
         profiles.add(newProfile);
     }
 
+    /**
+     *
+     * @return int the size of the profiles array
+     */
     public static int getSize() {
         return profiles.size();
     }
 
+    /**
+     *
+     * @param i int the profiles position in the arraylist
+     * @return PlayerProfile the profile of the player at i
+     */
     public static PlayerProfile getProfileInt(int i) {
+
         return profiles.get(i);
     }
 
     /**
      * Updates the string data stored in a profile file for either username or max level.
-     * @param whichData
-     * @param data
-     * @param username
+     * @param whichData ProfileData the type of data to update
+     * @param data String the data to change
+     * @param username String profile for whom these changes are taking place
      */
     public static void updateProfileData(ProfileData whichData, String data, String username) {
         String fileName = usernameToPath(username);
@@ -151,7 +161,6 @@ public class PlayerProfileManager {
     /**
      * Increases the maximum level of a profile by 1.
      * @param username username that the profile file is named after
-     * @return PlayerProfile with data from file
      */
     public static void setMaxLevel(String username, String levelString) {
         int newLevel = Integer.parseInt(levelString);
@@ -162,6 +171,11 @@ public class PlayerProfileManager {
         }
     }
 
+    /**
+     * gets the max level for a profile
+     * @param username String the username for hte profile we want the max level
+     * @return int the max level for a player
+     */
     public static int getMaxLevel(String username) {
         for (PlayerProfile playerProfile : profiles) {
             if (playerProfile.getUsername().equals(username)) {
@@ -194,7 +208,7 @@ public class PlayerProfileManager {
         Leaderboard.removeScores(username);
     }
 
-    /*
+    /**
      * Removes all stored save files that are linked to a given profile.
      * @param username Username of profile.
      */
@@ -214,7 +228,7 @@ public class PlayerProfileManager {
         }
     }
 
-    /*
+    /**
      * reads all lines from profile file as they are in the file (includes newlines)
      * 
      * @param username Username of profile
@@ -230,7 +244,7 @@ public class PlayerProfileManager {
         return fileText;
     }
 
-    /*
+    /**
      * Opens a scanner on a profile file named 'username'.
      * @param username Username of profile.
      * @return Scanner pointing to profile file.
@@ -248,7 +262,7 @@ public class PlayerProfileManager {
         return in;
     }
 
-    /*
+    /**
      * Returns a profile object with 'username' if it exits.
      * @param username Username of profile.
      * @return Profile with name username if it exists, else null.
@@ -269,7 +283,7 @@ public class PlayerProfileManager {
         }
     }
 
-    /*
+    /**
      * Takes a username and returns the path that profile will be stored at.
      * @param username Username of profile
      * @return Path of profile file.
@@ -279,7 +293,7 @@ public class PlayerProfileManager {
         return filePath;
     }
 
-    /*
+    /**
      * Checks if a profile with a given username exists.
      * @param username Username of profile.
      * @return True if profile with user exists.

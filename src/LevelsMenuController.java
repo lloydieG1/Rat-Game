@@ -114,6 +114,11 @@ public class LevelsMenuController implements Initializable {
         levelPane.setPrefColumns(3);
     }
 
+    /**
+     * gives the tooltip for each level buttons leaderboard
+     * @param level String name of the level
+     * @return ToolTip leaderboard on hoever over the button
+     */
     private Tooltip getLevelLeaderboardHover(String level) {
         ArrayList<Score> scores = Leaderboard.getScores(level, 0);
         String text = "leaderboard: \n";
@@ -134,12 +139,18 @@ public class LevelsMenuController implements Initializable {
         return leaderboard;
     }
 
+    /**
+     * updates the buttons for hte levels to reflect current information
+     */
     public void refreshButtons() {
         removebuttons();
         addLevelButtons();
     }
 
 
+    /**
+     * removes all the level buttons
+     */
     private void removebuttons() {
         while (levelPane.getChildren().size() > 0) {
             levelPane.getChildren().remove(0);
@@ -156,7 +167,7 @@ public class LevelsMenuController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Game.levelMenuController = this;
-        //  addLevelButtons();
+
     }
 }
 

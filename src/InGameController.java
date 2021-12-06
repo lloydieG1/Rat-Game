@@ -38,10 +38,10 @@ public class InGameController implements Initializable {
 
 
     @FXML
-    Canvas gameCanvas; //canvas the game is shown on
+    private Canvas gameCanvas; //canvas the game is shown on
 
     @FXML
-    Text score;
+    private Text score;
 
     @FXML
     private TilePane bombPane;
@@ -73,7 +73,7 @@ public class InGameController implements Initializable {
     @FXML
     private Canvas ratLives;
 
-    public int buttonSize = 70;
+    public static final int BUTTON_SIZE = 70;
 
     @FXML
     private Text userName;
@@ -85,6 +85,15 @@ public class InGameController implements Initializable {
 
     private static ElementType lastItem;
 
+
+    /**
+     * sets the score text
+     * @param score String new score to be displayed
+     */
+    public void setScore(String score) {
+        this.score.setText(score);
+    }
+
     /**
      * Stops all the arrow keys from being active.
      */
@@ -95,18 +104,31 @@ public class InGameController implements Initializable {
         downArrow = false;
     }
 
+    /**
+     * updates the mouse position in the game when it moves
+     * @param event
+     */
     @FXML
-    private void buttonsVisible(MouseEvent event) {
+    private void updateMousePosition(MouseEvent event) {
         mouseX = event.getX();
         mouseY = event.getY();
 
     }
 
+    /**
+     * sets the username on display
+     * @param name String the name of the user
+     */
     public void setUserNameText(String name) {
         userName.setText("username: " + name);
 
     }
 
+    /**
+     *
+     * sets the level name on display
+     * @param name String name of the level
+     */
     public void setLevelNameText(String name) {
         levelName.setText("level: " + name);
 
@@ -126,25 +148,29 @@ public class InGameController implements Initializable {
 
     }
 
+    /**
+     * if mouse is over one of the nav buttons when click move in that direciton
+     * @param event
+     */
     @FXML
     private void mapClick(MouseEvent event) {
         mouseX = event.getX();
         mouseY = event.getY();
 
-        if (mouseX < buttonSize) {
+        if (mouseX < BUTTON_SIZE) {
             leftArrow = true;
 
         }
 
-        if (mouseY < buttonSize) {
+        if (mouseY < BUTTON_SIZE) {
             upArrow = true;
         }
 
-        if (mouseX > Game.MAP_WIDTH - buttonSize) {
+        if (mouseX > Game.MAP_WIDTH - BUTTON_SIZE) {
             rightArrow = true;
         }
 
-        if (mouseY > Game.MAP_HEIGHT - buttonSize) {
+        if (mouseY > Game.MAP_HEIGHT - BUTTON_SIZE) {
             downArrow = true;
         }
 
@@ -152,6 +178,10 @@ public class InGameController implements Initializable {
     }
 
 
+    /**
+     * when a button is released, you dont move in any directions
+     * @param event
+     */
     @FXML
     private void mapRelease(MouseEvent event) {
 
@@ -178,11 +208,19 @@ public class InGameController implements Initializable {
         return sideBar;
     }
 
+    /**
+     * @param fileName String name of the file of the image
+     * @return Image image for the item
+     */
     private Image getImage(String fileName) {
         Image image = ImageLoader.getImage(fileName, 64);
         return image;
     }
 
+    /**
+     * when the mouse leaves the canvas, default to moving in no directions so
+     * a button doesnt stick
+     */
     @FXML
     private void canvasMouseLeave() {
         mouseX = gameCanvas.getWidth() / 2;
@@ -195,6 +233,10 @@ public class InGameController implements Initializable {
     }
 
 
+    /**
+     * move the map position to the position of the cursor in the minimap
+     * @param event
+     */
     @FXML
     private void minimapClick(MouseEvent event) {
         double widthX = Game.currentLevel.getMapBounds()[0];
@@ -218,6 +260,11 @@ public class InGameController implements Initializable {
 
     }
 
+    /**
+     * 
+     * @param type
+     * @return
+     */
     private String typeToString(ElementType type) {
         if (type.equals(ElementType.Bomb)) {
             return "bomb";

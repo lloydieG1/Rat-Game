@@ -256,7 +256,7 @@ public class Game extends Application {
      * Updates the score text in the level.
      */
     public static void updateScore() {
-        levelController.score.setText(Integer.toString(score));
+        levelController.setScore(Integer.toString(score));
     }
 
     /**
@@ -331,7 +331,7 @@ public class Game extends Application {
      */
     private static void drawButtons(GraphicsContext g) {
 
-        int buttonsize = levelController.buttonSize;
+        int buttonsize = levelController.BUTTON_SIZE;
         drawButton(g, 0, 0, MAP_WIDTH, buttonsize);
         drawButton(g, 0, 0, buttonsize, MAP_HEIGHT);
         drawButton(g, MAP_WIDTH - buttonsize, 0, MAP_WIDTH, MAP_HEIGHT);

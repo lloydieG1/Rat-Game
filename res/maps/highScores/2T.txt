@@ -6,3 +6,4 @@ Injata     - 184 - in: 16.200 seconds
 CIA        - 181 - in: 19.730 seconds
 CIA        - 159 - in: 41.450 seconds
 CIA        - 141 - in: 60.680 seconds
+Injata     - 174 - in: 61.430 seconds

@@ -76,6 +76,10 @@ public class Poison extends Element {
         }
     }
 
+    /**
+     * renders a poison element
+     * @param g The Graphics.
+     */
     @Override
     protected void render(GraphicsContext g) {
         double x = renderX();

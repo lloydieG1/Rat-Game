@@ -88,6 +88,10 @@ public class MainMenuController implements Initializable {
         Game.quit();
     }
 
+    /**
+     * checks if there is a new message, and if there is scroll down to reveal
+     * new one
+     */
     public void refreshDailyMessage() {
         System.out.println(motd);
         text1Pos = 0;
@@ -106,6 +110,11 @@ public class MainMenuController implements Initializable {
 
     }
 
+    /**
+     * renders the daily message sign, allowing the scrolling
+     *
+     * @param g Graphics context
+     */
     private void renderMessage(GraphicsContext g) {
 
 
@@ -131,18 +140,26 @@ public class MainMenuController implements Initializable {
         renderMotd(motdLines(motd), text2Pos, g);
     }
 
-    private void renderGrid(GraphicsContext g) {
 
-        //
-
-    }
-
+    /**
+     * renders the message of the day in text
+     * @param lines
+     * @param position
+     * @param g
+     */
     private void renderMotd(ArrayList<String> lines, double position, GraphicsContext g) {
         for (int i = 0; i < lines.size(); i++) {
             g.fillText(lines.get(i), 0, fontSize + i * fontSize - position);
         }
     }
 
+    /**
+     * get the text wrapping for the message of the day
+     * @param motd String the message to wrap
+     * @return ArrayList of strings one per line
+     *
+     *
+     */
     private ArrayList<String> motdLines(String motd) {
         motd = motd + " ";
         ArrayList<String> lines = new ArrayList<>();

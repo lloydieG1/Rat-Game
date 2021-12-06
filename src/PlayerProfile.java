@@ -53,13 +53,6 @@ public class PlayerProfile {
         this.username = username;
     }
 
-    /**
-     * Get the profile player path.
-     * @return The path for the player profile.
-     */
-    public String getPlayerProfilePath() {
-        return playerProfilePath;
-    }
 
 }
 
