@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
  * Class used for construction and behaviours of Rat elements.
  * @author William Randle
  * @author Mosaed
+ * @author Tafon Taffe
  */
 public class Rat extends Element {
 

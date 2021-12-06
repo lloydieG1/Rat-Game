@@ -564,7 +564,7 @@ public class Level {
             FileWriter myWriter = new FileWriter(saveFolder
                     + Game.currentProfile.getUsername()
                     + level + ".txt");
-            
+
             myWriter.write(file);
             myWriter.close();
             System.out.println("Successfully saved");
