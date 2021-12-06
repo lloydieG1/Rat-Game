@@ -80,6 +80,10 @@ public class Tile {
         }
     }
 
+    /**
+     * Renders the extra details for the tiles.
+     * @param g Graphics context
+     */
     public void renderDetails(GraphicsContext g) {
         g.setFill(Color.RED);
         if (type.equals(TileType.Path)) {
@@ -94,9 +98,9 @@ public class Tile {
     }
 
     /**
-     * Description.
-     * @param g
-     * @param width
+     * renders the tile in a minimap
+     * @param g Graphics context
+     * @param width width of the canvas
      */
     public void minirender(GraphicsContext g, double width) {
         //check if this tile is visible for the 4 directions
@@ -119,10 +123,11 @@ public class Tile {
     }
 
     /**
-     * Description.
-     * @return
+     * returns the tile type as a st
+     * @return String the tile type as a string
      */
-    public String tileType() {
+    public String asString() {
+
         if (type.equals(TileType.Grass)) {
             return "G";
         } else if (type.equals(TileType.Path)) {
@@ -134,15 +139,20 @@ public class Tile {
         }
     }
 
-    public String asString() {
-        return tileType();
-    }
-
+    /**
+     *
+     * @return boolean if the tile is not on the edge of the map
+     */
     private boolean isNotOnEdge() {
         return (x > 0 && y > 0 && x < Game.currentLevel.getMapBounds()[0] - 1 && y
                 < Game.currentLevel.getMapBounds()[1] - 1);
     }
 
+    /**
+     *
+     * @param type TileType the tile type you checks existance the 4 directions
+     * @return boolean[] if each direction contains a tile with matching type
+     */
     private boolean[] nextToType(TileType type) {
 
         boolean[] edges = new boolean[4];
@@ -164,8 +174,8 @@ public class Tile {
 
     /**
      * Renders the side for a grass tile.
-     * @param g
-     * @param edges
+     * @param g Graphics context
+     * @param edges boolean[] edges adjacent which grass should be rendered on
      */
     private void renderSideGrass(GraphicsContext g, boolean[] edges, int shadetype, double width) {
         double factor = (int) Game.gameSize;
@@ -196,6 +206,13 @@ public class Tile {
     }
 
 
+    /**
+     * shades to make tile look 3d based on its adjacent tiles
+     * @param g Graphics context
+     * @param edges boolean[] edges to shade on
+     * @param shadeType int the type of shading
+     * @param width double width of the canvas
+     */
     private void shadeDown(GraphicsContext g, boolean[] edges, int shadeType, double width) {
         double factor = (int) Game.gameSize;
         double x = (int) (this.x * factor + Game.gameX);
@@ -226,23 +243,56 @@ public class Tile {
     }
 
 
+    /**
+     * renders the right panel of a tile
+     * @param g Graphics context
+     * @param x int x position of the upper left corner
+     * @param y int y position of the upper left corner
+     * @param detailThickness double the thickness of the panel
+     */
     private void renderRightPanel(GraphicsContext g, double x, double y, double detailThickness) {
         g.fillRect(x + (size * (detailThickness - 1)) / detailThickness, y,
                 size / detailThickness, size);
     }
 
+    /**
+     * renders the left panel of a tile
+     * @param g Graphics context
+     * @param x int x position of the upper left corner
+     * @param y int y position of the upper left corner
+     * @param detailThickness double the thickness of the panel
+     */
     private void renderLeftPanel(GraphicsContext g, double x, double y, double detailThickness) {
         g.fillRect(x, y, size / detailThickness, size);
     }
 
+    /**
+     * renders the down panel of a tile
+     * @param g Graphics context
+     * @param x int x position of the upper left corner
+     * @param y int y position of the upper left corner
+     * @param detailThickness double the thickness of the panel
+     */
     private void renderDownPanel(GraphicsContext g, double x, double y, double detailThickness) {
         g.fillRect(x, y + (size * (detailThickness - 1) / detailThickness), size, size / detailThickness);
     }
 
+    /**
+     * renders the top panel of a tile
+     * @param g Graphics context
+     * @param x int x position of the upper left corner
+     * @param y int y position of the upper left corner
+     * @param detailThickness double the thickness of the panel
+     */
     private void renderUpPanel(GraphicsContext g, double x, double y, double detailThickness) {
         g.fillRect(x, y, size, size / detailThickness);
     }
 
+    /**
+     * renders the side for a tunnel
+     * @param g Graphics context
+     * @param edges boolean[] edges the tunnel nees to render
+     */
     private void renderSideTunnel(GraphicsContext g, boolean[] edges) {
         double currentDistance = detailThickness;
         for (int i = 0; i < iterations; i++) {
@@ -252,8 +302,9 @@ public class Tile {
     }
 
     /**
+     * renders the gradient for a shadow of a tunnel
      * @param dist thickness of the side of a tile
-     * @param g
+     * @param g Graphics context
      */
     private void gradientTunnel(double dist, GraphicsContext g, boolean[] edges, double opacity) {
         double factor = (int) Game.gameSize;
