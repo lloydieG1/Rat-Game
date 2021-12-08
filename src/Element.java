@@ -396,7 +396,7 @@ public abstract class Element {
      * Gives the x position for where the element should be rendered on screen.
      * @return The rendered version of X.
      */
-    protected double renderX() {
+    public double renderX() {
         double x = (int) (this.x * Game.gameSize + Game.gameX);
         double nextX = (int) (this.nextX * Game.gameSize + Game.gameX);
         return interpolate(x, nextX);
@@ -406,7 +406,7 @@ public abstract class Element {
      * Gives the y position for where the element should be rendered on screen.
      * @return The rendered version of Y.
      */
-    protected double renderY() {
+    public double renderY() {
         double y = (int) (this.y * Game.gameSize + Game.gameY);
         double nextY = (int) (this.nextY * Game.gameSize + Game.gameY);
         return interpolate(y, nextY);

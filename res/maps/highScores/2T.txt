@@ -1,9 +1,10 @@
+Injata     - 194 - in: 6.880 seconds
+Injata     - 194 - in: 6.910 seconds
+Injata     - 233 - in: 7.850 seconds
 Injata     - 193 - in: 7.930 seconds
+Injata     - 232 - in: 8.460 seconds
 Injata     - 192 - in: 8.830 seconds
 Adrian     - 231 - in: 9.540 seconds
+Injata     - 231 - in: 9.610 seconds
 Injata     - 187 - in: 13.640 seconds
 Injata     - 184 - in: 16.200 seconds
-CIA        - 181 - in: 19.730 seconds
-CIA        - 159 - in: 41.450 seconds
-CIA        - 141 - in: 60.680 seconds
-Injata     - 174 - in: 61.430 seconds

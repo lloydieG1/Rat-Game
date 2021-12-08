@@ -59,6 +59,7 @@ public class Level {
         this.maxRats = maxRats;
         this.timeLimit = timeLimit;
         this.timer = timer;
+        addElement(new Tower(ElementType.Tower, this, 1, 1, 3));
     }
 
     /**
@@ -383,7 +384,9 @@ public class Level {
     public void renderTiles(GraphicsContext g) {
         for (int i = 0; i < tiles.length; i++) {
             for (int j = 0; j < tiles[i].length; j++) {
-                if (tiles[i][j].getType().equals(TileType.Path)) {
+                TileType type = tiles[i][j].getType();
+                if (type.equals(TileType.Path)
+                        || type.equals(TileType.Grass)) {
                     tiles[i][j].render(g);
                 }
             }
@@ -411,8 +414,7 @@ public class Level {
         for (int i = 0; i < tiles.length; i++) {
             for (int j = 0; j < tiles[i].length; j++) {
                 TileType type = tiles[i][j].getType();
-                if (type.equals(TileType.Tunnel)
-                        || type.equals(TileType.Grass)) {
+                if (type.equals(TileType.Tunnel)) {
                     tiles[i][j].render(g);
                 }
             }
