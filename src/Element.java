@@ -9,8 +9,8 @@ import java.util.ArrayList;
  * @version 1.0
  */
 public abstract class Element {
-    protected int x;
-    protected int y;
+    protected double x;
+    protected double y;
     protected ElementType type;
     protected int tickSpeed = Game.FPS;
     protected int currentTick = 0;
@@ -22,8 +22,8 @@ public abstract class Element {
 
     protected double size = Game.gameSize; // the size when rendered
 
-    protected int nextX; //the next x position of the element
-    protected int nextY; //the next y position of the element
+    protected double nextX; //the next x position of the element
+    protected double nextY; //the next y position of the element
     protected Direction lastDir = Direction.North; //the last direction
     protected int health; //the health of the element. if 0, it dies
 
@@ -111,7 +111,7 @@ public abstract class Element {
      * @return X position in the map
      */
     public int getX() {
-        return x;
+        return (int)x;
     }
 
     /**
@@ -119,7 +119,7 @@ public abstract class Element {
      * @return Y position in the map
      */
     public int getY() {
-        return y;
+        return (int)y;
     }
 
 
@@ -250,8 +250,8 @@ public abstract class Element {
      * @return If rat is stuck between tiles.
      */
     protected boolean isStuck() {
-        int checkX = x;
-        int checkY = y;
+        int checkX = getX();
+        int checkY = getY();
         int totalPaths = 0; //if paths accesable is < 2 then stuck
 
         if (isTile(checkX, checkY + 1)) {
@@ -492,17 +492,17 @@ public abstract class Element {
         while (!(isTile(checkX, checkY))) {
             randomDirection = Game.random.nextInt(4);
             if (randomDirection == 0) {
-                checkX = x;
-                checkY = y - 1;
+                checkX = getX();
+                checkY = getY() - 1;
             } else if (randomDirection == 1) {
-                checkX = x + 1;
-                checkY = y;
+                checkX = getX() + 1;
+                checkY = getY();
             } else if (randomDirection == 2) {
-                checkX = x;
-                checkY = y + 1;
+                checkX = getX();
+                checkY = getY() + 1;
             } else if (randomDirection == 3) {
-                checkX = x - 1;
-                checkY = y;
+                checkX = getX() - 1;
+                checkY = getY();
             }
         }
         return numAsDir(randomDirection * 90);

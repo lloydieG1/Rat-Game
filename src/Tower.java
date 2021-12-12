@@ -35,10 +35,24 @@ public class Tower extends Element {
     }
 
     private void logic() {
+        if (!(closestRat.getX() == getX() && closestRat.getY() == getY())) {
+            level.addElementLive(new Projectile(ElementType.Projectile, level, getX(), getY(), 3, getDistX()/2, getDistY()/2));
+        }
+    }
+
+    private double getDistance(double distX, double distY) {
+        return Math.sqrt(distX*distX + distY*distY);
+    }
+
+    private double getDistX() {
+        return closestRat.getX()-x;
 
     }
 
+    private double getDistY() {
+        return closestRat.getY()-y;
 
+    }
 
     @Override
     protected void killRat(Rat rat) {
@@ -62,7 +76,7 @@ public class Tower extends Element {
             level.removeElement(this);
             System.out.println("deleting poison");
         }
-
+        scanRats();
         currentTick++;
         if (currentTick > tickSpeed) {
             currentTick = 0;
@@ -74,18 +88,18 @@ public class Tower extends Element {
      * scans rats in the surrounding radius and chooses the closest one
      */
     private void scanRats() {
-        closestRat = new Rat(ElementType.Rat, level, x, y, true, Direction.North, 4, false);
+        closestRat = new Rat(ElementType.Rat, level, getX(), getY(), true, Direction.North, 4, false);
         double distance = MAX_VALUE;
 
         int radius = RADIUS;
-        for (int x = this.x - radius; x <= this.x + radius; x++) {
-            for (int y = this.y - radius; y <= this.y + radius; y++) {
+        for (int x = getX() - radius; x <= this.x + radius; x++) {
+            for (int y = getY() - radius; y <= this.y + radius; y++) {
                 for (Element element : level.getElements(x, y)) {
                     if (element.getType().equals(ElementType.Rat)) {
                         Rat rat = (Rat) element;
                         double dist1X = rat.getX()-x;
                         double dist1Y = rat.getY()-y;
-                        if (Math.sqrt(distX*distX + distY*distY) < distance) {
+                        if (Math.sqrt(dist1X*dist1X + dist1Y*dist1Y) < distance) {
                             distance = (Math.sqrt(distX*distX + distY*distY));
                             closestRat = rat;
                             distX = dist1X;
@@ -105,9 +119,8 @@ public class Tower extends Element {
     protected void render(GraphicsContext g) {
         double x = renderX();
         double y = renderY();
-        scanRats();
+
         double rotation = (Math.toDegrees(Math.atan2(((closestRat.renderY()- y)), (closestRat.renderX()-x)))) - 90;
-        System.out.println(rotation);
 
         g.save();
         g.translate(x + Game.gameSize / 2.0, y + Game.gameSize / 2.0);

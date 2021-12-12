@@ -56,34 +56,34 @@ public class Bomb extends Element {
 	 * Expand the explosion of a bomb in all directions until it hits grass.
 	 */
 	private void explode() {
-		level.addElementLive(new Explosion(ElementType.Explosion, level, (x), y, BLAST_TIME));
+		level.addElementLive(new Explosion(ElementType.Explosion, level, getX(), getY(), BLAST_TIME));
 
-		int tempX = x;
-		int tempY = y;
+		int tempX = getX();
+		int tempY = getY();
 		tempX++;
 
 		while (isSpreadable(tempX, tempY)) {
 			level.addElementLive(new Explosion(ElementType.Explosion, level, (tempX), tempY, BLAST_TIME));
 			tempX++;
 		}
-		tempX = x;
-		tempY = y;
+		tempX = getX();
+		tempY = getY();
 		tempX--;
 
 		while (isSpreadable(tempX, tempY)) {
 			level.addElementLive(new Explosion(ElementType.Explosion, level, (tempX), tempY, BLAST_TIME));
 			tempX--;
 		}
-		tempX = x;
-		tempY = y;
+		tempX = getX();
+		tempY = getY();
 		tempY++;
 
 		while (isSpreadable(tempX, tempY)) {
 			level.addElementLive(new Explosion(ElementType.Explosion, level, (tempX), tempY, BLAST_TIME));
 			tempY++;
 		}
-		tempX = x;
-		tempY = y;
+		tempX = getX();
+		tempY = getY();
 		tempY--;
 
 		while (isSpreadable(tempX, tempY)) {
