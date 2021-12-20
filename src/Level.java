@@ -59,6 +59,7 @@ public class Level {
         this.maxRats = maxRats;
         this.timeLimit = timeLimit;
         this.timer = timer;
+        addElement(new Tower(ElementType.Tower, this, 1, 1, 3));
     }
 
     /**
@@ -121,8 +122,8 @@ public class Level {
      * @param y Vertical map coordinate.
      * @return Tile at parsed position.
      */
-    public Tile getTile(int x, int y) {
-        return tiles[x][y];
+    public Tile getTile(double x, double y) {
+        return tiles[(int)x][(int)y];
     }
 
     /**
@@ -150,10 +151,10 @@ public class Level {
      * @param y int y value that shares the tile
      * @return Arraylist elements contained in the tile that has coordinates x,y
      */
-    public ArrayList<Element> getElements(int x, int y) {
+    public ArrayList<Element> getElements(double x, double y) {
         ArrayList<Element> stack = new ArrayList<>(); //returning elements at x,y
         for (Element element : elements) {
-            if (element.getX() == x && element.getY() == y) {
+            if (element.getX() == (int)x && element.getY() == (int)y) {
                 stack.add(element);
             }
         }
@@ -383,7 +384,9 @@ public class Level {
     public void renderTiles(GraphicsContext g) {
         for (int i = 0; i < tiles.length; i++) {
             for (int j = 0; j < tiles[i].length; j++) {
-                if (tiles[i][j].getType().equals(TileType.Path)) {
+                TileType type = tiles[i][j].getType();
+                if (type.equals(TileType.Path)
+                        || type.equals(TileType.Grass)) {
                     tiles[i][j].render(g);
                 }
             }
@@ -411,8 +414,7 @@ public class Level {
         for (int i = 0; i < tiles.length; i++) {
             for (int j = 0; j < tiles[i].length; j++) {
                 TileType type = tiles[i][j].getType();
-                if (type.equals(TileType.Tunnel)
-                        || type.equals(TileType.Grass)) {
+                if (type.equals(TileType.Tunnel)) {
                     tiles[i][j].render(g);
                 }
             }

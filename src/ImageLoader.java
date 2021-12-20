@@ -22,11 +22,14 @@ public class ImageLoader {
 
     public static Image sterilizeAura = getImage("steriliseAura.png", 64);
 
+
     public static Image stopSign = getImage("stopSign.png", 64);
     public static Image stopSign1 = getImage("stopSign1.png", 64);
     public static Image stopSign2 = getImage("stopSign2.png", 64);
     public static Image stopSign3 = getImage("stopSign3.png", 64);
     public static Image stopSign4 = getImage("stopSign4.png", 64);
+
+    public static Image tower = getImage("tower.png", 64);
 
     public static Image icon = getImage("icon.png", 64);
 
