@@ -67,8 +67,8 @@ public class Sterilise extends Element {
      */
     public void sterilise() {
         int radius = 1;
-        for (int x = getX() - radius; x <= this.x + radius; x++) {
-            for (int y = getY() - radius; y <= this.y + radius; y++) {
+        for (int x = this.x - radius; x <= this.x + radius; x++) {
+            for (int y = this.y - radius; y <= this.y + radius; y++) {
                 for (Element element : level.getElements(x, y)) {
                     if (element.getType().equals(ElementType.Rat)) {
                         Rat rat = (Rat) element;

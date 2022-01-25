@@ -27,7 +27,6 @@ public class Poison extends Element {
     }
 
     private void logic() {
-        //spawn a projectile entity whicih moves until it hits a rat
     	
     }
 
@@ -65,10 +64,11 @@ public class Poison extends Element {
 
     @Override
     protected void tick() {
-        if (level.getTile(x, y).getType().equals(TileType.Path)) {
+        if (level.getTile(x, y).getType().equals(TileType.Grass)) {
             level.removeElement(this);
             System.out.println("deleting poison");
         }
+        checkRat();
         currentTick++;
         if (currentTick > tickSpeed) {
             currentTick = 0;
@@ -84,11 +84,6 @@ public class Poison extends Element {
     protected void render(GraphicsContext g) {
         double x = renderX();
         double y = renderY();
-        g.save();
-        g.translate(x + Game.gameSize / 2.0, y + Game.gameSize / 2.0);
-        g.rotate(interpolateDir(dirAsNum(lastDir), dirAsNum(dir)));
-        g.drawImage(image, -(size / 2), -(size / 2), size, size);
-        g.restore();
-
+        g.drawImage(image, x, y, size, size);
     }
 }

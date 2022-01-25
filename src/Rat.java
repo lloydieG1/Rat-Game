@@ -235,7 +235,7 @@ public class Rat extends Element {
         if (isPregnant()) {
 
             tickSpeed = Game.FPS * 2;
-            Rat rat = new Rat(ElementType.Rat, level, getX(), getY(),
+            Rat rat = new Rat(ElementType.Rat, level, x, y,
                     Game.random.nextBoolean(), Direction.North, MAX_HEALTH, false);
             rat.setAge(0);
             rat.setMatingTime(0);

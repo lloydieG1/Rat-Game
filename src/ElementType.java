@@ -17,8 +17,6 @@ public enum ElementType {
     Poison(),
     FemaleGenderChange(),
     MaleGenderChange(),
-    Tower(),
-    Projectile(),
     Explosion();
 
 }

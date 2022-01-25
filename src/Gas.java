@@ -55,18 +55,18 @@ public class Gas extends Element {
         age++;
         if (health >= 0) {
             health--;
-            if (isSpreadable(getX() - 1, getY())) {
-                level.addElementLive(new Gas(ElementType.Gas, level, (getX() - 1), getY(), health));
+            if (isSpreadable(x - 1, y)) {
+                level.addElementLive(new Gas(ElementType.Gas, level, (x - 1), y, health));
             }
-            if (isSpreadable(getX() + 1, getY())) {
-                level.addElementLive(new Gas(ElementType.Gas, level, (getX() + 1), getY(), health));
+            if (isSpreadable(x + 1, y)) {
+                level.addElementLive(new Gas(ElementType.Gas, level, (x + 1), y, health));
             }
-            if (isSpreadable(getX(), getY() - 1)) {
-                level.addElementLive(new Gas(ElementType.Gas, level, getX(), getY() - 1, health));
+            if (isSpreadable(x, y - 1)) {
+                level.addElementLive(new Gas(ElementType.Gas, level, x, y - 1, health));
 
             }
-            if (isSpreadable(getX(), getY() + 1)) {
-                level.addElementLive(new Gas(ElementType.Gas, level, getX(), getY() + 1, health));
+            if (isSpreadable(x, y + 1)) {
+                level.addElementLive(new Gas(ElementType.Gas, level, x, y + 1, health));
 
             }
         } else {

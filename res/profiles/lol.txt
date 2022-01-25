@@ -1,2 +1,0 @@
-USER: lol
-MAX LEVEL: 2
